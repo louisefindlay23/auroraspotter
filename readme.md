@@ -10,6 +10,10 @@ Louise Findlay = [@louisefindlay23](https://github.com/louisefindlay23)
 
 Brandon Reid = [@brandonreid11](https://github.com/brandonreid11)
 
+Miriam Wojcik = [@mijamka](https://github.com/mijamka)
+
+Maya Bonazarova = [@mayabonaz](https://github.com/mayabonaz)
+
 ### Useful Links  :link:
 
 Website - To be created
