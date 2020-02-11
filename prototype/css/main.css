@@ -78,3 +78,7 @@ i:hover {
     text-align: center;
     padding: 3% 0;
 }
+
+#map img {
+    margin: 0 auto;
+}
