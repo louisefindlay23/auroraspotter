@@ -21,12 +21,21 @@ nav {
     overflow: auto;
 }
 
+h2 {
+    font-size: 1rem;
+}
+
+h1,
+h2 {
+    color: var(--main-color);
+
+}
+
 #icon {
     background: var(--background-color);
 }
 
 a {
-    color: var(--main-color);
     text-decoration: none;
 }
 
@@ -50,7 +59,8 @@ i:hover {
     align-items: center;
 }
 
-.fa-bars {
+.fa-bars,
+.fa-times {
     font-size: 2rem;
     color: var(--main-color);
 }

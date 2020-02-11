@@ -1,7 +1,13 @@
 $(document).ready(function () {
 
     $(".fa-bars").click(function () {
-        $("#menu").toggle();
+        $("#icon").hide();
+        $("#menu").show();
+    });
+
+    $(".fa-times").click(function () {
+        $("#menu").hide();
+        $("#icon").show();
     });
 
 });
