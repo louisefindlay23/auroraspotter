@@ -1,6 +1,7 @@
 :root {
     --main-color: #ffffff;
     --background-color: #800080;
+    --text-color: #000000;
 }
 
 html,
@@ -21,12 +22,17 @@ nav {
     overflow: auto;
 }
 
+h1,
+h2 {
+    color: var(--text-color);
+}
+
 h2 {
     font-size: 1rem;
 }
 
-h1,
-h2 {
+header h1,
+header h2 {
     color: var(--main-color);
 
 }
@@ -43,6 +49,21 @@ a:hover,
 i:hover {
     opacity: 50%;
     cursor: pointer;
+}
+
+main {
+    width: 90%;
+    height: auto;
+    overflow: auto;
+    margin: 0 2.5%;
+}
+
+div {
+    text-align: center;
+}
+
+img {
+    margin: 2% 0;
 }
 
 .flex-container {
