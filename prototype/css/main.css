@@ -124,3 +124,9 @@ img {
 #map img {
     margin: 0 auto;
 }
+
+.half {
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+}
