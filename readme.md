@@ -16,4 +16,4 @@ Maya Bonazarova = [@mayabonaz](https://github.com/mayabonaz)
 
 ### Useful Links  :link:
 
-Website - **Front-End Only** - https://cm2104-dynamicwebdevelopment.github.io/aurora/
+Website - **To be done**
