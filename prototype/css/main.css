@@ -41,6 +41,27 @@ header h2 {
     background: var(--background-color);
 }
 
+input,
+button {
+    width: 90%;
+    height: auto;
+    overflow: auto;
+    margin: 5% 2%;
+    padding: 2.5%;
+    border: 2px solid var(--background-color);
+    border-radius: 10px;
+}
+
+button {
+    width: 95%;
+    background: var(--background-color);
+    color: var(--main-color);
+}
+
+::placeholder {
+    color: var(--text-color);
+}
+
 a {
     text-decoration: none;
 }
@@ -55,7 +76,7 @@ main {
     width: 90%;
     height: auto;
     overflow: auto;
-    margin: 0 2.5%;
+    margin: 0 5%;
 }
 
 div {
@@ -102,4 +123,10 @@ img {
 
 #map img {
     margin: 0 auto;
+}
+
+.half {
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
 }
