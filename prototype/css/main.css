@@ -46,7 +46,7 @@ button {
     width: 90%;
     height: auto;
     overflow: auto;
-    margin: 5% 2.5%;
+    margin: 5% 2%;
     padding: 2.5%;
     border: 2px solid var(--background-color);
     border-radius: 10px;
