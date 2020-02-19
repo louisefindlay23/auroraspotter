@@ -122,17 +122,16 @@ img {
     align-items: center;
 }
 
-#half img {
-    width: 45%;
-    float: left;
+.image-row {
+    display: flex;
 }
 
-#left {
-    padding-right: 2.5%;
+.half {
+    flex: 50%;
 }
 
-#right {
-    padding-left: 2.5%;
+#left-image {
+    margin-right: 10px;
 }
 
 .fa-bars,
