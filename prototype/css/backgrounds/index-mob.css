@@ -1,0 +1,17 @@
+body{
+    
+  background:
+  linear-gradient(
+      rgba(168, 168, 168, 0.5), 
+      rgba(168, 168, 168, 0.5)
+    ),
+    url(../../img/bg-home.png);
+  background-position: -300px 0px;
+  background-size: 977px 300px;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+#menu{
+  background-color: black;
+}
