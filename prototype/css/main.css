@@ -1,6 +1,6 @@
 :root {
-    --main-color: #ffffff;
-    --text-color: #ffffff;
+    --black: #000000;
+    --white: #ffffff;
 }
 
 html,
@@ -26,7 +26,7 @@ h1,
 h2,
 h3 {
     font-family: 'Montserrat', sans-serif;
-    color: var(--text-color);
+    color: var(--white);
 }
 
 h1 {
@@ -46,7 +46,7 @@ h3 {
 
 header h1,
 header h2 {
-    color: var(--main-color);
+    color: var(--white);
 
 }
 
@@ -56,8 +56,20 @@ header h2 {
 
 p {
     font-family: 'Hind', sans-serif;
-    color: var(--text-color);
+    color: var(--white);
     font-size: 0.6rem;
+}
+
+p a {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--white);
+}
+
+#form-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    margin: 10% 2%;
 }
 
 input,
@@ -67,18 +79,22 @@ button {
     overflow: auto;
     margin: 10% 2%;
     padding: 2.10%;
-    border: 2px solid var(--background-color);
-    border-radius: 10px;
+    background: var(--black);
+    border: 2px solid var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
 }
 
 button {
-    width: 910%;
-    background: var(--background-color);
-    color: var(--main-color);
+    width: 96%;
+    font-weight: 500;
 }
 
 ::placeholder {
-    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    color: var(--white);
 }
 
 a {
@@ -136,7 +152,7 @@ img {
 .fa-bars,
 .fa-times {
     font-size: 2rem;
-    color: var(--main-color);
+    color: var(--white);
 }
 
 #menu {
@@ -164,6 +180,6 @@ img {
     margin-right: 10%;
 }
 
-#map{
+#map {
     margin-top: 20%;
 }
