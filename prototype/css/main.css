@@ -1,7 +1,6 @@
 :root {
-    --main-color: #ffffff;
-    --background-color: #800080;
-    --text-color: #000000;
+    --black: #000000;
+    --white: #ffffff;
 }
 
 html,
@@ -9,6 +8,7 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
+    background: var(--background-color);
 }
 
 html {
@@ -23,17 +23,30 @@ nav {
 }
 
 h1,
-h2 {
-    color: var(--text-color);
+h2,
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+}
+
+h1 {
+    font-weight: normal;
 }
 
 h2 {
+    font-weight: 600;
     font-size: 1rem;
+    margin-bottom: 20%;
+}
+
+h3 {
+    font-weight: lighter;
+    margin-bottom: 2%;
 }
 
 header h1,
 header h2 {
-    color: var(--main-color);
+    color: var(--white);
 
 }
 
@@ -41,25 +54,47 @@ header h2 {
     background: var(--background-color);
 }
 
+p {
+    font-family: 'Hind', sans-serif;
+    color: var(--white);
+    font-size: 0.6rem;
+}
+
+p a {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--white);
+}
+
+#form-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    margin: 10% 2%;
+}
+
 input,
 button {
     width: 90%;
     height: auto;
     overflow: auto;
-    margin: 5% 2%;
-    padding: 2.5%;
-    border: 2px solid var(--background-color);
-    border-radius: 10px;
+    margin: 10% 2%;
+    padding: 2.10%;
+    background: var(--black);
+    border: 2px solid var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
 }
 
 button {
-    width: 95%;
-    background: var(--background-color);
-    color: var(--main-color);
+    width: 96%;
+    font-weight: 500;
 }
 
 ::placeholder {
-    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    color: var(--white);
 }
 
 a {
@@ -73,21 +108,22 @@ i:hover {
 }
 
 main {
-    width: 90%;
+    width: 80%;
     height: auto;
     overflow: auto;
-    margin: 0 5%;
-}
-
-div {
-    text-align: center;
+    margin: 0 10%;
 }
 
 img {
-    margin: 2% 0;
+    width: 100%;
+    height: auto;
+    overflow: auto;
 }
 
 .flex-container {
+    width: 100%;
+    height: auto;
+    overflow: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -101,15 +137,28 @@ img {
     align-items: center;
 }
 
+.image-row {
+    display: flex;
+}
+
+.half {
+    flex: 50%;
+}
+
+#left-image {
+    margin-right: 10px;
+}
+
 .fa-bars,
 .fa-times {
     font-size: 2rem;
-    color: var(--main-color);
+    color: var(--white);
 }
 
 #menu {
     display: none;
     background: var(--background-color);
+    background-color: black;
     width: 100%;
     height: auto;
     overflow: auto;
@@ -121,12 +170,20 @@ img {
     padding: 3% 0;
 }
 
-#map img {
-    margin: 0 auto;
+#icon .flex-container {
+    justify-content: flex-start;
+    margin: auto;
 }
 
-.half {
-    width: 50%;
-    margin-left: 0;
-    margin-right: 0;
+#icon a {
+    margin-left: 10%;
+}
+
+.fa-bars {
+    margin-left: auto;
+    margin-right: 10%;
+}
+
+#map {
+    margin-top: 20%;
 }
