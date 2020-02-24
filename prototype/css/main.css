@@ -56,6 +56,14 @@ header h2 {
 
 }
 
+.black {
+    color: var(--black);
+}
+
+.text-center {
+    text-align: center;
+}
+
 .icon {
     background: var(--background-color);
 }
@@ -157,21 +165,21 @@ img {
 }
 
 /* STYLES FOR WEATHER FORECAST ELEMENTS */
-#left-image {  
+#left-image {
     font-family: 'Montserrat', sans-serif;
     background-color: #FFF;
     margin: 0;
     border-radius: 10px;
-    padding-bottom : 50px;
+    padding-bottom: 50px;
 }
 
-.weather-title{
+.weather-title {
     width: 100%;
-    height: 50px;
+    height: auto;
     border-radius: 10px 10px 0 0;
 }
 
-.weather-title p{
+.weather-title p {
     text-align: center;
     padding: 8px;
     margin: 0 auto;
@@ -179,7 +187,7 @@ img {
     color: #293251;
 }
 
-.notification{
+.notification {
     background-color: #f8d7da;
     display: none;
 }
@@ -200,7 +208,7 @@ img {
 
 .weather-icon {
     width: 100%;
-    height: 128px;
+    height: auto;
 }
 
 .weather-icon img {
@@ -222,9 +230,7 @@ img {
     cursor: pointer;
 }
 
-.temperature p:hover {
-    
-}
+.temperature p:hover {}
 
 .temperature span {
     color: #293251;
@@ -244,9 +250,7 @@ img {
     font-size: 1.2em;
 }
 
-.weather-location {
-    
-}
+.weather-location {}
 
 .weather-location p {
     margin: 0;
@@ -306,4 +310,8 @@ hr {
 
 #map {
     margin-top: 20%;
+}
+
+.flex-center {
+    justify-content: center;
 }
