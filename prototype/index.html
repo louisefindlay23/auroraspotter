@@ -24,7 +24,7 @@
         <nav class="icon">
             <div class="flex-container">
                 <a id="title" href="#">
-                    <h1>Aurora</h1>
+                    <h1>AURORA</h1>
                 </a>
                 <i class="fas fa-bars"></i>
             </div>
@@ -58,16 +58,28 @@
 
             <!-- Placeholder images for dynamic content -->
             <div id="map">
-                <img src="https://via.placeholder.com/300x150.png?text=Google+Map">
+                <img class="placeholders" src="https://via.placeholder.com/300x150.png?text=Google+Map">
             </div>
-            <div class="image-row">
-                <div id="left-image" class="half">
-                    <img src="https://via.placeholder.com/150x150.png?text=Weather">
-                </div>
-                <div class="half">
-                    <img src="https://via.placeholder.com/150x150.png?text=Aurora+Status">
+            <div class="flex-container flex-center">
+                <!-- CONTAINER FOR WEATHER FORECAST -->
+                <div class="notification"> </div>
+                <div class="weather-container">
+                    <h4 class="black text-center">Weather Forecast</h4>
+                    <div class="weather-icon">
+                        <img src="img/weather-icons/unknown.png" alt="">
+                    </div>
+                    <div class="temperature">
+                        <p>- °<span>C</span></p>
+                    </div>
+                    <div class="temperature-description">
+                        <p> - </p>
+                    </div>
+                    <div class="weather-location">
+                        <p>-</p>
+                    </div>
                 </div>
             </div>
+            <img class="placeholders" src="https://via.placeholder.com/150x150.png?text=Aurora+Status">
         </section>
 
         <!-- Text about project and tips for seeing Aurora -->
@@ -85,6 +97,7 @@
             </div>
         </section>
     </main>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
