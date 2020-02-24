@@ -17,3 +17,5 @@ Maya Bonazarova = [@mayabonaz](https://github.com/mayabonaz)
 ### Useful Links  :link:
 
 Website - [Github Pages](https://cm2104-dynamicwebdevelopment.github.io/aurora/prototype/index.html)
+
+Project Management - [Glo Boards](https://app.gitkraken.com/glo/board/XkEAXQ6McgARAiGj)
