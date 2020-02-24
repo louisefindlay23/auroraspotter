@@ -20,15 +20,6 @@ const KELVIN = 273;
 // API key for making api calls
 const key = "bba7e5b7d4db7564662712e34db2cb37";
 
-// navigator.permissions.query({name:'geolocation'}).then(function(result) {
-//     if (result.state === 'granted') {
-//         navigator.geolocation.getCurrentPosition(setPosition, showError);
-//     } else if (result.state === 'prompt') {
-//       console.log("You denied");
-//     }
-//     // Don't do anything if the permission was denied.
-//   });
-
 
 // Check if Geolocation services are avialable in the browser
 if('geolocation' in navigator){
