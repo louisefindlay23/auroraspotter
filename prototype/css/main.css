@@ -1,6 +1,7 @@
 :root {
     --black: #000000;
     --white: #ffffff;
+    --grey: #2b292a;
 }
 
 html,
@@ -68,7 +69,9 @@ header h2 {
     background: var(--background-color);
 }
 
-p {
+p,
+th,
+td {
     font-family: 'Hind', sans-serif;
     color: var(--white);
     font-size: 0.6rem;
@@ -133,10 +136,54 @@ img {
     overflow: auto;
 }
 
+/* Table CSS */
+
+table {
+    margin: 2% auto;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    border: 2px solid var(--white);
+    padding: 12px 20px;
+    border-collapse: collapse;
+    background: var(--grey);
+}
+
+table th {
+    border-top: none;
+}
+
+table .first {
+    border-left: none;
+}
+
+table .last {
+    border-right: none;
+}
+
+td a {
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* Other Styling */
+
 .placeholders {
     width: 100%;
     height: auto;
     overflow: auto;
+}
+
+#profile-pic {
+    width: 75%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 5%;
 }
 
 .flex-container {
