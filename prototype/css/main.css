@@ -31,6 +31,7 @@ h4 {
 }
 
 h1 {
+    font-size: 1rem;
     font-weight: normal;
 }
 
@@ -116,7 +117,7 @@ main {
     width: 80%;
     height: auto;
     overflow: auto;
-    margin: 0 10%;
+    margin: 0 5% 10% 10%;
 }
 
 img {
@@ -287,6 +288,10 @@ hr {
 .icon .flex-container {
     justify-content: flex-start;
     margin: auto;
+}
+
+#menu .flex-container {
+    justify-content: space-around;
 }
 
 .icon a,
