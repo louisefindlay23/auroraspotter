@@ -187,6 +187,10 @@ hr {
     margin: auto;
 }
 
+#menu .flex-container {
+    justify-content: space-around;
+}
+
 .icon a,
 .icon h4 {
     margin-left: 10%;
