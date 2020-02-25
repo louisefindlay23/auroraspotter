@@ -1,13 +1,14 @@
 $(document).ready(function () {
 
     $(".fa-bars").click(function () {
-        $("header .icon").hide();
+        $("header .icon, main h2").hide();
         $("#menu").show();
     });
 
     $(".fa-times").click(function () {
         $("#menu").hide();
-        $("header .icon").show();
+        $("main h2").addClass("remove-animation");
+        $("header .icon, main h2").show();
     });
 
     $('table tr').each(function () {
