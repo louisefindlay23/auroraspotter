@@ -2,11 +2,13 @@ $(document).ready(function () {
 
     $(".fa-bars").click(function () {
         $("header .icon").hide();
+                $("main h2").hide();
         $("#menu").show();
     });
 
     $(".fa-times").click(function () {
         $("#menu").hide();
+                $("main h2").addClass("remove-animation");
         $("header .icon").show();
     });
 
