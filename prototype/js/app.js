@@ -23,20 +23,38 @@ const key = "bba7e5b7d4db7564662712e34db2cb37";
 
 // Check if Geolocation services are avialable in the browser
 if('geolocation' in navigator){
-    navigator.geolocation.getCurrentPosition(setPosition, showError);   // Get longitude and latitude properties 
-}else{                                                                  // of user's location from position object
-    notificationElement.style.display = "block";
-    notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";      // Display error notification
-}
+    // If lat and long of user's location saved in local storage
+    if (!(localStorage.getItem('myLatitude') && (localStorage.getItem('myLongitude')))) {
+        navigator.geolocation.getCurrentPosition(setPosition, showError);     // Ask geopermission, get current position
+        navigator.geolocation.watchPosition(setPosition, showError);          // Watch current position
+    } else {
+        // If lat and long available, don't ask geopermission, return lat and long
+        var myLat = localStorage.getItem('myLatitude');
+        console.log("latitude from localStorage: "+ myLat);
+        var myLong = localStorage.getItem('myLongitude');
+        console.log("longitude from localStorage: "+ myLong);
+        getWeather(myLat, myLong);      // Return getWeather function to make API call
+    }
+  }else{
+        // Display message if geolocation isn't supported
+        notificationElement.style.display = "block";
+        notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";
+  }
+
+
+// // Check if Geolocation services are avialable in the browser
+// if('geolocation' in navigator){
+//     navigator.geolocation.getCurrentPosition(setPosition, showError);   // Get longitude and latitude properties 
+// }else{                                                                  // of user's location from position object
+//     notificationElement.style.display = "block";
+//     notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";      // Display error notification
+// }
 
 
 // Get user's location for requesting weather forecast
 function setPosition(position){
     let latitude = position.coords.latitude;       
     let longitude = position.coords.longitude;
-    
-    console.log("lat: "+latitude);
-    console.log("lon: "+longitude);
     
     getWeather(latitude, longitude);        
 }
@@ -68,7 +86,7 @@ function getWeather(latitude, longitude){
         });
 }
 
-// Updates innerHTML and displays weather forecast
+// Updates innerHTML of HTML elements and displays weather forecast
 function displayWeather(){
     iconElement.innerHTML = `<img src="img/weather-icons/${weather.iconId}.png"/>`;
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
