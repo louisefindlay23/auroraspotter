@@ -310,8 +310,6 @@ td a {
     cursor: pointer;
 }
 
-.temperature p:hover {}
-
 .temperature span {
     color: #293251;
     font-size: 0.5em;
@@ -329,9 +327,6 @@ td a {
     text-align: center;
     font-size: 1.2em;
 }
-
-.weather-location {}
-
 .weather-location p {
     margin: 0;
     padding: 0;
@@ -366,10 +361,10 @@ td a {
     justify-content: space-around;
 }
 
-.icon a,
+header .icon a,
 .icon h4 {
     margin-left: 10%;
-}
+}   
 
 .fa-bars {
     margin-left: auto;
