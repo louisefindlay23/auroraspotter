@@ -32,7 +32,7 @@ const key = "bba7e5b7d4db7564662712e34db2cb37";
 
 // Check if Geolocation services are avialable in the browser
 if('geolocation' in navigator){
-    navigator.geolocation.getCurrentPosition(setPosition, showError);   // Get longitude and latitude properties 
+    navigator.geolocation.getCurrentPosition(setPosition, showError);   // Get longitude and latitude properties
 }else{                                                                  // of user's location from position object
     notificationElement.style.display = "block";
     notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";      // Display error notification
@@ -41,13 +41,13 @@ if('geolocation' in navigator){
 
 // Get user's location for requesting weather forecast
 function setPosition(position){
-    let latitude = position.coords.latitude;       
+    let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
-    
+
     console.log("lat: "+latitude);
     console.log("lon: "+longitude);
-    
-    getWeather(latitude, longitude);        
+
+    getWeather(latitude, longitude);
 }
 
 // Display an error if there is a problem with geolocation service
@@ -60,9 +60,9 @@ function showError(error){
 function getWeather(latitude, longitude){
     let apiCall = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
 
-    fetch(apiCall)  
+    fetch(apiCall)
         .then(function(response){
-            let data = response.json();     
+            let data = response.json();
             return data;            // Return JSON response object
         })
         .then(function(data){
@@ -73,7 +73,7 @@ function getWeather(latitude, longitude){
             weather.country = data.sys.country;                             // Set weather country
         })
         .then(function(){
-            displayWeather();                                // when Promise resolve, call displayWeather() to update UI 
+            displayWeather();                                // when Promise resolve, call displayWeather() to update UI
         });
 }
 
