@@ -1,7 +1,12 @@
+/* CSS Variables: Colours */
+
 :root {
     --black: #000000;
     --white: #ffffff;
+    --grey: #2b292a;
 }
+
+/*  HTML Element Styling */
 
 html,
 body {
@@ -21,6 +26,25 @@ nav {
     height: auto;
     overflow: auto;
 }
+
+main {
+    width: 80%;
+    height: auto;
+    overflow: auto;
+    margin: 0 5% 10% 10%;
+}
+
+img {
+    height: auto;
+    overflow: auto;
+}
+
+hr {
+    color: var(--white);
+}
+
+
+/* Text Styling */
 
 h1,
 h2,
@@ -56,19 +80,9 @@ header h2 {
 
 }
 
-.black {
-    color: var(--black);
-}
-
-.text-center {
-    text-align: center;
-}
-
-.icon {
-    background: var(--background-color);
-}
-
-p {
+p,
+th,
+td {
     font-family: 'Hind', sans-serif;
     color: var(--white);
     font-size: 0.6rem;
@@ -80,11 +94,17 @@ p a {
     text-decoration-color: var(--white);
 }
 
-#form-text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: lighter;
-    margin: 10% 2%;
+a {
+    text-decoration: none;
 }
+
+a:hover,
+i:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+/* Form Styling */
 
 input,
 button {
@@ -111,33 +131,64 @@ button {
     color: var(--white);
 }
 
-a {
-    text-decoration: none;
+/* Table CSS */
+
+table {
+    margin: 2% auto;
+    border-collapse: collapse;
 }
 
-a:hover,
-i:hover {
-    opacity: 50%;
-    cursor: pointer;
+table th,
+table td {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    border: 2px solid var(--white);
+    padding: 12px 20px;
+    border-collapse: collapse;
+    background: var(--grey);
 }
 
-main {
-    width: 80%;
-    height: auto;
-    overflow: auto;
-    margin: 0 5% 10% 10%;
+table th {
+    border-top: none;
 }
 
-img {
-    height: auto;
-    overflow: auto;
+table .first {
+    border-left: none;
 }
 
-.placeholders {
-    width: 100%;
-    height: auto;
-    overflow: auto;
+table .last {
+    border-right: none;
 }
+
+td a {
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* Classes - Text Styling */
+
+.black {
+    color: var(--black);
+}
+
+.text-center {
+    text-align: center;
+}
+
+#form-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    margin: 10% 2%;
+}
+
+/* Classes - Alignment */
+
+#map {
+    margin-top: 20%;
+}
+
+/* Classes - Flexbox */
 
 .flex-container {
     width: 100%;
@@ -156,6 +207,10 @@ img {
     align-items: center;
 }
 
+.flex-center {
+    justify-content: center;
+}
+
 .image-row {
     display: flex;
 }
@@ -164,7 +219,32 @@ img {
     flex: 50%;
 }
 
-/* STYLES FOR WEATHER FORECAST ELEMENTS */
+/* Classes - Image Styling */
+
+.fa-bars,
+.fa-times,
+.fa-user,
+.fa-key,
+.fa-sign-out-alt {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.placeholders {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+#profile-pic {
+    width: 75%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 5%;
+}
+
+/* Classes - Weather Styling */
+
 #left-image {
     font-family: 'Montserrat', sans-serif;
     background-color: #FFF;
@@ -260,19 +340,7 @@ img {
     font-size: 0.8em;
 }
 
-
-.fa-bars,
-.fa-times,
-.fa-user,
-.fa-key,
-.fa-sign-out-alt {
-    font-size: 2rem;
-    color: var(--white);
-}
-
-hr {
-    color: var(--white);
-}
+/* Classes - Menu Styling */
 
 #menu {
     display: none;
@@ -308,10 +376,41 @@ hr {
     margin-right: 10%;
 }
 
-#map {
-    margin-top: 20%;
+.icon {
+    background: var(--background-color);
 }
 
-.flex-center {
-    justify-content: center;
+/* Classes - CSS Animation */
+
+@keyframes bounceInLeft {
+
+    0% {
+        opacity: 0;
+        transform: translate3d(-3000px, 0, 0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate3d(25px, 0, 0);
+    }
+
+    75% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    90% {
+        transform: translate3d(5px, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+main h2 {
+    animation: bounceInLeft 1s ease-in 0s 1 both;
+}
+
+.remove-animation {
+    animation-duration: 0s;
 }
