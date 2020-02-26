@@ -487,12 +487,25 @@ main h2 {
     animation-duration: 0s;
 }
 
+#activity-container {
+    width: 100vw !important;
+}
+
 /* Media Queries */
 
 
 /* Larger than mobiles */
 
-@media screen and (min-width: 640px) {}
+@media screen and (min-width: 640px) {
+
+    h2 {
+        margin-bottom: 10%;
+    }
+
+    #menu .flex-column {
+        margin-bottom: 5%;
+    }
+}
 
 /* Larger than tablets */
 
