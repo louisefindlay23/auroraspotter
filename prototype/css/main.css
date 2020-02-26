@@ -427,3 +427,8 @@ main h2 {
 #status-frame{
     width: 100%;
 }
+
+.temp-hide {
+    display: none;
+}
+

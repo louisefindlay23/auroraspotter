@@ -132,7 +132,7 @@ function login(){
                         logged = true;
                         //set the index of the logged user
                         localStorage.setItem('userID', JSON.stringify(login));
-                }
+                    }
                 }
                 
             }
@@ -164,5 +164,20 @@ function signout(){
     localStorage.setItem('logged', JSON.stringify(false));
     localStorage.setItem('userID', JSON.stringify('null'));
     window.location.href = "index.html";
+
+}
+
+// function to hide menu elements
+function hideElements() {
+    // check if user is logged in
+    var isLogged = JSON.parse(localStorage.getItem('logged'));
+     //var isLogged = false;
+    if(!isLogged){
+        $(".logout-nav").hide();        // if not logged in, hide Profile and Setting from nav
+        
+    }
+    else{
+        $(".login-nav").hide();        // if logged in, hide Login and Sign up from nav
+    }
 
 }
