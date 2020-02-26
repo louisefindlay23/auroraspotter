@@ -345,6 +345,7 @@ td a {
     height: auto;
     overflow: auto;
     position: absolute;
+    z-index: 10000;
 }
 
 #menu h2 {
@@ -420,5 +421,9 @@ main h2 {
     position: relative;
     margin-top: 65%;
     height: 220px; 
-    z-index: -1;
+}
+
+/*Change the width of aurora status iframe*/
+#status-frame{
+    width: 100%;
 }
