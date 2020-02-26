@@ -186,9 +186,14 @@ td a {
     margin: 10% 2%;
 }
 
+#profile-page p {
+    font-size: 0.8rem;
+}
+
 /* Classes - Alignment */
 
-#map {
+#map,
+#diary {
     margin-top: 20%;
 }
 
