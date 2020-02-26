@@ -12,16 +12,12 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/backgrounds/index-mob.css">
     <!--Leaflet map css files-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <!-- JS Scripts and jQuery -->
     <script src="js/vendor/jquery-1.11.2.min.js"></script>
     <script src="js/main.js"></script>
     <!--Leaflet map script (edit note: must be included after the leaflet css)-->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 </head>
 
 <body>
@@ -61,18 +57,19 @@
     </header>
     <main>
         <section id="welcome">
-            <h2>Welcome Back, First Name</h2>
+            <h2>Follow the Northern Lights</h2>
 
-            <!-- Placeholder images for dynamic content -->
+            <!-- Aurora Map -->
             <div id="map">
                 <!--leaflet map-->
                 <div id="mapid"></div>
                 <!--call map script-->
                 <script src="js/map.js"></script>
-                
+
             </div>
+
+            <!-- Weather Forecast -->
             <div class="flex-container flex-center">
-                <!-- CONTAINER FOR WEATHER FORECAST -->
                 <div class="notification"> </div>
                 <div class="weather-container">
                     <h4 class="black text-center">Weather Forecast</h4>
@@ -90,32 +87,34 @@
                     </div>
                 </div>
             </div>
-            <div id='aurora_status'>
+
+            <!-- Aurora Status -->
+            <div id="aurora_status">
                 <script>
                     //link to aurora watch status
-                    var mobile_content='<iframe id ="status-frame" scrolling="no" frameborder="0" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
+                    var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
                     //link to aurora watch status and solar activity plots
-                    var other_devices ='<iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"</iframe>';
+                    var other_devices = '<iframe scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"</iframe>';
 
                     //function to load an appriopriate content
-                    function loadStatus(){
-                    //on mobile devices display only the aurora watch uk alert status
-                    if(screen.width<450){
-                        document.getElementById('aurora_status').innerHTML = mobile_content;
+                    function loadStatus() {
+                        //on mobile devices display only the aurora watch uk alert status
+                        if (screen.width < 450) {
+                            document.getElementById('aurora_status').innerHTML = mobile_content;
 
+                        }
+                        //on bigger screens display the plots provided by aurora watch uk
+                        else {
+                            document.getElementById('aurora_status').innerHTML = other_devices;
+                        }
                     }
-                    //on bigger screens display the plots provided by aurora watch uk
-                    else{
-                        document.getElementById('aurora_status').innerHTML = other_devices;
-                    }
-                }
                     loadStatus();
 
                     //detect change of the screen size and reload the appropriate element
                     window.addEventListener('resize', loadStatus);
 
-                </script>   
-                </div>
+                </script>
+            </div>
         </section>
 
         <!-- Text about project and tips for seeing Aurora -->
