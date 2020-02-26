@@ -22,48 +22,16 @@ const key = "bba7e5b7d4db7564662712e34db2cb37";
 
 
 // Check if Geolocation services are avialable in the browser
-if ('geolocation' in navigator) {
-    // If lat and long of user's location saved in local storage
-    if (!(localStorage.getItem('myLatitude') && (localStorage.getItem('myLongitude')))) {
-        navigator.geolocation.getCurrentPosition(setPosition, showError); // Ask geopermission, get current position
-        navigator.geolocation.watchPosition(setPosition, showError); // Watch current position
-    } else {
-        // If lat and long available, don't ask geopermission, return lat and long
-        var myLat = localStorage.getItem('myLatitude');
-        console.log("latitude from localStorage: " + myLat);
-        var myLong = localStorage.getItem('myLongitude');
-        console.log("longitude from localStorage: " + myLong);
-        getWeather(myLat, myLong); // Return getWeather function to make API call
+if('geolocation' in navigator){
+    localStorage.setItem('myLatitude', '57.1189003');
+    localStorage.setItem('myLongitude', '-2.1351575');
+    if (localStorage.getItem('myLatitude') && (localStorage.getItem('myLongitude'))) {
+      var latitude = localStorage.getItem('myLatitude');
+      var longitude = localStorage.getItem('myLongitude');
+      getWeather(latitude,longitude);
     }
-} else {
-    // Display message if geolocation isn't supported
-    notificationElement.style.display = "block";
-    notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";
 }
 
-
-// // Check if Geolocation services are avialable in the browser
-// if('geolocation' in navigator){
-//     navigator.geolocation.getCurrentPosition(setPosition, showError);   // Get longitude and latitude properties 
-// }else{                                                                  // of user's location from position object
-//     notificationElement.style.display = "block";
-//     notificationElement.innerHTML = "<p>Browser doesn't Support Geolocation</p>";      // Display error notification
-// }
-
-
-// Get user's location for requesting weather forecast
-function setPosition(position) {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
-
-    getWeather(latitude, longitude);
-}
-
-// Display an error if there is a problem with geolocation service
-function showError(error) {
-    notificationElement.style.display = "block";
-    notificationElement.innerHTML = `<p> ${error.message} </p>`;
-}
 
 // Make an API call with api key to get a weather forecast
 function getWeather(latitude, longitude) {
@@ -92,4 +60,5 @@ function displayWeather() {
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
-}
+    }
+

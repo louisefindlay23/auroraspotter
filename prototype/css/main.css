@@ -545,6 +545,15 @@ main h2 {
     }
 }
 
+/*Change the width of aurora status iframe*/
+#status-frame{
+    width: 100%;
+}
+
+.temp-hide {
+    display: none;
+}
+
 /* Larger than desktops */
 
 @media screen and (min-width: 1920px) {}
