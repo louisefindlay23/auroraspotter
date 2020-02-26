@@ -104,6 +104,10 @@ i:hover {
     cursor: pointer;
 }
 
+iframe {
+    border: 0;
+}
+
 /* Form Styling */
 
 input,
@@ -172,6 +176,10 @@ td a {
     color: var(--black);
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .text-center {
     text-align: center;
 }
@@ -182,10 +190,35 @@ td a {
     margin: 10% 2%;
 }
 
+#profile-page p {
+    font-size: 0.8rem;
+}
+
 /* Classes - Alignment */
 
-#map {
+#map,
+#weather,
+#about-us,
+#tips,
+#diary {
     margin-top: 20%;
+}
+
+#about-us p,
+#tips p {
+    margin-top: 10%;
+}
+
+#settings-page .flex-container {
+    justify-content: space-between;
+}
+
+#tips p:first-child {
+    margin-top: 10%;
+}
+
+#tips p {
+    margin-top: 0;
 }
 
 /* Classes - Flexbox */
@@ -327,6 +360,7 @@ td a {
     text-align: center;
     font-size: 1.2em;
 }
+
 .weather-location p {
     margin: 0;
     padding: 0;
@@ -362,10 +396,9 @@ td a {
     justify-content: space-around;
 }
 
-header .icon a,
-.icon h4 {
+header .icon a {
     margin-left: 10%;
-}   
+}
 
 .fa-bars {
     margin-left: auto;
@@ -374,6 +407,22 @@ header .icon a,
 
 .icon {
     background: var(--background-color);
+}
+
+/* Classes - Map Styling */
+
+/* Leaflet map custom style */
+
+#mapid {
+    position: relative;
+    height: 220px;
+}
+
+/* Change the width of aurora status iframe */
+
+#status-frame {
+    width: 100%;
+    height: 50px;
 }
 
 /* Classes - CSS Animation */
@@ -407,20 +456,93 @@ main h2 {
     animation: bounceInLeft 1s ease-in 0s 1 both;
 }
 
+@keyframes shake {
+
+    from,
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+.shake {
+    animation: shake 1s ease-in 0s 1 both;
+}
+
 .remove-animation {
     animation-duration: 0s;
 }
 
-/*Map container*/
-#map {
-    margin-top: 30%;
+/* Media Queries */
+
+
+/* Larger than mobiles */
+
+@media screen and (min-width: 640px) {
+
+    h2 {
+        margin-bottom: 10%;
+    }
+
+    #menu .flex-column {
+        margin-bottom: 5%;
+    }
+
+    #map,
+    #weather {
+        width: 80%;
+    }
+
+    #mapid {
+        height: 300px;
+    }
 }
 
-/*Leaflet map custom style*/
-#mapid { 
-    position: relative;
-    margin-top: 65%;
-    height: 220px; 
+/* Larger than tablets */
+
+@media screen and (min-width: 1280px) {
+
+    #mapid {
+        height: 400px;
+    }
+
+    input,
+    button {
+        width: 50%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    button {
+        width: 55%;
+    }
+
+    #settings-page .flex-container {
+        width: 50%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th,
+    table td {
+        padding: 24px 40px;
+    }
 }
 
 /*Change the width of aurora status iframe*/
@@ -432,3 +554,6 @@ main h2 {
     display: none;
 }
 
+/* Larger than desktops */
+
+@media screen and (min-width: 1920px) {}

@@ -2,13 +2,14 @@ $(document).ready(function () {
 
     $(".fa-bars").click(function () {
         $("header .icon").hide();
-                $("main h2").hide();
+        $("main h2").hide();
         $("#menu").show();
     });
 
     $(".fa-times").click(function () {
         $("#menu").hide();
-                $("main h2").addClass("remove-animation");
+        $("main h2").addClass("remove-animation");
+        $("main h2").show();
         $("header .icon").show();
     });
 
@@ -24,23 +25,23 @@ $(document).ready(function () {
 //function triggered when user clicks the sign up button
 //handles form validation
 //temporarily saves the data in the browser's local storage to simulate the user interaction before back-end implemented
-function signUp(){
-    
+function signUp() {
+
     //variables to store users input
     var username = document.getElementById('rusername').value;
     var email = document.getElementById('remail').value;
     var password = document.getElementById('rpassword').value;
     var pwdConf = document.getElementById('rpassConf').value;
-    
+
     //create user class
-    class User{
-        constructor(username, email, password){
+    class User {
+        constructor(username, email, password) {
             this.username = username;
             this.email = email;
             this.password = password;
         }
 
-        changePwd(newPwd){
+        changePwd(newPwd) {
             this.password = newPwd;
         }
     }
@@ -58,50 +59,50 @@ function signUp(){
     var userExist = false;
 
     //check all input fields have been filled up
-    if(username == '' || email == '' || pwdConf == '' || password == ''){
+    if (username == '' || email == '' || pwdConf == '' || password == '') {
         //TODO: create DOM element to display an error msg
         alert('Please provide all details');
-    }
-    else if(pwdConf != password){
+    } else if (pwdConf != password) {
         //TODO: create DOM element to display error msg
         alert("Passwords entered must be identical");
-    }
-    else{
+    } else {
         console.log('test');
-         //check does the username already exist
-        if(usersSaved != null){
-        try{
-            for(var i in usersSaved){
-                if(usersSaved[i].username == username){
-                    userExist = true;
-                    //alert for now TODO: create a dom element to display error msg
-                    alert('The username already registered. Please try a different username');
+        //check does the username already exist
+        if (usersSaved != null) {
+            try {
+                for (var i in usersSaved) {
+                    if (usersSaved[i].username == username) {
+                        userExist = true;
+                        //alert for now TODO: create a dom element to display error msg
+                        alert('The username already registered. Please try a different username');
+                    }
                 }
-            }  
-        } catch(err){
+            } catch (err) {
+                console.log('no users saved');
+            }
+        } else {
             console.log('no users saved');
         }
-    }
-    else{
-        console.log('no users saved');
-    }
 
-        
+
 
         //if user not in the list, validate the rest of the form
         //if input correct, add to the list of users and save in Local Storage
-        if(!userExist){
+        if (!userExist) {
             usersList = usersSaved;
             let new_user = new User(username, email, password);
             usersList.push(new_user);
             localStorage.removeItem('users');
             localStorage.setItem('users', JSON.stringify(usersList));
             window.location.href = "login.html";
-            
-        var form = document.getElementById("myForm");
-        function handleForm(event) { event.preventDefault(); } 
-        form.addEventListener('submit', handleForm);
-   
+
+            var form = document.getElementById("myForm");
+
+            function handleForm(event) {
+                event.preventDefault();
+            }
+            form.addEventListener('submit', handleForm);
+
         }
 
     }
@@ -109,7 +110,7 @@ function signUp(){
 }
 
 //login function
-function login(){
+function login() {
     //store form user input in variables
     var login = document.getElementById('lusername').value;
     var password = document.getElementById('lpassword').value;
@@ -117,17 +118,16 @@ function login(){
     var logged = false;
 
     //check that the login and password fields have been filled up
-    if(login =='' || password == ''){
+    if (login == '' || password == '') {
         //TODO: style error msg
         alert('Details incorrect');
-    }
-    else{
+    } else {
         //check does the username exist in the users list
-        try{
-            for(var i in usersSaved){
-                if(usersSaved[i].username == login){
+        try {
+            for (var i in usersSaved) {
+                if (usersSaved[i].username == login) {
                     //if it does, check does the password match
-                    if(usersSaved[i].password == password){
+                    if (usersSaved[i].password == password) {
                         //if it does set the logged value to true
                         logged = true;
                         //set the index of the logged user
@@ -136,31 +136,33 @@ function login(){
                 }
                 
             }
-        } catch(err){
+        } catch (err) {
             console.log('no users saved');
         }
 
         //if the logged value is true, redirect user to home page
         //otherwise display an error msg
-        if(logged == true){
+        if (logged == true) {
             localStorage.setItem('logged', JSON.stringify(true));
             var form = document.getElementById("login-form");
-            function handleForm(event) { event.preventDefault(); } 
+
+            function handleForm(event) {
+                event.preventDefault();
+            }
             form.addEventListener('submit', handleForm);
             window.location.href = "index.html";
-        }
-        else{
-        alert('Details incorrect');
+        } else {
+            alert('Details incorrect');
         }
     }
-    
-    
+
+
 }
 
 //signout function
 //change the localStorage logged value to false
 //redirect the user to the index page
-function signout(){
+function signout() {
     localStorage.setItem('logged', JSON.stringify(false));
     localStorage.setItem('userID', JSON.stringify('null'));
     window.location.href = "index.html";

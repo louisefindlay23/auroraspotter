@@ -57,26 +57,30 @@
     </header>
 
     <!-- Settings Icons -->
-    <main class="icon">
+    <main id="settings-page" class="icon">
         <h2>Settings</h2>
         <hr>
         <div class="flex-container">
-            <i class="fas fa-user"></i>
-            <h4>Profile</h4>
+            <a href="profile.html">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="profile.html">
+                <h4>Profile</h4>
+            </a>
         </div>
         <hr>
         <div class="flex-container">
             <a href="change-password.html">
-            <i class="fas fa-key"></i>
+                <i class="fas fa-key"></i>
             </a>
             <a href="change-password.html">
-            <h4>Change Password</h4>
+                <h4>Change Password</h4>
             </a>
         </div>
         <hr>
         <div class="flex-container">
             <i class="fas fa-sign-out-alt"></i>
-            <h4 id='logout' onclick='signout();'>Log Out</h4>
+            <h4 id="logout" onclick="signout();">Log Out</h4>
         </div>
         <hr>
     </main>
