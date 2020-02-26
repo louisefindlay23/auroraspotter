@@ -409,3 +409,16 @@ main h2 {
 .remove-animation {
     animation-duration: 0s;
 }
+
+/*Map container*/
+#map {
+    margin-top: 30%;
+}
+
+/*Leaflet map custom style*/
+#mapid { 
+    position: relative;
+    margin-top: 65%;
+    height: 220px; 
+    z-index: -1;
+}
