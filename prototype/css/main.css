@@ -193,8 +193,20 @@ td a {
 /* Classes - Alignment */
 
 #map,
+#weather,
+#about-us,
+#tips,
 #diary {
     margin-top: 20%;
+}
+
+#about-us p,
+#tips p {
+    margin-top: 10%;
+}
+
+#settings-page .flex-container {
+    justify-content: space-between;
 }
 
 /* Classes - Flexbox */
@@ -372,8 +384,7 @@ td a {
     justify-content: space-around;
 }
 
-header .icon a,
-.icon h4 {
+header .icon a {
     margin-left: 10%;
 }
 
@@ -388,17 +399,10 @@ header .icon a,
 
 /* Classes - Map Styling */
 
-/* Map container */
-
-#map {
-    margin-top: 30%;
-}
-
 /* Leaflet map custom style */
 
 #mapid {
     position: relative;
-    margin-top: 65%;
     height: 220px;
 }
 
@@ -406,6 +410,7 @@ header .icon a,
 
 #status-frame {
     width: 100%;
+    height: 50px;
 }
 
 /* Classes - CSS Animation */
