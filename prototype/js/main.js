@@ -107,3 +107,62 @@ function signUp(){
     }
 
 }
+
+//login function
+function login(){
+    //store form user input in variables
+    var login = document.getElementById('lusername').value;
+    var password = document.getElementById('lpassword').value;
+    var usersSaved = JSON.parse(localStorage.getItem('users'));
+    var logged = false;
+
+    //check that the login and password fields have been filled up
+    if(login =='' || password == ''){
+        //TODO: style error msg
+        alert('Details incorrect');
+    }
+    else{
+        //check does the username exist in the users list
+        try{
+            for(var i in usersSaved){
+                if(usersSaved[i].username == login){
+                    //if it does, check does the password match
+                    if(usersSaved[i].password == password){
+                        //if it does set the logged value to true
+                        logged = true;
+                        //set the index of the logged user
+                        localStorage.setItem('userID', JSON.stringify(login));
+                }
+                }
+                
+            }
+        } catch(err){
+            console.log('no users saved');
+        }
+
+        //if the logged value is true, redirect user to home page
+        //otherwise display an error msg
+        if(logged == true){
+            localStorage.setItem('logged', JSON.stringify(true));
+            var form = document.getElementById("login-form");
+            function handleForm(event) { event.preventDefault(); } 
+            form.addEventListener('submit', handleForm);
+            window.location.href = "index.html";
+        }
+        else{
+        alert('Details incorrect');
+        }
+    }
+    
+    
+}
+
+//signout function
+//change the localStorage logged value to false
+//redirect the user to the index page
+function signout(){
+    localStorage.setItem('logged', JSON.stringify(false));
+    localStorage.setItem('userID', JSON.stringify('null'));
+    window.location.href = "index.html";
+
+}
