@@ -107,3 +107,17 @@ function signUp(){
     }
 
 }
+
+//login function
+function login(){
+    localStorage.setItem('logged', JSON.stringify(true));
+}
+
+//signout function
+//change the localStorage logged value to false
+//redirect the user to the index page
+function signout(){
+    localStorage.setItem('logged', JSON.stringify(false));
+    window.location.href = "index.html";
+
+}
