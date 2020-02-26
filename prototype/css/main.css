@@ -205,6 +205,10 @@ td a {
     margin-top: 10%;
 }
 
+#settings-page .flex-container {
+    justify-content: space-between;
+}
+
 /* Classes - Flexbox */
 
 .flex-container {
@@ -380,8 +384,7 @@ td a {
     justify-content: space-around;
 }
 
-header .icon a,
-.icon h4 {
+header .icon a {
     margin-left: 10%;
 }
 
