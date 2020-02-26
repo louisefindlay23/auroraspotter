@@ -104,6 +104,10 @@ i:hover {
     cursor: pointer;
 }
 
+iframe {
+    border: 0;
+}
+
 /* Form Styling */
 
 input,
@@ -327,6 +331,7 @@ td a {
     text-align: center;
     font-size: 1.2em;
 }
+
 .weather-location p {
     margin: 0;
     padding: 0;
@@ -365,7 +370,7 @@ td a {
 header .icon a,
 .icon h4 {
     margin-left: 10%;
-}   
+}
 
 .fa-bars {
     margin-left: auto;
@@ -374,6 +379,28 @@ header .icon a,
 
 .icon {
     background: var(--background-color);
+}
+
+/* Classes - Map Styling */
+
+/* Map container */
+
+#map {
+    margin-top: 30%;
+}
+
+/* Leaflet map custom style */
+
+#mapid {
+    position: relative;
+    margin-top: 65%;
+    height: 220px;
+}
+
+/* Change the width of aurora status iframe */
+
+#status-frame {
+    width: 100%;
 }
 
 /* Classes - CSS Animation */
@@ -436,21 +463,4 @@ main h2 {
 
 .remove-animation {
     animation-duration: 0s;
-}
-
-/*Map container*/
-#map {
-    margin-top: 30%;
-}
-
-/*Leaflet map custom style*/
-#mapid { 
-    position: relative;
-    margin-top: 65%;
-    height: 220px; 
-}
-
-/*Change the width of aurora status iframe*/
-#status-frame{
-    width: 100%;
 }
