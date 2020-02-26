@@ -176,6 +176,10 @@ td a {
     color: var(--black);
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .text-center {
     text-align: center;
 }
@@ -207,6 +211,14 @@ td a {
 
 #settings-page .flex-container {
     justify-content: space-between;
+}
+
+#tips p:first-child {
+    margin-top: 10%;
+}
+
+#tips p {
+    margin-top: 0;
 }
 
 /* Classes - Flexbox */
@@ -474,3 +486,65 @@ main h2 {
 .remove-animation {
     animation-duration: 0s;
 }
+
+/* Media Queries */
+
+
+/* Larger than mobiles */
+
+@media screen and (min-width: 640px) {
+
+    h2 {
+        margin-bottom: 10%;
+    }
+
+    #menu .flex-column {
+        margin-bottom: 5%;
+    }
+
+    #map,
+    #weather {
+        width: 80%;
+    }
+
+    #mapid {
+        height: 300px;
+    }
+}
+
+/* Larger than tablets */
+
+@media screen and (min-width: 1280px) {
+
+    #mapid {
+        height: 400px;
+    }
+
+    input,
+    button {
+        width: 50%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    button {
+        width: 55%;
+    }
+
+    #settings-page .flex-container {
+        width: 50%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th,
+    table td {
+        padding: 24px 40px;
+    }
+}
+
+/* Larger than desktops */
+
+@media screen and (min-width: 1920px) {}
