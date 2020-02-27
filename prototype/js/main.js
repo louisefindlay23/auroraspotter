@@ -134,7 +134,7 @@ function login() {
                         localStorage.setItem('userID', JSON.stringify(login));
                     }
                 }
-
+                
             }
         } catch (err) {
             console.log('no users saved');
@@ -159,6 +159,40 @@ function login() {
 
 }
 
+//function to change user's password
+function changePassword(){
+    //set user input to variables
+    var newPwd = document.getElementById('newPwd').value;
+    var newPwdConf = document.getElementById('newPwdConf').value;
+    
+    //get username
+    var login = JSON.parse(localStorage.getItem('userID'));
+
+    //get the list of the users
+    var usersSaved = JSON.parse(localStorage.getItem('users'));
+    
+    //check the passwords are the same
+    if(newPwd != newPwdConf){
+        //TODO: style error msg
+        console.log(newPwd);
+        console.log(newPwdConf);
+        alert('Passwords entered must be identical');
+    }
+    //update user's password
+    else{
+        for (var i in usersSaved) {
+            if (usersSaved[i].username == login) {
+                usersSaved[i].password = newPwd;
+                localStorage.removeItem('users');
+                localStorage.setItem('users', JSON.stringify(usersSaved));
+                setTimeout(function(){document.location.href = "settings.html"},500);
+            }
+    }
+
+            
+}
+}
+
 //signout function
 //change the localStorage logged value to false
 //redirect the user to the index page
@@ -166,5 +200,20 @@ function signout() {
     localStorage.setItem('logged', JSON.stringify(false));
     localStorage.setItem('userID', JSON.stringify('null'));
     window.location.href = "index.html";
+
+}
+
+// function to hide menu elements
+function hideElements() {
+    // check if user is logged in
+    var isLogged = JSON.parse(localStorage.getItem('logged'));
+     //var isLogged = false;
+    if(!isLogged){
+        $(".logout-nav").hide();        // if not logged in, hide Profile and Setting from nav
+        
+    }
+    else{
+        $(".login-nav").hide();        // if logged in, hide Login and Sign up from nav
+    }
 
 }
