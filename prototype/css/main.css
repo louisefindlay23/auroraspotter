@@ -124,7 +124,7 @@ button {
     font-weight: lighter;
 }
 
-button {
+button, input[type=submit] {
     width: 96%;
     font-weight: 500;
 }
@@ -527,7 +527,7 @@ main h2 {
         margin-bottom: 5%;
     }
 
-    button {
+    button, input[type=submit] {
         width: 55%;
     }
 
