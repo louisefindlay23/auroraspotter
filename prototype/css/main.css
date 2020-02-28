@@ -442,6 +442,29 @@ header .icon a {
     font-size: 18px;
 }
 
+
+/* Index page record new location text and button styles */
+#new_entry{
+    margin-top: 35%;
+}
+
+#btn_add_loc{
+    border: 2px solid #B2E172;
+    color: #B2E172;
+}
+
+#btn_add_loc:hover{
+    cursor: pointer;
+    background-color:  #526E7D;
+}
+
+#btn_add_loc:active {
+    background-color: #B2E172;
+    border-color: #526E7D;
+    color: #456FE6;
+    transform: translateY(.5px);
+  }
+
 /* Classes - CSS Animation */
 
 @keyframes bounceInLeft {
