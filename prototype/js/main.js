@@ -33,6 +33,19 @@ function signUp() {
     var password = document.getElementById('rpassword').value;
     var pwdConf = document.getElementById('rpassConf').value;
 
+    //users list
+    var usersList = [];
+
+    //(temporary solution to simulate the user interaction; will be changed during backend implementation due to the security issues)
+    //can cause compatibility issues
+    var usersSaved = JSON.parse(localStorage.getItem('users'));
+
+    //boolean to keep track is user in the list
+    var userExist = false;
+
+    //DOM element to display an error msg
+    var error_holder = document.getElementById('error-msg');
+
     //create user class
     class User {
         constructor(username, email, password) {
@@ -46,25 +59,23 @@ function signUp() {
         }
     }
 
-    //users list
-    var usersList = [];
 
-    //get the usernames stored in the localStorage 
-    //TODO:
-    //(temporary solution to simulate the user interaction; will be changed during backend implementation due to the security issues)
-    //can cause compatibility issues
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
+    //prevent page refreshing on button click
+    var form = document.getElementById("myForm");   
 
-    //boolean to keep track is user in the list
-    var userExist = false;
+            function handleForm(event) {
+                event.preventDefault();
+            }
+            form.addEventListener('submit', handleForm);
 
-    //check all input fields have been filled up
+    //check all input fields have been filled up, if not display an error msg
     if (username == '' || email == '' || pwdConf == '' || password == '') {
-        //TODO: create DOM element to display an error msg
-        alert('Please provide all details');
+        error_holder.style.marginTop = '-50px';
+        error_holder.innerHTML = 'Please provide all details';
     } else if (pwdConf != password) {
-        //TODO: create DOM element to display error msg
-        alert("Passwords entered must be identical");
+        //display error msg if passwords entered dont match
+        error_holder.style.marginTop = '-50px';
+        error_holder.innerHTML = 'Passwords entered must be identical';
     } else {
         console.log('test');
         //check does the username already exist
@@ -73,8 +84,9 @@ function signUp() {
                 for (var i in usersSaved) {
                     if (usersSaved[i].username == username) {
                         userExist = true;
-                        //alert for now TODO: create a dom element to display error msg
-                        alert('The username already registered. Please try a different username');
+                        //display an error msg if the username already registered
+                        error_holder.style.marginTop = '-50px';
+                        error_holder.innerHTML = 'The username already registered\n Please try a different username';
                     }
                 }
             } catch (err) {
@@ -83,8 +95,6 @@ function signUp() {
         } else {
             console.log('no users saved');
         }
-
-
 
         //if user not in the list, validate the rest of the form
         //if input correct, add to the list of users and save in Local Storage
@@ -95,19 +105,12 @@ function signUp() {
             localStorage.removeItem('users');
             localStorage.setItem('users', JSON.stringify(usersList));
             window.location.href = "login.html";
-
-            var form = document.getElementById("myForm");
-
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
-
         }
 
     }
 
 }
+
 
 //login function
 function login() {
@@ -116,11 +119,21 @@ function login() {
     var password = document.getElementById('lpassword').value;
     var usersSaved = JSON.parse(localStorage.getItem('users'));
     var logged = false;
+    var error_holder = document.getElementById('login-error');
+
+    //prevent page refreshing on button click
+    var form = document.getElementById("login-form");   
+
+            function handleForm(event) {
+                event.preventDefault();
+            }
+            form.addEventListener('submit', handleForm);
 
     //check that the login and password fields have been filled up
     if (login == '' || password == '') {
-        //TODO: style error msg
-        alert('Details incorrect');
+        //display error msg if any of the fields not filled up
+        error_holder.style.marginTop = '-50px';
+        error_holder.innerHTML = 'Please enter username and password below';
     } else {
         //check does the username exist in the users list
         try {
@@ -152,7 +165,9 @@ function login() {
             form.addEventListener('submit', handleForm);
             window.location.href = "index.html";
         } else {
-            alert('Details incorrect');
+            //display error msg 
+            error_holder.style.marginTop = '-50px';
+            error_holder.innerHTML = 'Details incorrect';
         }
     }
 
@@ -170,13 +185,27 @@ function changePassword(){
 
     //get the list of the users
     var usersSaved = JSON.parse(localStorage.getItem('users'));
+
+    var error_holder = document.getElementById('passchange-error');
+
+    //prevent page refreshing on button click
+    var form = document.getElementById("passChange");   
+
+            function handleForm(event) {
+                event.preventDefault();
+            }
+            form.addEventListener('submit', handleForm);
     
+    //check new password field is not empty
+    if(newPwd==''){
+        //display error msg if passwords dont match
+        error_holder.style.marginTop = '-50px';
+        error_holder.innerHTML = 'Enter new password below';
+    }
     //check the passwords are the same
-    if(newPwd != newPwdConf){
-        //TODO: style error msg
-        console.log(newPwd);
-        console.log(newPwdConf);
-        alert('Passwords entered must be identical');
+    else if(newPwd != newPwdConf){
+        error_holder.style.marginTop = '-50px';
+        error_holder.innerHTML = 'Passwords entered must be identical';
     }
     //update user's password
     else{
@@ -215,5 +244,12 @@ function hideElements() {
     else{
         $(".login-nav").hide();        // if logged in, hide Login and Sign up from nav
     }
+
+}
+
+//replace text on Profile page with user's details
+function profileContent(){
+var usersList = JSON.parse(localStorage.getItem('users'));
+var username = JSON.parse(localStorage.getItem('username')) 
 
 }

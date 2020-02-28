@@ -425,6 +425,12 @@ header .icon a {
     height: 50px;
 }
 
+
+#error-msg, #login-error, #passchange-error{
+    color: #B2E172;
+    font-size: 18px;
+}
+
 /* Classes - CSS Animation */
 
 @keyframes bounceInLeft {
@@ -487,12 +493,11 @@ main h2 {
     animation-duration: 0s;
 }
 
+
 /* Media Queries */
-
-
 /* Larger than mobiles */
 
-@media screen and (min-width: 640px) {
+@media screen and (max-width: 1280px) and (min-width: 640px) {
 
     h2 {
         margin-bottom: 10%;
@@ -510,6 +515,12 @@ main h2 {
     #mapid {
         height: 300px;
     }
+
+    #status-frame{
+        width: 80%;
+        height: 50px;
+    }
+
 }
 
 /* Larger than tablets */
@@ -545,10 +556,7 @@ main h2 {
     }
 }
 
-/*Change the width of aurora status iframe*/
-#status-frame{
-    width: 100%;
-}
+
 
 .temp-hide {
     display: none;
