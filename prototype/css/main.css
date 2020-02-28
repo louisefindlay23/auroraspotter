@@ -542,7 +542,7 @@ main h2 {
         margin-bottom: 15%;
     }
 
-    #form-title {
+    .small-title {
         margin-bottom: 7.5%;
     }
 
@@ -553,6 +553,10 @@ main h2 {
 
     main {
         margin-top: 2.5%;
+    }
+
+    #small-main {
+        margin-bottom: 2.5%;
     }
 
     #map,
@@ -596,6 +600,10 @@ main h2 {
         margin-top: 5%;
     }
 
+    #profile-page p {
+        font-size: 1rem;
+    }
+
     input,
     button {
         width: 100%;
@@ -604,14 +612,33 @@ main h2 {
         padding: 5%;
     }
 
+    #myForm input {
+        width: 50%;
+        padding: 2.5%;
+        margin-left: 25%;
+    }
+
     button,
     input[type=submit] {
         width: 55%;
         margin-left: 30%;
     }
 
+    #myForm button,
+    #myForm input[type=submit] {
+        width: 55%;
+    }
+
+    #form-text {
+        margin-bottom: 2.5%;
+    }
+
     #settings-page .flex-container {
         width: 50%;
+    }
+
+    .icon .flex-container {
+        justify-content: space-between;
     }
 
     table {

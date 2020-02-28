@@ -55,16 +55,18 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h2>Welcome Back, Log In</h2>
-        <p id='login-error'></p>
+    <main id="small-main">
+        <h2 class="small-title">Welcome Back, Log In</h2>
+        <p id="login-error"></p>
 
         <!-- Login form -->
-        <form id="login-form">
-            <input type="text" id="lusername" name="name" placeholder="Username">
-            <input type="password" id="lpassword" name="password" placeholder="Password">
-            <input type="submit" value="Login" onclick="login()">
-        </form>
+        <div class="flex-container flex-center">
+            <form id="login-form">
+                <input type="text" id="lusername" name="name" placeholder="Username">
+                <input type="password" id="lpassword" name="password" placeholder="Password">
+                <input type="submit" value="Login" onclick="login()">
+            </form>
+        </div>
 
         <!-- Register Link -->
         <p id="form-text">Not got an account? Sign Up <a href="signup.html">Here</a></p>
