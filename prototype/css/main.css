@@ -426,7 +426,7 @@ header .icon a {
 }
 
 
-#error-msg{
+#error-msg, #login-error, #passchange-error{
     color: #B2E172;
     font-size: 18px;
 }
