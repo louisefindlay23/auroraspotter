@@ -180,7 +180,7 @@ td a {
     font-weight: bold;
 }
 
-.text-center {
+.text-center, #profile-user, #profile-email {
     text-align: center;
 }
 

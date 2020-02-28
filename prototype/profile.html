@@ -17,7 +17,7 @@
     <script src="js/main.js"></script>
 </head>
 
-<body onload="hideElements()">
+<body onload="hideElements(); profileContent();">
 
     <header>
 
@@ -57,13 +57,13 @@
         </nav>
     </header>
     <main id="profile-page">
-        <h2>Your Profile</h2>
+        <h2>Profile Details</h2>
 
-        <p class="text-center">Username</p>
-        <p class="text-center">Email</p>
+        <p id='profile-user'>Username</p>
+        <p id="profile-email">Email</p>
 
         <div id="diary">
-            <h2>My Observation Diary</h2>
+            <h2>Observation Diary</h2>
 
             <table>
                 <thead>
