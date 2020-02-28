@@ -62,31 +62,33 @@
         <section id="welcome">
             <h2>Follow the Northern Lights</h2>
 
-            <!-- Aurora Map -->
-            <div id="map">
-                <!--leaflet map-->
-                <div id="mapid"></div>
-                <!--call map script-->
-                <script src="js/map.js"></script>
+            <div class="flex-container">
+                <!-- Aurora Map -->
+                <div id="map">
+                    <!--leaflet map-->
+                    <div id="mapid"></div>
+                    <!--call map script-->
+                    <script src="js/map.js"></script>
 
-            </div>
+                </div>
 
-            <!-- Weather Forecast -->
-            <div id="weather" class="flex-container flex-center">
-                <div class="notification"> </div>
-                <div class="weather-container">
-                    <h4 class="black text-center">Weather Forecast</h4>
-                    <div class="weather-icon">
-                        <img src="img/weather-icons/unknown.png" alt="">
-                    </div>
-                    <div class="temperature">
-                        <p>- °<span>C</span></p>
-                    </div>
-                    <div class="temperature-description">
-                        <p> - </p>
-                    </div>
-                    <div class="weather-location">
-                        <p>-</p>
+                <!-- Weather Forecast -->
+                <div id="weather" class="flex-container flex-center">
+                    <div class="notification"> </div>
+                    <div class="weather-container">
+                        <h4 class="black text-center">Weather Forecast</h4>
+                        <div class="weather-icon">
+                            <img src="img/weather-icons/unknown.png" alt="">
+                        </div>
+                        <div class="temperature">
+                            <p>- °<span>C</span></p>
+                        </div>
+                        <div class="temperature-description">
+                            <p> - </p>
+                        </div>
+                        <div class="weather-location">
+                            <p>-</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,20 +105,20 @@
                     function loadStatus() {
                         //on mobile devices display only the aurora watch uk alert status
                         if (screen.width < 1280) {
-                            try{
-                            document.getElementById('aurora_status').innerHTML = mobile_content;
+                            try {
+                                document.getElementById('aurora_status').innerHTML = mobile_content;
                             }
                             //accessing iframe with JS will throw security error
-                            catch(err){}
+                            catch (err) {}
 
                         }
                         //on bigger screens display the plots provided by aurora watch uk
                         else {
-                            try{
-                            document.getElementById('aurora_status').innerHTML = other_devices;
+                            try {
+                                document.getElementById('aurora_status').innerHTML = other_devices;
                             }
                             //accessing iframe with JS will throw security error
-                            catch(err){}
+                            catch (err) {}
                         }
                     }
                     loadStatus();

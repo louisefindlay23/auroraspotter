@@ -538,6 +538,10 @@ main h2 {
 
 @media screen and (min-width: 1280px) {
 
+    h2 {
+        margin-bottom: 15%;
+    }
+
     nav.icon,
     #menu .flex-container {
         margin-top: 2.5%;
@@ -545,11 +549,43 @@ main h2 {
 
     #map,
     #weather {
-        width: 50%;
+        width: 45%;
+        margin: auto 2.5%;
     }
 
     #mapid {
-        height: 400px;
+        height: 387.933px;
+    }
+
+    #aurora_status,
+    #activity-img,
+    #button-container {
+        margin-top: 7.5%;
+    }
+
+    #activity-container {
+        width: 100vw;
+    }
+
+    #map,
+    #weather,
+    #about-us,
+    #tips,
+    #diary {
+        margin-top: 7.5%;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 5%;
+    }
+
+    #tips p:first-child {
+        margin-top: 5%;
     }
 
     input,
