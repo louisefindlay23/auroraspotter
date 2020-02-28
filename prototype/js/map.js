@@ -11,3 +11,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 //adding markers
 var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+
+//function to add new location
+function recordNewLoc(){
+    
+}
