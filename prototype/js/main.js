@@ -247,9 +247,21 @@ function hideElements() {
 
 }
 
-//replace text on Profile page with user's details
+//funtion replace text on Profile page with user's details
 function profileContent(){
-var usersList = JSON.parse(localStorage.getItem('users'));
-var username = JSON.parse(localStorage.getItem('username')) 
+    var usersList = JSON.parse(localStorage.getItem('users'));
+    var username = JSON.parse(localStorage.getItem('userID'));
+    var user_email = '';
+    var username_cont = document.getElementById('profile-user');
+    var email_cont = document.getElementById('profile-email');
 
+    //set user details
+    for (var i in usersList) {
+        if (usersList[i].username == username) {
+            user_email = usersList[i].email;
+            //display user details on the screen
+            username_cont.innerHTML = username;
+            email_cont.innerHTML = user_email;
+            }
+        }
 }

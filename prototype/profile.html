@@ -17,7 +17,7 @@
     <script src="js/main.js"></script>
 </head>
 
-<body onload="hideElements()">
+<body onload="hideElements(); profileContent();">
 
     <header>
 
@@ -59,8 +59,8 @@
     <main id="profile-page small-main">
         <h2 class="small-title">Your Profile</h2>
 
-        <p class="text-center">Username</p>
-        <p class="text-center">Email</p>
+        <p id='profile-user'>Username</p>
+        <p id="profile-email">Email</p>
 
         <div id="diary">
             <h2 class="small-title">My Observation Diary</h2>
