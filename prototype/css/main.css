@@ -124,7 +124,8 @@ button {
     font-weight: lighter;
 }
 
-button, input[type=submit] {
+button,
+input[type=submit] {
     width: 96%;
     font-weight: 500;
 }
@@ -425,8 +426,18 @@ header .icon a {
     height: 50px;
 }
 
+#wrapper {
+    width: 100%;
+}
 
-#error-msg, #login-error, #passchange-error{
+#activity-image {
+    width: 100%;
+}
+
+
+#error-msg,
+#login-error,
+#passchange-error {
     color: #B2E172;
     font-size: 18px;
 }
@@ -497,7 +508,7 @@ main h2 {
 /* Media Queries */
 /* Larger than mobiles */
 
-@media screen and (max-width: 1280px) and (min-width: 640px) {
+@media screen and (min-width: 640px) {
 
     h2 {
         margin-bottom: 10%;
@@ -516,7 +527,7 @@ main h2 {
         height: 300px;
     }
 
-    #status-frame{
+    #status-frame {
         width: 80%;
         height: 50px;
     }
@@ -526,6 +537,16 @@ main h2 {
 /* Larger than tablets */
 
 @media screen and (min-width: 1280px) {
+
+    nav.icon,
+    #menu .flex-container {
+        margin-top: 2.5%;
+    }
+
+    #map,
+    #weather {
+        width: 50%;
+    }
 
     #mapid {
         height: 400px;
@@ -538,7 +559,8 @@ main h2 {
         margin-bottom: 5%;
     }
 
-    button, input[type=submit] {
+    button,
+    input[type=submit] {
         width: 55%;
     }
 
@@ -555,8 +577,6 @@ main h2 {
         padding: 24px 40px;
     }
 }
-
-
 
 .temp-hide {
     display: none;
