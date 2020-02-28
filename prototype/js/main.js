@@ -246,3 +246,10 @@ function hideElements() {
     }
 
 }
+
+//replace text on Profile page with user's details
+function profileContent(){
+var usersList = JSON.parse(localStorage.getItem('users'));
+var username = JSON.parse(localStorage.getItem('username')) 
+
+}

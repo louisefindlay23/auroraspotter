@@ -103,12 +103,20 @@
                     function loadStatus() {
                         //on mobile devices display only the aurora watch uk alert status
                         if (screen.width < 1280) {
+                            try{
                             document.getElementById('aurora_status').innerHTML = mobile_content;
+                            }
+                            //accessing iframe with JS will throw security error
+                            catch(err){}
 
                         }
                         //on bigger screens display the plots provided by aurora watch uk
                         else {
+                            try{
                             document.getElementById('aurora_status').innerHTML = other_devices;
+                            }
+                            //accessing iframe with JS will throw security error
+                            catch(err){}
                         }
                     }
                     loadStatus();
