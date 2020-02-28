@@ -542,8 +542,16 @@ main h2 {
         margin-bottom: 15%;
     }
 
+    #form-title {
+        margin-bottom: 7.5%;
+    }
+
     nav.icon,
     #menu .flex-container {
+        margin-top: 2.5%;
+    }
+
+    main {
         margin-top: 2.5%;
     }
 
@@ -590,14 +598,16 @@ main h2 {
 
     input,
     button {
-        width: 50%;
-        margin-top: 5%;
-        margin-bottom: 5%;
+        width: 100%;
+        margin-top: 7.5%;
+        margin-bottom: 7.5%;
+        padding: 5%;
     }
 
     button,
     input[type=submit] {
         width: 55%;
+        margin-left: 30%;
     }
 
     #settings-page .flex-container {
