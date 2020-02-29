@@ -181,7 +181,9 @@ td a {
     font-weight: bold;
 }
 
-.text-center, #profile-user, #profile-email {
+.text-center,
+#profile-user,
+#profile-email {
     text-align: center;
 }
 
@@ -203,6 +205,10 @@ td a {
 #tips,
 #diary {
     margin-top: 20%;
+}
+
+#map {
+    width: 100%;
 }
 
 #about-us p,
@@ -444,18 +450,18 @@ header .icon a {
 
 
 /* Index page record new location text and button styles */
-#new_entry{
+#new_entry {
     margin-top: 35%;
 }
 
-#btn_add_loc{
+#btn_add_loc {
     border: 2px solid #B2E172;
     color: #B2E172;
 }
 
-#btn_add_loc:hover{
+#btn_add_loc:hover {
     cursor: pointer;
-    background-color:  #526E7D;
+    background-color: #526E7D;
 }
 
 #btn_add_loc:active {
@@ -463,60 +469,62 @@ header .icon a {
     border-color: #526E7D;
     color: #456FE6;
     transform: translateY(.5px);
-  }
+}
 
-  /* new observation popup msg */
+/* new observation popup msg */
 
-  #popup-msg{
-      margin-top: 5%;
-      margin-left: 10%;
-      margin-right: 10%;
-      font-size: 14px;
-      margin-bottom: -3%;
-  }
+#popup-msg {
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 14px;
+    margin-bottom: -3%;
+}
 
-  #new-popup{
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 15%;
-      top: 28%;
-      width: 70%;
-      height: 30%;
-      background-color: black;
-      border: 1px solid #B2E172;
-      box-shadow: 1px 1px #B2E172;
-  }
+#new-popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 15%;
+    top: 28%;
+    width: 70%;
+    height: 30%;
+    background-color: black;
+    border: 1px solid #B2E172;
+    box-shadow: 1px 1px #B2E172;
+}
 
-  #popup-cancel, #popup-save{
-      width: 30%;
-  }
+#popup-cancel,
+#popup-save {
+    width: 30%;
+}
 
-  #popup-cancel{
-      margin-left: 15%;
-      float: left;
-      border: 1px solid white;
-  }
+#popup-cancel {
+    margin-left: 15%;
+    float: left;
+    border: 1px solid white;
+}
 
-  #popup-cancel:hover{
+#popup-cancel:hover {
     color: white;
     border: 2px solid #B2E172;
 }
 
-  #popup-save{
-      display: inline-block;
-      color:  #B2E172;
-      border: 1px solid #B2E172;
-  }
+#popup-save {
+    display: inline-block;
+    color: #B2E172;
+    border: 1px solid #B2E172;
+}
 
-  #popup-save:hover{
+#popup-save:hover {
     display: inline-block;
     border: 2px solid #B2E172;
     color: white;
 }
 
-#popup-cancel:active, #popup-save:active{
-    background-color:  #526E7D;
+#popup-cancel:active,
+#popup-save:active {
+    background-color: #526E7D;
 }
 
 /* Classes - CSS Animation */

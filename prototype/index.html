@@ -62,18 +62,18 @@
         <section id="welcome">
             <h2>Follow the Northern Lights</h2>
 
-             <!-- Record Observation -->
-             <div id='new_entry'>
+            <!-- Record Observation -->
+            <div id="new_entry">
                 <p>Do you have an Aurora in front of your eyes?</p>
                 <p>Click the button below to share your location!</p>
-                <button id='btn_add_loc' onclick='recordNewLoc()'>Record Observation</button>
-                </div>
+                <button id="btn_add_loc" onclick="recordNewLoc()">Record Observation</button>
+            </div>
 
             <!-- New entry pop up -->
-            <div id='new-popup'>
-                <p id='popup-msg'>Test Text</p>
-                <button id='popup-cancel' onclick="cancelLocation()">Cancel</button>
-                <button id='popup-save' onclick="addLocation()">Save</button>
+            <div id="new-popup">
+                <p id="popup-msg">Test Text</p>
+                <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
+                <button id="popup-save" onclick="addLocation()">Save</button>
             </div>
 
             <div class="flex-container">
@@ -119,12 +119,12 @@
                     function loadStatus() {
                         //on mobile devices display only the aurora watch uk alert status
                         if (window.innerWidth < 1280) {
-                                document.getElementById('aurora_status').innerHTML = mobile_content;
-                            }
+                            document.getElementById('aurora_status').innerHTML = mobile_content;
+                        }
                         //on bigger screens display the plots provided by aurora watch uk
                         else {
-                                document.getElementById('aurora_status').innerHTML = other_devices;
-                            }
+                            document.getElementById('aurora_status').innerHTML = other_devices;
+                        }
                     }
                     loadStatus();
 
