@@ -499,20 +499,20 @@ header .icon a {
   }
 
   #popup-cancel:hover{
-    color: #B2E172;
+    color: white;
     border: 2px solid #B2E172;
 }
 
   #popup-save{
       display: inline-block;
       color:  #B2E172;
-      border: 1px solid white;
+      border: 1px solid #B2E172;
   }
 
   #popup-save:hover{
     display: inline-block;
     border: 2px solid #B2E172;
-    color: #B2E172;
+    color: white;
 }
 
 #popup-cancel:active, #popup-save:active{
