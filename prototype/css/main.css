@@ -122,6 +122,7 @@ button {
     color: var(--white);
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
+    border-radius: 5px;
 }
 
 button,
@@ -681,6 +682,7 @@ main h2 {
         margin-top: 7.5%;
         margin-bottom: 7.5%;
         padding: 5%;
+        border-radius: 10px;
     }
 
     #myForm input {
@@ -693,6 +695,7 @@ main h2 {
     input[type=submit] {
         width: 55%;
         margin-left: 30%;
+        border-radius: 5px;
     }
 
     #myForm button,
