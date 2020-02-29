@@ -62,31 +62,47 @@
         <section id="welcome">
             <h2>Follow the Northern Lights</h2>
 
-            <!-- Aurora Map -->
-            <div id="map">
-                <!--leaflet map-->
-                <div id="mapid"></div>
-                <!--call map script-->
-                <script src="js/map.js"></script>
+             <!-- Record Observation -->
+             <div id='new_entry'>
+                <p>Do you have an Aurora in front of your eyes?</p>
+                <p>Click the button below to share your location!</p>
+                <button id='btn_add_loc' onclick='recordNewLoc()'>Record Observation</button>
+                </div>
 
+            <!-- New entry pop up -->
+            <div id='new-popup'>
+                <p id='popup-msg'>Test Text</p>
+                <button id='popup-cancel' onclick="cancelLocation()">Cancel</button>
+                <button id='popup-save' onclick="addLocation()">Save</button>
             </div>
 
-            <!-- Weather Forecast -->
-            <div id="weather" class="flex-container flex-center">
-                <div class="notification"> </div>
-                <div class="weather-container">
-                    <h4 class="black text-center">Weather Forecast</h4>
-                    <div class="weather-icon">
-                        <img src="img/weather-icons/unknown.png" alt="">
-                    </div>
-                    <div class="temperature">
-                        <p>- °<span>C</span></p>
-                    </div>
-                    <div class="temperature-description">
-                        <p> - </p>
-                    </div>
-                    <div class="weather-location">
-                        <p>-</p>
+            <div class="flex-container">
+                <!-- Aurora Map -->
+                <div id="map">
+                    <!--leaflet map-->
+                    <div id="mapid"></div>
+                    <!--call map script-->
+                    <script src="js/map.js"></script>
+
+                </div>
+
+                <!-- Weather Forecast -->
+                <div id="weather" class="flex-container flex-center">
+                    <div class="notification"> </div>
+                    <div class="weather-container">
+                        <h4 class="black text-center">Weather Forecast</h4>
+                        <div class="weather-icon">
+                            <img src="img/weather-icons/unknown.png" alt="">
+                        </div>
+                        <div class="temperature">
+                            <p>- °<span>C</span></p>
+                        </div>
+                        <div class="temperature-description">
+                            <p> - </p>
+                        </div>
+                        <div class="weather-location">
+                            <p>-</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,18 +113,26 @@
                     //link to aurora watch status
                     var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
                     //link to aurora watch status and solar activity plots
-                    var other_devices = '<iframe scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"</iframe>';
+                    var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
 
                     //function to load an appriopriate content
                     function loadStatus() {
                         //on mobile devices display only the aurora watch uk alert status
-                        if (screen.width < 450) {
-                            document.getElementById('aurora_status').innerHTML = mobile_content;
+                        if (screen.width < 1280) {
+                            try {
+                                document.getElementById('aurora_status').innerHTML = mobile_content;
+                            }
+                            //accessing iframe with JS will throw security error
+                            catch (err) {}
 
                         }
                         //on bigger screens display the plots provided by aurora watch uk
                         else {
-                            document.getElementById('aurora_status').innerHTML = other_devices;
+                            try {
+                                document.getElementById('aurora_status').innerHTML = other_devices;
+                            }
+                            //accessing iframe with JS will throw security error
+                            catch (err) {}
                         }
                     }
                     loadStatus();

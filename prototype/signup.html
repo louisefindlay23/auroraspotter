@@ -56,17 +56,21 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h2>Please, Sign Up</h2>
+    <main id="small-main">
+        <h2 class="small-title">Please, Sign Up</h2>
+
+        <p id="error-msg"></p>
 
         <!-- Register form -->
-        <form id='myForm'>
-            <input type="text" id='rusername' name="username" placeholder="Username">
-            <input type="email" id='remail' name="email" placeholder="E-Mail Address">
-            <input type="text" id='rpassword' name="password" placeholder="Password">
-            <input type="text" id='rpassConf' name="confirm-password" placeholder="Confirm Password">
-            <button value="register" onclick='signUp()'>Sign Up</button>
-        </form>
+        <div class="flex-container flex-center">
+            <form id="myForm">
+                <input type="text" id="rusername" name="username" placeholder="Username">
+                <input type="email" id="remail" name="email" placeholder="E-Mail Address">
+                <input type="password" id="rpassword" name="password" placeholder="Password">
+                <input type="password" id="rpassConf" name="confirm-password" placeholder="Confirm Password">
+                <input type="submit" value="Register" onclick="signUp()">
+            </form>
+        </div>
 
         <!-- Login Link -->
         <p id="form-text">Already got an account? Log In <a href="login.html">Here</a></p>

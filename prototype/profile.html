@@ -17,7 +17,7 @@
     <script src="js/main.js"></script>
 </head>
 
-<body onload="hideElements()">
+<body onload="hideElements(); profileContent();">
 
     <header>
 
@@ -56,29 +56,29 @@
             </div>
         </nav>
     </header>
-    <main id="profile-page">
-        <h2>Your Profile</h2>
+    <main id="profile-page small-main">
+        <h2 class="small-title">Profile Details</h2>
 
-        <p class="text-center">Username</p>
-        <p class="text-center">Email</p>
+        <p id='profile-user'>Username</p>
+        <p id="profile-email">Email</p>
 
         <div id="diary">
-            <h2>My Observation Diary</h2>
+            <h2 class="small-title">Observation Diary</h2>
 
             <table>
                 <thead>
                     <tr>
                         <th>Date</th>
+                        <th>Time</th>
                         <th>Co-ordinates</th>
-                        <th>Remove?</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
                         <td>5/12/20</td>
+                        <td>11:34</td>
                         <td>44.006481</td>
-                        <td><a href="">Yes</a></td>
                     </tr>
                     <tr>
                         <td></td>
