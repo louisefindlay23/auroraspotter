@@ -483,7 +483,8 @@ header .icon a {
       top: 28%;
       width: 70%;
       height: 30%;
-      background-color: #526E7D;
+      background-color: black;
+      border: 1px solid #B2E172;
   }
 
   #popup-cancel, #popup-save{
@@ -493,6 +494,7 @@ header .icon a {
   #popup-cancel{
       margin-left: 15%;
       float: left;
+      border: 2px solid white;
   }
 
   #popup-cancel:hover{
@@ -503,6 +505,7 @@ header .icon a {
   #popup-save{
       display: inline-block;
       color:  #B2E172;
+      border: 2px solid white;
   }
 
   #popup-save:hover{
