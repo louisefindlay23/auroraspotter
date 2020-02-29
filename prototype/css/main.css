@@ -485,6 +485,7 @@ header .icon a {
       height: 30%;
       background-color: black;
       border: 1px solid #B2E172;
+      box-shadow: 1px 1px #B2E172;
   }
 
   #popup-cancel, #popup-save{
@@ -494,7 +495,7 @@ header .icon a {
   #popup-cancel{
       margin-left: 15%;
       float: left;
-      border: 2px solid white;
+      border: 1px solid white;
   }
 
   #popup-cancel:hover{
@@ -505,13 +506,17 @@ header .icon a {
   #popup-save{
       display: inline-block;
       color:  #B2E172;
-      border: 2px solid white;
+      border: 1px solid white;
   }
 
   #popup-save:hover{
     display: inline-block;
     border: 2px solid #B2E172;
     color: #B2E172;
+}
+
+#popup-cancel:active, #popup-save:active{
+    background-color:  #526E7D;
 }
 
 /* Classes - CSS Animation */
