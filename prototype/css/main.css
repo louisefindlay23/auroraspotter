@@ -456,6 +456,7 @@ header .icon a {
 /* Index page record new location text and button styles */
 #new_entry {
     margin-top: 35%;
+    padding-top: 5%;
 }
 
 #btn_add_loc {
@@ -628,6 +629,32 @@ main h2 {
 
 }
 
+/* Extra content defined breakpoints */
+
+@media screen and (min-width: 940px) {
+
+    #map,
+    #weather,
+    #about-us,
+    #tips,
+    #diary {
+        margin-top: 7.5%;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 5%;
+    }
+
+    #tips p:first-child {
+        margin-top: 5%;
+    }
+}
+
 /* Larger than tablets */
 
 @media screen and (min-width: 1280px) {
@@ -671,27 +698,6 @@ main h2 {
 
     #activity-container {
         width: 100vw;
-    }
-
-    #map,
-    #weather,
-    #about-us,
-    #tips,
-    #diary {
-        margin-top: 7.5%;
-    }
-
-    p {
-        font-size: 0.8rem;
-    }
-
-    #about-us p,
-    #tips p {
-        margin-top: 5%;
-    }
-
-    #tips p:first-child {
-        margin-top: 5%;
     }
 
     #profile-page p {
