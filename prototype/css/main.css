@@ -399,7 +399,7 @@ td a {
 }
 
 .icon .flex-container {
-    justify-content: flex-start;
+    justify-content: space-between;
     margin: auto;
 }
 
@@ -629,7 +629,7 @@ main h2 {
 
 }
 
-/* Extra content defined breakpoints */
+/* In between mobile and tablet */
 
 @media screen and (min-width: 940px) {
 
@@ -700,6 +700,10 @@ main h2 {
         width: 100vw;
     }
 
+    #new_entry {
+        margin-top: 20%;
+    }
+
     #profile-page p {
         font-size: 1rem;
     }
@@ -742,10 +746,6 @@ main h2 {
         width: 50%;
     }
 
-    .icon .flex-container {
-        justify-content: space-between;
-    }
-
     table {
         width: 100%;
     }
@@ -760,10 +760,16 @@ main h2 {
     }
 }
 
-/* Larger than desktops */
+/* Desktop */
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1580px) {
+
     #new_entry {
-        margin-top: 20%;
+        margin-top: 5%;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 2.5%;
     }
 }
