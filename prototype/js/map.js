@@ -21,15 +21,6 @@ function loadMap(){
     var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15');
     var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15');
 
-    //map click function
-    var popup = L.popup();
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(mymap);
-
-    }
 
     
 
@@ -60,10 +51,16 @@ function loadMap(){
         }
     }
 
+    //onmap click display a weather forecast for the chosen location
+    function onMapClick(e) {
+        var lat = e.latlng["lat"];
+        var lon = e.latlng["lng"];
+        getWeather(lat, lon);
 
-    //popups
-    
-    //mymap.on('click', onMapClick);
+    }
+
+    mymap.on('click', onMapClick);
+
 }
 
 
@@ -136,15 +133,9 @@ function addLocation(){
 }
 
 
-//2) create markers for each location
-    //read locations from the storage
-    //loop to create all markers
-    //In the marker show: coordinates, date, time, username (what if the location already saved?)
 
-//3) when user click on the map - show the weather for chosen location
+//1) when user click on the map - show the weather for chosen location
 
 
-//create few sample markers
 
-
-//4) check is the user logged in before adding new location
+//2) check is the user logged in before adding new location
