@@ -1,3 +1,9 @@
+//Project: Aurora Spotter
+//Group: 
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Leaflet map implementation
+
 //observation class
 class Observation {
     constructor(username, latitude, longitude, date, time) {

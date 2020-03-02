@@ -1,3 +1,9 @@
+//Project: Aurora Spotter
+//Group: 
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Main JS
+
 $(document).ready(function () {
 
     $(".fa-bars").click(function () {

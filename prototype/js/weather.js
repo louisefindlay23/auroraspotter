@@ -1,3 +1,9 @@
+//Project: Aurora Spotter
+//Group: 
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Weather API handling code
+
 // Icons created by Ashley Jager, https://github.com/manifestinteractive/weather-underground-icons
 // api key : bba7e5b7d4db7564662712e34db2cb37
 
