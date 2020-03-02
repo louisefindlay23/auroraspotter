@@ -486,16 +486,17 @@ header .icon a {
 /* new observation popup msg */
 
 #popup-msg {
-    margin-top: 20%;
-    margin-left: 10%;
-    margin-right: 10%;
     font-size: 14px;
-    margin-bottom: -3%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #new-popup {
     display: none;
     position: absolute;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     z-index: 1100;
     left: 10%;
     top: 58%;
@@ -506,13 +507,20 @@ header .icon a {
     box-shadow: 1px 1px #B2E172;
 }
 
+.btn-flex-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
 #popup-cancel,
 #popup-save {
     width: 30%;
 }
 
 #popup-cancel {
-    margin-left: 15%;
     float: left;
     border: 1px solid white;
 }

@@ -55,6 +55,10 @@
     #tips p:first-child {
         margin-top: 5%;
     }
+
+    #popup-msg {
+        margin-top: 10%;
+    }
 }
 
 /* Larger than tablets */
@@ -80,6 +84,10 @@
 
     #small-main {
         margin-bottom: 2.5%;
+    }
+
+    #popup-msg {
+        margin-top: 15%;
     }
 
     #map {
@@ -157,6 +165,12 @@
         width: 55%;
     }
 
+    #popup-cancel,
+    #popup-save {
+        margin: 10% 2%;
+        padding: 2.10%;
+    }
+
     #form-text {
         margin-bottom: 2.5%;
     }
@@ -190,5 +204,13 @@
     #about-us p,
     #tips p {
         margin-top: 2.5%;
+    }
+
+    #new-popup {
+        height: 60%;
+    }
+
+    #popup-msg {
+        margin-top: 10%;
     }
 }

@@ -74,8 +74,10 @@
             <!-- New entry pop up -->
             <div id="new-popup">
                 <p id="popup-msg">Test Text</p>
-                <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
-                <button id="popup-save" onclick="addLocation()">Save</button>
+                <div class="btn-flex-container">
+                    <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
+                    <button id="popup-save" onclick="addLocation()">Save</button>
+                </div>
             </div>
             <!-- Aurora Map -->
             <div id="map">
@@ -130,7 +132,6 @@
 
                         //detect change of the screen size and reload the appropriate element
                         window.addEventListener('resize', loadStatus);
-
                     </script>
                 </div>
             </div>
@@ -175,6 +176,4 @@
         </section>
     </main>
     <script src="js/weather.js"></script>
-</body>
-
-</html>
+</body></html>
