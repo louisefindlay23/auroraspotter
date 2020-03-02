@@ -486,7 +486,7 @@ header .icon a {
 /* new observation popup msg */
 
 #popup-msg {
-    margin-top: 5%;
+    margin-top: 20%;
     margin-left: 10%;
     margin-right: 10%;
     font-size: 14px;
@@ -496,11 +496,11 @@ header .icon a {
 #new-popup {
     display: none;
     position: absolute;
-    z-index: 500;
-    left: 15%;
-    top: 28%;
-    width: 70%;
-    height: 30%;
+    z-index: 1100;
+    left: 10%;
+    top: 58%;
+    width: 80%;
+    height: 45%;
     background-color: black;
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
