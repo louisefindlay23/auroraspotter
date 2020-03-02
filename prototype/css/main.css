@@ -495,8 +495,8 @@ header .icon a {
 
 #new-popup {
     display: none;
-    position: fixed;
-    z-index: 1;
+    position: absolute;
+    z-index: 500;
     left: 15%;
     top: 28%;
     width: 70%;
