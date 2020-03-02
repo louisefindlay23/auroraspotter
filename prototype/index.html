@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 </head>
 
-<body onload="hideElements()">
+<body onload="hideElements(), loadMap()">
 
     <header>
         <!-- Default Header -->
@@ -62,21 +62,21 @@
         <section id="welcome">
             <h2>Follow the Northern Lights</h2>
 
-             <!-- Record Observation -->
-             <div id='new_entry'>
+            <!-- Record Observation -->
+            <div id="new_entry">
                 <p>Do you have an Aurora in front of your eyes?</p>
                 <p>Click the button below to share your location!</p>
-                <button id='btn_add_loc' onclick='recordNewLoc()'>Record Observation</button>
-                </div>
-
-            <!-- New entry pop up -->
-            <div id='new-popup'>
-                <p id='popup-msg'>Test Text</p>
-                <button id='popup-cancel' onclick="cancelLocation()">Cancel</button>
-                <button id='popup-save' onclick="addLocation()">Save</button>
+                <button id="btn_add_loc" onclick="recordNewLoc()">Record Observation</button>
             </div>
 
-            <div class="flex-container">
+            <!-- New entry pop up -->
+            <div id="new-popup">
+                <p id="popup-msg">Test Text</p>
+                <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
+                <button id="popup-save" onclick="addLocation()">Save</button>
+            </div>
+
+            <div id="home-content" class="flex-container">
                 <!-- Aurora Map -->
                 <div id="map">
                     <!--leaflet map-->
@@ -118,21 +118,12 @@
                     //function to load an appriopriate content
                     function loadStatus() {
                         //on mobile devices display only the aurora watch uk alert status
-                        if (screen.width < 1280) {
-                            try {
-                                document.getElementById('aurora_status').innerHTML = mobile_content;
-                            }
-                            //accessing iframe with JS will throw security error
-                            catch (err) {}
-
+                        if (window.innerWidth < 1280) {
+                            document.getElementById('aurora_status').innerHTML = mobile_content;
                         }
                         //on bigger screens display the plots provided by aurora watch uk
                         else {
-                            try {
-                                document.getElementById('aurora_status').innerHTML = other_devices;
-                            }
-                            //accessing iframe with JS will throw security error
-                            catch (err) {}
+                            document.getElementById('aurora_status').innerHTML = other_devices;
                         }
                     }
                     loadStatus();
