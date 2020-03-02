@@ -250,15 +250,28 @@ function hideElements() {
 
 }
 
-//funtion replace text on Profile page with user's details
+//display user's data on the Profile page
 function profileContent(){
+    //get user's details
     var usersList = JSON.parse(localStorage.getItem('users'));
+    if(usersList == null){
+        usersList = [];
+    }
     var username = JSON.parse(localStorage.getItem('userID'));
+    if(username == null){
+        username = '';
+    }
     var user_email = '';
     var username_cont = document.getElementById('profile-user');
     var email_cont = document.getElementById('profile-email');
+    var table = document.getElementById('table-content');
+    var new_raw;
+    var observation_records = JSON.parse(localStorage.getItem('observations'));
+    if(observation_records == null){
+        observation_records = [];
+    }
 
-    //set user details
+    //display user's email and username on the screen
     for (var i in usersList) {
         if (usersList[i].username == username) {
             user_email = usersList[i].email;
@@ -267,4 +280,13 @@ function profileContent(){
             email_cont.innerHTML = user_email;
             }
         }
+
+        //display user's observation details on screen
+    for(var i in observation_records){
+        if(observation_records[i].username == username){
+            new_raw = '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude + 
+            ', ' + observation_records[i].longitude + '</td></tr>';
+            table.insertAdjacentHTML('beforeend', new_raw);
+        }
+    }
 }

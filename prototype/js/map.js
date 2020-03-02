@@ -37,14 +37,14 @@ function loadMap() {
     var observation_records = JSON.parse(localStorage.getItem('observations'));
 
     
-    if(observation_records != null){
-        observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+    if(observation_records == null){
+        observation_records = [];
         
     }
-    else{
-        observation_records = [];
-        observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
-    }
+    
+    //add test data to the observation_records array
+    observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+    
 
     for(var i in observation_records){
         //count the total number of observations for the point
