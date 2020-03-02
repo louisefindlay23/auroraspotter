@@ -290,6 +290,11 @@ td a {
 
 /* Classes - Weather Styling */
 
+.weather-container {
+    padding: 2.5%;
+    padding-bottom: 5%;
+}
+
 #left-image {
     font-family: 'Montserrat', sans-serif;
     background-color: #FFF;
@@ -447,7 +452,6 @@ header .icon a {
     width: 100%;
 }
 
-
 #error-msg,
 #login-error,
 #passchange-error {
@@ -482,24 +486,33 @@ header .icon a {
 /* new observation popup msg */
 
 #popup-msg {
-    margin-top: 5%;
-    margin-left: 10%;
-    margin-right: 10%;
     font-size: 14px;
-    margin-bottom: -3%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #new-popup {
     display: none;
-    position: fixed;
-    z-index: 1;
-    left: 15%;
-    top: 28%;
-    width: 70%;
-    height: 30%;
+    position: absolute;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    left: 10%;
+    top: 58%;
+    width: 80%;
+    height: 45%;
     background-color: black;
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
+}
+
+.btn-flex-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 #popup-cancel,
@@ -508,7 +521,6 @@ header .icon a {
 }
 
 #popup-cancel {
-    margin-left: 15%;
     float: left;
     border: 1px solid white;
 }
@@ -595,186 +607,4 @@ main h2 {
 
 .remove-animation {
     animation-duration: 0s;
-}
-
-
-/* Media Queries */
-
-/* Larger than mobiles */
-
-@media screen and (min-width: 640px) {
-
-    h2 {
-        margin-bottom: 10%;
-    }
-
-    #menu .flex-column {
-        margin-bottom: 5%;
-    }
-
-    #map,
-    #weather {
-        width: 80%;
-    }
-
-    #mapid {
-        height: 300px;
-    }
-
-    #status-frame {
-        width: 80%;
-        height: 50px;
-    }
-
-    #home-content {
-        justify-content: center;
-    }
-
-}
-
-/* In between mobile and tablet */
-
-@media screen and (min-width: 940px) {
-
-    #map,
-    #weather,
-    #about-us,
-    #tips,
-    #diary {
-        margin-top: 7.5%;
-    }
-
-    p {
-        font-size: 0.8rem;
-    }
-
-    #about-us p,
-    #tips p {
-        margin-top: 5%;
-    }
-
-    #tips p:first-child {
-        margin-top: 5%;
-    }
-}
-
-/* Larger than tablets */
-
-@media screen and (min-width: 1280px) {
-
-    h2 {
-        margin-bottom: 15%;
-    }
-
-    .small-title {
-        margin-bottom: 7.5%;
-    }
-
-    nav.icon,
-    #menu .flex-container {
-        margin-top: 2.5%;
-    }
-
-    main {
-        margin-top: 2.5%;
-    }
-
-    #small-main {
-        margin-bottom: 2.5%;
-    }
-
-    #map,
-    #weather {
-        width: 45%;
-        margin: auto 2.5%;
-    }
-
-    #mapid {
-        height: 387.933px;
-    }
-
-    #aurora_status,
-    #activity-img,
-    #button-container {
-        margin-top: 7.5%;
-    }
-
-    #activity-container {
-        width: 100vw;
-    }
-
-    #new_entry {
-        margin-top: 20%;
-    }
-
-    #profile-page p {
-        font-size: 1rem;
-    }
-
-    input,
-    button {
-        width: 100%;
-        margin-top: 7.5%;
-        margin-bottom: 7.5%;
-        padding: 5%;
-        border-radius: 10px;
-    }
-
-    #myForm input {
-        width: 50%;
-        padding: 2.5%;
-        margin-left: 25%;
-    }
-
-    button,
-    input[type=submit] {
-        width: 55%;
-        margin-left: 30%;
-        border-radius: 5px;
-    }
-
-    #btn_add_loc {
-        padding: 2.5%;
-        margin-left: 25%;
-    }
-
-    #myForm button,
-    #myForm input[type=submit] {
-        width: 55%;
-    }
-
-    #form-text {
-        margin-bottom: 2.5%;
-    }
-
-    #settings-page .flex-container {
-        width: 50%;
-    }
-
-    table {
-        width: 100%;
-    }
-
-    table th,
-    table td {
-        padding: 24px 40px;
-    }
-
-    .temp-hide {
-        display: none;
-    }
-}
-
-/* Desktop */
-
-@media screen and (min-width: 1580px) {
-
-    #new_entry {
-        margin-top: 5%;
-    }
-
-    #about-us p,
-    #tips p {
-        margin-top: 2.5%;
-    }
 }

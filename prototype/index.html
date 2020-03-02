@@ -10,9 +10,11 @@
     <link href="https://fonts.googleapis.com/css?family=Hind|Montserrat:300,400,600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/59dd3e37d5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/backgrounds/index-mob.css">
     <!--Leaflet map css files-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+
     <!-- JS Scripts and jQuery -->
     <script src="js/vendor/jquery-1.11.2.min.js"></script>
     <script src="js/main.js"></script>
@@ -75,22 +77,23 @@
             <!-- New entry pop up -->
             <div id="new-popup">
                 <p id="popup-msg">Test Text</p>
-                <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
-                <button id="popup-save" onclick="addLocation()">Save</button>
+                <div class="btn-flex-container">
+                    <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
+                    <button id="popup-save" onclick="addLocation()">Save</button>
+                </div>
+            </div>
+            <!-- Aurora Map -->
+            <div id="map">
+                <!--leaflet map-->
+                <div id="mapid"></div>
+                <!--call map script-->
+                <script src="js/map.js"></script>
+
             </div>
 
-            <div id="home-content" class="flex-container">
-                <!-- Aurora Map -->
-                <div id="map">
-                    <!--leaflet map-->
-                    <div id="mapid"></div>
-                    <!--call map script-->
-                    <script src="js/map.js"></script>
-
-                </div>
-
-                <!-- Weather Forecast -->
-                <div id="weather" class="flex-container flex-center">
+            <!-- Weather Forecast -->
+            <div id="home-container" class="flex-container">
+                <div id="weather">
                     <div class="notification"> </div>
                     <div class="weather-container">
                         <h4 class="black text-center">Weather Forecast</h4>
@@ -108,33 +111,32 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Aurora Status -->
-            <div id="aurora_status">
-                <script>
-                    //link to aurora watch status
-                    var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
-                    //link to aurora watch status and solar activity plots
-                    var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
+                <!-- Aurora Status -->
+                <div id="aurora_status">
+                    <script>
+                        //link to aurora watch status
+                        var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
+                        //link to aurora watch status and solar activity plots
+                        var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
 
-                    //function to load an appriopriate content
-                    function loadStatus() {
-                        //on mobile devices display only the aurora watch uk alert status
-                        if (window.innerWidth < 1280) {
-                            document.getElementById('aurora_status').innerHTML = mobile_content;
+                        //function to load an appriopriate content
+                        function loadStatus() {
+                            //on mobile devices display only the aurora watch uk alert status
+                            if (window.innerWidth < 1280) {
+                                document.getElementById('aurora_status').innerHTML = mobile_content;
+                            }
+                            //on bigger screens display the plots provided by aurora watch uk
+                            else {
+                                document.getElementById('aurora_status').innerHTML = other_devices;
+                            }
                         }
-                        //on bigger screens display the plots provided by aurora watch uk
-                        else {
-                            document.getElementById('aurora_status').innerHTML = other_devices;
-                        }
-                    }
-                    loadStatus();
+                        loadStatus();
 
-                    //detect change of the screen size and reload the appropriate element
-                    window.addEventListener('resize', loadStatus);
-
-                </script>
+                        //detect change of the screen size and reload the appropriate element
+                        window.addEventListener('resize', loadStatus);
+                    </script>
+                </div>
             </div>
         </section>
 
@@ -145,8 +147,8 @@
                 <p>
                     Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Aberdeen and Aberdeenshire region.
                     It provides a map for tagging the locations where Aurora was spotted.
-                    The OpenWeatherMap API provides the weather forecast, and AuroraWatch UK API delivers an Aurora forecast diagram of hourly geomagnetic activity index. 
-                    Aurora forecast shows the likelihood of seeing Aurora in the UK.  
+                    The OpenWeatherMap API provides the weather forecast, and AuroraWatch UK API delivers an Aurora forecast diagram of hourly geomagnetic activity index.
+                    Aurora forecast shows the likelihood of seeing Aurora in the UK.
                     The weather forecast, together with the Aurora forecast, help users to decide if the day and time are suitable for viewing Aurora.
                 </p>
             </div>
@@ -177,6 +179,4 @@
         </section>
     </main>
     <script src="js/weather.js"></script>
-</body>
-
-</html>
+</body></html>

@@ -1,6 +1,6 @@
 //observation class
-class Observation{
-    constructor(username, latitude, longitude, date, time){
+class Observation {
+    constructor(username, latitude, longitude, date, time) {
         this.username = username;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -13,7 +13,7 @@ class Observation{
 var mymap = L.map('mapid').setView([54.28, -1.5147], 4);
 var marker;
 
-function loadMap(){
+function loadMap() {
 
     //test data
     var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25');
@@ -22,7 +22,7 @@ function loadMap(){
     var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15');
 
 
-    
+
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -35,6 +35,7 @@ function loadMap(){
 
     //adding markers
     var observation_records = JSON.parse(localStorage.getItem('observations'));
+
     
     if(observation_records != null){
         observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
@@ -82,50 +83,57 @@ function loadMap(){
 
 //function called when user clicks 'Record Observation' button
 //display popup box with info that will be saved
-function recordNewLoc(){
-    
+function recordNewLoc() {
+
     //check if user logged in/if not, display an error msg
     var is_logged = JSON.parse(localStorage.getItem('logged'));
-    if(!is_logged){
+    if (!is_logged) {
         //display error msg/log in or close
     }
 
     //else
-    else{
-    function showPosition(position) {
-        document.getElementById('new-popup').style.display = 'block';
-        var popup_txt_cont =  document.getElementById('popup-msg');
-        //get users location
-        var user_loc = []; 
-        user_loc[0] = position.coords.latitude;
-        user_loc[1] = position.coords.longitude;
-        var current_date = new Date().toLocaleString("en-GB", {year:"numeric", day:"2-digit", month:"2-digit"});
-        var current_time = new Date().toLocaleString("pl-PL", {hour:"2-digit", minute:"2-digit"});
-        var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0] + ', ' + user_loc[1] + 
-                    '<br>Date: ' + current_date + '<br>Time: ' + current_time;
-        //Display txt in the popup box
-        popup_txt_cont.innerHTML = conf_txt;
-        var current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
-        localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
-      }
-
-      function onError(error) {
-        alert('Please allow geolocation');
+    else {
+        function showPosition(position) {
+            document.getElementById('new-popup').style.display = 'flex';
+            var popup_txt_cont = document.getElementById('popup-msg');
+            //get users location
+            var user_loc = [];
+            user_loc[0] = position.coords.latitude;
+            user_loc[1] = position.coords.longitude;
+            var current_date = new Date().toLocaleString("en-GB", {
+                year: "numeric",
+                day: "2-digit",
+                month: "2-digit"
+            });
+            var current_time = new Date().toLocaleString("pl-PL", {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+            var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0] + ', ' + user_loc[1] +
+                '<br>Date: ' + current_date + '<br>Time: ' + current_time;
+            //Display txt in the popup box
+            popup_txt_cont.innerHTML = conf_txt;
+            var current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
+            localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
         }
-   
-      
+
+        function onError(error) {
+            alert('Please allow geolocation');
+        }
+
+
         navigator.geolocation.getCurrentPosition(showPosition, onError);
     }
-    
+
 }
 
 //close popup if user clicks on Cancel button
-function cancelLocation(){
+function cancelLocation() {
     localStorage.removeItem('current_user_details');
     document.getElementById('new-popup').style.display = 'none';
 }
 
-function addLocation(){
+function addLocation() {
     document.getElementById('new-popup').style.display = 'none';
     var username = JSON.parse(localStorage.getItem('userID'));
     var current_user_details = JSON.parse(localStorage.getItem('current_user_details'));
@@ -134,7 +142,7 @@ function addLocation(){
     var current_date = current_user_details[2];
     var current_time = current_user_details[3];
     var observations_saved = JSON.parse(localStorage.getItem('observations'));
-    if(observations_saved == null){
+    if (observations_saved == null) {
         observations_saved = [];
     }
     let new_observation = new Observation(username, latitude, longitude, current_date, current_time);
@@ -149,4 +157,6 @@ function addLocation(){
 
 
 
+
 //2) check is the user logged in before adding new location
+
