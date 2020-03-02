@@ -48,6 +48,7 @@ function loadMap(){
             marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
            marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
+           marker.on('click', onMapClick);
         }
     }
 
@@ -58,8 +59,16 @@ function loadMap(){
         getWeather(lat, lon);
 
     }
+    
+    //on marker click display a weather forecast for the chosen location
+    function onMarkerClick(e){
+        var lat = e.latlng["lat"];
+        var lon = e.latlng["lng"];
+        getWeather(lat, lon);
+    }
 
     mymap.on('click', onMapClick);
+    
 
 }
 
@@ -123,7 +132,6 @@ function addLocation(){
     }
     let new_observation = new Observation(username, latitude, longitude, current_date, current_time);
     observations_saved.push(new_observation);
-    localStorage.removeItem('observations');
     localStorage.setItem('observations', JSON.stringify(observations_saved));
 
     //refresh the map
@@ -131,10 +139,6 @@ function addLocation(){
     map.invalidateSize();
     loadMap();
 }
-
-
-
-//1) when user click on the map - show the weather for chosen location
 
 
 
