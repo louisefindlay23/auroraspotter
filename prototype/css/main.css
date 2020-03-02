@@ -290,6 +290,11 @@ td a {
 
 /* Classes - Weather Styling */
 
+.weather-container {
+    padding: 2.5%;
+    padding-bottom: 5%;
+}
+
 #left-image {
     font-family: 'Montserrat', sans-serif;
     background-color: #FFF;
@@ -446,7 +451,6 @@ header .icon a {
 #activity-image {
     width: 100%;
 }
-
 
 #error-msg,
 #login-error,
