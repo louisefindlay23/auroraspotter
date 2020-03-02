@@ -40,6 +40,10 @@ function signUp() {
     //can cause compatibility issues
     var usersSaved = JSON.parse(localStorage.getItem('users'));
 
+    if(usersSaved == null){
+        usersSaved = [];
+    }
+
     //boolean to keep track is user in the list
     var userExist = false;
 
@@ -77,7 +81,6 @@ function signUp() {
         error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Passwords entered must be identical';
     } else {
-        console.log('test');
         //check does the username already exist
         if (usersSaved != null) {
             try {
