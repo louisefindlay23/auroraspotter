@@ -91,6 +91,9 @@
                     <div class="notification"> </div>
                     <div class="weather-container">
                         <h4 class="black text-center">Weather Forecast</h4>
+                        <div class="weather-location">
+                            <p>-</p>
+                        </div>
                         <div class="weather-icon">
                             <img src="img/weather-icons/unknown.png" alt="">
                         </div>
@@ -99,9 +102,6 @@
                         </div>
                         <div class="temperature-description">
                             <p> - </p>
-                        </div>
-                        <div class="weather-location">
-                            <p>-</p>
                         </div>
                     </div>
                 </div>
@@ -140,8 +140,11 @@
             <h3>ABOUT US</h3>
             <div id="about-us-text">
                 <p>
-                    Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Aberdeen and in Aberdeenshire region. It provides a map for tagging locations where Aurora has been seen.
-                    The weather forecast data is provided by the OpenWeatherMap API. Aurora web app detects the user’s geolocation pull weather forecast data from the API.
+                    Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Aberdeen and Aberdeenshire region.
+                    It provides a map for tagging the locations where Aurora was spotted.
+                    The OpenWeatherMap API provides the weather forecast, and AuroraWatch UK API delivers an Aurora forecast diagram of hourly geomagnetic activity index. 
+                    Aurora forecast shows the likelihood of seeing Aurora in the UK.  
+                    The weather forecast, together with the Aurora forecast, help users to decide if the day and time are suitable for viewing Aurora.
                 </p>
             </div>
         </section>
