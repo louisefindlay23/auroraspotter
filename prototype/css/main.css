@@ -122,6 +122,7 @@ button {
     color: var(--white);
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
+    border-radius: 5px;
 }
 
 button,
@@ -362,10 +363,12 @@ td a {
 .temperature-description {
     width: 100%;
     height: auto;
+    padding-top: 0;
+    padding-bottom: 4px;
 }
 
 .temperature-description p {
-    padding: 8px;
+    /* padding: 8px; */
     margin: 0;
     color: #293251;
     text-align: center;
@@ -714,6 +717,7 @@ main h2 {
         margin-top: 7.5%;
         margin-bottom: 7.5%;
         padding: 5%;
+        border-radius: 10px;
     }
 
     #myForm input {
@@ -726,6 +730,7 @@ main h2 {
     input[type=submit] {
         width: 55%;
         margin-left: 30%;
+        border-radius: 5px;
     }
 
     #btn_add_loc {
