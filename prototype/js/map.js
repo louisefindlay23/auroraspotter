@@ -35,21 +35,28 @@ function loadMap(){
 
     //adding markers
     var observation_records = JSON.parse(localStorage.getItem('observations'));
-    observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+    
     if(observation_records != null){
-        for(var i in observation_records){
-            //count the total number of observations for the point
-            var counter = 0;
-            for(var j in observation_records){
-                if(observation_records[i].latitude == observation_records[j].latitude && observation_records[i].longitude == observation_records[j].longitude){
-                    counter ++;
-                }
+        observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+        
+    }
+    else{
+        observation_records = [];
+        observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+    }
+
+    for(var i in observation_records){
+        //count the total number of observations for the point
+        var counter = 0;
+        for(var j in observation_records){
+            if(observation_records[i].latitude == observation_records[j].latitude && observation_records[i].longitude == observation_records[j].longitude){
+                counter ++;
             }
-            marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
-           marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-           "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
-           marker.on('click', onMapClick);
         }
+        marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
+       marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
+       "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
+       marker.on('click', onMapClick);
     }
 
     //onmap click display a weather forecast for the chosen location
