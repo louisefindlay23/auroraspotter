@@ -1,3 +1,10 @@
+<!-- 
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Profile page -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Hind|Montserrat:300,400,600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/59dd3e37d5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/backgrounds/profile-mobile.css">
 
     <!-- JS Scripts and jQuery -->
@@ -17,7 +25,7 @@
     <script src="js/main.js"></script>
 </head>
 
-<body>
+<body onload="hideElements(); profileContent();">
 
     <header>
 
@@ -41,76 +49,47 @@
                 <a href="index.html">
                     <h2>Home</h2>
                 </a>
-                <a href="login.html">
+                <a href="login.html" class="login-nav">
                     <h2>Log In</h2>
                 </a>
-                <a href="signup.html">
+                <a href="signup.html" class="login-nav">
                     <h2>Sign Up</h2>
                 </a>
-                <a href="profile.html">
+                <a href="profile.html" class="logout-nav">
                     <h2>Profile</h2>
                 </a>
-                <a href="settings.html">
+                <a href="settings.html" class="logout-nav">
                     <h2>Settings</h2>
+                </a>
+                <a href="index.html" class="logout-nav">
+                    <h2 onclick="signout();">Log out</h2>
                 </a>
             </div>
         </nav>
     </header>
-    <main>
-        <h2>Your Profile</h2>
+    <main id="profile-page small-main">
+        <h2 class="small-title">Profile Details</h2>
 
-        <div class="flex-container flex-center">
+        <p id='profile-user'>Username</p>
+        <p id="profile-email">Email</p>
 
-            <img id="profile-pic" src="img/profile-pic.jpg">
+        <div id="diary">
+            <h2 class="small-title">Observation Diary</h2>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Coordinates</th>
+                    </tr>
+                </thead>
+
+                <tbody id='table-content'>
+                    
+                </tbody>
+            </table>
         </div>
-
-        <form>
-            <input type="text" name="new-password" placeholder="New Password">
-            <input type="text" name="confirm-password" placeholder="Confirm New Password">
-            <button value="Submit">Save</button>
-        </form>
-
-        <h2>My Observation Diary</h2>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Co-ordinates</th>
-                    <th>Remove?</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>5/12/20</td>
-                    <td>44.006481</td>
-                    <td><a href="">Yes</a></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-
 
     </main>
 </body>

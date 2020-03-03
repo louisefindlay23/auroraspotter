@@ -1,3 +1,10 @@
+<!-- 
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Sign-up page -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Hind|Montserrat:300,400,600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/59dd3e37d5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/backgrounds/register-mobile.css">
 
     <!-- JS Scripts and jQuery -->
@@ -17,7 +25,7 @@
     <script src="js/main.js"></script>
 </head>
 
-<body>
+<body onload="hideElements()">
 
     <header>
 
@@ -44,30 +52,34 @@
                 <a href="login.html">
                     <h2>Log In</h2>
                 </a>
-                <a href="settings.html">
-                    <h2>Settings</h2>
+                <a href="signup.html">
+                    <h2>Sign Up</h2>
                 </a>
-                <a href="profile.html">
+                <a href="profile.html" class="logout-nav">
                     <h2>Profile</h2>
+                </a>
+                <a href="settings.html" class="logout-nav">
+                    <h2>Settings</h2>
                 </a>
             </div>
         </nav>
     </header>
-    <main>
-        <h2>Please, Sign Up</h2>
+    <main id="small-main">
+        <h2 class="small-title">Please, Sign Up</h2>
+
+        <p id="error-msg"></p>
 
         <!-- Register form -->
-        <form id='myForm'>
-            <input type="text" id='rusername' name="username" placeholder="Username">
-            <input type="email" id='remail' name="email" placeholder="E-Mail Address">
-            <input type="text" id='rpassword' name="password" placeholder="Password">
-            <input type="text" id='rpassConf' name="confirm-password" placeholder="Confirm Password">
-            <button value="register" onclick='signUp()'>Sign Up</button>
-        </form>
-
-        <!-- Login Link -->
-        <p id="form-text">Already got an account? Log In <a href="login.html">Here</a></p>
+        <div class="flex-container flex-center">
+            <form id="myForm">
+                <input type="text" id="rusername" name="username" placeholder="Username">
+                <input type="email" id="remail" name="email" placeholder="E-Mail Address">
+                <input type="password" id="rpassword" name="password" placeholder="Password">
+                <input type="password" id="rpassConf" name="confirm-password" placeholder="Confirm Password">
+                <input type="submit" value="Register" onclick="signUp()">
+                <!-- Login Link -->
+                <p id="form-text">Already got an account? Log In <a href="login.html">Here</a></p>
+            </form>
+        </div>
     </main>
-</body>
-
-</html>
+</body></html>

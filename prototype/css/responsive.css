@@ -1,0 +1,224 @@
+/* 
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//File contains CSS code dealing with responsivness of the website
+*/
+
+/* Media Queries */
+
+/* Larger than mobiles */
+
+@media screen and (min-width: 640px) {
+
+    h2 {
+        margin-bottom: 10%;
+    }
+
+    #menu .flex-column {
+        margin-bottom: 5%;
+    }
+
+    #map {
+        width: 80%;
+    }
+
+    #mapid {
+        height: 300px;
+    }
+
+    #status-frame {
+        width: 80%;
+        height: 50px;
+    }
+
+    #home-content {
+        justify-content: center;
+    }
+
+}
+
+/* In between mobile and tablet */
+
+@media screen and (min-width: 940px) {
+
+    #map,
+    #weather,
+    #about-us,
+    #tips,
+    #diary {
+        margin-top: 7.5%;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 5%;
+    }
+
+    #tips p:first-child {
+        margin-top: 5%;
+    }
+
+    #popup-msg {
+        margin-top: 10%;
+    }
+}
+
+/* Larger than tablets */
+
+@media screen and (min-width: 1280px) {
+
+    h2 {
+        margin-bottom: 15%;
+    }
+
+    .small-title {
+        margin-bottom: 7.5%;
+    }
+
+    nav.icon,
+    #menu .flex-container {
+        margin-top: 2.5%;
+    }
+
+    main {
+        margin-top: 2.5%;
+    }
+
+    #small-main {
+        margin-bottom: 2.5%;
+    }
+
+    #popup-msg {
+        margin-top: 15%;
+    }
+
+    #map {
+        width: 100%;
+        height: 450px;
+    }
+
+    #weather,
+    #aurora_status,
+    #status_frame {
+        width: 45%;
+        margin: auto 2.5%;
+    }
+
+    #mapid {
+        height: 387.933px;
+    }
+
+    #aurora_status,
+    #activity-img,
+    #button-container {
+        margin-top: 7.5%;
+    }
+
+    #activity-container {
+        width: 100vw;
+    }
+
+    #plot-frame,
+    .frame-cont {
+        height: 100vh;
+    }
+
+    .weather-container {
+        margin-top: -8.875%;
+    }
+
+    #new_entry {
+        margin-top: 20%;
+    }
+
+    #profile-page p {
+        font-size: 1rem;
+    }
+
+    input,
+    button {
+        width: 100%;
+        margin-top: 7.5%;
+        margin-bottom: 7.5%;
+        padding: 5%;
+        border-radius: 10px;
+    }
+
+    #myForm input {
+        width: 50%;
+        padding: 2.5%;
+        margin-left: 25%;
+    }
+
+    button,
+    input[type=submit] {
+        width: 55%;
+        margin-left: 30%;
+        border-radius: 5px;
+    }
+
+    #btn_add_loc {
+        padding: 2.5%;
+        margin-left: 25%;
+    }
+
+    #myForm button,
+    #myForm input[type=submit] {
+        width: 55%;
+    }
+
+    #popup-cancel,
+    #popup-save {
+        margin: 10% 2%;
+        padding: 2.10%;
+    }
+
+    #form-text {
+        margin-bottom: 2.5%;
+    }
+
+    #settings-page .flex-container {
+        width: 50%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th,
+    table td {
+        padding: 24px 40px;
+    }
+
+    .temp-hide {
+        display: none;
+    }
+}
+
+/* Desktop */
+
+@media screen and (min-width: 1580px) {
+
+    #new_entry {
+        margin-top: 5%;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 2.5%;
+    }
+
+    #new-popup {
+        height: 60%;
+    }
+
+    #popup-msg {
+        margin-top: 10%;
+    }
+}

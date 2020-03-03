@@ -2,17 +2,19 @@
 
 ### About the Project
 
-For CM2104 - Dynamic Web Development module. More details to follow.
+Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Aberdeen and in Aberdeenshire region. It provides a map for tagging locations where Aurora has been seen.
+
+The weather forecast data is provided by the OpenWeatherMap API. Aurora web app detects the user’s geolocation pull weather forecast data from the API.
 
 ### Collaborators
 
-Louise Findlay = [@louisefindlay23](https://github.com/louisefindlay23)
+Louise Findlay (Front-End) = [@louisefindlay23](https://github.com/louisefindlay23)
 
-Brandon Reid = [@brandonreid11](https://github.com/brandonreid11)
+Brandon Reid (Design) = [@brandonreid11](https://github.com/brandonreid11)
 
-Miriam Wojcik = [@mijamka](https://github.com/mijamka)
+Miriam Wojcik (Back-End) = [@mijamka](https://github.com/mijamka)
 
-Maya Bonazarova = [@mayabonaz](https://github.com/mayabonaz)
+Maya Bonazarovaarova (Back-End) = [@mayaBonazarova](https://github.com/mayaBonazarova)
 
 ### Useful Links  :link:
 
