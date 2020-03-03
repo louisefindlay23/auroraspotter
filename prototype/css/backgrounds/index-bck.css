@@ -15,12 +15,7 @@ body {
     width: 100%;
     background-repeat: no-repeat;
     background-size: 100% 8%;
-    background-color: black;
-}
-
-/* Menu background color */
-#menu {
-    background-color: black;
+    background-color: var(--black);
 }
 
 /* Media Queries */

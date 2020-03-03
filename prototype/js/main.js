@@ -6,6 +6,8 @@
 
 $(document).ready(function () {
 
+    // Show/Hide different navs and icons for hamburger menu
+
     $(".fa-bars").click(function () {
         $("header .icon").hide();
         $("main h2").hide();
@@ -18,6 +20,8 @@ $(document).ready(function () {
         $("main h2").show();
         $("header .icon").show();
     });
+
+    // Table Styling
 
     $('table tr').each(function () {
         $(this).find('th').first().addClass('first');
@@ -46,7 +50,7 @@ function signUp() {
     //can cause compatibility issues
     var usersSaved = JSON.parse(localStorage.getItem('users'));
 
-    if(usersSaved == null){
+    if (usersSaved == null) {
         usersSaved = [];
     }
 
@@ -71,12 +75,12 @@ function signUp() {
 
 
     //prevent page refreshing on button click
-    var form = document.getElementById("myForm");   
+    var form = document.getElementById("myForm");
 
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
+    function handleForm(event) {
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
 
     //check all input fields have been filled up, if not display an error msg
     if (username == '' || email == '' || pwdConf == '' || password == '') {
@@ -131,12 +135,12 @@ function login() {
     var error_holder = document.getElementById('login-error');
 
     //prevent page refreshing on button click
-    var form = document.getElementById("login-form");   
+    var form = document.getElementById("login-form");
 
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
+    function handleForm(event) {
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
 
     //check that the login and password fields have been filled up
     if (login == '' || password == '') {
@@ -156,7 +160,7 @@ function login() {
                         localStorage.setItem('userID', JSON.stringify(login));
                     }
                 }
-                
+
             }
         } catch (err) {
             console.log('no users saved');
@@ -184,11 +188,11 @@ function login() {
 }
 
 //function to change user's password
-function changePassword(){
+function changePassword() {
     //set user input to variables
     var newPwd = document.getElementById('newPwd').value;
     var newPwdConf = document.getElementById('newPwdConf').value;
-    
+
     //get username
     var login = JSON.parse(localStorage.getItem('userID'));
 
@@ -198,37 +202,39 @@ function changePassword(){
     var error_holder = document.getElementById('passchange-error');
 
     //prevent page refreshing on button click
-    var form = document.getElementById("passChange");   
+    var form = document.getElementById("passChange");
 
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
-    
+    function handleForm(event) {
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
+
     //check new password field is not empty
-    if(newPwd==''){
+    if (newPwd == '') {
         //display error msg if passwords dont match
         error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Enter new password below';
     }
     //check the passwords are the same
-    else if(newPwd != newPwdConf){
+    else if (newPwd != newPwdConf) {
         error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Passwords entered must be identical';
     }
     //update user's password
-    else{
+    else {
         for (var i in usersSaved) {
             if (usersSaved[i].username == login) {
                 usersSaved[i].password = newPwd;
                 localStorage.removeItem('users');
                 localStorage.setItem('users', JSON.stringify(usersSaved));
-                setTimeout(function(){document.location.href = "settings.html"},500);
+                setTimeout(function () {
+                    document.location.href = "settings.html"
+                }, 500);
             }
-    }
+        }
 
-            
-}
+
+    }
 }
 
 //signout function
@@ -245,26 +251,25 @@ function signout() {
 function hideElements() {
     // check if user is logged in
     var isLogged = JSON.parse(localStorage.getItem('logged'));
-     //var isLogged = false;
-    if(!isLogged){
-        $(".logout-nav").hide();        // if not logged in, hide Profile and Setting from nav
-        
-    }
-    else{
-        $(".login-nav").hide();        // if logged in, hide Login and Sign up from nav
+    //var isLogged = false;
+    if (!isLogged) {
+        $(".logout-nav").hide(); // if not logged in, hide Profile and Setting from nav
+
+    } else {
+        $(".login-nav").hide(); // if logged in, hide Login and Sign up from nav
     }
 
 }
 
 //display user's data on the Profile page
-function profileContent(){
+function profileContent() {
     //get user's details
     var usersList = JSON.parse(localStorage.getItem('users'));
-    if(usersList == null){
+    if (usersList == null) {
         usersList = [];
     }
     var username = JSON.parse(localStorage.getItem('userID'));
-    if(username == null){
+    if (username == null) {
         username = '';
     }
     var user_email = '';
@@ -273,7 +278,7 @@ function profileContent(){
     var table = document.getElementById('table-content');
     var new_raw;
     var observation_records = JSON.parse(localStorage.getItem('observations'));
-    if(observation_records == null){
+    if (observation_records == null) {
         observation_records = [];
     }
 
@@ -284,14 +289,14 @@ function profileContent(){
             //display user details on the screen
             username_cont.innerHTML = username;
             email_cont.innerHTML = user_email;
-            }
         }
+    }
 
-        //display user's observation details on screen
-    for(var i in observation_records){
-        if(observation_records[i].username == username){
-            new_raw = '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude + 
-            ', ' + observation_records[i].longitude + '</td></tr>';
+    //display user's observation details on screen
+    for (var i in observation_records) {
+        if (observation_records[i].username == username) {
+            new_raw = '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude +
+                ', ' + observation_records[i].longitude + '</td></tr>';
             table.insertAdjacentHTML('beforeend', new_raw);
         }
     }
