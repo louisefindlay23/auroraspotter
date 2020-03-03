@@ -494,10 +494,17 @@ header .icon a {
 
 /* new observation popup msg */
 
-#popup-msg {
+#popup-msg, 
+#login-prompt-msg {
     font-size: 14px;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+
+#login-prompt-msg{
+    padding-top: 5%;
+    text-align: center;
 }
 
 #overlay {
@@ -528,6 +535,24 @@ header .icon a {
     background-color: black;
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
+    
+}
+
+
+#record-not-logged{
+    padding-top: 5%;
+    max-width: 500px;
+    max-height: 250px;
+}
+
+#new-popup{
+    max-width: 600px;
+    max-height: 350px;
+}
+
+.popup-btn{
+    padding-top: 3.5%;
+    padding-bottom: 3.5%;
 }
 
 .btn-flex-container {
@@ -538,10 +563,22 @@ header .icon a {
     align-items: center;
 }
 
+#popup-msg{
+    text-align: center;
+}
+
+
 #popup-cancel,
 #popup-save,
 #login-prompt-close {
     width: 30%;
+}
+
+#login-prompt-close{
+    max-width: 200px;
+    max-height: 50px;
+    overflow: hidden;
+    margin-left: 0%;
 }
 
 #popup-cancel {
