@@ -6,8 +6,9 @@
 //File contains background settings for the profile page
 */
 
-/*Background for the mobile version of the profile page*/
-body{
+/* Background for the mobile version of the profile page */
+
+body {
     background:
     linear-gradient(
         rgba(168, 168, 168, 0.5), 
@@ -18,53 +19,38 @@ body{
     background-size: 2150px;
 }
 
-/*Menu background color*/
-#menu{
+/* Menu background color */
+
+#menu {
     background-color: black;
   }
 
   /* Media Queries */
+  
 /* Larger than mobiles */
 
 @media screen and (max-width: 1280px) and (min-width: 640px) {
-  body{
-    background:
-    linear-gradient(
-        rgba(168, 168, 168, 0.5), 
-        rgba(168, 168, 168, 0.5)
-      ),
-      url(../../img/bg.png);
+
+  body {
     background-position: -960px -209px;
-    background-size: 2150px;
 }
 
 }
 
 /* Larger than tablets */
-@media screen and (min-width: 1280px) {
-  body{ 
-    background:
-    linear-gradient(
-        rgba(168, 168, 168, 0.5), 
-        rgba(168, 168, 168, 0.5)
-      ),
-      url(../../img/bg.png);
-    background-position: -400px -209px;
-    background-size: 2150px;
-}
 
+@media screen and (min-width: 1280px) {
+
+body {
+    background-position: -400px -209px;
+}
 }
 
 /* Larger than desktops */
 
 @media screen and (min-width: 1920px) {
-  body{ 
-    background:
-    linear-gradient(
-        rgba(168, 168, 168, 0.5), 
-        rgba(168, 168, 168, 0.5)
-      ),
-      url(../../img/bg.png);
+
+  body { 
       background-position: 0px 0px;
       background-size: cover;
 }
