@@ -616,6 +616,10 @@ header .icon a {
     text-decoration: none;
 }
 
+#tips-link{
+    color: #B2E172;
+}
+
 /* Classes - CSS Animation */
 
 @keyframes bounceInLeft {
