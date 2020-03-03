@@ -500,13 +500,27 @@ header .icon a {
     margin-right: 5%;
 }
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 9000;
+}
+
 #new-popup, #record-not-logged {
     display: none;
     position: absolute;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    z-index: 1100;
+    z-index: 9999;
     left: 10%;
     top: 58%;
     width: 80%;

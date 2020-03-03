@@ -94,7 +94,9 @@ function recordClicked(){
     
     //if user not logged in promt to log in
     if (!is_logged || is_logged == null) {
-        document.getElementById('record-not-logged').style.display = 'flex';
+        $("#record-not-logged").fadeIn();
+        var overlay = jQuery('<div id="overlay"> </div>');
+        overlay.appendTo(document.body);
     }
     else{
         recordNewLoc();
@@ -104,7 +106,11 @@ function recordClicked(){
 //display popup box with info that will be saved
 function recordNewLoc() {
         function showPosition(position) {
-            document.getElementById('new-popup').style.display = 'flex';
+             
+            var overlay = jQuery('<div id="overlay"> </div>');
+            overlay.appendTo(document.body);
+            $("#new-popup").fadeIn();
+            //document.getElementById('new-popup').style.display = 'flex';
             var popup_txt_cont = document.getElementById('popup-msg');
             //get users location
             var user_loc = [];
@@ -140,10 +146,12 @@ function recordNewLoc() {
 function cancelLocation() {
     localStorage.removeItem('current_user_details');
     document.getElementById('new-popup').style.display = 'none';
+    $("#overlay").remove();
 }
 
 function addLocation() {
     document.getElementById('new-popup').style.display = 'none';
+    $("#overlay").remove();
     var username = JSON.parse(localStorage.getItem('userID'));
     var current_user_details = JSON.parse(localStorage.getItem('current_user_details'));
     var latitude = current_user_details[0];
@@ -166,6 +174,7 @@ function addLocation() {
 
 function closeLoginPrompt(){
     document.getElementById('record-not-logged').style.display = 'none';
+    $("#overlay").remove();
 }
 
 
