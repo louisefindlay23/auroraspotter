@@ -28,10 +28,6 @@ body {
 
 @media screen and (max-width: 640px) and (min-width: 400px) {
     body {
-        background:
-            linear-gradient(rgba(168, 168, 168, 0.5),
-                rgba(168, 168, 168, 0.5)),
-            url(../../img/bg-home.png);
         background-size: 100% 9%;
     }
 }
