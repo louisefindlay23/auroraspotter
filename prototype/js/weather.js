@@ -1,6 +1,6 @@
-//Project: Aurora Spotter
+//Project: Aurora
 //Group: DM Web Dev Team
-//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
 //Date: 2/3/2020
 //Weather API handling code
 

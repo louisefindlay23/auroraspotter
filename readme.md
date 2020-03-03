@@ -14,7 +14,7 @@ Brandon Reid (Design) = [@brandonreid11](https://github.com/brandonreid11)
 
 Miriam Wojcik (Back-End) = [@mijamka](https://github.com/mijamka)
 
-Maya Bonazarova (Back-End) = [@mayabonaz](https://github.com/mayabonaz)
+Maya Bonazarovaarova (Back-End) = [@mayaBonazarova](https://github.com/mayaBonazarova)
 
 ### Useful Links  :link:
 
