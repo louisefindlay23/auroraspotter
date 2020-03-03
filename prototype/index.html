@@ -78,17 +78,14 @@
                 <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
                 <button id="popup-save" onclick="addLocation()">Save</button>
             </div>
-
+            <!-- Aurora Map -->
+            <div id="map">
+                <!--leaflet map-->
+                <div id="mapid"></div>
+                <!--call map script-->
+                <script src="js/map.js"></script>
+            </div>
             <div id="home-content" class="flex-container">
-                <!-- Aurora Map -->
-                <div id="map">
-                    <!--leaflet map-->
-                    <div id="mapid"></div>
-                    <!--call map script-->
-                    <script src="js/map.js"></script>
-
-                </div>
-
                 <!-- Weather Forecast -->
                 <div id="weather" class="flex-container flex-center">
                     <div class="notification"> </div>
@@ -108,9 +105,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Aurora Status -->
+                <!-- Aurora Status -->
             <div id="aurora_status">
                 <script>
                     //link to aurora watch status
@@ -135,6 +130,7 @@
                     window.addEventListener('resize', loadStatus);
 
                 </script>
+            </div>
             </div>
         </section>
 
