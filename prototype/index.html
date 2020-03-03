@@ -89,19 +89,23 @@
             </div>
 
             <!-- New entry pop up -->
-            <div id="new-popup">
-                <p id="popup-msg"></p>
-                <div class="btn-flex-container">
-                    <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
-                    <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+            <div class="popup-container">
+                <div id="new-popup">
+                    <p id="popup-msg"></p>
+                    <div class="btn-flex-container">
+                        <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
+                        <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Display error msg if user tries to add observation when not logged in -->
-            <div id="record-not-logged">
-                <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
-                <div class="btn-flex-container">
-                    <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+            <div class="popup-container">
+                <div id="record-not-logged">
+                    <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
+                    <div class="btn-flex-container">
+                        <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                    </div>
                 </div>
             </div>
             <!-- Aurora Map -->
