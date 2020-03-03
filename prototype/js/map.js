@@ -42,28 +42,28 @@ function loadMap() {
     //adding markers
     var observation_records = JSON.parse(localStorage.getItem('observations'));
 
-    
-    if(observation_records == null){
+
+    if (observation_records == null) {
         observation_records = [];
-        
+
     }
-    
+
     //add test data to the observation_records array
     observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
-    
 
-    for(var i in observation_records){
+
+    for (var i in observation_records) {
         //count the total number of observations for the point
         var counter = 0;
-        for(var j in observation_records){
-            if(observation_records[i].latitude == observation_records[j].latitude && observation_records[i].longitude == observation_records[j].longitude){
-                counter ++;
+        for (var j in observation_records) {
+            if (observation_records[i].latitude == observation_records[j].latitude && observation_records[i].longitude == observation_records[j].longitude) {
+                counter++;
             }
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
-       marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-       "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
-       marker.on('click', onMapClick);
+        marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
+        marker.on('click', onMapClick);
     }
 
     //onmap click display a weather forecast for the chosen location
@@ -73,73 +73,73 @@ function loadMap() {
         getWeather(lat, lon);
 
     }
-    
+
     //on marker click display a weather forecast for the chosen location
-    function onMarkerClick(e){
+    function onMarkerClick(e) {
         var lat = e.latlng["lat"];
         var lon = e.latlng["lng"];
         getWeather(lat, lon);
     }
 
     mymap.on('click', onMapClick);
-    
+
 
 }
 
 
 
 //function called when user clicks 'Record Observation' button
-function recordClicked(){
+function recordClicked() {
     var is_logged = JSON.parse(localStorage.getItem('logged'));
-    
+
     //if user not logged in promt to log in
     if (!is_logged || is_logged == null) {
         $("#record-not-logged").fadeIn();
+        $("#record-not-logged").css("display", "inline-block");
         var overlay = jQuery('<div id="overlay"> </div>');
         overlay.appendTo(document.body);
-    }
-    else{
+    } else {
         recordNewLoc();
     }
 }
 
 //display popup box with info that will be saved
 function recordNewLoc() {
-        function showPosition(position) {
-             
-            var overlay = jQuery('<div id="overlay"> </div>');
-            overlay.appendTo(document.body);
-            $("#new-popup").fadeIn();
-            //document.getElementById('new-popup').style.display = 'flex';
-            var popup_txt_cont = document.getElementById('popup-msg');
-            //get users location
-            var user_loc = [];
-            user_loc[0] = position.coords.latitude;
-            user_loc[1] = position.coords.longitude;
-            var current_date = new Date().toLocaleString("en-GB", {
-                year: "numeric",
-                day: "2-digit",
-                month: "2-digit"
-            });
-            var current_time = new Date().toLocaleString("pl-PL", {
-                hour: "2-digit",
-                minute: "2-digit"
-            });
-            var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0] + ', ' + user_loc[1] +
-                '<br>Date: ' + current_date + '<br>Time: ' + current_time;
-            //Display txt in the popup box
-            popup_txt_cont.innerHTML = conf_txt;
-            var current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
-            localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
-        }
+    function showPosition(position) {
 
-        function onError(error) {
-            alert('Please allow geolocation');
-        }
-
-
-        navigator.geolocation.getCurrentPosition(showPosition, onError);
+        var overlay = jQuery('<div id="overlay"> </div>');
+        overlay.appendTo(document.body);
+        $("#new-popup").fadeIn();
+        document.getElementById('new-popup').style.display = 'inline-block';
+        var popup_txt_cont = document.getElementById('popup-msg');
+        //get users location
+        var user_loc = [];
+        user_loc[0] = position.coords.latitude;
+        user_loc[1] = position.coords.longitude;
+        var current_date = new Date().toLocaleString("en-GB", {
+            year: "numeric",
+            day: "2-digit",
+            month: "2-digit"
+        });
+        var current_time = new Date().toLocaleString("pl-PL", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+        var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0] + ', ' + user_loc[1] +
+            '<br>Date: ' + current_date + '<br>Time: ' + current_time;
+        //Display txt in the popup box
+        popup_txt_cont.innerHTML = conf_txt;
+        var current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
+        localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
     }
+
+    function onError(error) {
+        alert('Please allow geolocation');
+    }
+
+
+    navigator.geolocation.getCurrentPosition(showPosition, onError);
+}
 
 
 //close popup if user clicks on Cancel button
@@ -172,11 +172,10 @@ function addLocation() {
     loadMap();
 }
 
-function closeLoginPrompt(){
+function closeLoginPrompt() {
     document.getElementById('record-not-logged').style.display = 'none';
     $("#overlay").remove();
 }
 
 
 //2) check is the user logged in before adding new location
-
