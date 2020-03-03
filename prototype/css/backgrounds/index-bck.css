@@ -1,0 +1,42 @@
+/*
+//Project: Aurora Spotter
+//Group: DM Web Dev Team
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//File contains background settings for the home page
+*/
+
+/* Background for the mobile version of index page */
+body {
+    background:
+        linear-gradient(rgba(168, 168, 168, 0.5),
+            rgba(168, 168, 168, 0.5)),
+        url(../../img/bg-home.png);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 8%;
+    background-color: black;
+}
+
+/* Menu background color */
+#menu {
+    background-color: black;
+}
+
+/* Media Queries */
+/* Larger than mobiles */
+
+@media screen and (max-width: 640px) and (min-width: 400px) {
+    body {
+        background-size: 100% 9%;
+    }
+}
+
+/* Larger than desktops */
+
+@media screen and (min-width: 1920px) {
+    body {
+        background-position: 0px -100px;
+        background-size: 100% 10%;
+    }
+}
