@@ -1,3 +1,9 @@
+//Project: Aurora Spotter
+//Group: DM Web Dev Team
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Leaflet map implementation
+
 //observation class
 class Observation {
     constructor(username, latitude, longitude, date, time) {
@@ -37,14 +43,14 @@ function loadMap() {
     var observation_records = JSON.parse(localStorage.getItem('observations'));
 
     
-    if(observation_records != null){
-        observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+    if(observation_records == null){
+        observation_records = [];
         
     }
-    else{
-        observation_records = [];
-        observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
-    }
+    
+    //add test data to the observation_records array
+    observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
+    
 
     for(var i in observation_records){
         //count the total number of observations for the point
@@ -81,20 +87,30 @@ function loadMap() {
 }
 
 
+
 //function called when user clicks 'Record Observation' button
+function recordClicked(){
+    var is_logged = JSON.parse(localStorage.getItem('logged'));
+    
+    //if user not logged in promt to log in
+    if (!is_logged || is_logged == null) {
+        $("#record-not-logged").fadeIn();
+        var overlay = jQuery('<div id="overlay"> </div>');
+        overlay.appendTo(document.body);
+    }
+    else{
+        recordNewLoc();
+    }
+}
+
 //display popup box with info that will be saved
 function recordNewLoc() {
-
-    //check if user logged in/if not, display an error msg
-    var is_logged = JSON.parse(localStorage.getItem('logged'));
-    if (!is_logged) {
-        //display error msg/log in or close
-    }
-
-    //else
-    else {
         function showPosition(position) {
-            document.getElementById('new-popup').style.display = 'flex';
+             
+            var overlay = jQuery('<div id="overlay"> </div>');
+            overlay.appendTo(document.body);
+            $("#new-popup").fadeIn();
+            //document.getElementById('new-popup').style.display = 'flex';
             var popup_txt_cont = document.getElementById('popup-msg');
             //get users location
             var user_loc = [];
@@ -125,16 +141,17 @@ function recordNewLoc() {
         navigator.geolocation.getCurrentPosition(showPosition, onError);
     }
 
-}
 
 //close popup if user clicks on Cancel button
 function cancelLocation() {
     localStorage.removeItem('current_user_details');
     document.getElementById('new-popup').style.display = 'none';
+    $("#overlay").remove();
 }
 
 function addLocation() {
     document.getElementById('new-popup').style.display = 'none';
+    $("#overlay").remove();
     var username = JSON.parse(localStorage.getItem('userID'));
     var current_user_details = JSON.parse(localStorage.getItem('current_user_details'));
     var latitude = current_user_details[0];
@@ -155,7 +172,10 @@ function addLocation() {
     loadMap();
 }
 
-
+function closeLoginPrompt(){
+    document.getElementById('record-not-logged').style.display = 'none';
+    $("#overlay").remove();
+}
 
 
 //2) check is the user logged in before adding new location

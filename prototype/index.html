@@ -1,3 +1,11 @@
+<!-- 
+//Project: Aurora Spotter
+//Group: DM Web Dev Team
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Home page -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +31,6 @@
 </head>
 
 <body onload="hideElements(), loadMap()">
-
     <header>
         <!-- Default Header -->
         <nav class="icon">
@@ -69,17 +76,25 @@
 
             <!-- Record Observation -->
             <div id="new_entry">
-                <p>Do you have an Aurora in front of your eyes?</p>
+                <p>Do you have an Aurora before your eyes?</p>
                 <p>Click the button below to share your location!</p>
-                <button id="btn_add_loc" onclick="recordNewLoc()">Record Observation</button>
+                <button id="btn_add_loc" onclick="recordClicked()">Record Observation</button>
             </div>
 
             <!-- New entry pop up -->
             <div id="new-popup">
-                <p id="popup-msg">Test Text</p>
+                <p id="popup-msg"></p>
                 <div class="btn-flex-container">
-                    <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
-                    <button id="popup-save" onclick="addLocation()">Save</button>
+                    <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
+                    <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+                </div>
+            </div>
+
+            <!-- Display error msg if user tries to add observation when not logged in -->
+            <div id="record-not-logged">
+                <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
+                <div class="btn-flex-container">
+                    <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
                 </div>
             </div>
             <!-- Aurora Map -->
@@ -145,11 +160,21 @@
             <h3>ABOUT US</h3>
             <div id="about-us-text">
                 <p>
-                    Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Aberdeen and Aberdeenshire region.
-                    It provides a map for tagging the locations where Aurora was spotted.
-                    The OpenWeatherMap API provides the weather forecast, and AuroraWatch UK API delivers an Aurora forecast diagram of hourly geomagnetic activity index.
-                    Aurora forecast shows the likelihood of seeing Aurora in the UK.
-                    The weather forecast, together with the Aurora forecast, help users to decide if the day and time are suitable for viewing Aurora.
+                    Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain.
+                    The map shows locations where our users observed this magnificent phenomenon. You can click on the pins on the map to check the date, time,
+                    exact coordinates for the location and the total number of observations registered at that point by our community. 
+                    <br/><br/>
+                    To help you plan the best Northern Lights experience, we provide you with a weather forecast and the preditctions how likely it is to see an Aurora. 
+                    AuroraWatch UK takes geomagnetic activity measurements to detect the likelihood of seeing Aurora from the UK. They use color-coded status system to report their findings.
+                    <br/>Green represents 'No significant activity', when the Aurora in unlikely to be visible from anywhere in UK.
+                    <br/>Yellow represents 'Minor geomagnetic activity' and it's used when there is a chance of observing Aurora by camera from Scotland, northern England and Northern Ireland.
+                    <br/>Amber alert means 'Possible aurora' by eye from Scotland, northern England and Northern Ireland and by camera from other parts of the UK.
+                    <br/>Red status, 'Aurora likely', means that it is likely to observe aurora by eye from anywhere in the UK.
+                    <br/>For more information check the AuroraWatch UK website: <a href="http://aurorawatch.lancs.ac.uk/">http://aurorawatch.lancs.ac.uk/. </a>        
+                    <br/><br/>
+                    Another big factor that could influence your experience is the weather as you need a clear sky to be able to see the Nothern Lights.
+                    <br/>The website uses the OpenWeatherMap API to provide you with the weather forecast. You can also click on any point on the map to check the forecast for the chosen location.
+                    <br/><br/>In the <a href='#tips' id='tips-link'>TIPS</a> section we provide additional useful information to help you plan the best Northern Light experience!
                 </p>
             </div>
         </section>
@@ -179,4 +204,5 @@
         </section>
     </main>
     <script src="js/weather.js"></script>
-</body></html>
+</body>
+</html>

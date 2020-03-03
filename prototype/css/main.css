@@ -1,3 +1,12 @@
+/* 
+//Project: Aurora Spotter
+//Group: DM Web Dev Team
+//TMs: Maya Bonaz, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//File contains main CSS (backgrounds for each page and stylesheet dealing with responsivnes can be found in separate files)
+
+*/
+
 /* CSS Variables: Colours */
 
 :root {
@@ -485,19 +494,40 @@ header .icon a {
 
 /* new observation popup msg */
 
-#popup-msg {
+#popup-msg, 
+#login-prompt-msg {
     font-size: 14px;
     margin-left: 5%;
     margin-right: 5%;
 }
 
-#new-popup {
+
+#login-prompt-msg{
+    padding-top: 5%;
+    text-align: center;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 9000;
+}
+
+#new-popup, #record-not-logged {
     display: none;
     position: absolute;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    z-index: 1100;
+    z-index: 9999;
     left: 10%;
     top: 58%;
     width: 80%;
@@ -505,6 +535,24 @@ header .icon a {
     background-color: black;
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
+    
+}
+
+
+#record-not-logged{
+    padding-top: 5%;
+    max-width: 500px;
+    max-height: 250px;
+}
+
+#new-popup{
+    max-width: 600px;
+    max-height: 350px;
+}
+
+.popup-btn{
+    padding-top: 3.5%;
+    padding-bottom: 3.5%;
 }
 
 .btn-flex-container {
@@ -515,9 +563,22 @@ header .icon a {
     align-items: center;
 }
 
+#popup-msg{
+    text-align: center;
+}
+
+
 #popup-cancel,
-#popup-save {
+#popup-save,
+#login-prompt-close {
     width: 30%;
+}
+
+#login-prompt-close{
+    max-width: 200px;
+    max-height: 50px;
+    overflow: hidden;
+    margin-left: 0%;
 }
 
 #popup-cancel {
@@ -530,21 +591,33 @@ header .icon a {
     border: 2px solid #B2E172;
 }
 
-#popup-save {
+#popup-save, 
+#login-prompt-close {
     display: inline-block;
     color: #B2E172;
     border: 1px solid #B2E172;
 }
 
-#popup-save:hover {
+#popup-save:hover,
+#login-prompt-close:hover {
     display: inline-block;
     border: 2px solid #B2E172;
     color: white;
 }
 
 #popup-cancel:active,
-#popup-save:active {
+#popup-save:active,
+#login-prompt-close:active {
     background-color: #526E7D;
+}
+
+#login-prompt{
+    color: #B2E172;
+    text-decoration: none;
+}
+
+#tips-link{
+    color: #B2E172;
 }
 
 /* Classes - CSS Animation */
