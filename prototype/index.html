@@ -79,15 +79,23 @@
             <div id="new_entry">
                 <p>Do you have an Aurora in front of your eyes?</p>
                 <p>Click the button below to share your location!</p>
-                <button id="btn_add_loc" onclick="recordNewLoc()">Record Observation</button>
+                <button id="btn_add_loc" onclick="recordClicked()">Record Observation</button>
             </div>
 
             <!-- New entry pop up -->
             <div id="new-popup">
-                <p id="popup-msg">Test Text</p>
+                <p id="popup-msg"></p>
                 <div class="btn-flex-container">
                     <button id="popup-cancel" onclick="cancelLocation()">Cancel</button>
                     <button id="popup-save" onclick="addLocation()">Save</button>
+                </div>
+            </div>
+
+            <!-- Display error msg if user tries to add observation when not logged in -->
+            <div id="record-not-logged">
+                <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add observation</p>
+                <div class="btn-flex-container">
+                    <button id="login-prompt-close" onclick="closeLoginPrompt()">Close</button>
                 </div>
             </div>
             <!-- Aurora Map -->
@@ -187,4 +195,5 @@
         </section>
     </main>
     <script src="js/weather.js"></script>
-</body></html>
+</body>
+</html>

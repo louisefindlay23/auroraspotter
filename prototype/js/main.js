@@ -142,7 +142,7 @@ function login() {
     if (login == '' || password == '') {
         //display error msg if any of the fields not filled up
         error_holder.style.marginTop = '-50px';
-        error_holder.innerHTML = 'Please enter username and password below';
+        error_holder.innerHTML = 'Please enter your username and password';
     } else {
         //check does the username exist in the users list
         try {

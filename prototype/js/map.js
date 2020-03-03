@@ -87,18 +87,22 @@ function loadMap() {
 }
 
 
+
 //function called when user clicks 'Record Observation' button
+function recordClicked(){
+    var is_logged = JSON.parse(localStorage.getItem('logged'));
+    
+    //if user not logged in promt to log in
+    if (!is_logged || is_logged == null) {
+        document.getElementById('record-not-logged').style.display = 'flex';
+    }
+    else{
+        recordNewLoc();
+    }
+}
+
 //display popup box with info that will be saved
 function recordNewLoc() {
-
-    //check if user logged in/if not, display an error msg
-    var is_logged = JSON.parse(localStorage.getItem('logged'));
-    if (!is_logged) {
-        //display error msg/log in or close
-    }
-
-    //else
-    else {
         function showPosition(position) {
             document.getElementById('new-popup').style.display = 'flex';
             var popup_txt_cont = document.getElementById('popup-msg');
@@ -131,7 +135,6 @@ function recordNewLoc() {
         navigator.geolocation.getCurrentPosition(showPosition, onError);
     }
 
-}
 
 //close popup if user clicks on Cancel button
 function cancelLocation() {
@@ -161,7 +164,9 @@ function addLocation() {
     loadMap();
 }
 
-
+function closeLoginPrompt(){
+    document.getElementById('record-not-logged').style.display = 'none';
+}
 
 
 //2) check is the user logged in before adding new location

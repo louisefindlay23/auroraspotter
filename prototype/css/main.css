@@ -500,7 +500,7 @@ header .icon a {
     margin-right: 5%;
 }
 
-#new-popup {
+#new-popup, #record-not-logged {
     display: none;
     position: absolute;
     flex-flow: column nowrap;
@@ -525,7 +525,8 @@ header .icon a {
 }
 
 #popup-cancel,
-#popup-save {
+#popup-save,
+#login-prompt-close {
     width: 30%;
 }
 
@@ -539,21 +540,29 @@ header .icon a {
     border: 2px solid #B2E172;
 }
 
-#popup-save {
+#popup-save, 
+#login-prompt-close {
     display: inline-block;
     color: #B2E172;
     border: 1px solid #B2E172;
 }
 
-#popup-save:hover {
+#popup-save:hover,
+#login-prompt-close:hover {
     display: inline-block;
     border: 2px solid #B2E172;
     color: white;
 }
 
 #popup-cancel:active,
-#popup-save:active {
+#popup-save:active,
+#login-prompt-close:active {
     background-color: #526E7D;
+}
+
+#login-prompt{
+    color: #B2E172;
+    text-decoration: none;
 }
 
 /* Classes - CSS Animation */
