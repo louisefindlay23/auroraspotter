@@ -523,18 +523,6 @@ header .icon a {
 
 /* new observation popup msg */
 
-#popup-msg,
-#login-prompt-msg {
-    font-size: 14px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-
-#login-prompt-msg {
-    padding-top: 5%;
-    text-align: center;
-}
 
 #overlay {
     position: fixed;
@@ -550,14 +538,34 @@ header .icon a {
     z-index: 9000;
 }
 
+.popup-container{
+    overflow: hidden;
+}
+
+.popup-container,
+#popup-msg {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#new-popup {
+    min-height: 230px;
+    max-width: 600px;
+    max-height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+
 #new-popup,
 #record-not-logged {
     display: none;
-    position: relative;
+    position: absolute;
     z-index: 9999;
-    top: 58%;
     width: 80%;
-    height: 45%;
+    height: 40%;
     background-color: black;
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
@@ -565,19 +573,46 @@ header .icon a {
 
 
 #record-not-logged {
-    padding-top: 5%;
+    height: 25%;
     max-width: 500px;
     max-height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#new-popup {
-    max-width: 600px;
-    max-height: 350px;
+#popup-content{
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#record-not-content{
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#popup-msg,
+#login-prompt-msg {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    align-self: center;
+}
+
+
+#login-prompt-msg {
+    text-align: center;
 }
 
 .popup-btn {
     padding-top: 3.5%;
     padding-bottom: 3.5%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .btn-flex-container {
@@ -587,12 +622,6 @@ header .icon a {
     justify-content: space-around;
     align-items: center;
 }
-
-.popup-container,
-#popup-msg {
-    text-align: center;
-}
-
 
 #popup-cancel,
 #popup-save,
@@ -605,6 +634,7 @@ header .icon a {
     max-height: 50px;
     overflow: hidden;
     margin-left: 0%;
+    margin-bottom: 2%;
 }
 
 #popup-cancel {
@@ -642,9 +672,11 @@ header .icon a {
     text-decoration: none;
 }
 
-#tips-link {
+#tips-link, #join-link {
     color: #B2E172;
 }
+
+
 
 /* Classes - CSS Animation */
 
