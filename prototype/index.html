@@ -108,9 +108,11 @@
             <!-- Display error msg if user tries to add observation when not logged in -->
             <div class="popup-container">
                 <div id="record-not-logged">
-                    <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
-                    <div class="btn-flex-container">
-                        <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                    <div id='record-not-content' class="flex-container">
+                        <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
+                        <div class="btn-flex-container">
+                            <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>

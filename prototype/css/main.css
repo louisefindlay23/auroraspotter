@@ -538,6 +538,9 @@ header .icon a {
     z-index: 9000;
 }
 
+.popup-container{
+    overflow: hidden;
+}
 
 .popup-container,
 #popup-msg {
@@ -546,6 +549,7 @@ header .icon a {
 }
 
 #new-popup {
+    min-height: 230px;
     max-width: 600px;
     max-height: 350px;
     top: 50%;
@@ -569,7 +573,6 @@ header .icon a {
 
 
 #record-not-logged {
-    padding-top: 5%;
     height: 25%;
     max-width: 500px;
     max-height: 250px;
@@ -585,16 +588,23 @@ header .icon a {
     margin-top: 5%;
 }
 
+#record-not-content{
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
 #popup-msg,
 #login-prompt-msg {
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
     align-self: center;
 }
 
 
 #login-prompt-msg {
-    padding-top: 5%;
     text-align: center;
 }
 
@@ -624,7 +634,6 @@ header .icon a {
     max-height: 50px;
     overflow: hidden;
     margin-left: 0%;
-    margin-top: 5%;
     margin-bottom: 2%;
 }
 
