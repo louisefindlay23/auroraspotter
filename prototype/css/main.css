@@ -199,7 +199,7 @@ footer{
 }
 
 .bold {
-    font-weight: bold;
+    text-decoration: underline;
 }
 
 .text-center,
@@ -247,7 +247,7 @@ body {
 #about-us,
 #tips,
 #diary {
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 #map {
@@ -256,7 +256,7 @@ body {
 
 #about-us p,
 #tips p {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 #settings-page .flex-container {
@@ -264,11 +264,11 @@ body {
 }
 
 #tips p:first-child {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 #tips p {
-    margin-top: 0;
+    margin-top: 5%;
 }
 
 /* Classes - Flexbox */
