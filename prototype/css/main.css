@@ -73,7 +73,7 @@ h1 {
 h2 {
     font-weight: 600;
     font-size: 1rem;
-    margin-bottom: 20%;
+    margin-bottom: 5%;
 }
 
 h3 {
@@ -215,7 +215,8 @@ footer{
 #form-text {
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
-    margin: 10% 2%;
+    margin: 1% 2%;
+    text-align: center;
 }
 
 #profile-page p {
@@ -727,6 +728,8 @@ header .icon a {
 
 main h2 {
     animation: bounceInLeft 1s ease-in 0s 1 both;
+    text-align: center;
+    margin-bottom: 5%;
 }
 
 @keyframes shake {
