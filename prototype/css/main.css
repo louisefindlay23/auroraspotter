@@ -198,7 +198,7 @@ footer{
     color: var(--black);
 }
 
-.bold {
+.underline {
     text-decoration: underline;
 }
 
@@ -691,8 +691,9 @@ header .icon a {
     text-decoration: none;
 }
 
-#tips-link, #join-link {
+#tips-link, #join-link, #aurora-link {
     color: #B2E172;
+    text-decoration: none;
 }
 
 
