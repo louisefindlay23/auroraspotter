@@ -112,6 +112,8 @@ function signUp() {
         //if user not in the list, validate the rest of the form
         //if input correct, add to the list of users and save in Local Storage
         if (!userExist) {
+            //encrypt user's password using MD5 (still better than plain text)
+            password = CryptoJS.MD5(password).toString();
             usersList = usersSaved;
             let new_user = new User(username, email, password);
             usersList.push(new_user);
@@ -148,6 +150,7 @@ function login() {
         error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Please enter your username and password';
     } else {
+        password = CryptoJS.MD5(password).toString();
         //check does the username exist in the users list
         try {
             for (var i in usersSaved) {
