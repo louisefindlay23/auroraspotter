@@ -41,7 +41,7 @@
 
 <body onload="hideElements(), loadMap()">
 
-    <header id='top-panel'>
+    <header id="top-panel">
         <!-- Default Header -->
         <nav class="icon">
             <div class="flex-container">
@@ -79,7 +79,7 @@
                 </a>
             </div>
         </nav>
-        <h2 id='welcome-msg'>Follow the Northern Lights</h2>
+        <h2 id="welcome-msg">Follow the Northern Lights</h2>
     </header>
 
     <main>
@@ -95,11 +95,11 @@
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
-                    <div id='popup-content' class="flex-container">
+                    <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
                         <div class="btn-flex-container">
-                            <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
-                            <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+                            <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
+                            <button id="popup-save" class="popup-btn" onclick="addLocation()">Save</button>
                         </div>
                     </div>
                 </div>
@@ -108,10 +108,10 @@
             <!-- Display error msg if user tries to add observation when not logged in -->
             <div class="popup-container">
                 <div id="record-not-logged">
-                    <div id='record-not-content' class="flex-container">
-                        <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
+                    <div id="record-not-content" class="flex-container">
+                        <p id="login-prompt-msg">You need to be <a href="login.html" id="login-prompt"> Signed In </a> to add your observation</p>
                         <div class="btn-flex-container">
-                            <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                            <button id="login-prompt-close" class="popup-btn" onclick="closeLoginPrompt()">Close</button>
                         </div>
                     </div>
                 </div>
