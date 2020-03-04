@@ -181,6 +181,14 @@ td a {
     text-decoration: underline;
 }
 
+footer{
+    margin-top: 10%;
+    width: 100%;
+    border-top: 1px solid #B2E172;
+    padding-top: 1%;
+}
+
+
 /* Classes - Text Styling */
 
 .black {
@@ -409,6 +417,13 @@ body {
     color: #293251;
     text-align: center;
     font-size: 0.8em;
+}
+
+
+.footer-txt{
+    font-size: 14px;
+    margin-right: 10%;
+    text-align: right;
 }
 
 /* Classes - Menu Styling */
@@ -692,3 +707,4 @@ main h2 {
 .remove-animation {
     animation-duration: 0s;
 }
+
