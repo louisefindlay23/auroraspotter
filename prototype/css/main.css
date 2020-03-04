@@ -19,7 +19,7 @@
 
 html,
 body {
-    min-width:210px;  
+    min-width: 210px;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -183,11 +183,20 @@ td a {
     text-decoration: underline;
 }
 
-footer{
-    margin-top: 10%;
+footer {
     width: 100%;
     border-top: 1px solid #B2E172;
     padding-top: 1%;
+    height: auto;
+    overflow: auto;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 0;
+}
+
+.fixed {
+    position: fixed;
 }
 
 
@@ -239,7 +248,7 @@ body {
 
 /* Classes - Alignment */
 
-#top-panel{
+#top-panel {
     margin-bottom: 5%;
 }
 
@@ -255,7 +264,7 @@ body {
     width: 100%;
 }
 
-#weather{
+#weather {
     width: 100%;
 }
 
@@ -432,7 +441,7 @@ body {
 }
 
 
-.footer-txt{
+.footer-txt {
     font-size: 14px;
     margin-right: 10%;
     text-align: right;
@@ -451,7 +460,7 @@ body {
     z-index: 10000;
 }
 
-#welcome-msg{
+#welcome-msg {
     margin-left: 10%;
     margin-top: 1rem;
 }
@@ -494,7 +503,7 @@ header .icon a {
 
 /* Change the width of aurora status iframe */
 
-#aurora_status{
+#aurora_status {
     width: 100%;
 }
 
@@ -558,7 +567,7 @@ header .icon a {
     z-index: 9000;
 }
 
-.popup-container{
+.popup-container {
     overflow: hidden;
 }
 
@@ -575,7 +584,7 @@ header .icon a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
+
 }
 
 
@@ -601,14 +610,14 @@ header .icon a {
     transform: translate(-50%, -50%);
 }
 
-#popup-content{
+#popup-content {
     display: flex;
     height: 80%;
     width: 100%;
     margin-top: 5%;
 }
 
-#record-not-content{
+#record-not-content {
     display: flex;
     height: 80%;
     width: 100%;
@@ -692,7 +701,9 @@ header .icon a {
     text-decoration: none;
 }
 
-#tips-link, #join-link, #aurora-link {
+#tips-link,
+#join-link,
+#aurora-link {
     color: #B2E172;
     text-decoration: none;
 }
@@ -762,4 +773,3 @@ main h2 {
 .remove-animation {
     animation-duration: 0s;
 }
-
