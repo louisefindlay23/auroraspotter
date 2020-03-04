@@ -20,6 +20,7 @@
 
 html,
 body {
+    min-width:210px;  
     width: 100%;
     padding: 0;
     margin: 0;
@@ -35,6 +36,7 @@ nav {
     height: auto;
     overflow: auto;
 }
+
 
 main {
     width: 80%;
@@ -181,14 +183,23 @@ td a {
     text-decoration: underline;
 }
 
+footer{
+    margin-top: 10%;
+    width: 100%;
+    border-top: 1px solid #B2E172;
+    padding-top: 1%;
+}
+
+
 /* Classes - Text Styling */
+
 
 .black {
     color: var(--black);
 }
 
 .bold {
-    font-weight: bold;
+    text-decoration: underline;
 }
 
 .text-center,
@@ -232,21 +243,29 @@ body {
 
 /* Classes - Alignment */
 
+#top-panel{
+    margin-bottom: 5%;
+}
+
 #map,
 #weather,
 #about-us,
 #tips,
 #diary {
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 #map {
     width: 100%;
 }
 
+#weather{
+    width: 100%;
+}
+
 #about-us p,
 #tips p {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 #settings-page .flex-container {
@@ -254,11 +273,11 @@ body {
 }
 
 #tips p:first-child {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 #tips p {
-    margin-top: 0;
+    margin-top: 5%;
 }
 
 /* Classes - Flexbox */
@@ -416,6 +435,13 @@ body {
     font-size: 0.8em;
 }
 
+
+.footer-txt{
+    font-size: 14px;
+    margin-right: 10%;
+    text-align: right;
+}
+
 /* Classes - Menu Styling */
 
 #menu {
@@ -427,6 +453,11 @@ body {
     overflow: auto;
     position: absolute;
     z-index: 10000;
+}
+
+#welcome-msg{
+    margin-left: 10%;
+    margin-top: 1rem;
 }
 
 #menu h2 {
@@ -467,6 +498,10 @@ header .icon a {
 
 /* Change the width of aurora status iframe */
 
+#aurora_status{
+    width: 100%;
+}
+
 #status-frame {
     width: 100%;
     height: 50px;
@@ -489,14 +524,13 @@ header .icon a {
 
 
 /* Index page record new location text and button styles */
-#new_entry {
-    margin-top: 35%;
-    padding-top: 5%;
-}
+
 
 #btn_add_loc {
     border: 2px solid #B2E172;
     color: #B2E172;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 #btn_add_loc:hover {
@@ -513,18 +547,6 @@ header .icon a {
 
 /* new observation popup msg */
 
-#popup-msg,
-#login-prompt-msg {
-    font-size: 14px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-
-#login-prompt-msg {
-    padding-top: 5%;
-    text-align: center;
-}
 
 #overlay {
     position: fixed;
@@ -540,14 +562,34 @@ header .icon a {
     z-index: 9000;
 }
 
+.popup-container{
+    overflow: hidden;
+}
+
+.popup-container,
+#popup-msg {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#new-popup {
+    min-height: 230px;
+    max-width: 600px;
+    max-height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+
 #new-popup,
 #record-not-logged {
     display: none;
-    position: relative;
+    position: absolute;
     z-index: 9999;
-    top: 58%;
     width: 80%;
-    height: 45%;
+    height: 40%;
     background-color: var(--black);
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
@@ -555,19 +597,46 @@ header .icon a {
 
 
 #record-not-logged {
-    padding-top: 5%;
+    height: 25%;
     max-width: 500px;
     max-height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#new-popup {
-    max-width: 600px;
-    max-height: 350px;
+#popup-content{
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#record-not-content{
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#popup-msg,
+#login-prompt-msg {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    align-self: center;
+}
+
+
+#login-prompt-msg {
+    text-align: center;
 }
 
 .popup-btn {
     padding-top: 3.5%;
     padding-bottom: 3.5%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .btn-flex-container {
@@ -577,12 +646,6 @@ header .icon a {
     justify-content: space-around;
     align-items: center;
 }
-
-.popup-container,
-#popup-msg {
-    text-align: center;
-}
-
 
 #popup-cancel,
 #popup-save,
@@ -595,6 +658,7 @@ header .icon a {
     max-height: 50px;
     overflow: hidden;
     margin-left: 0%;
+    margin-bottom: 2%;
 }
 
 #popup-cancel {
@@ -693,3 +757,4 @@ main h2 {
 .remove-animation {
     animation-duration: 0s;
 }
+

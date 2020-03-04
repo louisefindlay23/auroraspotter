@@ -15,6 +15,7 @@
     <title>Aurora</title>
 
     <!-- Fonts & Icons -->
+    <link rel="shortcut icon" type="image/icon" href="img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -33,12 +34,16 @@
     <!-- JS Scripts and jQuery -->
     <script src="js/vendor/jquery-1.11.2.min.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- crypto-js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <!--Leaflet Map Script-->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 </head>
 
 <body onload="hideElements(), loadMap()">
-    <header>
+    
+    <header id='top-panel'>
         <!-- Default Header -->
         <nav class="icon">
             <div class="flex-container">
@@ -76,12 +81,12 @@
                 </a>
             </div>
         </nav>
+        <h2 id='welcome-msg'>Follow the Northern Lights</h2>
     </header>
+    
     <main>
         <!-- Page Title -->
         <section id="welcome">
-            <h2>Follow the Northern Lights</h2>
-
             <!-- Record Observation -->
             <div id="new_entry">
                 <p>Do you have an Aurora before your eyes?</p>
@@ -92,10 +97,12 @@
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
-                    <p id="popup-msg"></p>
-                    <div class="btn-flex-container">
-                        <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
-                        <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+                    <div id='popup-content' class="flex-container">
+                        <p id="popup-msg"></p>
+                        <div class="btn-flex-container">
+                            <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
+                            <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,9 +110,11 @@
             <!-- Display error msg if user tries to add observation when not logged in -->
             <div class="popup-container">
                 <div id="record-not-logged">
-                    <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
-                    <div class="btn-flex-container">
-                        <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                    <div id='record-not-content' class="flex-container">
+                        <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
+                        <div class="btn-flex-container">
+                            <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -215,6 +224,9 @@
             </div>
         </section>
     </main>
+    <footer>
+        <p class='footer-txt'>RGU 2020 CM2104</footer></p>
+    </footer>
     <script src="js/weather.js"></script>
 </body>
 
