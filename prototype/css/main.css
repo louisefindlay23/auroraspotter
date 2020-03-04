@@ -37,9 +37,6 @@ nav {
     overflow: auto;
 }
 
-header{
-    margin-bottom: 15%;
-}
 
 main {
     width: 80%;
@@ -240,6 +237,10 @@ body {
 }
 
 /* Classes - Alignment */
+
+#top-panel{
+    margin-bottom: 5%;
+}
 
 #map,
 #weather,
@@ -510,13 +511,13 @@ header .icon a {
 
 
 /* Index page record new location text and button styles */
-#new_entry {
-    padding-top: 5%;
-}
+
 
 #btn_add_loc {
     border: 2px solid #B2E172;
     color: #B2E172;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 #btn_add_loc:hover {
