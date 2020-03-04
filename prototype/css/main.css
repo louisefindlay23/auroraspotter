@@ -254,6 +254,10 @@ body {
     width: 100%;
 }
 
+#weather{
+    width: 100%;
+}
+
 #about-us p,
 #tips p {
     margin-top: 5%;
@@ -488,6 +492,10 @@ header .icon a {
 }
 
 /* Change the width of aurora status iframe */
+
+#aurora_status{
+    width: 100%;
+}
 
 #status-frame {
     width: 100%;
