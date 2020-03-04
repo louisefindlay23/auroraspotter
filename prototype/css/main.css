@@ -13,6 +13,7 @@
     --black: #000000;
     --white: #ffffff;
     --grey: #2b292a;
+    --green: #B2E172;
 }
 
 /*  HTML Element Styling */
@@ -23,7 +24,6 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-    background: var(--background-color);
 }
 
 html {
@@ -208,6 +208,11 @@ footer{
     text-align: center;
 }
 
+#about-us a {
+    color: var(--green);
+    text-decoration-color: var(--green);
+}
+
 #new_entry p {
     text-align: center;
 }
@@ -339,7 +344,7 @@ body {
 
 #left-image {
     font-family: 'Montserrat', sans-serif;
-    background-color: #FFF;
+    background-color: var(--white);
     margin: 0;
     border-radius: 10px;
     padding-bottom: 50px;
@@ -442,7 +447,7 @@ body {
 #menu {
     display: none;
     background: var(--background-color);
-    background-color: black;
+    background-color: var(--black);
     width: 100%;
     height: auto;
     overflow: auto;
@@ -585,7 +590,7 @@ header .icon a {
     z-index: 9999;
     width: 80%;
     height: 40%;
-    background-color: black;
+    background-color: var(--black);
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
 }
@@ -690,13 +695,6 @@ header .icon a {
     color: #B2E172;
     text-decoration: none;
 }
-
-#tips-link, #join-link, #aurora-link {
-    color: #B2E172;
-    text-decoration: none;
-}
-
-
 
 /* Classes - CSS Animation */
 
