@@ -37,6 +37,11 @@
         justify-content: center;
     }
 
+    #login-prompt-close{
+        margin-top: 8%;
+    }
+
+
 }
 
 /* In between mobile and tablet */
@@ -64,9 +69,6 @@
         margin-top: 5%;
     }
 
-    #popup-msg {
-        margin-top: 10%;
-    }
 }
 
 /* Larger than tablets */
@@ -94,9 +96,6 @@
         margin-bottom: 2.5%;
     }
 
-    #popup-msg {
-        margin-top: 15%;
-    }
 
     #new_entry {
         margin-top: 5%;
@@ -183,7 +182,7 @@
 
     #popup-cancel,
     #popup-save {
-        margin: 10% 2%;
+        margin: 2%;
         padding: 2.10%;
     }
 
@@ -235,7 +234,4 @@
         height: 60%;
     }
 
-    #popup-msg {
-        margin-top: 10%;
-    }
 }
