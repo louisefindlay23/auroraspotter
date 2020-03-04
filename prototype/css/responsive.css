@@ -39,12 +39,12 @@
         justify-content: center;
     }
 
-    #btn_add_loc{
+    #btn_add_loc {
         width: 50%;
         margin-left: 25%;
     }
 
-    
+
 
 
 }
@@ -74,7 +74,7 @@
         margin-top: 5%;
     }
 
-    #btn_add_loc{
+    #btn_add_loc {
         width: 100%;
         margin-left: 0;
     }
@@ -86,9 +86,9 @@
         float: left;
     }
 
-    
 
-    #map{
+
+    #map {
         width: 70%;
         display: inline-block;
     }
@@ -128,7 +128,7 @@
         float: left;
     }
 
-    #map{
+    #map {
         width: 70%;
         display: inline-block;
     }
@@ -235,6 +235,11 @@
 
 @media screen and (min-width: 1580px) {
 
+    h2 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+
     #new_entry {
         margin-top: 10%;
         width: 20%;
@@ -242,7 +247,7 @@
         float: left;
     }
 
-    #map{
+    #map {
         width: 70%;
         display: inline-block;
     }
