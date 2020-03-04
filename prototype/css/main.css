@@ -197,6 +197,11 @@ td a {
     text-align: center;
 }
 
+#about-us a {
+    color: var(--green);
+    text-decoration-color: var(--green);
+}
+
 #new_entry p {
     text-align: center;
 }
@@ -625,11 +630,6 @@ header .icon a {
 #login-prompt {
     color: #B2E172;
     text-decoration: none;
-}
-
-#about-us a {
-    color: var(--green);
-    text-decoration-color: var(--green);
 }
 
 /* Classes - CSS Animation */
