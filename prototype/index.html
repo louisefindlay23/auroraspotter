@@ -126,7 +126,7 @@
             </div>
 
             <!-- Weather Forecast -->
-            <div id="home-container" class="flex-container">
+            <div id="home-container" class= "flex-container">
                 <div id="weather">
                     <div class="notification"> </div>
                     <div class="weather-container">
@@ -147,12 +147,12 @@
                 </div>
 
                 <!-- Aurora Status -->
-                <div id="aurora_status">
+                <div id="aurora_status" >
                     <script>
                         //link to aurora watch status
                         var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
                         //link to aurora watch status and solar activity plots
-                        var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
+                        var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
 
                         //function to load an appriopriate content
                         function loadStatus() {
@@ -166,7 +166,6 @@
                             }
                         }
                         loadStatus();
-
                         //detect change of the screen size and reload the appropriate element
                         window.addEventListener('resize', loadStatus);
 

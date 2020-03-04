@@ -30,10 +30,6 @@
         height: 300px;
     }
 
-    #status-frame {
-        width: 100%;
-        height: 50px;
-    }
 
     #home-content {
         justify-content: center;
@@ -43,6 +39,12 @@
         width: 50%;
         margin-left: 25%;
     }
+
+    #weather{
+        width: 100%;
+    }
+
+    
 
     
 
@@ -86,11 +88,13 @@
         float: left;
     }
 
-    
-
     #map{
         width: 70%;
         display: inline-block;
+    }
+
+    #weather{
+        width: 100%;
     }
 
 }
@@ -98,6 +102,7 @@
 /* Larger than tablets */
 
 @media screen and (min-width: 1280px) {
+
 
     h2 {
         margin-bottom: 15%;
@@ -108,7 +113,7 @@
     }
 
     nav.icon,
-    #menu .flex-container {
+    #menu{
         margin-top: 2.5%;
     }
 
@@ -134,35 +139,49 @@
     }
 
 
-    #weather,
-    #aurora_status,
-    #status_frame {
-        width: 45%;
-        margin: auto 2.5%;
+    #aurora_status{
+        padding: 0;
+        width: 100%;
+        height: auto;
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    #home-container{
+        margin-left: 0;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: stretch;
+        background-color: white;
+        padding: 0;
+    }
+
+    
+    #weather {
+        margin-top: 0;
+        background-color: #f4f9ff;
+        display: flex;
+    }
+    
+    .weather-container{
+        margin: auto;
+    }
+
+
+    .frame-cont{
+        display: flex;
+    }
+
+    #plot-frame{
+        margin: 0 auto;
     }
 
     #mapid {
-        height: 387.933px;
+        height: 500px;
     }
 
-    #aurora_status,
-    #activity-img,
-    #button-container {
-        margin-top: 7.5%;
-    }
-
-    #activity-container {
-        width: 100vw;
-    }
-
-    #plot-frame,
-    .frame-cont {
-        height: 100vh;
-    }
-
-    .weather-container {
-        margin-top: -8.875%;
-    }
 
     #new_entry {
         margin-top: 10%;
@@ -179,6 +198,13 @@
         margin-bottom: 7.5%;
         padding: 5%;
         border-radius: 10px;
+    }
+
+    #activity-img{
+        align-self: center;
+        top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     }
 
     #myForm input {
@@ -235,6 +261,7 @@
 
 @media screen and (min-width: 1580px) {
 
+    
     #new_entry {
         margin-top: 10%;
         width: 20%;
