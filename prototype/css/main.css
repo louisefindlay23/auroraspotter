@@ -530,6 +530,10 @@ header .icon a {
     margin-right: 5%;
 }
 
+#popup-msg{
+    margin-top: 15%;
+}
+
 
 #login-prompt-msg {
     padding-top: 5%;
@@ -553,9 +557,8 @@ header .icon a {
 #new-popup,
 #record-not-logged {
     display: none;
-    position: relative;
+    position: absolute;
     z-index: 9999;
-    top: 58%;
     width: 80%;
     height: 45%;
     background-color: black;
@@ -568,11 +571,17 @@ header .icon a {
     padding-top: 5%;
     max-width: 500px;
     max-height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #new-popup {
     max-width: 600px;
     max-height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .popup-btn {
