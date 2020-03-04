@@ -37,6 +37,10 @@ nav {
     overflow: auto;
 }
 
+header{
+    margin-bottom: 15%;
+}
+
 main {
     width: 80%;
     height: auto;
@@ -507,7 +511,6 @@ header .icon a {
 
 /* Index page record new location text and button styles */
 #new_entry {
-    margin-top: 35%;
     padding-top: 5%;
 }
 

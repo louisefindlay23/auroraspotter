@@ -7,18 +7,18 @@
 */
 
 /* Background for the mobile version of index page */
-body {
+header {
     background:
         linear-gradient(rgba(168, 168, 168, 0.5),
             rgba(168, 168, 168, 0.5)),
         url(../../img/bg-home.png);
     width: 100%;
     background-repeat: no-repeat;
-    background-size: 100% 8%;
+    background-size: 100% 100%;
     background-color: var(--black);
 }
 
-
 body{
-    background-color: black;
+    background: black;
 }
+
