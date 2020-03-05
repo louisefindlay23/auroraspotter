@@ -508,6 +508,13 @@ header .icon a {
 
 /* Leaflet map custom style */
 
+.leaflet-touch .leaflet-bar a {
+    background-color: #dedede;
+  }
+  .leaflet-control-zoom-out{
+    margin-top: 15px;
+  }
+  
 #mapid {
     position: relative;
     height: 220px;
