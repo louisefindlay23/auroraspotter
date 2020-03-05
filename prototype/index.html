@@ -1,7 +1,7 @@
 <!-- 
 //Project: Aurora
 //Group: DM Web Dev Team
-//TMs: Maya Bonazarovaarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
 //Date: 2/3/2020
 //Home page -->
 
@@ -40,8 +40,8 @@
 </head>
 
 <body onload="hideElements(), loadMap()">
-    
-    <header id='top-panel'>
+
+    <header id="top-panel">
         <!-- Default Header -->
         <nav class="icon">
             <div class="flex-container">
@@ -79,9 +79,9 @@
                 </a>
             </div>
         </nav>
-        <h2 id='welcome-msg'>Follow the Northern Lights</h2>
+        <h2 id="welcome-msg">Follow the Northern Lights</h2>
     </header>
-    
+
     <main>
         <!-- Page Title -->
         <section id="welcome">
@@ -95,11 +95,11 @@
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
-                    <div id='popup-content' class="flex-container">
+                    <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
                         <div class="btn-flex-container">
-                            <button id="popup-cancel" class='popup-btn' onclick="cancelLocation()">Cancel</button>
-                            <button id="popup-save" class='popup-btn' onclick="addLocation()">Save</button>
+                            <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
+                            <button id="popup-save" class="popup-btn" onclick="addLocation()">Save</button>
                         </div>
                     </div>
                 </div>
@@ -108,10 +108,10 @@
             <!-- Display error msg if user tries to add observation when not logged in -->
             <div class="popup-container">
                 <div id="record-not-logged">
-                    <div id='record-not-content' class="flex-container">
-                        <p id="login-prompt-msg">You need to be <a href="login.html" id='login-prompt'> Signed In </a> to add your observation</p>
+                    <div id="record-not-content" class="flex-container">
+                        <p id="login-prompt-msg">You need to be <a href="login.html" id="login-prompt"> Signed In </a> to add your observation</p>
                         <div class="btn-flex-container">
-                            <button id="login-prompt-close" class='popup-btn' onclick="closeLoginPrompt()">Close</button>
+                            <button id="login-prompt-close" class="popup-btn" onclick="closeLoginPrompt()">Close</button>
                         </div>
                     </div>
                 </div>
@@ -178,53 +178,52 @@
         <section id="about-us">
             <h3>ABOUT US</h3>
             <div id="about-us-text">
-                <p> Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain. The map shows areas where our users have seen this magnificent phenomenon. 
-                    <br/>You can click on the pins on the map to check the date, time, exact coordinates for the location and the total number of observations registered at that point by our community. 
-                    <br/>To help you plan the best Northern Lights experience, we provide you with a weather forecast and the predictions how likely it is to see an Aurora.
+                <p>Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain. The map shows locations where our users observed this magnificent phenomenon. You can click on the pins on the map to check the date, time, exact coordinates for the location and the total number of observations registered at that point by our community.</p>
 
-                    <p>AuroraWatch UK takes geomagnetic activity measurements to detect the likelihood of seeing Aurora from the UK. They use a colour-coded status system to report their findings. 
-                        <br/>Green represents 'No significant activity' when the aurora in unlikely to be visible from anywhere in the UK. 
-                        <br/>Yellow represents 'Minor geomagnetic activity', and it's used when there is a chance of observing Aurora by a camera from Scotland, northern England and Northern Ireland. 
-                        <br/>Amber alert means 'Possible aurora' by eye from Scotland, northern England and Northern Ireland and by a camera from other parts of the UK. 
-                        <br/>Red status, 'Aurora likely', means that it is likely to observe aurora by eye from anywhere in the UK. 
-                        <br/>For more information, check the AuroraWatch UK website: <a id='aurora-link' href="http://aurorawatch.lancs.ac.uk/">http://aurorawatch.lancs.ac.uk/. </a>
-                    </p>
+                <p>To help you plan the best Northern Lights experience, we provide you with a weather forecast and the preditctions how likely it is to see an Aurora.</p>
 
-                    <p> Another big factor that could influence your experience is the weather as you need a clear sky to be able to see the Nothern Lights. 
-                        <br/>The website uses the OpenWeatherMap API to provide you with the weather forecast. You can also click on any point on the map to check the forecast for the chosen location. 
-                        <br/>In the <a href='#tips' id='tips-link'>TIPS</a> section, we provide additional useful information to help you plan the best Northern Light experience!
-                    </p>
+                <p>AuroraWatch UK takes geomagnetic activity measurements to detect the likelihood of seeing Aurora from the UK. They use color-coded status system to report their findings.</p>
 
-                    <p><a href='signup.html' id='join-link'>Join our community</a> to be able to add new observation points and track your observations data in the Profile section.</p>
+                <p>Green represents 'No significant activity', when the Aurora in unlikely to be visible from anywhere in UK. Yellow represents 'Minor geomagnetic activity' and it's used when there is a chance of observing Aurora by camera from Scotland, northern England and Northern Ireland.</p>
+
+                <p>Amber alert means 'Possible aurora' by eye from Scotland, northern England and Northern Ireland and by camera from other parts of the UK. Red status, 'Aurora likely', means that it is likely to observe aurora by eye from anywhere in the UK.</p>
+
+                <p>For more information check the AuroraWatch UK website: <a id="aurora-link" href="http://aurorawatch.lancs.ac.uk">http://aurorawatch.lancs.ac.uk</a></p>
+
+                <p>Another big factor that could influence your experience is the weather as you need a clear sky to be able to see the Nothern Lights. The website uses the OpenWeatherMap API to provide you with the weather forecast. You can also click on any point on the map to check the forecast for the chosen location.</p>
+
+                <p>In the <a id="tips-link" href="#tips">TIPS</a> section, we provide additional useful information to help you plan the best Northern Light experience!</p>
+
+                <p><a href="signup.html" id="join-link">Join our community</a> to be able to add new observation points and track your observations data in the Profile section.</p>
             </div>
         </section>
 
         <section id="tips">
             <h3>TIPS</h3>
             <div>
-                <p class="bold">Time of the year:</p>
+                <p class="underline">Time of the Year:</p>
 
                 <p>Aurora phenomenon is visible between late August and early April. Months from November to February are a great time to witness the aurora light shows.
                 </p>
 
-                <p class="bold">Aurora Forecast:</p>
+                <p class="underline">Aurora Forecast:</p>
                 <p>Natural occurrence of the aurora depends on the collision of solar wind and gaseous particles of the Earth’s atmosphere. High geomagnetic activity on the aurora forecast indicates, there is a good chance to see the aurora on that given day/time.
                 </p>
-                <p class="bold">Weather:</p>
+                <p class="underline">Weather:</p>
                 <p>Carefully check the weather forecast before going out for aurora hunting. Cloudy and rainy weather forecast minimises the chances of seeing the aurora. The clear night sky offers the best probability of experiencing the aurora.
                 </p>
-                <p class="bold">Location:</p>
+                <p class="underline">Location:</p>
                 <p>Aurora occurs near the magnetic poles of the Earth.
                     Check the locations tagged on the map. The locations with the most tags are the best spots to see aurora displays.
                 </p>
-                <p class="bold">Light Pollution:</p>
+                <p class="underline">Light Pollution:</p>
                 <p>Light pollution from the city streets and buildings will make it difficult to fully experience the aurora. The best places to see the aurora are usually away from the city lights.</p>
                 <p> Additionally, the light from a full moon also causes problems as it brightens up the skies. Therefore, the timing of the outing is important too.</p>
             </div>
         </section>
     </main>
     <footer>
-        <p class='footer-txt'>RGU 2020 CM2104</footer></p>
+        <p class="footer-txt">RGU 2020 CM2104</p>
     </footer>
     <script src="js/weather.js"></script>
 </body>
