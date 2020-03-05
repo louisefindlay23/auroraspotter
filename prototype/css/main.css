@@ -405,6 +405,8 @@ body {
     width: 100%;
     height: auto;
     background-color: #F4F9FF;
+    padding-top: 2%;
+    margin-top: 10%;
 }
 
 .weather-icon {
@@ -444,7 +446,7 @@ body {
 }
 
 .temperature-description p {
-    /* padding: 8px; */
+    padding: 5%;
     margin: 0;
     color: #293251;
     text-align: center;
@@ -453,7 +455,6 @@ body {
 
 .weather-location p {
     margin: 0;
-    padding: 0;
     color: #293251;
     text-align: center;
     font-size: 0.8em;
@@ -494,7 +495,7 @@ body {
 
 .icon .flex-container {
     justify-content: space-between;
-    margin: 2.5% auto;
+    margin: 1.5% auto;
 }
 
 #menu .flex-container {
@@ -564,7 +565,7 @@ header .icon a {
 
 
 .small-title {
-    margin-top: 10%;
+    margin-top: 3%;
 }
 
 /* Index page record new location text and button styles */
