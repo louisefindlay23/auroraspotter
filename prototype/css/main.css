@@ -38,14 +38,14 @@ header,
 nav {
     width: 100%;
     height: auto;
-    overflow: hidden;
+    overflow: auto;
 }
 
 
 main {
     width: 80%;
     height: auto;
-    overflow: hidden;
+    overflow: auto;
     margin: 0 5% 10% 10%;
 }
 
@@ -129,7 +129,7 @@ input,
 button {
     width: 90%;
     height: auto;
-    overflow: hidden;
+    overflow: auto;
     margin: 10% 2%;
     padding: 2.10%;
     background: var(--black);
@@ -213,7 +213,6 @@ footer {
 }
 
 .underline {
-    font-size: 0.9rem;
     text-decoration: underline;
 }
 
@@ -255,7 +254,8 @@ body {
 /* Classes - Alignment */
 
 #top-panel {
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    height: 20vh;
 }
 
 #map,
@@ -502,21 +502,11 @@ header .icon a {
 
 /* Leaflet map custom style */
 
-.leaflet-touch .leaflet-bar a {
-    background-color: #dedede;
-  }
-  .leaflet-control-zoom-out{
-    margin-top: 15px;
-  }
-
 #mapid {
     position: relative;
-    height: 300px;
-}
-
-#mapid {
-    background-color: rgba(255, 0, 0, 0.0);
-    border: solid 1px #B2E172;
+    height: 220px;
+    border: 1px solid #B2E172;
+    background-color: var(--black);
 }
 
 /* Change the width of aurora status iframe */
@@ -553,11 +543,10 @@ header .icon a {
     border: 1px solid #B2E172;
     color: #B2E172;
     margin-top: 10%;
-    margin-bottom: 0;
-    margin-left: 0;
+    margin-bottom: 1%;
     border-radius: unset;
     width: 100%;
-    text-transform: uppercase;
+    margin-left: 0;
 }
 
 #btn_add_loc:hover {
@@ -723,7 +712,6 @@ header .icon a {
     text-decoration: none;
 }
 
- 
 #tips-link,
 #join-link,
 #aurora-link {

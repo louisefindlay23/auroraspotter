@@ -20,7 +20,7 @@
     }
 
     #top-panel{
-        height: 40vh;
+        height: 20vh;
     }
 
 
@@ -62,12 +62,20 @@
         margin-top: 5%;
     }
 
-    #map {
-        width: 70%;
-        display: inline-block;
 
     #weather {
         width: 100%;
+    }
+
+    #map{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #btn_add_loc{
+        margin-top: 0;
+        padding-top: 2%;
+        padding-bottom: 2%;
     }
 }
 
@@ -95,17 +103,18 @@
         margin-bottom: 2.5%;
     }
 
-    #map {
-        width: 70%;
-        display: inline-block;
     #top-row{
         display: flex;
         align-content: stretch;
     }
 
+    #top-panel{
+        height: 30vh;
+    }
 
     #mapid {
         height: 500px;
+        margin-top: 3%;
     }
 
     #aurora_status {
@@ -118,14 +127,15 @@
 
     #home-container {
         margin-left: 0;
-        margin-top: 10%;
-        width: 100%;
+        margin-top: 5%;
+        width: 99.7%;
         display: flex;
         flex-wrap: nowrap;
         align-items: stretch;
         justify-content: stretch;
         background-color: white;
         padding: 0;
+        border: solid 3px #b2e17b;
     }
 
     #weather {
@@ -209,6 +219,12 @@
     
     .temp-hide {
         display: none;
+    }
+
+    #btn_add_loc{
+        margin-top: 0;
+        padding-top: 1%;
+        padding-bottom: 1%;
     }
 }
 
