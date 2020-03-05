@@ -8,6 +8,10 @@
 */
 
 /* CSS Variables: Colours */
+*{
+    margin: 0;
+    padding: 0;
+}
 
 :root {
     --black: #000000;
@@ -34,14 +38,14 @@ header,
 nav {
     width: 100%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
 }
 
 
 main {
     width: 80%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
     margin: 0 5% 10% 10%;
 }
 
@@ -125,7 +129,7 @@ input,
 button {
     width: 90%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
     margin: 10% 2%;
     padding: 2.10%;
     background: var(--black);
@@ -292,7 +296,7 @@ body {
 .flex-container {
     width: 100%;
     height: auto;
-    overflow: auto;
+    overflow: none;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -498,9 +502,21 @@ header .icon a {
 
 /* Leaflet map custom style */
 
+.leaflet-touch .leaflet-bar a {
+    background-color: #dedede;
+  }
+  .leaflet-control-zoom-out{
+    margin-top: 15px;
+  }
+
 #mapid {
     position: relative;
-    height: 220px;
+    height: 300px;
+}
+
+#mapid {
+    background-color: rgba(255, 0, 0, 0.0);
+    border: solid 1px #B2E172;
 }
 
 /* Change the width of aurora status iframe */
@@ -534,10 +550,14 @@ header .icon a {
 
 
 #btn_add_loc {
-    border: 2px solid #B2E172;
+    border: 1px solid #B2E172;
     color: #B2E172;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 10%;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-radius: unset;
+    width: 100%;
+    text-transform: uppercase;
 }
 
 #btn_add_loc:hover {
@@ -703,6 +723,7 @@ header .icon a {
     text-decoration: none;
 }
 
+ 
 #tips-link,
 #join-link,
 #aurora-link {

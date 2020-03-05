@@ -15,6 +15,7 @@
     <title>Aurora</title>
 
     <!-- Fonts & Icons -->
+
     <link rel="shortcut icon" type="image/icon" href="img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#547e80">
@@ -37,6 +38,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <!--Leaflet Map Script-->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.2.1/mapbox.css' rel='stylesheet' />
 </head>
 
 <body onload="hideElements(), loadMap()">
@@ -85,13 +88,7 @@
     <main>
         <!-- Page Title -->
         <section id="welcome">
-            <!-- Record Observation -->
-            <div id="new_entry">
-                <p>Do you have an Aurora before your eyes?</p>
-                <p>Click the button below to share your location!</p>
-                <button id="btn_add_loc" onclick="recordClicked()">Record Observation</button>
-            </div>
-
+            
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
@@ -116,6 +113,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- Aurora Map -->
             <div id="map">
                 <!--leaflet map-->
@@ -125,8 +123,13 @@
 
             </div>
 
+            <!-- Record Observation -->
+            <div id="new_entry">
+                <button id="btn_add_loc" onclick="recordClicked()">Press Here To Record Sighting</button>
+            </div>
+
             <!-- Weather Forecast -->
-            <div id="home-container" class="flex-container">
+            <div id="home-container" class= "flex-container">
                 <div id="weather">
                     <div class="notification"> </div>
                     <div class="weather-container">
@@ -147,12 +150,12 @@
                 </div>
 
                 <!-- Aurora Status -->
-                <div id="aurora_status">
+                <div id="aurora_status" >
                     <script>
                         //link to aurora watch status
                         var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
                         //link to aurora watch status and solar activity plots
-                        var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
+                        var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="http://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
 
                         //function to load an appriopriate content
                         function loadStatus() {
@@ -166,7 +169,6 @@
                             }
                         }
                         loadStatus();
-
                         //detect change of the screen size and reload the appropriate element
                         window.addEventListener('resize', loadStatus);
 
@@ -179,6 +181,8 @@
         <section id="about-us">
             <h3>ABOUT US</h3>
             <div id="about-us-text">
+
+
                 <p>Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain. The map shows locations where our users observed this magnificent phenomenon. You can click on the pins on the map to check the date, time, exact coordinates for the location and the total number of observations registered at that point by our community.</p>
 
                 <p>To help you plan the best Northern Lights experience, we provide you with a weather forecast and the preditctions how likely it is to see an Aurora.</p>
@@ -196,6 +200,7 @@
                 <p>In the <a id="tips-link" href="#tips">TIPS</a> section, we provide additional useful information to help you plan the best Northern Light experience!</p>
 
                 <p><a href="signup.html" id="join-link">Join our community</a> to be able to add new observation points and track your observations data in the Profile section.</p>
+
             </div>
         </section>
 

@@ -186,8 +186,6 @@ function login() {
             error_holder.innerHTML = 'Details incorrect';
         }
     }
-
-
 }
 
 //function to change user's password

@@ -16,7 +16,8 @@ class Observation {
 }
 
 //initialize the map
-var mymap = L.map('mapid').setView([54.28, -1.5147], 4);
+L.mapbox.accessToken = 'pk.eyJ1IjoibWlqYW1rYSIsImEiOiJjazZ6dXpoM3QwMDBnM2xwOGlmYnJ0M2F5In0.ibAoU9L8gv4ZEFpPvz5HkQ';
+var mymap = L.map('mapid').setView([54.28, -1.5147], 4).addLayer(L.mapbox.styleLayer('mapbox://styles/mijamka/ck7dxomcf1tmd1itdkpblyyom'));
 var marker;
 
 function loadMap() {
@@ -29,18 +30,8 @@ function loadMap() {
 
 
 
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'sk.eyJ1IjoibWlqYW1rYSIsImEiOiJjazZ6djRiMGswczY4M2dta2gzZWNpdGc0In0.ntk0RexZw85rMtlaxpkVnQ'
-    }).addTo(mymap);
-
     //adding markers
-    var observation_records = JSON.parse(localStorage.getItem('observations'));
+    var observation_records = JSON.parse(localStorage.getItem('observations'));;
 
 
     if (observation_records == null) {
@@ -176,6 +167,3 @@ function closeLoginPrompt() {
     document.getElementById('record-not-logged').style.display = 'none';
     $("#overlay").remove();
 }
-
-
-//2) check is the user logged in before adding new location
