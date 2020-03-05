@@ -8,6 +8,7 @@
 */
 
 /* CSS Variables: Colours */
+
 *{
     margin: 0;
     padding: 0;
@@ -23,7 +24,7 @@
 
 html,
 body {
-    min-width: 210px;
+    min-width: 310px;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -38,7 +39,7 @@ header,
 nav {
     width: 100%;
     height: auto;
-    overflow: hidden;
+    overflow: auto;
 }
 
 
@@ -125,11 +126,12 @@ iframe {
 
 /* Form Styling */
 
+
 input,
 button {
     width: 90%;
     height: auto;
-    overflow: hidden;
+    overflow: auto;
     margin: 10% 2%;
     padding: 2.10%;
     background: var(--black);
@@ -198,6 +200,11 @@ footer {
     left: 0;
     bottom: 0;
     margin-bottom: 0;
+    background: rgba(255,255,255, 0.3);
+}
+
+#foot-index{
+    background-color: var(--black);
 }
 
 .fixed {
@@ -213,7 +220,6 @@ footer {
 }
 
 .underline {
-    font-size: 0.9rem;
     text-decoration: underline;
 }
 
@@ -255,7 +261,9 @@ body {
 /* Classes - Alignment */
 
 #top-panel {
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    height: 20vh;
+    overflow: hidden;
 }
 
 #map,
@@ -296,7 +304,7 @@ body {
 .flex-container {
     width: 100%;
     height: auto;
-    overflow: none;
+    overflow: hidden;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -461,7 +469,7 @@ body {
     background-color: black;
     width: 100%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
     position: absolute;
     z-index: 10000;
 }
@@ -508,15 +516,12 @@ header .icon a {
   .leaflet-control-zoom-out{
     margin-top: 15px;
   }
-
+  
 #mapid {
     position: relative;
-    height: 300px;
-}
-
-#mapid {
-    background-color: rgba(255, 0, 0, 0.0);
-    border: solid 1px #B2E172;
+    height: 220px;
+    border: 1px solid #B2E172;
+    background-color: var(--black);
 }
 
 /* Change the width of aurora status iframe */
@@ -542,9 +547,16 @@ header .icon a {
 #login-error,
 #passchange-error {
     color: #B2E172;
-    font-size: 18px;
+    font-size: .8rem;
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
 }
 
+
+.small-title{
+    margin-top: 10%;
+}
 
 /* Index page record new location text and button styles */
 
@@ -553,10 +565,10 @@ header .icon a {
     border: 1px solid #B2E172;
     color: #B2E172;
     margin-top: 10%;
-    margin-bottom: 0;
-    margin-left: 0;
+    margin-bottom: 1%;
     border-radius: unset;
     width: 100%;
+    margin-left: 0;
     text-transform: uppercase;
 }
 
@@ -723,7 +735,6 @@ header .icon a {
     text-decoration: none;
 }
 
- 
 #tips-link,
 #join-link,
 #aurora-link {
