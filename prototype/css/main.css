@@ -225,8 +225,12 @@ footer {
 }
 
 .underline {
-    text-decoration: underline;
+    font-size: 1rem;
 }
+
+#tips p {
+    margin-top: 1%;
+ }
 
 .text-center,
 #profile-user,
@@ -289,7 +293,7 @@ body {
 
 #about-us p,
 #tips p {
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 #settings-page .flex-container {
