@@ -84,11 +84,9 @@ function signUp() {
 
     //check all input fields have been filled up, if not display an error msg
     if (username == '' || email == '' || pwdConf == '' || password == '') {
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Please provide all details';
     } else if (pwdConf != password) {
         //display error msg if passwords entered dont match
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Passwords entered must be identical';
     } else {
         //check does the username already exist
@@ -98,7 +96,6 @@ function signUp() {
                     if (usersSaved[i].username == username) {
                         userExist = true;
                         //display an error msg if the username already registered
-                        error_holder.style.marginTop = '-50px';
                         error_holder.innerHTML = 'The username already registered<br/>Please try a different username';
                     }
                 }
@@ -147,7 +144,6 @@ function login() {
     //check that the login and password fields have been filled up
     if (login == '' || password == '') {
         //display error msg if any of the fields not filled up
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Please enter your username and password';
     } else {
         password = CryptoJS.MD5(password).toString();
@@ -182,7 +178,6 @@ function login() {
             window.location.href = "index.html";
         } else {
             //display error msg 
-            error_holder.style.marginTop = '-50px';
             error_holder.innerHTML = 'Details incorrect';
         }
     }
@@ -213,12 +208,10 @@ function changePassword() {
     //check new password field is not empty
     if (newPwd == '') {
         //display error msg if passwords dont match
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Enter new password below';
     }
     //check the passwords are the same
     else if (newPwd != newPwdConf) {
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Passwords entered must be identical';
     }
     //update user's password
@@ -276,9 +269,11 @@ function profileContent() {
     var user_email = '';
     var username_cont = document.getElementById('profile-user');
     var email_cont = document.getElementById('profile-email');
-    var table = document.getElementById('table-content');
-    var new_raw;
     var observation_records = JSON.parse(localStorage.getItem('observations'));
+    var diary_empty = true;
+    var new_table = '';
+    var diary_cont = document.getElementById('diary');
+
     if (observation_records == null) {
         observation_records = [];
     }
@@ -293,12 +288,21 @@ function profileContent() {
         }
     }
 
-    //display user's observation details on screen
-    for (var i in observation_records) {
-        if (observation_records[i].username == username) {
-            new_raw = '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude +
-                ', ' + observation_records[i].longitude + '</td></tr>';
-            table.insertAdjacentHTML('beforeend', new_raw);
+        //display user's observation details on screen
+        for (var i in observation_records) {
+            if (observation_records[i].username == username) {
+                new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
+                    ', ' + observation_records[i].longitude.toPrecision(5) + '</td></tr>';
+                diary_empty = false;
+            }
+        }
+
+        if(diary_empty==true){
+            diary_cont.insertAdjacentHTML('beforeend','<p style="margin-top:20%; text-align: center;">Nothing to display here!</p>');
+        }
+        else{
+            diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th></tr></thead><tbody id="table-content">'
+            + new_table + " </tbody></table>");
         }
     }
-}
+

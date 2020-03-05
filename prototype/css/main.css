@@ -8,6 +8,7 @@
 */
 
 /* CSS Variables: Colours */
+
 *{
     margin: 0;
     padding: 0;
@@ -23,7 +24,7 @@
 
 html,
 body {
-    min-width: 210px;
+    min-width: 310px;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -124,6 +125,7 @@ iframe {
 }
 
 /* Form Styling */
+
 
 input,
 button {
@@ -545,9 +547,16 @@ header .icon a {
 #login-error,
 #passchange-error {
     color: #B2E172;
-    font-size: 18px;
+    font-size: .8rem;
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
 }
 
+
+.small-title{
+    margin-top: 10%;
+}
 
 /* Index page record new location text and button styles */
 
