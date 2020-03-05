@@ -53,9 +53,8 @@
         font-size: 0.8rem;
     }
 
-    #about-us p, 
-    #tips p {
-        margin-top: 5%;
+    #about-us p {
+        margin-top: 2.5%;
     }
 
     #tips p:first-child {
@@ -248,9 +247,8 @@
         margin-top: 1.25rem;
     }
   
-    #about-us p, 
-    #tips p {
-        margin-top: 2.5%;
+    #about-us p {
+        margin-top: 1%;
     }
 
     #new-popup {
