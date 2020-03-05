@@ -77,6 +77,18 @@
         padding-top: 2%;
         padding-bottom: 2%;
     }
+
+    #set-cont{
+        width: 40%;
+        margin-right: 30%;
+        margin-left: 30%;
+    }
+
+    #set-cont >i {
+        margin-bottom: 2%;
+        margin-top: 2%;
+    }
+
 }
 
 /* Larger than tablets */
