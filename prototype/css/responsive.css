@@ -19,7 +19,7 @@
         margin-bottom: 5%;
     }
 
-    #top-panel{
+    #top-panel {
         height: 20vh;
     }
 
@@ -42,9 +42,18 @@
 /* In between mobile and tablet */
 
 @media screen and (min-width: 940px) {
-    #weather, 
-    #about-us, 
-    #tips, 
+
+    #menu .flex-column {
+        margin-bottom: 0;
+    }
+
+    #settings-page .flex-container {
+        margin: 5% auto
+    }
+
+    #weather,
+    #about-us,
+    #tips,
     #diary {
         margin-top: 7.5%;
     }
@@ -53,7 +62,7 @@
         font-size: 0.8rem;
     }
 
-    #about-us p, 
+    #about-us p,
     #tips p {
         margin-top: 5%;
     }
@@ -67,24 +76,24 @@
         width: 100%;
     }
 
-    #map{
+    #map {
         margin-top: 0;
         margin-bottom: 0;
     }
 
-    #btn_add_loc{
+    #btn_add_loc {
         margin-top: 0;
         padding-top: 2%;
         padding-bottom: 2%;
     }
 
-    #set-cont{
+    #set-cont {
         width: 40%;
         margin-right: 30%;
         margin-left: 30%;
     }
 
-    #set-cont >i {
+    #set-cont > i {
         margin-bottom: 2%;
         margin-top: 2%;
     }
@@ -102,11 +111,6 @@
         margin-bottom: 7.5%;
     }
 
-    nav.icon, 
-    #menu .flex-container {
-        margin-top: 2.5%;
-    }
-
     main {
         margin-top: 2.5%;
     }
@@ -115,12 +119,12 @@
         margin-bottom: 2.5%;
     }
 
-    #top-row{
+    #top-row {
         display: flex;
         align-content: stretch;
     }
 
-    #top-panel{
+    #top-panel {
         height: 30vh;
     }
 
@@ -172,7 +176,7 @@
         font-size: 1rem;
     }
 
-    input, 
+    input,
     button {
         width: 100%;
         margin-top: 7.5%;
@@ -194,19 +198,20 @@
         margin-left: 25%;
     }
 
-    button, input[type=submit] {
+    button,
+    input[type=submit] {
         width: 55%;
         margin-left: 30%;
         border-radius: 5px;
     }
 
 
-    #myForm button, 
+    #myForm button,
     #myForm input[type=submit] {
         width: 55%;
     }
 
-    #popup-cancel, 
+    #popup-cancel,
     #popup-save {
         margin: 2%;
         padding: 2.10%;
@@ -224,16 +229,16 @@
         width: 100%;
     }
 
-    table th, 
+    table th,
     table td {
         padding: 24px 40px;
     }
-    
+
     .temp-hide {
         display: none;
     }
 
-    #btn_add_loc{
+    #btn_add_loc {
         margin-top: 0;
         padding-top: 1%;
         padding-bottom: 1%;
@@ -247,8 +252,8 @@
         font-size: 1.25rem;
         margin-top: 1.25rem;
     }
-  
-    #about-us p, 
+
+    #about-us p,
     #tips p {
         margin-top: 2.5%;
     }
@@ -257,11 +262,11 @@
         height: 60%;
     }
 
-    #top-panel{
+    #top-panel {
         margin-bottom: 0%;
     }
 
-    #map{
-        margin-top:0;
+    #map {
+        margin-top: 0;
     }
 }

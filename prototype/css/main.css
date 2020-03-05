@@ -9,7 +9,7 @@
 
 /* CSS Variables: Colours */
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -115,7 +115,7 @@ a {
 }
 
 a:hover,
-i:hover {
+i:hover, #logout:hover {
     opacity: 50%;
     cursor: pointer;
 }
@@ -200,10 +200,10 @@ footer {
     left: 0;
     bottom: 0;
     margin-bottom: 0;
-    background: rgba(255,255,255, 0.3);
+    background: rgba(255, 255, 255, 0.3);
 }
 
-#foot-index{
+#foot-index {
     background-color: var(--black);
 }
 
@@ -293,10 +293,6 @@ body {
 
 #tips p:first-child {
     margin-top: 5%;
-}
-
-#tips p {
-    margin-top: 1%;
 }
 
 /* Classes - Flexbox */
@@ -457,7 +453,7 @@ body {
 
 .footer-txt {
     font-size: 14px;
-    margin-right: 10%;
+    margin: 2.5% 10% 2.5% 0;
     text-align: right;
 }
 
@@ -469,6 +465,7 @@ body {
     background-color: black;
     width: 100%;
     height: auto;
+    padding-bottom: 2.5%;
     overflow: hidden;
     position: absolute;
     z-index: 10000;
@@ -482,11 +479,12 @@ body {
 #menu h2 {
     text-align: center;
     padding: 3% 0;
+    margin: 20% 0;
 }
 
 .icon .flex-container {
     justify-content: space-between;
-    margin: auto;
+    margin: 2.5% auto;
 }
 
 #menu .flex-container {
@@ -512,11 +510,12 @@ header .icon a {
 
 .leaflet-touch .leaflet-bar a {
     background-color: #dedede;
-  }
-  .leaflet-control-zoom-out{
+}
+
+.leaflet-control-zoom-out {
     margin-top: 15px;
-  }
-  
+}
+
 #mapid {
     position: relative;
     height: 220px;
@@ -554,7 +553,7 @@ header .icon a {
 }
 
 
-.small-title{
+.small-title {
     margin-top: 10%;
 }
 
@@ -774,7 +773,7 @@ header .icon a {
 main h2 {
     animation: bounceInLeft 1s ease-in 0s 1 both;
     text-align: center;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
 }
 
 @keyframes shake {
@@ -806,4 +805,8 @@ main h2 {
 
 .remove-animation {
     animation-duration: 0s;
+}
+
+nav {
+    padding-top: 2.5%;
 }
