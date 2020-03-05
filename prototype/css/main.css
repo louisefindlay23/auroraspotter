@@ -523,6 +523,10 @@ header .icon a {
     background-color: #dedede;
 }
 
+.leaflet-popup-tip {
+    display: none;
+}
+
 .leaflet-control-zoom-out {
     margin-top: 15px;
 }
