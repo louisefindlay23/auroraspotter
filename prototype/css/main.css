@@ -115,7 +115,8 @@ a {
 }
 
 a:hover,
-i:hover, #logout:hover {
+i:hover,
+#logout:hover {
     opacity: 50%;
     cursor: pointer;
 }
@@ -262,6 +263,7 @@ body {
 
 #top-panel {
     margin-bottom: 3%;
+    padding-bottom: 3%;
     height: 20vh;
     overflow: hidden;
 }
