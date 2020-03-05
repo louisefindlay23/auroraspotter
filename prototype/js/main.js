@@ -1,4 +1,12 @@
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarovaarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Main JS
+
 $(document).ready(function () {
+
+    // Show/Hide different navs and icons for hamburger menu
 
     $(".fa-bars").click(function () {
         $("header .icon").hide();
@@ -12,6 +20,8 @@ $(document).ready(function () {
         $("main h2").show();
         $("header .icon").show();
     });
+
+    // Table Styling
 
     $('table tr').each(function () {
         $(this).find('th').first().addClass('first');
@@ -40,6 +50,10 @@ function signUp() {
     //can cause compatibility issues
     var usersSaved = JSON.parse(localStorage.getItem('users'));
 
+    if (usersSaved == null) {
+        usersSaved = [];
+    }
+
     //boolean to keep track is user in the list
     var userExist = false;
 
@@ -61,23 +75,20 @@ function signUp() {
 
 
     //prevent page refreshing on button click
-    var form = document.getElementById("myForm");   
+    var form = document.getElementById("myForm");
 
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
+    function handleForm(event) {
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
 
     //check all input fields have been filled up, if not display an error msg
     if (username == '' || email == '' || pwdConf == '' || password == '') {
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Please provide all details';
     } else if (pwdConf != password) {
         //display error msg if passwords entered dont match
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Passwords entered must be identical';
     } else {
-        console.log('test');
         //check does the username already exist
         if (usersSaved != null) {
             try {
@@ -85,8 +96,7 @@ function signUp() {
                     if (usersSaved[i].username == username) {
                         userExist = true;
                         //display an error msg if the username already registered
-                        error_holder.style.marginTop = '-50px';
-                        error_holder.innerHTML = 'The username already registered\n Please try a different username';
+                        error_holder.innerHTML = 'The username already registered<br/>Please try a different username';
                     }
                 }
             } catch (err) {
@@ -99,6 +109,8 @@ function signUp() {
         //if user not in the list, validate the rest of the form
         //if input correct, add to the list of users and save in Local Storage
         if (!userExist) {
+            //encrypt user's password using MD5 (still better than plain text)
+            password = CryptoJS.MD5(password).toString();
             usersList = usersSaved;
             let new_user = new User(username, email, password);
             usersList.push(new_user);
@@ -122,19 +134,19 @@ function login() {
     var error_holder = document.getElementById('login-error');
 
     //prevent page refreshing on button click
-    var form = document.getElementById("login-form");   
+    var form = document.getElementById("login-form");
 
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
+    function handleForm(event) {
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
 
     //check that the login and password fields have been filled up
     if (login == '' || password == '') {
         //display error msg if any of the fields not filled up
-        error_holder.style.marginTop = '-50px';
-        error_holder.innerHTML = 'Please enter username and password below';
+        error_holder.innerHTML = 'Please enter your username and password';
     } else {
+        password = CryptoJS.MD5(password).toString();
         //check does the username exist in the users list
         try {
             for (var i in usersSaved) {
@@ -147,7 +159,7 @@ function login() {
                         localStorage.setItem('userID', JSON.stringify(login));
                     }
                 }
-                
+
             }
         } catch (err) {
             console.log('no users saved');
@@ -166,20 +178,17 @@ function login() {
             window.location.href = "index.html";
         } else {
             //display error msg 
-            error_holder.style.marginTop = '-50px';
             error_holder.innerHTML = 'Details incorrect';
         }
     }
-
-
 }
 
 //function to change user's password
-function changePassword(){
+function changePassword() {
     //set user input to variables
     var newPwd = document.getElementById('newPwd').value;
     var newPwdConf = document.getElementById('newPwdConf').value;
-    
+
     //get username
     var login = JSON.parse(localStorage.getItem('userID'));
 
@@ -189,37 +198,38 @@ function changePassword(){
     var error_holder = document.getElementById('passchange-error');
 
     //prevent page refreshing on button click
-    var form = document.getElementById("passChange");   
+    var form = document.getElementById("passChange");
 
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
-    
+    function handleForm(event) {
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
+
     //check new password field is not empty
-    if(newPwd==''){
+    if (newPwd == '') {
         //display error msg if passwords dont match
-        error_holder.style.marginTop = '-50px';
         error_holder.innerHTML = 'Enter new password below';
     }
     //check the passwords are the same
-    else if(newPwd != newPwdConf){
-        error_holder.style.marginTop = '-50px';
+    else if (newPwd != newPwdConf) {
         error_holder.innerHTML = 'Passwords entered must be identical';
     }
     //update user's password
-    else{
+    else {
+        var pass_hash = CryptoJS.MD5(newPwd).toString();
         for (var i in usersSaved) {
             if (usersSaved[i].username == login) {
-                usersSaved[i].password = newPwd;
+                usersSaved[i].password = pass_hash;
                 localStorage.removeItem('users');
                 localStorage.setItem('users', JSON.stringify(usersSaved));
-                setTimeout(function(){document.location.href = "settings.html"},500);
+                setTimeout(function () {
+                    document.location.href = "settings.html"
+                }, 500);
             }
-    }
+        }
 
-            
-}
+
+    }
 }
 
 //signout function
@@ -236,32 +246,64 @@ function signout() {
 function hideElements() {
     // check if user is logged in
     var isLogged = JSON.parse(localStorage.getItem('logged'));
-     //var isLogged = false;
-    if(!isLogged){
-        $(".logout-nav").hide();        // if not logged in, hide Profile and Setting from nav
-        
-    }
-    else{
-        $(".login-nav").hide();        // if logged in, hide Login and Sign up from nav
+    //var isLogged = false;
+    if (!isLogged) {
+        $(".logout-nav").hide(); // if not logged in, hide Profile and Setting from nav
+
+    } else {
+        $(".login-nav").hide(); // if logged in, hide Login and Sign up from nav
     }
 
 }
 
-//funtion replace text on Profile page with user's details
-function profileContent(){
+//display user's data on the Profile page
+function profileContent() {
+    //get user's details
     var usersList = JSON.parse(localStorage.getItem('users'));
+    if (usersList == null) {
+        usersList = [];
+    }
     var username = JSON.parse(localStorage.getItem('userID'));
+    if (username == null) {
+        username = '';
+    }
     var user_email = '';
     var username_cont = document.getElementById('profile-user');
     var email_cont = document.getElementById('profile-email');
+    var observation_records = JSON.parse(localStorage.getItem('observations'));
+    var diary_empty = true;
+    var new_table = '';
+    var diary_cont = document.getElementById('diary');
 
-    //set user details
+    if (observation_records == null) {
+        observation_records = [];
+    }
+
+    //display user's email and username on the screen
     for (var i in usersList) {
         if (usersList[i].username == username) {
             user_email = usersList[i].email;
             //display user details on the screen
             username_cont.innerHTML = username;
             email_cont.innerHTML = user_email;
+        }
+    }
+
+        //display user's observation details on screen
+        for (var i in observation_records) {
+            if (observation_records[i].username == username) {
+                new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
+                    ', ' + observation_records[i].longitude.toPrecision(5) + '</td></tr>';
+                diary_empty = false;
             }
         }
-}
+
+        if(diary_empty==true){
+            diary_cont.insertAdjacentHTML('beforeend','<p style="margin-top:20%; text-align: center;">Nothing to display here!</p>');
+        }
+        else{
+            diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th></tr></thead><tbody id="table-content">'
+            + new_table + " </tbody></table>");
+        }
+    }
+
