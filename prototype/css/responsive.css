@@ -125,7 +125,7 @@
     }
 
     #top-panel {
-        height: 30vh;
+        height: 27.5vh;
     }
 
     #mapid {
@@ -264,6 +264,7 @@
 
     #top-panel {
         margin-bottom: 0%;
+        height: 30vh;
     }
 
     #map {
