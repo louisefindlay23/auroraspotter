@@ -216,9 +216,10 @@ function changePassword() {
     }
     //update user's password
     else {
+        var pass_hash = CryptoJS.MD5(newPwd).toString();
         for (var i in usersSaved) {
             if (usersSaved[i].username == login) {
-                usersSaved[i].password = newPwd;
+                usersSaved[i].password = pass_hash;
                 localStorage.removeItem('users');
                 localStorage.setItem('users', JSON.stringify(usersSaved));
                 setTimeout(function () {
