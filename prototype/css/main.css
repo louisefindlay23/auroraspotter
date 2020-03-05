@@ -45,7 +45,7 @@ nav {
 main {
     width: 80%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
     margin: 0 5% 10% 10%;
 }
 
@@ -198,6 +198,11 @@ footer {
     left: 0;
     bottom: 0;
     margin-bottom: 0;
+    background: rgba(255,255,255, 0.3);
+}
+
+#foot-index{
+    background-color: var(--black);
 }
 
 .fixed {
@@ -256,6 +261,7 @@ body {
 #top-panel {
     margin-bottom: 3%;
     height: 20vh;
+    overflow: hidden;
 }
 
 #map,
@@ -296,7 +302,7 @@ body {
 .flex-container {
     width: 100%;
     height: auto;
-    overflow: none;
+    overflow: hidden;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -461,7 +467,7 @@ body {
     background-color: black;
     width: 100%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
     position: absolute;
     z-index: 10000;
 }
@@ -547,6 +553,7 @@ header .icon a {
     border-radius: unset;
     width: 100%;
     margin-left: 0;
+    text-transform: uppercase;
 }
 
 #btn_add_loc:hover {

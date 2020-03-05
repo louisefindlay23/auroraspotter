@@ -99,7 +99,7 @@ function signUp() {
                         userExist = true;
                         //display an error msg if the username already registered
                         error_holder.style.marginTop = '-50px';
-                        error_holder.innerHTML = 'The username already registered\n Please try a different username';
+                        error_holder.innerHTML = 'The username already registered<br/>Please try a different username';
                     }
                 }
             } catch (err) {
