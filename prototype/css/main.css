@@ -141,6 +141,10 @@ button {
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
     border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    opacity: 1;
 }
 
 button,
@@ -263,7 +267,6 @@ body {
 
 #top-panel {
     margin-bottom: 3%;
-    padding-bottom: 3%;
     height: 20vh;
     overflow: hidden;
 }
@@ -810,5 +813,5 @@ main h2 {
 }
 
 nav {
-    padding-top: 2.5%;
+    padding-top: 1%;
 }
