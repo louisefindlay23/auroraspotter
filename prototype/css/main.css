@@ -494,7 +494,7 @@ body {
 
 .icon .flex-container {
     justify-content: space-between;
-    margin: 2.5% auto;
+    margin: 1.5% auto;
 }
 
 #menu .flex-container {
@@ -564,7 +564,7 @@ header .icon a {
 
 
 .small-title {
-    margin-top: 10%;
+    margin-top: 3%;
 }
 
 /* Index page record new location text and button styles */
