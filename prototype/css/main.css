@@ -7,12 +7,14 @@
 
 */
 
-/* CSS Variables: Colours */
+/* Clear margins and padding */
 
 * {
     margin: 0;
     padding: 0;
 }
+
+/* CSS Variables: Colours */
 
 :root {
     --black: #000000;
@@ -125,8 +127,36 @@ iframe {
     border: 0;
 }
 
-/* Form Styling */
+footer {
+    width: 100%;
+    border-top: 1px solid #B2E172;
+    padding-top: 1%;
+    height: auto;
+    overflow: auto;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+}
 
+#foot-index {
+    background-color: var(--black);
+}
+
+.footer-txt {
+    font-size: 14px;
+    margin: 1% 10% 1% 0;
+    text-align: right;
+}
+
+
+.fixed {
+    position: fixed;
+}
+
+
+/* Form Styling */
 
 input,
 button {
@@ -195,27 +225,6 @@ td a {
     text-decoration: underline;
 }
 
-footer {
-    width: 100%;
-    border-top: 1px solid #B2E172;
-    padding-top: 1%;
-    height: auto;
-    overflow: auto;
-    position: relative;
-    left: 0;
-    bottom: 0;
-    margin-bottom: 0;
-    background: rgba(255, 255, 255, 0.3);
-}
-
-#foot-index {
-    background-color: var(--black);
-}
-
-.fixed {
-    position: fixed;
-}
-
 
 /* Classes - Text Styling */
 
@@ -252,6 +261,25 @@ footer {
 #profile-page p {
     font-size: 0.8rem;
 }
+
+#error-msg,
+#login-error,
+#passchange-error {
+    color: #B2E172;
+    font-size: .8rem;
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
+}
+
+#tips-link,
+#join-link,
+#aurora-link {
+    color: #B2E172;
+    text-decoration: none;
+}
+
+
 
 /* Global Background Styling */
 
@@ -302,6 +330,11 @@ body {
 
 #tips p:first-child {
     margin-top: 5%;
+}
+
+
+.small-title {
+    margin-top: 3%;
 }
 
 /* Classes - Flexbox */
@@ -460,13 +493,6 @@ body {
     font-size: 0.8em;
 }
 
-
-.footer-txt {
-    font-size: 14px;
-    margin: 1% 10% 1% 0;
-    text-align: right;
-}
-
 /* Classes - Menu Styling */
 
 #menu {
@@ -557,21 +583,6 @@ header .icon a {
     width: 100%;
 }
 
-#error-msg,
-#login-error,
-#passchange-error {
-    color: #B2E172;
-    font-size: .8rem;
-    margin-top: 10%;
-    width: 100%;
-    text-align: center;
-}
-
-
-.small-title {
-    margin-top: 3%;
-}
-
 /* Index page record new location text and button styles */
 
 
@@ -598,9 +609,8 @@ header .icon a {
     transform: translateY(.5px);
 }
 
-/* new observation popup msg */
 
-
+/* popups */
 #overlay {
     position: fixed;
     top: 0;
@@ -634,7 +644,6 @@ header .icon a {
     transform: translate(-50%, -50%);
 
 }
-
 
 #new-popup,
 #record-not-logged {
@@ -748,15 +757,6 @@ header .icon a {
     color: #B2E172;
     text-decoration: none;
 }
-
-#tips-link,
-#join-link,
-#aurora-link {
-    color: #B2E172;
-    text-decoration: none;
-}
-
-
 
 /* Classes - CSS Animation */
 
