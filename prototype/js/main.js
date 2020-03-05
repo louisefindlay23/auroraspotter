@@ -9,16 +9,11 @@ $(document).ready(function () {
     // Show/Hide different navs and icons for hamburger menu
 
     $(".fa-bars").click(function () {
-        $("header .icon").hide();
-        $("main h2").hide();
         $("#menu").show();
     });
 
     $(".fa-times").click(function () {
         $("#menu").hide();
-        $("main h2").addClass("remove-animation");
-        $("main h2").show();
-        $("header .icon").show();
     });
 
     // Table Styling
@@ -289,21 +284,19 @@ function profileContent() {
         }
     }
 
-        //display user's observation details on screen
-        for (var i in observation_records) {
-            if (observation_records[i].username == username) {
-                new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
-                    ', ' + observation_records[i].longitude.toPrecision(5) + '</td></tr>';
-                diary_empty = false;
-            }
-        }
-
-        if(diary_empty==true){
-            diary_cont.insertAdjacentHTML('beforeend','<p style="margin-top:20%; text-align: center;">Nothing to display here!</p>');
-        }
-        else{
-            diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th></tr></thead><tbody id="table-content">'
-            + new_table + " </tbody></table>");
+    //display user's observation details on screen
+    for (var i in observation_records) {
+        if (observation_records[i].username == username) {
+            new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
+                ', ' + observation_records[i].longitude.toPrecision(5) + '</td></tr>';
+            diary_empty = false;
         }
     }
 
+    if (diary_empty == true) {
+        diary_cont.insertAdjacentHTML('beforeend', '<p style="margin-top:20%; text-align: center;">Nothing to display here!</p>');
+    } else {
+        diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th></tr></thead><tbody id="table-content">' +
+            new_table + " </tbody></table>");
+    }
+}
