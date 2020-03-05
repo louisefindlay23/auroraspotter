@@ -1,8 +1,6 @@
 #### DM Web Dev Team - CM2104 Group Project Repository
-
 ## Project Aurora
 Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain. The map shows locations where our users observed this magnificent phenomenon. You can click on the pins on the map to check the date, time, exact coordinates for the location and the total number of observations registered at that point by our community.
-
 To help you plan the best Northern Lights experience, we provide you with a weather forecast and the preditctions how likely it is to see an Aurora.
 
 ## Features
@@ -14,7 +12,7 @@ To help you plan the best Northern Lights experience, we provide you with a weat
 - View the observation diary.
 
 ## Technology/Framework used
-HTML, CSS, JavaScript, jQuery
+HTML5, CSS, JavaScript, jQuery
 
 ## API Reference
 [Leaflet Map API](https://leafletjs.com/)\
@@ -29,7 +27,7 @@ Brandon Reid (Design) = [@brandonreid11](https://github.com/brandonreid11)
 
 Miriam Wojcik (Back-End) = [@mijamka](https://github.com/mijamka)
 
-Maya Bonazarovaarova (Back-End) = [@mayaBonazarova](https://github.com/mayaBonazarova)
+Maya Bonazarova (Back-End) = [@mayabonaz](https://github.com/mayabonaz)
 
 ### Useful Links  :link:
 
