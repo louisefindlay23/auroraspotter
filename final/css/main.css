@@ -1,0 +1,827 @@
+/*
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//File contains main CSS (backgrounds for each page and stylesheet dealing with responsivnes can be found in separate files)
+
+*/
+
+/* Clear margins and padding */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* CSS Variables: Colours */
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --grey: #2b292a;
+}
+
+/*  HTML Element Styling */
+
+html,
+body {
+    min-width: 310px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: var(--background-color);
+}
+
+html {
+    font-size: 16pt;
+}
+
+header,
+nav {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+
+main {
+    width: 80%;
+    height: auto;
+    overflow: hidden;
+    margin: 0 5% 10% 10%;
+}
+
+img {
+    height: auto;
+    overflow: auto;
+}
+
+hr {
+    color: var(--white);
+}
+
+
+/* Text Styling */
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+}
+
+h1 {
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 5%;
+}
+
+h3 {
+    font-weight: lighter;
+    margin-bottom: 2%;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+header h1,
+header h2 {
+    color: var(--white);
+
+}
+
+p,
+th,
+td {
+    font-family: 'Hind', sans-serif;
+    color: var(--white);
+    font-size: 0.6rem;
+}
+
+p a {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--white);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+i:hover,
+#logout:hover {
+    opacity: 50%;
+    cursor: pointer;
+}
+
+iframe {
+    border: 0;
+}
+
+footer {
+    width: 100%;
+    border-top: 1px solid #B2E172;
+    padding-top: 1%;
+    height: auto;
+    overflow: auto;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#foot-index {
+    background-color: var(--black);
+}
+
+.footer-txt {
+    font-size: 14px;
+    margin: 1% 10% 1% 0;
+    text-align: right;
+}
+
+
+.fixed {
+    position: fixed;
+}
+
+
+/* Form Styling */
+
+input,
+button {
+    width: 90%;
+    height: auto;
+    overflow: auto;
+    margin: 10% 2%;
+    padding: 2.10%;
+    background: var(--black);
+    border: 2px solid var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    opacity: 1;
+}
+
+button,
+input[type=submit] {
+    width: 96%;
+    font-weight: 500;
+}
+
+::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    color: var(--white);
+}
+
+/* Table CSS */
+
+table {
+    max-width: 100%;
+    margin: 2% auto;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    border: 2px solid var(--white);
+    padding: 12px 20px;
+    border-collapse: collapse;
+    background: var(--grey);
+}
+
+table th {
+    border-top: none;
+}
+
+table .first {
+    border-left: none;
+}
+
+table .last {
+    border-right: none;
+}
+
+td a {
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: underline;
+}
+
+
+/* Classes - Text Styling */
+
+
+.black {
+    color: var(--black);
+}
+
+.underline {
+    font-size: 1rem;
+}
+
+#tips p {
+    margin-top: 1%;
+}
+
+.text-center,
+#profile-user,
+#profile-email {
+    text-align: center;
+}
+
+#new_entry p {
+    text-align: center;
+}
+
+#form-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
+    margin: 1% 2%;
+    text-align: center;
+}
+
+#profile-page p {
+    font-size: 0.8rem;
+}
+
+#error-msg,
+#login-error,
+#passchange-error {
+    color: #B2E172;
+    font-size: .8rem;
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
+}
+
+#tips-link,
+#join-link,
+#aurora-link {
+    color: #B2E172;
+    text-decoration: none;
+}
+
+
+
+/* Global Background Styling */
+
+body {
+    background:
+        linear-gradient(rgba(168, 168, 168, 0.5),
+            rgba(168, 168, 168, 0.5)),
+        url(../img/bg.png);
+    background-size: 2150px;
+}
+
+#menu {
+    background-color: var(--black);
+}
+
+/* Classes - Alignment */
+
+#top-panel {
+    margin-bottom: 3%;
+    height: 25vh;
+    overflow: hidden;
+}
+
+#map,
+#weather,
+#about-us,
+#tips,
+#diary {
+    margin-top: 10%;
+}
+
+#map {
+    width: 100%;
+}
+
+#weather {
+    width: 100%;
+}
+
+#about-us p,
+#tips p {
+    margin-top: 3%;
+}
+
+#settings-page .flex-container {
+    justify-content: space-between;
+}
+
+#tips p:first-child {
+    margin-top: 5%;
+}
+
+
+.small-title {
+    margin-top: 3%;
+}
+
+/* Classes - Flexbox */
+
+.flex-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.image-row {
+    display: flex;
+}
+
+.half {
+    flex: 50%;
+}
+
+/* Classes - Image Styling */
+
+.fa-bars,
+.fa-times,
+.fa-user,
+.fa-key,
+.fa-sign-out-alt {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.placeholders {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+#profile-pic {
+    width: 75%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 5%;
+}
+
+/* Classes - Weather Styling */
+
+.weather-container {
+    padding: 2.5%;
+    padding-bottom: 5%;
+}
+
+#left-image {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #FFF;
+    margin: 0;
+    border-radius: 10px;
+    padding-bottom: 50px;
+}
+
+.weather-title {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.weather-title p {
+    text-align: center;
+    padding: 8px;
+    margin: 0 auto;
+    font-size: 1.2em;
+    color: #293251;
+}
+
+.notification {
+    background-color: #f8d7da;
+    display: none;
+}
+
+.notification p {
+    color: #721c24;
+    font-size: 1.2em;
+    margin: 0;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.weather-container {
+    width: 100%;
+    height: auto;
+    background-color: #F4F9FF;
+    padding-top: 2%;
+    margin-top: 10%;
+}
+
+.weather-icon {
+    width: 100%;
+    height: auto;
+}
+
+.weather-icon img {
+    display: block;
+    margin: 0 auto;
+}
+
+.temperature {
+    width: 100%;
+    height: auto;
+}
+
+.temperature p {
+    padding: 0;
+    margin: 0;
+    color: #293251;
+    font-size: 3em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.temperature span {
+    color: #293251;
+    font-size: 0.5em;
+}
+
+.temperature-description {
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 4px;
+}
+
+.temperature-description p {
+    padding: 5%;
+    margin: 0;
+    color: #293251;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.weather-location p {
+    margin: 0;
+    color: #293251;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+/* Classes - Menu Styling */
+
+#menu {
+    display: none;
+    background: var(--background-color);
+    background-color: black;
+    width: 100%;
+    height: auto;
+    padding-bottom: 2.5%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 10000;
+}
+
+#welcome-msg {
+    margin-left: 10%;
+    margin-top: 1rem;
+}
+
+#menu h2 {
+    text-align: center;
+    padding: 3% 0;
+    margin: 20% 0;
+}
+
+.icon .flex-container {
+    justify-content: space-between;
+    margin: 1.5% auto;
+}
+
+#menu .flex-container {
+    justify-content: space-around;
+}
+
+header .icon a {
+    margin-left: 10%;
+}
+
+.fa-bars {
+    margin-left: auto;
+    margin-right: 10%;
+}
+
+.icon {
+    background: var(--background-color);
+}
+
+/* Classes - Map Styling */
+
+/* Leaflet map custom style */
+
+.leaflet-touch .leaflet-bar a {
+    background-color: #dedede;
+}
+
+.leaflet-popup-tip {
+    display: none;
+}
+
+.leaflet-control-zoom-out {
+    margin-top: 15px;
+}
+
+#mapid {
+    position: relative;
+    height: 220px;
+    border: 1px solid #B2E172;
+    background-color: var(--black);
+}
+
+/* Change the width of aurora status iframe */
+
+#aurora_status {
+    width: 100%;
+}
+
+#status-frame {
+    width: 100%;
+    height: 50px;
+}
+
+#wrapper {
+    width: 100%;
+}
+
+#activity-image {
+    width: 100%;
+}
+
+/* Index page record new location text and button styles */
+
+
+#btn_add_loc {
+    border: 1px solid #B2E172;
+    color: #B2E172;
+    margin-top: 10%;
+    margin-bottom: 1%;
+    border-radius: unset;
+    width: 100%;
+    margin-left: 0;
+    text-transform: uppercase;
+}
+
+#btn_add_loc:hover {
+    cursor: pointer;
+    background-color: #526E7D;
+}
+
+#btn_add_loc:active {
+    background-color: #B2E172;
+    border-color: #526E7D;
+    color: #456FE6;
+    transform: translateY(.5px);
+}
+
+
+/* popups */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 9000;
+}
+
+.popup-container {
+    overflow: hidden;
+}
+
+.popup-container,
+#popup-msg {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#new-popup {
+    min-height: 230px;
+    max-width: 600px;
+    max-height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+#new-popup,
+#record-not-logged {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    width: 80%;
+    height: 40%;
+    background-color: black;
+    border: 1px solid #B2E172;
+    box-shadow: 1px 1px #B2E172;
+}
+
+
+#record-not-logged {
+    height: 25%;
+    max-width: 500px;
+    max-height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#popup-content {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#record-not-content {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#popup-msg,
+#login-prompt-msg {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    align-self: center;
+}
+
+
+#login-prompt-msg {
+    text-align: center;
+}
+
+.popup-btn {
+    padding-top: 3.5%;
+    padding-bottom: 3.5%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.btn-flex-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#popup-cancel,
+#popup-save,
+#login-prompt-close {
+    width: 30%;
+}
+
+#login-prompt-close {
+    max-width: 200px;
+    max-height: 50px;
+    overflow: hidden;
+    margin-left: 0%;
+    margin-bottom: 2%;
+}
+
+#popup-cancel {
+    float: left;
+    border: 1px solid white;
+}
+
+#popup-cancel:hover {
+    color: white;
+    border: 2px solid #B2E172;
+}
+
+#popup-save,
+#login-prompt-close {
+    display: inline-block;
+    color: #B2E172;
+    border: 1px solid #B2E172;
+}
+
+#popup-save:hover,
+#login-prompt-close:hover {
+    display: inline-block;
+    border: 2px solid #B2E172;
+    color: white;
+}
+
+#popup-cancel:active,
+#popup-save:active,
+#login-prompt-close:active {
+    background-color: #526E7D;
+}
+
+#login-prompt {
+    color: #B2E172;
+    text-decoration: none;
+}
+
+/* Classes - CSS Animation */
+
+@keyframes bounceInLeft {
+
+    0% {
+        opacity: 0;
+        transform: translate3d(-3000px, 0, 0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate3d(25px, 0, 0);
+    }
+
+    75% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    90% {
+        transform: translate3d(5px, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+main h2 {
+    animation: bounceInLeft 1s ease-in 0s 1 both;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+@keyframes shake {
+
+    from,
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+.shake {
+    animation: shake 1s ease-in 0s 1 both;
+}
+
+.remove-animation {
+    animation-duration: 0s;
+}
+
+nav {
+    padding-top: 1%;
+}

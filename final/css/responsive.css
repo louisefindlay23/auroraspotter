@@ -1,0 +1,273 @@
+/*
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//File contains CSS code dealing with responsivness of the website
+*/
+
+/* Media Queries */
+
+/* Larger than mobiles */
+
+@media screen and (min-width: 640px) {
+    h2 {
+        margin-bottom: 10%;
+    }
+
+    #menu .flex-column {
+        margin-bottom: 5%;
+    }
+
+    #top-panel {
+        height: 20vh;
+    }
+
+
+    #home-content {
+        justify-content: center;
+    }
+
+
+    #mapid {
+        height: 350px;
+    }
+
+    #weather {
+        width: 100%;
+    }
+
+}
+
+/* In between mobile and tablet */
+
+@media screen and (min-width: 940px) {
+
+    #menu .flex-column {
+        margin-bottom: 0;
+    }
+
+    #settings-page .flex-container {
+        margin: 5% auto
+    }
+
+    #weather,
+    #about-us,
+    #tips,
+    #diary {
+        margin-top: 7.5%;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 2.5%;
+    }
+
+    #tips p:first-child {
+        margin-top: 5%;
+    }
+
+
+    #weather {
+        width: 100%;
+    }
+
+    #map {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #btn_add_loc {
+        margin-top: 0;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    #set-cont {
+        width: 40%;
+        margin-right: 30%;
+        margin-left: 30%;
+    }
+
+    #set-cont > i {
+        margin-bottom: 2%;
+        margin-top: 2%;
+    }
+
+}
+
+/* Larger than tablets */
+
+@media screen and (min-width: 1280px) {
+    h2 {
+        margin-bottom: 15%;
+    }
+
+    .small-title {
+        margin-bottom: 3%;
+    }
+
+    main {
+        margin-top: 2.5%;
+    }
+
+    #small-main {
+        margin-bottom: 2.5%;
+    }
+
+    #top-row {
+        display: flex;
+        align-content: stretch;
+    }
+
+    #top-panel {
+        height: 27.5vh;
+    }
+
+    #mapid {
+        height: 500px;
+        margin-top: 3%;
+    }
+
+    #aurora_status {
+        padding: 0;
+        width: 100%;
+        height: auto;
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    #home-container {
+        margin-left: 0;
+        margin-top: 5%;
+        width: 99.7%;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: stretch;
+        background-color: white;
+        padding: 0;
+        border: solid 3px #b2e17b;
+    }
+
+    #weather {
+        margin-top: 0;
+        background-color: #f4f9ff;
+        display: flex;
+    }
+
+    .weather-container {
+        margin: auto;
+    }
+
+    .frame-cont {
+        display: flex;
+    }
+
+    #plot-frame {
+        margin: 0 auto;
+    }
+
+    #profile-page p {
+        font-size: 1rem;
+    }
+
+    input,
+    button {
+        width: 100%;
+        margin-top: 5%;
+        margin-bottom: 3.5%;
+        padding: 5%;
+        border-radius: 10px;
+    }
+
+    #activity-img {
+        align-self: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #myForm input {
+        width: 50%;
+        padding: 2.5%;
+        margin-left: 25%;
+    }
+
+    button,
+    input[type=submit] {
+        width: 55%;
+        margin-left: 30%;
+        border-radius: 5px;
+    }
+
+
+    #myForm button,
+    #myForm input[type=submit] {
+        width: 55%;
+    }
+
+    #popup-cancel,
+    #popup-save {
+        margin: 2%;
+        padding: 2.10%;
+    }
+
+    #form-text {
+        margin-bottom: 2.5%;
+    }
+
+    #settings-page .flex-container {
+        width: 50%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th,
+    table td {
+        padding: 24px 40px;
+    }
+
+    .temp-hide {
+        display: none;
+    }
+
+    #btn_add_loc {
+        margin-top: 0;
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+}
+
+/* Desktop */
+
+@media screen and (min-width: 1580px) {
+    h2 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+
+    #about-us p,
+    #tips p {
+        margin-top: 2.5%;
+    }
+
+    #new-popup {
+        height: 60%;
+    }
+
+    #top-panel {
+        margin-bottom: 0%;
+        height: 30vh;
+    }
+
+    #map {
+        margin-top: 0;
+    }
+}
