@@ -92,6 +92,7 @@ function signUp() {
 
     //prevent page refreshing on button click
     var form = document.getElementById("myForm");
+
     function handleForm(event) {
         event.preventDefault();
     }
@@ -132,7 +133,7 @@ function signUp() {
             usersList.push(new_user);
             localStorage.removeItem('users');
             localStorage.setItem('users', JSON.stringify(usersList));
-            window.location.href = "login.html";
+            window.location.href = "/login";
         }
 
     }
@@ -153,6 +154,7 @@ function login() {
 
     //prevent page refreshing on button click
     var form = document.getElementById("login-form");
+
     function handleForm(event) {
         event.preventDefault();
     }
@@ -192,7 +194,7 @@ function login() {
                 event.preventDefault();
             }
             form.addEventListener('submit', handleForm);
-            window.location.href = "index.html";
+            window.location.href = "/";
         } else {
             //display error msg
             error_holder.innerHTML = 'Details incorrect';
@@ -221,6 +223,7 @@ function changePassword() {
 
     //prevent page refreshing on button click
     var form = document.getElementById("passChange");
+
     function handleForm(event) {
         event.preventDefault();
     }
@@ -265,7 +268,7 @@ function signout() {
     localStorage.setItem('logged', JSON.stringify(false));
     localStorage.setItem('userID', JSON.stringify('null'));
     //redirect the user to the index page
-    window.location.href = "index.html";
+    window.location.href = "/";
 }
 
 
