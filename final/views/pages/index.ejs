@@ -16,43 +16,7 @@
 <body onload="hideElements(), loadMap()">
 
     <header id="top-panel">
-        <!-- Default Header -->
-        <nav class="icon">
-            <div class="flex-container">
-                <a id="title" href="/">
-                    <h1>AURORA</h1>
-                </a>
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-
-        <!-- Hamburger Menu -->
-        <nav id="menu">
-            <div class="flex-container">
-                <h1>Menu</h1>
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="flex-column">
-                <a href="/">
-                    <h2>Home</h2>
-                </a>
-                <a href="/login" class="login-nav">
-                    <h2>Log In</h2>
-                </a>
-                <a href="/signup" class="login-nav">
-                    <h2>Sign Up</h2>
-                </a>
-                <a href="/profile" class="logout-nav">
-                    <h2>Profile</h2>
-                </a>
-                <a href="/settings" class="logout-nav">
-                    <h2>Settings</h2>
-                </a>
-                <a href="/" class="logout-nav">
-                    <h2 onclick="signout();">Log Out</h2>
-                </a>
-            </div>
-        </nav>
+        <%- include("../partials/header") %>
         <h2 id="welcome-msg">Follow the Northern Lights</h2>
     </header>
 
