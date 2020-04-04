@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-require('ejs');
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -9,37 +8,37 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get('/', function (req, res) {
-    res.render('pages/index');
+    res.render('final/views/pages/index');
 });
 
 // change password page
 
 app.get('/change-password', function (req, res) {
-    res.render('pages/change-password');
+    res.render('final/pages/change-password');
 });
 
 // login page
 
 app.get('/login', function (req, res) {
-    res.render('pages/login');
+    res.render('final/pages/login');
 });
 
 // profile page
 
 app.get('/profile', function (req, res) {
-    res.render('pages/profile');
+    res.render('final/pages/profile');
 });
 
 // settings page
 
 app.get('/settings', function (req, res) {
-    res.render('pages/settings');
+    res.render('final/pages/settings');
 });
 
 // change password page
 
 app.get('/signup', function (req, res) {
-    res.render('pages/signup');
+    res.render('final/pages/signup');
 });
 
 app.listen(8080);
