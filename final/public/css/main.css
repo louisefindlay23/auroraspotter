@@ -44,6 +44,9 @@ nav {
     overflow: auto;
 }
 
+nav {
+    padding-top: 1%;
+}
 
 main {
     width: 80%;
@@ -163,7 +166,7 @@ button {
     width: 90%;
     height: auto;
     overflow: auto;
-    margin: 10% 2%;
+    margin: 10% 0;
     padding: 2.10%;
     background: var(--black);
     border: 2px solid var(--black);
@@ -255,7 +258,7 @@ td a {
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
     margin: 1% 2%;
-    text-align: center;
+    text-align: left;
 }
 
 #profile-page p {
@@ -279,7 +282,13 @@ td a {
     text-decoration: none;
 }
 
+.left-heading {
+    text-align: left;
+}
 
+#settings-heading {
+    font-size: 1.3rem;
+}
 
 /* Global Background Styling */
 
@@ -610,7 +619,7 @@ header .icon a {
 }
 
 
-/* popups */
+/* Popups */
 #overlay {
     position: fixed;
     top: 0;
@@ -820,8 +829,4 @@ main h2 {
 
 .remove-animation {
     animation-duration: 0s;
-}
-
-nav {
-    padding-top: 1%;
 }
