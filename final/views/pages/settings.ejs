@@ -1,0 +1,59 @@
+<!--
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Settings page -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head") %>
+    <link rel="stylesheet" href="css/backgrounds/settings-bck.css">
+</head>
+
+<body onload="hideElements()" id="set-body">
+
+    <header>
+        <!-- Default Header -->
+        <%- include("../partials/header") %>
+    </header>
+
+    <!-- Settings Icons -->
+    <main id="small-main" class="icon">
+        <!-- Page Title -->
+        <h2 class="small-title">Settings</h2>
+        <div id="settings-page set-cont">
+            <hr>
+            <div class="flex-container">
+                <a href="/profile">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="/profile">
+                    <h4>Profile</h4>
+                </a>
+            </div>
+            <hr>
+            <div class="flex-container">
+                <a href="/change-password">
+                    <i class="fas fa-key"></i>
+                </a>
+                <a href="/change-password">
+                    <h4>Change Password</h4>
+                </a>
+            </div>
+            <hr>
+            <div class="flex-container">
+                <i class="fas fa-sign-out-alt"></i>
+                <h4 id="logout" onclick="signout();">Log Out</h4>
+            </div>
+            <hr>
+        </div>
+    </main>
+    <footer class="fixed">
+        <%- include("../partials/footer") %>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!--
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 2/3/2020
+//Profile page -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head") %>
+    <link rel="stylesheet" href="css/backgrounds/profile-bck.css">
+</head>
+
+<body onload="hideElements(); profileContent();">
+
+    <header>
+        <%- include("../partials/header") %>
+    </header>
+    <main id="profile-page small-main">
+        <!-- Page Title -->
+        <h2 class="small-title">Profile Details</h2>
+
+        <!-- User's Details -->
+        <p id="profile-user">Username</p>
+        <p id="profile-email">Email</p>
+
+        <!-- Observation Diary records sightings the user has added -->
+        <div id="diary">
+            <h2 class="small-title">Observation Diary</h2>
+        </div>
+
+    </main>
+    <footer class="fixed">
+        <%- include("../partials/footer") %>
+    </footer>
+</body>
+
+</html>

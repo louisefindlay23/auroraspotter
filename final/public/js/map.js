@@ -84,7 +84,7 @@ function loadMap() {
 
 /* Adding new observations/locations to the map */
 
-//function called when user clicks 'Record Observation' button 
+//function called when user clicks 'Record Observation' button
 function recordClicked() {
 
     //get data from local storage to check is the user logged in
@@ -160,7 +160,7 @@ function cancelLocation() {
 }
 
 
-/* Storing and displaying new location/observation data */ 
+/* Storing and displaying new location/observation data */
 /* if the user confirms they want to save the data, store them in the local storage (temporary solution) */
 function addLocation() {
 
