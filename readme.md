@@ -11,8 +11,31 @@ To help you plan the best Northern Lights experience, we provide you with a weat
 - Tag a location where Aurora was observed.
 - View the observation diary.
 
-## Technology/Framework used
-HTML5, CSS, JavaScript, jQuery
+## Technologies Used
+
+The project was first developed as a static site and then converted into a dynamic site with a NodeJS backend.
+
+The static site is contained in the prototype folder and the dynamic site in the final folder.
+
+### Prototype: Front-End
+
+The first version of the site used hard-coded content and a login system stored in the browser's LocalStorage.
+
+#### Languages Used
+
+HTML5, CSS3 & JavaScript
+
+#### Libraries Used
+
+jQuery, Leaflet Maps, Mapbox, CryptoJS & Font Awesome
+
+### Final: Back-End
+
+The final version of the site uses a NodeJS backend and EJS template engine, served by Express to create a dynamic version of the Aurora website. The login system is replaced by a more secure MongoDB database, the (previously static) content is created through EJS pages and partials and images can be uploaded (in development.)
+
+#### Plugins Used
+
+Express, MongoDB, Multer & Path
 
 ## API Reference
 [Leaflet Map API](https://leafletjs.com/)\
@@ -31,6 +54,8 @@ Maya Bonazarova (Back-End) = [@mayabonaz](https://github.com/mayabonaz)
 
 ### Useful Links  :link:
 
-Website - [Github Pages](https://cm2104-dynamicwebdevelopment.github.io/aurora/prototype/index.html)
+Website - [Prototype](https://cm2104-dynamicwebdevelopment.github.io/aurora/prototype/index.html)
+
+Website - Final (TBD)
 
 Project Management - [Glo Boards](https://app.gitkraken.com/glo/board/XkEAXQ6McgARAiGj)
