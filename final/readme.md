@@ -4,8 +4,8 @@ The final version of the site uses a NodeJS backend and EJS template engine, ser
 
 ## Plugins Used
 
-*Web Server* = Express
+**Web Server** = Express
 
-*Database* = MongoDB
+**Database** = MongoDB
 
-*Image Upload* = Multer & Path
+**Image Upload** = Multer & Path
