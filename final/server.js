@@ -64,6 +64,7 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
   // req.body will hold the text fields, if there were any
     console.log("success");
     console.log(req.file);
+    console.log(req.file.filename);
 })
 
 app.listen(8080);
