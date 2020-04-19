@@ -1,6 +1,18 @@
 var express = require('express');
 var multer = require('multer');
-var upload = multer({dest: 'public/img/uploads/'});
+var path = require('path');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+var upload = multer({ storage: storage })
+
 var app = express();
 
 app.use(express.static('public'));
@@ -50,6 +62,8 @@ app.get('/signup', function (req, res) {
 app.post('/upload', upload.single('photo'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
+    console.log("success");
+    console.log(req.file);
 })
 
 app.listen(8080);
