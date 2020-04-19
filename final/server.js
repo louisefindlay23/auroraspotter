@@ -1,7 +1,9 @@
 var express = require('express');
+var multer = require('multer');
+var upload = multer({dest: __dirname + 'public'});
 var app = express();
 
-app.use(express.static('public'));
+app.use(express.static('../public/img/uploads'));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -41,6 +43,15 @@ app.get('/settings', function (req, res) {
 
 app.get('/signup', function (req, res) {
     res.render('pages/signup');
+});
+
+// upload photo route
+
+app.post('/upload', upload.single('photo'), (req, res, next) => {
+    if(req.file) {
+        res.json(req.file);
+    }
+    else throw 'error';
 });
 
 app.listen(8080);
