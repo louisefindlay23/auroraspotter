@@ -1,9 +1,9 @@
 var express = require('express');
 var multer = require('multer');
-var upload = multer({dest: __dirname + 'public'});
+var upload = multer({dest: 'public/img/uploads/'});
 var app = express();
 
-app.use(express.static('../public/img/uploads'));
+app.use(express.static('public'));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -47,11 +47,9 @@ app.get('/signup', function (req, res) {
 
 // upload photo route
 
-app.post('/upload', upload.single('photo'), (req, res, next) => {
-    if(req.file) {
-        res.json(req.file);
-    }
-    else throw 'error';
-});
+app.post('/upload', upload.single('photo'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+})
 
 app.listen(8080);
