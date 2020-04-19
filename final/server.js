@@ -1,6 +1,10 @@
+// Node Modules
+
 var express = require('express');
 var multer = require('multer');
 var path = require('path');
+
+// Multer DiskStorage - for storing images
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -13,6 +17,8 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
+// Initalising Express
+
 var app = express();
 
 app.use(express.static('public'));
@@ -24,7 +30,12 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get('/', function (req, res) {
-    res.render('pages/index');
+
+var photo = null;
+
+    res.render('pages/index', {
+        photo: photo
+    });
 });
 
 // change password page
@@ -60,11 +71,15 @@ app.get('/signup', function (req, res) {
 // upload photo route
 
 app.post('/upload', upload.single('photo'), function (req, res, next) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
+  // req.file is the `photo` file
     console.log("success");
     console.log(req.file);
     console.log(req.file.filename);
+    var photo = req.file.filename;
+
+    res.render('pages/index', {
+        photo: photo
+    });
 })
 
 app.listen(8080);
