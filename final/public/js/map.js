@@ -42,8 +42,13 @@ function loadMap() {
     //add test data to the observation_records array
     observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
 
+    // variable for displaying uploaded photo
+
+     var uploadedphoto = $("#uploadedphoto").attr("src");
+
     //for each observation create a marker and add it to the map
     //add pop ups to be displayed when user clicks on the marker with informations about username, date, time and the coordinates for the location
+
     for (var i in observation_records) {
         //count the total number of observations for the point
         var counter = 0;
@@ -54,7 +59,7 @@ function loadMap() {
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
         marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + "<img src=" + uploadedphoto + ">");
         marker.on('click', onMapClick);
     }
 
