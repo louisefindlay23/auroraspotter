@@ -111,15 +111,18 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
     db.collection('photo').save(photofile, function(err, result) {
     if (err) throw err;
     console.log('saved to database');
+    });
 
     // send image file details to front-end
-    db.collection('photo').find().toArray(function(err, result) {
-    if (err) throw err;
-    var output = result.filename;
-    });
+        // db.photo.find().sort({'_id':-1}).limit(1)
+        var latestphoto = db.collection('photo').find().sort({'_id':-1}).limit(1);
+        var photofile = latestphoto.filename;
+    // db.collection('photo').find().toArray(function(err, result) {
+   //  if (err) throw err;
+   // var output = result.filename;
+   // });
     res.render('pages/index', {
-        photo: output
-    });
+        photo: photofile
     });
 });
 
