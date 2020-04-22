@@ -7,6 +7,7 @@ const express = require('express');     // load express
 const bodyParser = require('body-parser');
 const app = express();                  // access express functions
 const session = require('express-session');
+
 // Node Modules
 
 var multer = require('multer');
@@ -51,7 +52,7 @@ MongoClient.connect(url, function(err, database) {
 
 //******************** GET ROUTES - display pages **************************
 
-// using res.rnder to load up an ejs view files
+// using res.render to load up an ejs view files
 
 // root route
 app.get('/', function (req, res) {
@@ -99,11 +100,16 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
     console.log("success");
     console.log(req.file);
     console.log(req.file.filename);
-    var photo = req.file.filename;
 
-    res.render('pages/index', {
-        photo: photo
-    });
-})
+    // convert to JSON
+    var photofile = JSON.parse(photostring);
+
+    // save image file name in db
+    db.collection('photo').save(photofile, function(err, result) {
+    if (err) throw err;
+    console.log('saved to database');
+    res.redirect('/');
+ });
+});
 
 // app.listen(8080);
