@@ -113,7 +113,7 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
     console.log('saved to database');
     });
 
-    db.collection('photo').find({}).sort({timestamp: -1}).limit(1).toArray(function (err, result) {
+    db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
         console.log(result);
         var arrayphoto = result[0].filename;
         console.log(arrayphoto);
