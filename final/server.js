@@ -105,17 +105,22 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
     console.log("success");
     console.log(req.file);
     console.log(req.file.filename);
-    var photostring = req.file.filename;
+    var photofile = req.file;
 
-    // convert to JSON
-    var photofile = JSON.parse(photostring);
-
-    // save image file name in db
+    // save image file details in db
     db.collection('photo').save(photofile, function(err, result) {
     if (err) throw err;
     console.log('saved to database');
-    res.redirect('/');
- });
+
+    // send image file details to front-end
+    db.collection('photo').find().toArray(function(err, result) {
+    if (err) throw err;
+    var output = result.filename;
+    });
+    res.render('pages/index', {
+        photo: output
+    });
+    });
 });
 
 // app.listen(8080);
