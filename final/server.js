@@ -1,11 +1,16 @@
 
 //**************** DATABASE and EXPRESS connections *************************
 
+// Database Connections
+
 const MongoClient = require('mongodb').MongoClient; 
 const url = "mongodb://localhost:27017/usersdb";
-const express = require('express');     // load express
+
+
+
+const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();                  // access express functions
+const app = express();
 const session = require('express-session');
 
 // Node Modules
@@ -64,30 +69,30 @@ var photo = null;
     });
 });
 
-// change password page route
+// change password route
 app.get('/change-password', function (req, res) {
     res.render('pages/change-password');
 });
 
-// login page
+// login route
 
 app.get('/login', function (req, res) {
     res.render('pages/login');
 });
 
-// profile page
+// profile route
 
 app.get('/profile', function (req, res) {
     res.render('pages/profile');
 });
 
-// settings page
+// settings route
 
 app.get('/settings', function (req, res) {
     res.render('pages/settings');
 });
 
-// change password page
+// change password route
 
 app.get('/signup', function (req, res) {
     res.render('pages/signup');
@@ -100,6 +105,7 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
     console.log("success");
     console.log(req.file);
     console.log(req.file.filename);
+    var photostring = req.file.filename;
 
     // convert to JSON
     var photofile = JSON.parse(photostring);
