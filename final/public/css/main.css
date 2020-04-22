@@ -636,9 +636,7 @@ header .icon a {
 }
 
 #new-popup {
-    min-height: 230px;
     max-width: 600px;
-    max-height: 350px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -651,7 +649,7 @@ header .icon a {
     position: absolute;
     z-index: 9999;
     width: 80%;
-    height: 40%;
+    height: auto;
     background-color: black;
     border: 1px solid #B2E172;
     box-shadow: 1px 1px #B2E172;
@@ -824,4 +822,9 @@ main h2 {
 
 nav {
     padding-top: 1%;
+}
+
+#popup-submit {
+    color: var(--white);
+    border: 2px solid #B2E172;
 }

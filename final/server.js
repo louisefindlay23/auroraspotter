@@ -7,6 +7,25 @@ const express = require('express');     // load express
 const bodyParser = require('body-parser');
 const app = express();                  // access express functions
 const session = require('express-session');
+// Node Modules
+
+var multer = require('multer');
+var path = require('path');
+
+// Multer DiskStorage - for storing images
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+var upload = multer({ storage: storage })
+
+// Initalising Express
 
 app.use(express.static('public'));
 
@@ -36,7 +55,12 @@ MongoClient.connect(url, function(err, database) {
 
 // root route
 app.get('/', function (req, res) {
-    res.render('pages/index');
+
+var photo = null;
+
+    res.render('pages/index', {
+        photo: photo
+    });
 });
 
 // change password page route
@@ -68,7 +92,18 @@ app.get('/signup', function (req, res) {
     res.render('pages/signup');
 });
 
-//app.listen(8080);
+// upload photo route
 
+app.post('/upload', upload.single('photo'), function (req, res, next) {
+  // req.file is the `photo` file
+    console.log("success");
+    console.log(req.file);
+    console.log(req.file.filename);
+    var photo = req.file.filename;
 
-//********** POST ROUTES - processing data from forms ***************************
+    res.render('pages/index', {
+        photo: photo
+    });
+})
+
+// app.listen(8080);

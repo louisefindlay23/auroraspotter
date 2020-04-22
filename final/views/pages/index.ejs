@@ -24,16 +24,19 @@
     <main>
         <!-- Page Title -->
         <section id="welcome">
-
+<img id="uploadedphoto" src="../img/uploads/<%= photo %>">
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
                     <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" accept="image/*" name="photo">
                         <div class="btn-flex-container">
                             <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
-                            <button id="popup-save" class="popup-btn" onclick="addLocation()">Save</button>
+                            <input id="popup-save" class="popup-btn" onclick="addLocation()" type="submit" value="Save">
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -116,7 +119,6 @@
         <section id="about-us">
             <h3>ABOUT US</h3>
             <div id="about-us-text">
-
 
                 <p>Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain. The map shows locations where our users observed this magnificent phenomenon. You can click on the pins on the map to check the date, time, exact coordinates for the location and the total number of observations registered at that point by our community.</p>
 
