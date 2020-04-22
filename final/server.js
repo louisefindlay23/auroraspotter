@@ -1,6 +1,14 @@
+
+//**************** DATABASE and EXPRESS connections *************************
+
+const MongoClient = require('mongodb').MongoClient; 
+const url = "mongodb://localhost:27017/usersdb";
+const express = require('express');     // load express
+const bodyParser = require('body-parser');
+const app = express();                  // access express functions
+const session = require('express-session');
 // Node Modules
 
-var express = require('express');
 var multer = require('multer');
 var path = require('path');
 
@@ -19,16 +27,33 @@ var upload = multer({ storage: storage })
 
 // Initalising Express
 
-var app = express();
-
 app.use(express.static('public'));
 
-// set the view engine to ejs
-app.set('view engine', 'ejs');
+app.use(session({secret: 'keyboard cat'}));
 
-// use res.render to load up an ejs view file
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-// index page
+app.use(bodyParser.json());  
+app.set('view engine', 'ejs');      // set the view engine to ejs
+
+var db;
+
+// connecting variable db to database
+MongoClient.connect(url, function(err, database) {
+    if (err) throw err;
+    db = database;
+    app.listen(8080);
+    console.log('Listening on 8080');
+});
+
+
+//******************** GET ROUTES - display pages **************************
+
+// using res.rnder to load up an ejs view files
+
+// root route
 app.get('/', function (req, res) {
 
 var photo = null;
@@ -38,8 +63,7 @@ var photo = null;
     });
 });
 
-// change password page
-
+// change password page route
 app.get('/change-password', function (req, res) {
     res.render('pages/change-password');
 });
@@ -82,4 +106,4 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
     });
 })
 
-app.listen(8080);
+// app.listen(8080);
