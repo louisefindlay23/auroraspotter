@@ -115,15 +115,8 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
 
     // send image file details to front-end
         // db.photo.find().sort({'_id':-1}).limit(1)
-        var latestphoto = db.collection('photo').find().sort({'_id':-1}).limit(1);
-        var photofile = latestphoto.filename;
-    // db.collection('photo').find().toArray(function(err, result) {
-   //  if (err) throw err;
-   // var output = result.filename;
-   // });
-    res.render('pages/index', {
-        photo: photofile
+
+    db.collection('photo').find({}).sort({timestamp: -1}).limit(1).toArray(function (err, result) {
+     res.render("pages/index",{photo: result});
     });
 });
-
-// app.listen(8080);
