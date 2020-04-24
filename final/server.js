@@ -22,14 +22,15 @@ var path = require('path');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/img/uploads')
+    cb(null, 'public/img/uploads/aurora');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname))
+    let a = Math.floor(Math.random() * 1001);
+    cb(null, file.fieldname + '-' + a + path.extname(file.originalname));
   }
-})
+});
 
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 
 // Initalising Express
 
@@ -100,7 +101,7 @@ app.get('/signup', function (req, res) {
 
 // upload photo route
 
-app.post('/upload', upload.single('photo'), function (req, res, next) {
+app.post('/upload', upload.single('aurora'), function (req, res, next) {
   // req.file is the `photo` file
     console.log("success");
     console.log(req.file);

@@ -24,14 +24,14 @@
     <main>
         <!-- Page Title -->
         <section id="welcome">
-<img id="uploadedphoto" src="../img/uploads/<%= photo %>">
+<img id="uploadedphoto" src="../img/uploads/aurora/<%= photo %>">
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
                     <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
                         <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" accept="image/*" name="photo">
+                        <input type="file" accept="image/*" name="aurora">
                         <div class="btn-flex-container">
                             <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
                             <input id="popup-save" class="popup-btn" onclick="addLocation()" type="submit" value="Save">
