@@ -30,6 +30,8 @@ $(document).ready(function () {
         $(this).find('td').last().addClass('last');
     });
 
+    $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
+
 });
 
 // function to hide menu elements
