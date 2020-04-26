@@ -6,12 +6,13 @@
 
 //observation class
 class Observation {
-    constructor(username, latitude, longitude, date, time) {
+    constructor(username, latitude, longitude, date, time, observation_photo) {
         this.username = username;
         this.latitude = latitude;
         this.longitude = longitude;
         this.date = date;
         this.time = time;
+        this.observation_photo = observation_photo;
     }
 }
 
@@ -26,13 +27,13 @@ var marker;
 function loadMap() {
 
     //test data to more markers at different locations
-    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25');
-    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25');
-    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15');
-    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15');
+    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25', "<img src='../img/uploads/aurora/aurora-41.png'>");
+    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25', "<img src='../img/uploads/aurora/aurora-43.png'>");
+    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15',  "<img src='../img/uploads/aurora/aurora-135.png'>");
+    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15',  "<img src='../img/uploads/aurora/aurora-177.png'>");
 
     //get observations details from the local storage
-    var observation_records = JSON.parse(localStorage.getItem('observations'));;
+    var observation_records = JSON.parse(localStorage.getItem('observations'));
 
     //if no observations saved set observation_record to an empty array
     if (observation_records == null) {
@@ -59,7 +60,7 @@ function loadMap() {
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
         marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + "<img src=" + uploadedphoto + ">");
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + observation_records[i].observation_photo + "<img src=" + uploadedphoto + ">");
         marker.on('click', onMapClick);
     }
 
@@ -180,9 +181,8 @@ function addLocation() {
     var longitude = current_user_details[1];
     var current_date = current_user_details[2];
     var current_time = current_user_details[3];
-    var uploaded_photo = $("#uploadedphoto").attr("src");
-    console.log(uploaded_photo);
-    var observation_photo = "<img src='" + uploaded_photo + "'" + '>';
+
+    var observation_photo = document.getElementById("uploadedphoto").outerHTML;
     console.log(observation_photo);
     var observations_saved = JSON.parse(localStorage.getItem('observations'));
     if (observations_saved == null) {
