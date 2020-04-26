@@ -202,7 +202,6 @@ function login() {
     }
 }
 
-
 /* PASSWORD CHANGE */
 
 //function called when user submits the form on the PasswordChange page
@@ -253,7 +252,6 @@ function changePassword() {
                 }, 500);
             }
         }
-
 
     }
 }

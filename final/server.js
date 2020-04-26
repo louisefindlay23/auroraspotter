@@ -6,8 +6,6 @@
 const MongoClient = require('mongodb').MongoClient; 
 const url = "mongodb://localhost:27017/usersdb";
 
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -42,8 +40,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(bodyParser.json());  
-app.set('view engine', 'ejs');      // set the view engine to ejs
+app.use(bodyParser.json());
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
 
 var db;
 
@@ -63,12 +63,14 @@ MongoClient.connect(url, function(err, database) {
 // root route
 app.get('/', function (req, res) {
 
-// get the filename of the latest photo uploaded
+// get the details of the latest photo uploaded
 db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-        console.log(result);
-        var arrayphoto = result[0].filename;
-        console.log(arrayphoto);
-     res.render("pages/index",{photo: arrayphoto});
+    console.log(result);
+    // get the filename of the latest photo uploaded
+    var arrayphoto = result[0].filename;
+    console.log(arrayphoto);
+    // render the index page and pass the filename of the latest photo uploaded as a variable
+    res.render("pages/index",{photo: arrayphoto});
     });
 });
 

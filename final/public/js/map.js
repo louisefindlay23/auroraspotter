@@ -60,10 +60,9 @@ function loadMap() {
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
         marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + observation_records[i].observation_photo + "<img src=" + uploadedphoto + ">");
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + observation_records[i].observation_photo);
         marker.on('click', onMapClick);
     }
-
 
     /* display a weather forecast for the chosen location when user clicks on the map */
 
@@ -83,10 +82,7 @@ function loadMap() {
     }
 
     mymap.on('click', onMapClick);
-
-
 }
-
 
 /* Adding new observations/locations to the map */
 
@@ -110,7 +106,6 @@ function recordClicked() {
 //display popup box with info that will be saved for user confirmation
 function recordNewLoc() {
     function showPosition(position) {
-
 
         //block other parts of website and display a pop up box
         var overlay = jQuery('<div id="overlay"> </div>');
@@ -147,7 +142,6 @@ function recordNewLoc() {
         localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
     }
 
-
     //Display an error msg prompting user to allow geolocation permissions in case they werent granted
     function onError(error) {
         alert('Please allow geolocation');
@@ -164,7 +158,6 @@ function cancelLocation() {
     document.getElementById('new-popup').style.display = 'none';
     $("#overlay").remove();
 }
-
 
 /* Storing and displaying new location/observation data */
 /* if the user confirms they want to save the data, store them in the local storage (temporary solution) */
