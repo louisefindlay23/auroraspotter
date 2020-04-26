@@ -6,12 +6,13 @@
 
 //observation class
 class Observation {
-    constructor(username, latitude, longitude, date, time) {
+    constructor(username, latitude, longitude, date, time, observation_photo) {
         this.username = username;
         this.latitude = latitude;
         this.longitude = longitude;
         this.date = date;
         this.time = time;
+        this.observation_photo = observation_photo;
     }
 }
 
@@ -26,13 +27,13 @@ var marker;
 function loadMap() {
 
     //test data to more markers at different locations
-    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25');
-    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25');
-    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15');
-    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15');
+    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25', "<img src='../img/uploads/aurora/aurora-1.jpg'>");
+    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25', "<img src='../img/uploads/aurora/aurora-2.jpg'>");
+    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15',  "<img src='../img/uploads/aurora/aurora-3.jpg'>");
+    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15',  "<img src='../img/uploads/aurora/aurora-4.jpg'>");
 
     //get observations details from the local storage
-    var observation_records = JSON.parse(localStorage.getItem('observations'));;
+    var observation_records = JSON.parse(localStorage.getItem('observations'));
 
     //if no observations saved set observation_record to an empty array
     if (observation_records == null) {
@@ -44,6 +45,7 @@ function loadMap() {
 
     //for each observation create a marker and add it to the map
     //add pop ups to be displayed when user clicks on the marker with informations about username, date, time and the coordinates for the location
+
     for (var i in observation_records) {
         //count the total number of observations for the point
         var counter = 0;
@@ -54,10 +56,9 @@ function loadMap() {
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
         marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter);
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + observation_records[i].observation_photo);
         marker.on('click', onMapClick);
     }
-
 
     /* display a weather forecast for the chosen location when user clicks on the map */
 
@@ -77,10 +78,7 @@ function loadMap() {
     }
 
     mymap.on('click', onMapClick);
-
-
 }
-
 
 /* Adding new observations/locations to the map */
 
@@ -104,7 +102,6 @@ function recordClicked() {
 //display popup box with info that will be saved for user confirmation
 function recordNewLoc() {
     function showPosition(position) {
-
 
         //block other parts of website and display a pop up box
         var overlay = jQuery('<div id="overlay"> </div>');
@@ -141,7 +138,6 @@ function recordNewLoc() {
         localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
     }
 
-
     //Display an error msg prompting user to allow geolocation permissions in case they werent granted
     function onError(error) {
         alert('Please allow geolocation');
@@ -159,7 +155,6 @@ function cancelLocation() {
     $("#overlay").remove();
 }
 
-
 /* Storing and displaying new location/observation data */
 /* if the user confirms they want to save the data, store them in the local storage (temporary solution) */
 function addLocation() {
@@ -175,13 +170,16 @@ function addLocation() {
     var longitude = current_user_details[1];
     var current_date = current_user_details[2];
     var current_time = current_user_details[3];
+
+    var observation_photo = document.getElementById("uploadedphoto").outerHTML;
+    console.log(observation_photo);
     var observations_saved = JSON.parse(localStorage.getItem('observations'));
     if (observations_saved == null) {
         observations_saved = [];
     }
 
     //push new data and save them in observations list in localStorage (temporary solution)
-    let new_observation = new Observation(username, latitude, longitude, current_date, current_time);
+    let new_observation = new Observation(username, latitude, longitude, current_date, current_time, observation_photo);
     observations_saved.push(new_observation);
     localStorage.setItem('observations', JSON.stringify(observations_saved));
 

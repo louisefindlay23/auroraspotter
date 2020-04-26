@@ -10,6 +10,9 @@
 // Function called on page load to manage the nav bar
 $(document).ready(function () {
 
+    // Hide div with image that stores uploaded photo variable
+    $("#ejs-variable").hide();
+
     // Show/Hide different navs and icons for hamburger menu
     $(".fa-bars").click(function () {
         $("#menu").show();
@@ -26,6 +29,8 @@ $(document).ready(function () {
         $(this).find('td').first().addClass('first');
         $(this).find('td').last().addClass('last');
     });
+
+    $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
 
 });
 
@@ -202,7 +207,6 @@ function login() {
     }
 }
 
-
 /* PASSWORD CHANGE */
 
 //function called when user submits the form on the PasswordChange page
@@ -253,7 +257,6 @@ function changePassword() {
                 }, 500);
             }
         }
-
 
     }
 }
@@ -312,7 +315,7 @@ function profileContent() {
     for (var i in observation_records) {
         if (observation_records[i].username == username) {
             new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
-                ', ' + observation_records[i].longitude.toPrecision(5) + '</td></tr>';
+                ', ' + observation_records[i].longitude.toPrecision(5) + '</td><td>'+ observation_records[i].observation_photo + '</td></tr>';
             diary_empty = false;
         }
     }
@@ -324,7 +327,7 @@ function profileContent() {
     }
     //otherwise display a table with user's observation details
     else {
-        diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th></tr></thead><tbody id="table-content">' +
+        diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">' +
             new_table + " </tbody></table>");
     }
 }
