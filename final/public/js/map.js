@@ -180,13 +180,17 @@ function addLocation() {
     var longitude = current_user_details[1];
     var current_date = current_user_details[2];
     var current_time = current_user_details[3];
+    var uploaded_photo = $("#uploadedphoto").attr("src");
+    console.log(uploaded_photo);
+    var observation_photo = "<img src='" + uploaded_photo + "'" + '>';
+    console.log(observation_photo);
     var observations_saved = JSON.parse(localStorage.getItem('observations'));
     if (observations_saved == null) {
         observations_saved = [];
     }
 
     //push new data and save them in observations list in localStorage (temporary solution)
-    let new_observation = new Observation(username, latitude, longitude, current_date, current_time);
+    let new_observation = new Observation(username, latitude, longitude, current_date, current_time, observation_photo);
     observations_saved.push(new_observation);
     localStorage.setItem('observations', JSON.stringify(observations_saved));
 

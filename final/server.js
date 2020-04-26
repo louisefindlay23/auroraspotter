@@ -63,10 +63,12 @@ MongoClient.connect(url, function(err, database) {
 // root route
 app.get('/', function (req, res) {
 
-var photo = null;
-
-    res.render('pages/index', {
-        photo: photo
+// get the filename of the latest photo uploaded
+db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
+        console.log(result);
+        var arrayphoto = result[0].filename;
+        console.log(arrayphoto);
+     res.render("pages/index",{photo: arrayphoto});
     });
 });
 
@@ -114,10 +116,5 @@ app.post('/upload', upload.single('aurora'), function (req, res, next) {
     console.log('saved to database');
     });
 
-    db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-        console.log(result);
-        var arrayphoto = result[0].filename;
-        console.log(arrayphoto);
-     res.render("pages/index",{photo: arrayphoto});
-    });
+    res.redirect("/");
 });
