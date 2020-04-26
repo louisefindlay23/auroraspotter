@@ -10,6 +10,9 @@
 // Function called on page load to manage the nav bar
 $(document).ready(function () {
 
+    // Hide image that stores uploaded photo variable
+    $("#uploadedphoto").hide();
+
     // Show/Hide different navs and icons for hamburger menu
     $(".fa-bars").click(function () {
         $("#menu").show();
