@@ -27,10 +27,10 @@ var marker;
 function loadMap() {
 
     //test data to more markers at different locations
-    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25', "<img src='../img/uploads/aurora/aurora-41.png'>");
-    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25', "<img src='../img/uploads/aurora/aurora-43.png'>");
-    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15',  "<img src='../img/uploads/aurora/aurora-135.png'>");
-    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15',  "<img src='../img/uploads/aurora/aurora-177.png'>");
+    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25', "<img src='../img/uploads/aurora/aurora-1.jpg'>");
+    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25', "<img src='../img/uploads/aurora/aurora-2.jpg'>");
+    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15',  "<img src='../img/uploads/aurora/aurora-3.jpg'>");
+    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15',  "<img src='../img/uploads/aurora/aurora-4.jpg'>");
 
     //get observations details from the local storage
     var observation_records = JSON.parse(localStorage.getItem('observations'));
@@ -42,10 +42,6 @@ function loadMap() {
 
     //add test data to the observation_records array
     observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
-
-    // variable for displaying uploaded photo
-
-     var uploadedphoto = $("#uploadedphoto").attr("src");
 
     //for each observation create a marker and add it to the map
     //add pop ups to be displayed when user clicks on the marker with informations about username, date, time and the coordinates for the location
