@@ -11,7 +11,7 @@
 $(document).ready(function () {
 
     // Hide image that stores uploaded photo variable
-    $("#uploadedphoto").hide();
+    // $("#uploadedphoto").hide();
 
     // Show/Hide different navs and icons for hamburger menu
     $(".fa-bars").click(function () {
