@@ -37,6 +37,14 @@
         width: 100%;
     }
 
+    .leaflet-popup-content {
+    width: 180px;
+    }
+
+    .leaflet-popup-content b img {
+    width: 160px;
+    }
+
 }
 
 /* In between mobile and tablet */
@@ -96,6 +104,14 @@
     #set-cont > i {
         margin-bottom: 2%;
         margin-top: 2%;
+    }
+
+    .leaflet-popup-content {
+    width: 210px;
+    }
+
+    .leaflet-popup-content b img {
+    width: 190px;
     }
 
 }
@@ -242,6 +258,14 @@
         margin-top: 0;
         padding-top: 1%;
         padding-bottom: 1%;
+    }
+
+    .leaflet-popup-content {
+    width: 250px;
+    }
+
+    .leaflet-popup-content b img {
+    width: 235px;
     }
 }
 
