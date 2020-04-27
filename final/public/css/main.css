@@ -77,7 +77,7 @@ h1 {
     font-weight: normal;
 }
 
-h2 {
+h2, #welcome-msg {
     font-weight: 600;
     font-size: 1rem;
     margin-bottom: 5%;

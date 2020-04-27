@@ -18,7 +18,7 @@
 
     <header id="top-panel">
         <%- include("../partials/header") %>
-        <h2 id="welcome-msg">Follow the Northern Lights</h2>
+        <h3 id="welcome-msg">Follow the Northern Lights</h3>
     </header>
 
     <main>
@@ -30,7 +30,8 @@
                     <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
                         <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" accept="image/*" name="aurora" required>
+                            <label for="upload">Upload</label>
+                        <input id="upload" type="file" accept="image/*" name="aurora" required>
                         <div class="btn-flex-container">
                             <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
                             <input id="popup-save" class="popup-btn" onclick="addLocation()" type="submit" value="Save">
