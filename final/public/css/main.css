@@ -557,8 +557,8 @@ header .icon a {
     margin-top: 15px;
 }
 
-#uploadedphoto {
-    width: 235px;
+.leaflet-popup-content b img {
+    padding-top: 15px;
 }
 
 #mapid {
