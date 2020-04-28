@@ -10,7 +10,7 @@ The final version of the site uses a NodeJS backend and EJS template engine, ser
 
 **Image Upload** = Multer & Path
 
-##Run Instructions##
+## Run Instructions ##
 
 If running on Codio, make sure MongoDB and and the correct version of MongoDB is installed `npm install mongodb@2.2.33`
 
