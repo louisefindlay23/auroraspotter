@@ -290,26 +290,26 @@ function profileContent() {
     var user_email = '';
 
     //DOM Elements
-    var username_cont = document.getElementById('profile-user');
-    var email_cont = document.getElementById('profile-email');
-    var observation_records = JSON.parse(localStorage.getItem('observations'));
-    var new_table = '';
-    var diary_cont = document.getElementById('diary');
-    if (observation_records == null) {
-        observation_records = [];
-    }
+    // var username_cont = document.getElementById('profile-user');
+    // var email_cont = document.getElementById('profile-email');
+    // var observation_records = JSON.parse(localStorage.getItem('observations'));
+    // var new_table = '';
+    // var diary_cont = document.getElementById('diary');
+    // if (observation_records == null) {
+    //     observation_records = [];
+    // }
 
-    var diary_empty = true;
+    // var diary_empty = true;
 
-    //display user's email and username on the screen
-    for (var i in usersList) {
-        if (usersList[i].username == username) {
-            user_email = usersList[i].email;
-            //display user details on the screen
-            username_cont.innerHTML = username;
-            email_cont.innerHTML = user_email;
-        }
-    }
+    // //display user's email and username on the screen
+    // for (var i in usersList) {
+    //     if (usersList[i].username == username) {
+    //         user_email = usersList[i].email;
+    //         //display user details on the screen
+    //         username_cont.innerHTML = username;
+    //         email_cont.innerHTML = user_email;
+    //     }
+    // }
 
     //create a table with user's observation details on the screen
     for (var i in observation_records) {
