@@ -18,22 +18,20 @@
 
     <header id="top-panel">
         <%- include("../partials/header") %>
-        <h2 id="welcome-msg">Follow the Northern Lights</h2>
+        <h3 id="welcome-msg">Follow the Northern Lights</h3>
     </header>
 
     <main>
         <!-- Page Title -->
         <section id="welcome">
-            <div id="ejs-variable">
-                <img id="uploadedphoto" src="../img/uploads/aurora/<%= photo %>">
-            </div>
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
                     <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
                         <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" accept="image/*" name="aurora" required>
+                        <input id="upload" type="file" accept="image/*" name="aurora" required>
+                        <label id="upload-label" for="upload">Upload</label>
                         <div class="btn-flex-container">
                             <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
                             <input id="popup-save" class="popup-btn" onclick="addLocation()" type="submit" value="Save">
@@ -165,6 +163,9 @@
                 </p>
             </div>
         </section>
+        <div id="ejs-variable">
+                <img id="uploadedphoto" src="../img/uploads/aurora/<%= photo %>">
+        </div>
     </main>
     <footer id="foot-index">
         <%- include("../partials/footer") %>
