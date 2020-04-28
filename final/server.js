@@ -58,8 +58,6 @@ MongoClient.connect(url, function(err, database) {
 
 //******************** GET ROUTES - display pages **************************
 
-// using res.render to load up an ejs view files
-
 // root route
 app.get('/', function (req, res) {
 
@@ -80,19 +78,27 @@ app.get('/change-password', function (req, res) {
 });
 
 // login route
-
 app.get('/login', function (req, res) {
     res.render('pages/login');
 });
 
 // profile route
-
 app.get('/profile', function (req, res) {
-    res.render('pages/profile');
+    //if(!req.session.logged){res.redirect('/login');return;}
+    // get requested user by the username
+    var uname = req.query.username;
+    db.collection('profiles').findOne({
+        "username": uname
+    }, function(err, result) {
+        if (err) throw err;
+        console.log(uname+ ": "+ result);
+        res.render('pages/profile', {
+            user: result
+        })
+    });
 });
 
 // settings route
-
 app.get('/settings', function (req, res) {
     res.render('pages/settings');
 });
