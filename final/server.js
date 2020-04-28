@@ -96,10 +96,10 @@ app.get('/profile', function (req, res) {
         console.log(uname+ ": "+ result);
 
         // get the details of the latest photo uploaded
-        db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-        console.log(result);
+        db.collection('profile-photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, photo) {
+        console.log(photo);
         // get the filename of the latest photo uploaded
-        var arrayphoto = result[0].filename;
+        var arrayphoto = photo[0].filename;
         console.log(arrayphoto);
         // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
@@ -125,7 +125,7 @@ app.get('/signup', function (req, res) {
 
 app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
   // req.file is the `photo` file
-    console.log("success");
+    console.log("Aurora photo has been uploaded");
     console.log(req.file);
     console.log(req.file.filename);
     var photofile = req.file;
@@ -142,7 +142,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     // save image file details in db
     db.collection('photo').save(photofile, function(err, result) {
     if (err) throw err;
-    console.log('saved to database');
+    console.log('Aurora photo saved to database');
     });
 
     res.redirect("/");
@@ -150,14 +150,14 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
 
 app.post('/upload-profile', upload.single('profile'), function (req, res, next) {
   // req.file is the `photo` file
-    console.log("success");
+    console.log("Profile photo has been uploaded");
     console.log(req.file);
     console.log(req.file.filename);
     var photofile = req.file;
 
-    // resize image to 235px width
+    // resize image to 128px width
     sharp(req.file.path)
-                    .resize(235)
+                    .resize(128)
                     .toBuffer(function(err, buffer) {
         if (err) throw err;
         fs.writeFile(req.file.path, buffer, function(e) {
@@ -167,8 +167,7 @@ app.post('/upload-profile', upload.single('profile'), function (req, res, next) 
     // save image file details in db
     db.collection('profile-photo').save(photofile, function(err, result) {
     if (err) throw err;
-    console.log('saved to database');
-    });
-
+    console.log('Profile photo saved to the database');
     res.redirect("/");
+    });
 });
