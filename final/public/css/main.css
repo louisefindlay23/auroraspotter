@@ -117,7 +117,7 @@ a {
 }
 
 a:hover,
-i:hover,
+span:hover,
 #logout:hover {
     opacity: 50%;
     cursor: pointer;
