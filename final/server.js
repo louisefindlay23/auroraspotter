@@ -88,13 +88,13 @@ app.get('/login', function (req, res) {
 app.get('/profile', function (req, res) {
     //if(!req.session.logged){res.redirect('/login');return;}
     // get requested user by the username
-    var uname = req.query.username;
-    db.collection('profiles').findOne({
-        "username": uname
-    }, function(err, result) {
+    db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
         if (err) throw err;
-        console.log(uname+ ": "+ result);
-
+        console.log(result);
+        console.log(result[0].username);
+        var username = result[0].username;
+        var email = result[0].email;
+      
         // get the details of the latest photo uploaded
         db.collection('profile-photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, photo) {
         console.log(photo);
@@ -104,9 +104,11 @@ app.get('/profile', function (req, res) {
         // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
             user: result,
-            profilephoto: arrayphoto
-        });
+            profilephoto: arrayphoto,
+            username: username,
+            email: email
     });
+});
 });
 });
 
