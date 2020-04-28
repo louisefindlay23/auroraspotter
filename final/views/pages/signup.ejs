@@ -57,8 +57,10 @@
         <h2 class="small-title">Sign Up</h2>
         <!-- Register form -->
         <div class="flex-container flex-center">
-            <form id="myForm">
+            <form id="myForm" action="/upload-profile" method="post" enctype="multipart/form-data">
                 <input type="text" id="rusername" name="username" placeholder="Username">
+                <input id="upload-profile" type="file" accept="image/*" name="profile" required>
+                <label id="upload-profile-label" for="upload-profile">Upload</label>
                 <input type="email" id="remail" name="email" placeholder="E-Mail Address">
                 <input type="password" id="rpassword" name="password" placeholder="Password">
                 <input type="password" id="rpassConf" name="confirm-password" placeholder="Confirm Password">

@@ -33,8 +33,11 @@ $(document).ready(function () {
     $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
 
     // Change input file text to name of file
-    $('#upload').change(function() {
-         $("#upload-label").text(this.files[0].name);
+    $('#upload-aurora').change(function() {
+         $("#upload-aurora-label").text(this.files[0].name);
+});
+    $('#upload-profile').change(function() {
+         $("#upload-profile-label").text(this.files[0].name);
 });
 
 });
@@ -295,26 +298,26 @@ function profileContent() {
     var user_email = '';
 
     //DOM Elements
-    // var username_cont = document.getElementById('profile-user');
-    // var email_cont = document.getElementById('profile-email');
-    // var observation_records = JSON.parse(localStorage.getItem('observations'));
-    // var new_table = '';
-    // var diary_cont = document.getElementById('diary');
-    // if (observation_records == null) {
-    //     observation_records = [];
-    // }
+    var username_cont = document.getElementById('profile-user');
+    var email_cont = document.getElementById('profile-email');
+    var observation_records = JSON.parse(localStorage.getItem('observations'));
+    var new_table = '';
+    var diary_cont = document.getElementById('diary');
+    if (observation_records == null) {
+        observation_records = [];
+    }
 
-    // var diary_empty = true;
+    var diary_empty = true;
 
-    // //display user's email and username on the screen
-    // for (var i in usersList) {
-    //     if (usersList[i].username == username) {
-    //         user_email = usersList[i].email;
-    //         //display user details on the screen
-    //         username_cont.innerHTML = username;
-    //         email_cont.innerHTML = user_email;
-    //     }
-    // }
+    //display user's email and username on the screen
+    for (var i in usersList) {
+        if (usersList[i].username == username) {
+            user_email = usersList[i].email;
+            //display user details on the screen
+            username_cont.innerHTML = username;
+            email_cont.innerHTML = user_email;
+        }
+    }
 
     //create a table with user's observation details on the screen
     for (var i in observation_records) {

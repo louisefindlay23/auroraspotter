@@ -415,10 +415,8 @@ body {
 }
 
 #profile-pic {
-    width: 75%;
-    height: auto;
     border-radius: 50%;
-    margin-bottom: 5%;
+    margin-top: 10%;
 }
 
 /* Classes - Weather Styling */
