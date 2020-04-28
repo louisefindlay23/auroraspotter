@@ -22,7 +22,7 @@
                 <a href="/">
                     <h1>AURORA</h1>
                 </a>
-                <i class="fas fa-bars"></i>
+                <span class="fas fa-bars"></i>
             </div>
         </nav>
 
@@ -30,7 +30,7 @@
         <nav id="menu">
             <div class="flex-container">
                 <h1>Menu</h1>
-                <i class="fas fa-times"></i>
+                <span class="fas fa-times"></i>
             </div>
             <div class="flex-column">
                 <a href="/">
@@ -59,7 +59,9 @@
         <div id="form-wrapper" class="flex-container flex-center">
             <form id="login-form">
                 <input type="text" id="lusername" name="name" placeholder="Username">
+                <label for="lusername">Username</label>
                 <input type="password" id="lpassword" name="password" placeholder="Password">
+                <label for="lpassword">Password</label>
                 <input type="submit" value="Login" onclick="login()">
                 <!-- Register Link -->
                 <p id="form-text">Not got an account? Sign Up <a href="/signup">Here</a></p>
