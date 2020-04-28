@@ -33,8 +33,8 @@ $(document).ready(function () {
     $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
 
     // Change input file text to name of file
-    $('#upload').change(function() {
-         $("#upload-label").text(this.files[0].name);
+    $('#upload-aurora').change(function() {
+         $("#upload-aurora-label").text(this.files[0].name);
 });
 
 });

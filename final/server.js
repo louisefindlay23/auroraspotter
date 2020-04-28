@@ -94,10 +94,20 @@ app.get('/profile', function (req, res) {
     }, function(err, result) {
         if (err) throw err;
         console.log(uname+ ": "+ result);
+
+        // get the details of the latest photo uploaded
+        db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
+        console.log(result);
+        // get the filename of the latest photo uploaded
+        var arrayphoto = result[0].filename;
+        console.log(arrayphoto);
+        // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
-            user: result
-        })
+            user: result,
+            profilephoto: arrayphoto
+        });
     });
+});
 });
 
 // settings route
@@ -111,9 +121,9 @@ app.get('/signup', function (req, res) {
     res.render('pages/signup');
 });
 
-// upload photo route
+// upload photo routes
 
-app.post('/upload', upload.single('aurora'), function (req, res, next) {
+app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
   // req.file is the `photo` file
     console.log("success");
     console.log(req.file);
@@ -131,6 +141,31 @@ app.post('/upload', upload.single('aurora'), function (req, res, next) {
 
     // save image file details in db
     db.collection('photo').save(photofile, function(err, result) {
+    if (err) throw err;
+    console.log('saved to database');
+    });
+
+    res.redirect("/");
+});
+
+app.post('/upload-profile', upload.single('profile'), function (req, res, next) {
+  // req.file is the `photo` file
+    console.log("success");
+    console.log(req.file);
+    console.log(req.file.filename);
+    var photofile = req.file;
+
+    // resize image to 235px width
+    sharp(req.file.path)
+                    .resize(235)
+                    .toBuffer(function(err, buffer) {
+        if (err) throw err;
+        fs.writeFile(req.file.path, buffer, function(e) {
+        });
+    });
+
+    // save image file details in db
+    db.collection('profile-photo').save(photofile, function(err, result) {
     if (err) throw err;
     console.log('saved to database');
     });
