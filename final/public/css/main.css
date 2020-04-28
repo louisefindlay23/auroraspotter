@@ -159,7 +159,7 @@ footer {
 /* Form Styling */
 
 input,
-button {
+button, #upload-profile, #upload-profile-label {
     width: 90%;
     height: auto;
     overflow: auto;
@@ -257,7 +257,13 @@ td a {
 }
 
 #upload-profile, #upload-profile-label {
-    width: 80%;
+    border: none;
+    color: var(--white);
+    font-size: initial;
+}
+
+#upload-profile-label:hover {
+    border: none;
 }
 
 #upload-profile {
@@ -266,6 +272,7 @@ td a {
 
 #upload-profile-label {
     text-align: center;
+    margin-left: 0;
 }
 
 /* Classes - Text Styling */
