@@ -256,6 +256,10 @@ td a {
     font-weight: 600;
 }
 
+#upload-profile, #upload-profile-label {
+    width: 80%;
+}
+
 #upload-profile {
     margin: 0;
 }
