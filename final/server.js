@@ -84,13 +84,17 @@ app.get('/login', function (req, res) {
 
 // profile route
 app.get('/profile', function (req, res) {
+    //if(!req.session.logged){res.redirect('/login');return;}
+    // get requested user by the username
     db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
         if (err) throw err;
         console.log(result);
         console.log(result[0].username);
         var username = result[0].username;
+        var email = result[4].email;
         res.render('pages/profile', {
-            username: username
+            username: username,
+            email: email
         });
     });
 });
