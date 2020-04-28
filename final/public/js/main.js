@@ -36,6 +36,9 @@ $(document).ready(function () {
     $('#upload-aurora').change(function() {
          $("#upload-aurora-label").text(this.files[0].name);
 });
+    $('#upload-profile').change(function() {
+         $("#upload-profile-label").text(this.files[0].name);
+});
 
 });
 
