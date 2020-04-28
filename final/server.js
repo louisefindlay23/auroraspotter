@@ -93,7 +93,7 @@ app.get('/profile', function (req, res) {
         console.log(result);
         console.log(result[0].username);
         var username = result[0].username;
-        var email = result[4].email;
+        var email = result[0].email;
         res.render('pages/profile', {
             username: username,
             email: email
