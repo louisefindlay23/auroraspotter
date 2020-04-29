@@ -37,6 +37,18 @@
         width: 100%;
     }
 
+    .leaflet-popup-content {
+    width: 180px;
+    }
+
+    .leaflet-popup-content b img {
+    width: 160px;
+    }
+
+    #upload-profile-label {
+        margin-left: 2.5%;
+    }
+
 }
 
 /* In between mobile and tablet */
@@ -96,6 +108,14 @@
     #set-cont > i {
         margin-bottom: 2%;
         margin-top: 2%;
+    }
+
+    .leaflet-popup-content {
+    width: 210px;
+    }
+
+    .leaflet-popup-content b img {
+    width: 190px;
     }
 
 }
@@ -198,6 +218,11 @@
         margin-left: 25%;
     }
 
+    #upload-profile, #upload-profile-label {
+        width: 50%;
+        margin-left: 0;
+    }
+
     button,
     input[type=submit] {
         width: 55%;
@@ -242,6 +267,14 @@
         margin-top: 0;
         padding-top: 1%;
         padding-bottom: 1%;
+    }
+
+    .leaflet-popup-content {
+    width: 250px;
+    }
+
+    .leaflet-popup-content b img {
+    width: 235px;
     }
 }
 
