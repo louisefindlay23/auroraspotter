@@ -60,36 +60,47 @@ MongoClient.connect(url, function(err, database) {
     console.log('Listening on 8080');
 });
 
+session.loggedin = false;
+
+
 
 //******************** GET ROUTES - display pages **************************
 
 // root route
 app.get('/', function (req, res) {
-
-// get the details of the latest photo uploaded
-db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
+    var isLogged = req.session.loggedin;
+    // get the details of the latest photo uploaded
+    db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
     console.log(result);
-    // get the filename of the latest photo uploaded
-    var arrayphoto = result[0].filename;
-    console.log(arrayphoto);
-    // render the index page and pass the filename of the latest photo uploaded as a variable
-    res.render("pages/index",{photo: arrayphoto});
-    });
+   // get the filename of the latest photo uploaded
+   var arrayphoto = result[0].filename;
+   console.log(arrayphoto);
+    //render the index page and pass the filename of the latest photo uploaded as a variable
+   res.render("pages/index",{photo: arrayphoto, isLoggedIn: isLogged});  
+});
 });
 
 // change password route
 app.get('/change-password', function (req, res) {
-    res.render('pages/change-password');
+    var isLogged = req.session.loggedin;
+    res.render('pages/change-password', {isLoggedIn: isLogged});
 });
 
 // login route
 app.get('/login', function (req, res) {
-    res.render('pages/login');
+    var msg = '';
+    var isLogged = req.session.loggedin;
+    res.render('pages/login', {
+        login_error: msg,
+        isLoggedIn: isLogged
+    });
 });
 
 // profile route
 app.get('/profile', function (req, res) {
-    //if(!req.session.logged){res.redirect('/login');return;}
+    //Login status
+    var isLogged = req.session.loggedin;
+  
     // get requested user by the username
     db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
         if (err) throw err;
@@ -109,7 +120,8 @@ app.get('/profile', function (req, res) {
             user: result,
             profilephoto: arrayphoto,
             username: username,
-            email: email
+            email: email,
+            isLoggedIn: isLogged
     });
 });
 });
@@ -117,13 +129,15 @@ app.get('/profile', function (req, res) {
 
 // settings route
 app.get('/settings', function (req, res) {
-    res.render('pages/settings');
+    var isLogged = req.session.loggedin;
+    res.render('pages/settings', {isLoggedIn: isLogged});
 });
 
 // change password route
 
 app.get('/signup', function (req, res) {
-    res.render('pages/signup');
+    var isLogged = req.session.loggedin;
+    res.render('pages/signup', {isLoggedIn: isLogged});
 });
 
 // upload photo routes
@@ -176,3 +190,36 @@ app.post('/upload-profile', upload.single('profile'), function (req, res, next) 
     res.redirect("/");
     });
 });
+
+//login form handler
+app.post('/dologin', function(req,res){
+    var name = req.body.name;
+    var password = req.body.password;
+    var error_msg = '';
+    var isLogged = req.session.loggedin;
+    
+    if(name == '' || password == ''){
+        error_msg = 'Please enter your username and password';
+                   res.render('pages/login', {
+                       login_error: error_msg
+                   }); return
+    }
+    db.collection('profiles').findOne({'username':name}, function(err, result){
+        if(err) throw err;
+        if(!result){
+                   error_msg = 'The username or password you entered are incorrect';
+                   res.render('pages/login', {
+                       login_error: error_msg,
+                       isLoggedIn: isLogged
+                   }); return}
+        if(result.password == password){
+            req.session.loggedin = true; 
+            req.session.user = name;
+            res.redirect('/');
+        }else{
+              error_msg = 'The username or password you entered are incorrect';
+                   res.render('pages/login', {
+                       login_error: error_msg
+                   }); return}
+        });
+    });
