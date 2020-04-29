@@ -155,7 +155,9 @@ app.post('/dologin', function(req,res){
                        login_error: error_msg
                    }); return}
         if(result.password == password){
-            req.session.loggedin = true; res.redirect('/');
+            req.session.loggedin = true; 
+            req.session.user = name;
+            res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
                    res.render('pages/login', {
