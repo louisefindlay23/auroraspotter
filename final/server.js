@@ -105,7 +105,7 @@ app.get('/profile', function (req, res) {
     console.log(loggedUser);
   
     // get requested user by the username
-    db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
+    db.collection('profiles').find({username: loggedUser}).toArray(function (err, user) {
         console.log(user);
         // get user's details
         var username = user[0].username;
@@ -113,7 +113,7 @@ app.get('/profile', function (req, res) {
         console.log(username);
         console.log(email);
         // get the details of the latest photo uploaded
-        db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
+        db.collection('profiles').find({username: loggedUser}).toArray(function (err, user) {
         console.log(user);
         // get the filename of the latest photo uploaded
         var arrayphoto = user[0].filename;
@@ -210,11 +210,6 @@ app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
                    }); return;
             }
             else{
-                //create new user and insert into database
-                var user_details = {"username":name,"email":email,"password": password};
-                db.collection('profiles').save(user_details, function(err, result){
-                    if(err) throw err;
-                })
                 //save the photo
                 // req.file is the `photo` file
                 var photofile = req.file;
@@ -236,13 +231,14 @@ app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
         fs.writeFile(req.file.path, buffer, function(e) {
         });
     });
+                //create new user and insert into database
+                console.log(req.file.filename);
+                var user_details = {"username":name,"email":email,"password": password,"filename":req.file.filename};
+                db.collection('profiles').save(user_details, function(err, result){
+                    if(err) throw err;
+                    res.redirect('/login');
+                });
 
-    // save image file details in db
-    db.collection('profile-photo').save(photofile, function(err, result) {
-    if (err) throw err;
-    console.log('Profile photo saved to the database');
-    res.redirect("/login");
-    });
             }
             }
         });
@@ -274,8 +270,8 @@ app.post('/dologin', function(req,res){
                    }); return;}
         if(result.password == password){
             req.session.loggedin = true; 
-            req.session.username = result._id;
-            console.log(req.session.username);
+            req.session.username = result.username;
+            console.log("This is the username:" + req.session.username);
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
