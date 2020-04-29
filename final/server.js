@@ -204,6 +204,7 @@ app.post('/dologin', function(req,res){
                        login_error: error_msg
                    }); return
     }
+
     db.collection('profiles').findOne({'username':name}, function(err, result){
         if(err) throw err;
         if(!result){
@@ -214,7 +215,7 @@ app.post('/dologin', function(req,res){
                    }); return}
         if(result.password == password){
             req.session.loggedin = true; 
-            req.session.user = name;
+            req.session.username = result._id;
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
