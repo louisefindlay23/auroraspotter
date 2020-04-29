@@ -106,12 +106,11 @@ app.get('/profile', function (req, res) {
     // get requested user by the username
     db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
         console.log(user);
-        // get the filename of the latest photo uploaded
+        // get user's details
         var username = user[0].username;
         var email = user[0].email;
         console.log(username);
         console.log(email);
-      
         // get the details of the latest photo uploaded
         db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
         console.log(user);
