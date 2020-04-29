@@ -57,17 +57,17 @@
 
         <!-- Login form -->
         <div id="form-wrapper" class="flex-container flex-center">
-            <form id="login-form" action='/dologin' method='POST'>
+            <form id="login-form">
                 <input type="text" id="lusername" name="name" placeholder="Username">
                 <input type="password" id="lpassword" name="password" placeholder="Password">
-                <input type="submit" value="Login">
+                <input type="submit" value="Login" onclick="login()">
                 <!-- Register Link -->
                 <p id="form-text">Not got an account? Sign Up <a href="/signup">Here</a></p>
             </form>
         </div>
 
         <!-- Display Error Msg Here -->
-        <p id="login-error"><%= login_error %></p>
+        <p id="login-error"></p>
     </main>
     <footer class="fixed">
         <%- include("../partials/footer") %>
