@@ -112,15 +112,15 @@ app.get('/profile', function (req, res) {
       //  var email = result[0].email;
       
         // get the details of the latest photo uploaded
-        db.collection('profile').find({username: loggedUser}).toArray(function (err, user) {
+        db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
         console.log(user);
         // get the filename of the latest photo uploaded
-        //var arrayphoto = user[0].filename;
-       // console.log(arrayphoto);
+        var arrayphoto = user[0].filename;
+        console.log(arrayphoto);
         // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
           //  user: result,
-          //  profilephoto: arrayphoto,
+            profilephoto: arrayphoto,
             //username: username,
            // email: email,
             isLoggedIn: isLogged
@@ -217,6 +217,7 @@ app.post('/dologin', function(req,res){
         if(result.password == password){
             req.session.loggedin = true; 
             req.session.username = result._id;
+            console.log(req.session.username);
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
