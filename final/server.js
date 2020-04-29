@@ -137,15 +137,15 @@ app.get('/settings', function (req, res) {
 // change password route
 
 app.get('/signup', function (req, res) {
+    var msg = '';
     var isLogged = req.session.loggedin;
-    res.render('pages/signup', {isLoggedIn: isLogged});
+    res.render('pages/signup', {signup_error: msg, isLoggedIn: isLogged});
 });
 
 // upload photo routes
 
 app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
   // req.file is the `photo` file
-    console.log("Aurora photo has been uploaded");
     console.log(req.file);
     console.log(req.file.filename);
     var photofile = req.file;
@@ -168,13 +168,58 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     res.redirect("/");
 });
 
-app.post('/upload-profile', upload.single('profile'), function (req, res, next) {
-  // req.file is the `photo` file
-    console.log("Profile photo has been uploaded");
-    console.log(req.file);
-    console.log(req.file.filename);
-    var photofile = req.file;
-
+//registration form handler
+app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
+    
+    var name = req.body.username;
+    var password = req.body.password;
+    var pass_conf = req.body.confirm_password;
+    var email = req.body.email;
+    var error_msg = '';
+    var isLogged = req.session.loggedin;
+    
+    if(name == '' || password == '' || email == '' || pass_conf==''){
+        error_msg = 'Please provide all details';
+                   res.render('pages/signup', {
+                       signup_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+    }else{
+        db.collection('profiles').findOne({'username':name}, function(err, result){
+        if(err) throw err;
+        if(result){
+                 error_msg = 'The username already registered. Please try a different username';
+                   res.render('pages/signup', {
+                       signup_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+             }
+            else if(pass_conf!=password){
+                error_msg = 'Passwords entered must be identical';
+                   res.render('pages/signup', {
+                       signup_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+            }
+            else{
+                //create new user and insert into database
+                var user_details = {"username":name,"email":email,"password": password};
+                db.collection('profiles').save(user_details, function(err, result){
+                    if(err) throw err;
+                })
+                //save the photo
+                // req.file is the `photo` file
+                var photofile = req.file;
+    
+                if(photofile == null) {
+                    error_msg = 'Please upload profile photo';
+                   res.render('pages/signup', {
+                       signup_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+                }
+                
+                else{
     // resize image to 128px width
     sharp(req.file.path)
                     .resize(128)
@@ -188,8 +233,12 @@ app.post('/upload-profile', upload.single('profile'), function (req, res, next) 
     db.collection('profile-photo').save(photofile, function(err, result) {
     if (err) throw err;
     console.log('Profile photo saved to the database');
-    res.redirect("/");
+    res.redirect("/login");
     });
+            }
+            }
+        });
+    }
 });
 
 //login form handler
@@ -202,7 +251,8 @@ app.post('/dologin', function(req,res){
     if(name == '' || password == ''){
         error_msg = 'Please enter your username and password';
                    res.render('pages/login', {
-                       login_error: error_msg
+                       login_error: error_msg,
+                        isLoggedIn: isLogged
                    }); return;
     }
 
@@ -222,7 +272,8 @@ app.post('/dologin', function(req,res){
         }else{
               error_msg = 'The username or password you entered are incorrect';
                    res.render('pages/login', {
-                       login_error: error_msg
+                       login_error: error_msg,
+                        isLoggedIn: isLogged
                    }); return;}
         });
     });
