@@ -307,7 +307,7 @@ function profileContent() {
          observation_records = [];
      }
 
-    // var diary_empty = true;
+    var diary_empty = true;
 
     //display user's email and username on the screen
     // for (var i in usersList) {
