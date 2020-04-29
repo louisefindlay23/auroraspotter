@@ -24,21 +24,21 @@
         <h2 class="small-title">Sign Up</h2>
         <!-- Register form -->
         <div class="flex-container flex-center">
-            <form id="myForm" action="/upload-profile" method="post" enctype="multipart/form-data">
+            <form id="myForm" action='/uploadProfile' method='POST' enctype="multipart/form-data">
                 <input type="text" id="rusername" name="username" placeholder="Username">
-                <input id="upload-profile" type="file" accept="image/*" name="profile" required>
-                <label id="upload-profile-label" for="upload-profile">Upload</label>
+                <input id="upload-profile" type="file" accept="image/*" name="profile">
+                <label id="upload-profile-label" for="upload-profile">Upload Profile Photo</label>
                 <input type="email" id="remail" name="email" placeholder="E-Mail Address">
                 <input type="password" id="rpassword" name="password" placeholder="Password">
-                <input type="password" id="rpassConf" name="confirm-password" placeholder="Confirm Password">
-                <input type="submit" value="Register" onclick="signUp()">
+                <input type="password" id="rpassConf" name="confirm_password" placeholder="Confirm Password">
+                <input type="submit" value="Register">
                 <!-- Login Link -->
                 <p id="form-text">Already got an account? Log In <a href="/login">Here</a></p>
             </form>
         </div>
 
         <!-- Display an error msg here -->
-        <p id="error-msg"></p>
+        <p id="error-msg"><%= signup_error %></p>
     </main>
     <footer>
         <%- include("../partials/footer") %>
