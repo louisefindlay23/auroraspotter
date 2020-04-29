@@ -18,20 +18,20 @@
 
     <header id="top-panel">
         <%- include("../partials/header") %>
-        <h2 id="welcome-msg">Follow the Northern Lights</h2>
+        <h3 id="welcome-msg">Follow the Northern Lights</h3>
     </header>
 
     <main>
         <!-- Page Title -->
         <section id="welcome">
-<img id="uploadedphoto" src="../img/uploads/<%= photo %>">
             <!-- New Entry pop up -->
             <div class="popup-container">
                 <div id="new-popup">
                     <div id="popup-content" class="flex-container">
                         <p id="popup-msg"></p>
-                        <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" accept="image/*" name="photo">
+                        <form action="/upload-aurora" method="post" enctype="multipart/form-data">
+                        <input id="upload-aurora" type="file" accept="image/*" name="aurora" required>
+                        <label id="upload-aurora-label" for="upload-aurora">Upload</label>
                         <div class="btn-flex-container">
                             <button id="popup-cancel" class="popup-btn" onclick="cancelLocation()">Cancel</button>
                             <input id="popup-save" class="popup-btn" onclick="addLocation()" type="submit" value="Save">
@@ -45,7 +45,7 @@
             <div class="popup-container">
                 <div id="record-not-logged">
                     <div id="record-not-content" class="flex-container">
-                        <p id="login-prompt-msg">You need to be <a href="login.html" id="login-prompt"> Signed In </a> to add your observation</p>
+                        <p id="login-prompt-msg">You need to be <a href="/login" id="login-prompt"> Signed In </a> to add your observation</p>
                         <div class="btn-flex-container">
                             <button id="login-prompt-close" class="popup-btn" onclick="closeLoginPrompt()">Close</button>
                         </div>
@@ -130,7 +130,7 @@
 
                 <p>Amber alert means 'Possible aurora' by eye from Scotland, northern England and Northern Ireland and by camera from other parts of the UK. Red status, 'Aurora likely', means that it is likely to observe aurora by eye from anywhere in the UK.</p>
 
-                <p>For more information check the AuroraWatch UK website: <a id="aurora-link" href="http://aurorawatch.lancs.ac.uk">http://aurorawatch.lancs.ac.uk</a></p>
+                <p>For more information check the AuroraWatch UK website: <a id="aurora-link" href="http://aurorawatch.lancs.ac.uk">aurorawatch.lancs.ac.uk</a></p>
 
                 <p>Another big factor that could influence your experience is the weather as you need a clear sky to be able to see the Nothern Lights. The website uses the OpenWeatherMap API to provide you with the weather forecast. You can also click on any point on the map to check the forecast for the chosen location.</p>
 
@@ -156,15 +156,16 @@
                 <p>Carefully check the weather forecast before going out for aurora hunting. Cloudy and rainy weather forecast minimises the chances of seeing the aurora. The clear night sky offers the best probability of experiencing the aurora.
                 </p>
                 <p class="underline">Location:</p>
-                <p>Aurora occurs near the magnetic poles of the Earth.
-                    Check the locations tagged on the map. The locations with the most tags are the best spots to see aurora displays.
+                <p>Aurora occurs near the magnetic poles of the Earth. Check the locations tagged on the map. The locations with the most tags are the best spots to see aurora displays.
                 </p>
                 <p class="underline">Light Pollution:</p>
-                <p>Light pollution from the city streets and buildings will make it difficult to fully experience the aurora. The best places to see the aurora are usually away from the city lights.
-                    The light from a full moon also causes problems as it brightens up the skies. Therefore, the timing of the outing is important too.
+                <p>Light pollution from the city streets and buildings will make it difficult to fully experience the aurora. The best places to see the aurora are usually away from the city lights. The light from a full moon also causes problems as it brightens up the skies. Therefore, the timing of the outing is important too.
                 </p>
             </div>
         </section>
+        <div id="ejs-variable">
+                <img id="uploadedphoto" src="../img/uploads/aurora/<%= photo %>">
+        </div>
     </main>
     <footer id="foot-index">
         <%- include("../partials/footer") %>

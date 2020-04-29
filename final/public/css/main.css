@@ -77,7 +77,7 @@ h1 {
     font-weight: normal;
 }
 
-h2 {
+h2, #welcome-msg {
     font-weight: 600;
     font-size: 1rem;
     margin-bottom: 5%;
@@ -117,7 +117,7 @@ a {
 }
 
 a:hover,
-i:hover,
+span:hover,
 #logout:hover {
     opacity: 50%;
     cursor: pointer;
@@ -159,7 +159,7 @@ footer {
 /* Form Styling */
 
 input,
-button {
+button, #upload-profile, #upload-profile-label {
     width: 90%;
     height: auto;
     overflow: auto;
@@ -225,6 +225,55 @@ td a {
     text-decoration: underline;
 }
 
+[type="file"] {
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+[type="file"] + label {
+    background: var(--black);
+    border: 2px solid #B2E172;
+    border-radius: 5px;
+    color: #B2E172;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: inherit;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 0.8rem 25px;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    vertical-align: middle;
+}
+
+[type="file"] + label:hover {
+  border: 3px solid #B2E172;
+    font-weight: 600;
+}
+
+#upload-profile, #upload-profile-label {
+    border: none;
+    color: var(--white);
+    font-size: initial;
+}
+
+#upload-profile-label:hover {
+    border: none;
+}
+
+#upload-profile {
+    margin: 0;
+}
+
+#upload-profile-label {
+    text-align: center;
+    margin-left: 0;
+}
 
 /* Classes - Text Styling */
 
@@ -386,10 +435,8 @@ body {
 }
 
 #profile-pic {
-    width: 75%;
-    height: auto;
     border-radius: 50%;
-    margin-bottom: 5%;
+    margin-top: 10%;
 }
 
 /* Classes - Weather Styling */
@@ -535,6 +582,7 @@ header .icon a {
 .fa-bars {
     margin-left: auto;
     margin-right: 10%;
+    cursor: pointer;
 }
 
 .icon {
@@ -551,6 +599,15 @@ header .icon a {
 
 .leaflet-popup-tip {
     display: none;
+}
+
+.leaflet-popup-content {
+    width: 150px;
+}
+
+.leaflet-popup-content b img {
+    width: 130px;
+    padding-top: 15px;
 }
 
 .leaflet-control-zoom-out {
@@ -667,6 +724,7 @@ header .icon a {
 
 #popup-content {
     display: flex;
+    justify-content: center;
     height: 80%;
     width: 100%;
     margin-top: 5%;
@@ -705,12 +763,13 @@ header .icon a {
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 20%;
 }
 
 #popup-cancel,
 #popup-save,
 #login-prompt-close {
-    width: 30%;
+    width: 50%;
 }
 
 #login-prompt-close {
@@ -736,6 +795,11 @@ header .icon a {
     display: inline-block;
     color: #B2E172;
     border: 1px solid #B2E172;
+}
+
+#popup-save:hover,
+#popup-cancel:hover {
+    cursor: pointer;
 }
 
 #popup-save:hover,

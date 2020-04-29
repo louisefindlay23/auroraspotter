@@ -10,6 +10,9 @@
 // Function called on page load to manage the nav bar
 $(document).ready(function () {
 
+    // Hide div with image that stores uploaded photo variable
+    $("#ejs-variable").hide();
+
     // Show/Hide different navs and icons for hamburger menu
     $(".fa-bars").click(function () {
         $("#menu").show();
@@ -27,20 +30,20 @@ $(document).ready(function () {
         $(this).find('td').last().addClass('last');
     });
 
+    $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
+
+    // Change input file text to name of file
+    $('#upload-aurora').change(function() {
+         $("#upload-aurora-label").text(this.files[0].name);
+});
+    $('#upload-profile').change(function() {
+         $("#upload-profile-label").text(this.files[0].name);
+});
+
 });
 
 // function to hide menu elements
 function hideElements() {
-    // check if user is logged in
-    var isLogged = JSON.parse(localStorage.getItem('logged'));
-    //var isLogged = false;
-    if (!isLogged) {
-        $(".logout-nav").hide(); // if not logged in, hide Profile and Setting from nav
-
-    } else {
-        $(".login-nav").hide(); // if logged in, hide Login and Sign up from nav
-    }
-
 }
 
 
@@ -140,68 +143,6 @@ function signUp() {
 }
 
 
-/* LOG IN */
-
-//login function called when user submits the form on login page
-function login() {
-
-    //get user's input
-    var login = document.getElementById('lusername').value;
-    var password = document.getElementById('lpassword').value;
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
-    var logged = false;
-    var error_holder = document.getElementById('login-error');
-
-    //prevent page refreshing on button click
-    var form = document.getElementById("login-form");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-    //check that the login and password fields have been filled up
-    if (login == '' || password == '') {
-        //display error msg if any of the fields not filled up
-        error_holder.innerHTML = 'Please enter your username and password';
-    } else {
-        //check does the username exist in the users list
-        password = CryptoJS.MD5(password).toString();
-        try {
-            for (var i in usersSaved) {
-                if (usersSaved[i].username == login) {
-                    //if it does, check does the password match
-                    if (usersSaved[i].password == password) {
-                        //if it does set the logged value to true
-                        logged = true;
-                        //set the index of the logged user
-                        localStorage.setItem('userID', JSON.stringify(login));
-                    }
-                }
-
-            }
-        } catch (err) {
-            console.log('no users saved');
-        }
-
-        //if the logged value is true, redirect user to home page
-        //otherwise display an error msg
-        if (logged == true) {
-            localStorage.setItem('logged', JSON.stringify(true));
-            var form = document.getElementById("login-form");
-
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
-            window.location.href = "/";
-        } else {
-            //display error msg
-            error_holder.innerHTML = 'Details incorrect';
-        }
-    }
-}
-
 
 /* PASSWORD CHANGE */
 
@@ -254,7 +195,6 @@ function changePassword() {
             }
         }
 
-
     }
 }
 
@@ -287,32 +227,32 @@ function profileContent() {
     var user_email = '';
 
     //DOM Elements
-    var username_cont = document.getElementById('profile-user');
-    var email_cont = document.getElementById('profile-email');
-    var observation_records = JSON.parse(localStorage.getItem('observations'));
-    var new_table = '';
-    var diary_cont = document.getElementById('diary');
-    if (observation_records == null) {
-        observation_records = [];
-    }
+    // var username_cont = document.getElementById('profile-user');
+    // var email_cont = document.getElementById('profile-email');
+    // var observation_records = JSON.parse(localStorage.getItem('observations'));
+    // var new_table = '';
+    // var diary_cont = document.getElementById('diary');
+    // if (observation_records == null) {
+    //     observation_records = [];
+    // }
 
-    var diary_empty = true;
+    // var diary_empty = true;
 
     //display user's email and username on the screen
-    for (var i in usersList) {
-        if (usersList[i].username == username) {
-            user_email = usersList[i].email;
-            //display user details on the screen
-            username_cont.innerHTML = username;
-            email_cont.innerHTML = user_email;
-        }
-    }
+    // for (var i in usersList) {
+    //     if (usersList[i].username == username) {
+    //         user_email = usersList[i].email;
+    //         //display user details on the screen
+    //         username_cont.innerHTML = username;
+    //         email_cont.innerHTML = user_email;
+    //     }
+    // }
 
     //create a table with user's observation details on the screen
     for (var i in observation_records) {
         if (observation_records[i].username == username) {
             new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
-                ', ' + observation_records[i].longitude.toPrecision(5) + '</td></tr>';
+                ', ' + observation_records[i].longitude.toPrecision(5) + '</td><td>'+ observation_records[i].observation_photo + '</td></tr>';
             diary_empty = false;
         }
     }
@@ -324,7 +264,7 @@ function profileContent() {
     }
     //otherwise display a table with user's observation details
     else {
-        diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th></tr></thead><tbody id="table-content">' +
+        diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">' +
             new_table + " </tbody></table>");
     }
 }
