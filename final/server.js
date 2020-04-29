@@ -100,32 +100,34 @@ app.get('/login', function (req, res) {
 app.get('/profile', function (req, res) {
     //Login status
     var isLogged = req.session.loggedin;
+    var loggedUser = req.session.username;
+    console.log(loggedUser);
   
     // get requested user by the username
-    db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-        if (err) throw err;
-        console.log(result);
-        console.log(result[0].username);
-        var username = result[0].username;
-        var email = result[0].email;
+    //db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
+    //    if (err) throw err;
+      //  console.log(result);
+       // console.log(result[0].username);
+        //var username = result[0].username;
+      //  var email = result[0].email;
       
         // get the details of the latest photo uploaded
-        db.collection('profile-photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, photo) {
-        console.log(photo);
+        db.collection('profile').find({username: loggedUser}).toArray(function (err, user) {
+        console.log(user);
         // get the filename of the latest photo uploaded
-        var arrayphoto = photo[0].filename;
-        console.log(arrayphoto);
+        //var arrayphoto = user[0].filename;
+       // console.log(arrayphoto);
         // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
-            user: result,
-            profilephoto: arrayphoto,
-            username: username,
-            email: email,
+          //  user: result,
+          //  profilephoto: arrayphoto,
+            //username: username,
+           // email: email,
             isLoggedIn: isLogged
     });
 });
 });
-});
+//});
 
 // settings route
 app.get('/settings', function (req, res) {
