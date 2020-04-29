@@ -189,6 +189,10 @@ input[type=submit] {
     color: var(--white);
 }
 
+#rpassConf + label, #rusername + label, #remail + label, #rpassword + label, #lusername + label, #lpassword + label {
+    display: none;
+}
+
 /* Table CSS */
 
 table {
