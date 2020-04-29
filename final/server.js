@@ -216,7 +216,7 @@ app.post('/dologin', function(req,res){
                    }); return}
         if(result.password == password){
             req.session.loggedin = true; 
-            req.session.user = name;
+            req.session.username = result._id;
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
