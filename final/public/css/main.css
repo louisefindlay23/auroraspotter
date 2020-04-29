@@ -226,33 +226,46 @@ td a {
 }
 
 [type="file"] {
-  width: 0;
-  height: 0;
-  overflow: hidden;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
 }
 
 [type="file"] + label {
-  background: var(--black);
-  border: 2px solid #B2E172;
-  border-radius: 5px;
-  color: #B2E172;
-  cursor: pointer;
-  display: inline-block;
-  font-family: 'Montserrat', sans-serif;
-  font-size: inherit;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  outline: none;
-  padding: 0.8rem 25px;
-  position: relative;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  vertical-align: middle;
+    background: var(--black);
+    border: 2px solid #B2E172;
+    border-radius: 5px;
+    color: #B2E172;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: inherit;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 0.8rem 25px;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    vertical-align: middle;
 }
 
 [type="file"] + label:hover {
   border: 3px solid #B2E172;
     font-weight: 600;
+}
+
+#upload-profile, #upload-profile-label {
+    width: 80%;
+}
+
+#upload-profile {
+    margin: 0;
+}
+
+#upload-profile-label {
+    text-align: center;
 }
 
 /* Classes - Text Styling */
@@ -415,10 +428,8 @@ body {
 }
 
 #profile-pic {
-    width: 75%;
-    height: auto;
     border-radius: 50%;
-    margin-bottom: 5%;
+    margin-top: 10%;
 }
 
 /* Classes - Weather Styling */

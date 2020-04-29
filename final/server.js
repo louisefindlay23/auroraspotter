@@ -35,8 +35,11 @@ var upload = multer({ storage: storage });
 // Initalising Express
 
 app.use(express.static('public'));
-
-app.use(session({secret: 'keyboard cat'}));
+app.use(session({secret: 
+    'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -63,8 +66,6 @@ session.loggedin = false;
 
 //******************** GET ROUTES - display pages **************************
 
-// using res.render to load up an ejs view files
-
 // root route
 app.get('/', function (req, res) {
     var isLogged = req.session.loggedin;
@@ -86,7 +87,6 @@ app.get('/change-password', function (req, res) {
 });
 
 // login route
-
 app.get('/login', function (req, res) {
     var msg = '';
     var isLogged = req.session.loggedin;
@@ -97,14 +97,37 @@ app.get('/login', function (req, res) {
 });
 
 // profile route
-
 app.get('/profile', function (req, res) {
+    //Login status
     var isLogged = req.session.loggedin;
-    res.render('pages/profile', {isLoggedIn: isLogged});
+  
+    // get requested user by the username
+    db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        console.log(result[0].username);
+        var username = result[0].username;
+        var email = result[0].email;
+      
+        // get the details of the latest photo uploaded
+        db.collection('profile-photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, photo) {
+        console.log(photo);
+        // get the filename of the latest photo uploaded
+        var arrayphoto = photo[0].filename;
+        console.log(arrayphoto);
+        // render the index page and pass the filename of the latest photo uploaded as a variable
+        res.render('pages/profile', {
+            user: result,
+            profilephoto: arrayphoto,
+            username: username,
+            email: email,
+            isLoggedIn: isLogged
+    });
+});
+});
 });
 
 // settings route
-
 app.get('/settings', function (req, res) {
     var isLogged = req.session.loggedin;
     res.render('pages/settings', {isLoggedIn: isLogged});
@@ -117,11 +140,11 @@ app.get('/signup', function (req, res) {
     res.render('pages/signup', {isLoggedIn: isLogged});
 });
 
-// upload photo route
+// upload photo routes
 
-app.post('/upload', upload.single('aurora'), function (req, res, next) {
+app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
   // req.file is the `photo` file
-    console.log("success");
+    console.log("Aurora photo has been uploaded");
     console.log(req.file);
     console.log(req.file.filename);
     var photofile = req.file;
@@ -138,10 +161,34 @@ app.post('/upload', upload.single('aurora'), function (req, res, next) {
     // save image file details in db
     db.collection('photo').save(photofile, function(err, result) {
     if (err) throw err;
-    console.log('saved to database');
+    console.log('Aurora photo saved to database');
     });
 
     res.redirect("/");
+});
+
+app.post('/upload-profile', upload.single('profile'), function (req, res, next) {
+  // req.file is the `photo` file
+    console.log("Profile photo has been uploaded");
+    console.log(req.file);
+    console.log(req.file.filename);
+    var photofile = req.file;
+
+    // resize image to 128px width
+    sharp(req.file.path)
+                    .resize(128)
+                    .toBuffer(function(err, buffer) {
+        if (err) throw err;
+        fs.writeFile(req.file.path, buffer, function(e) {
+        });
+    });
+
+    // save image file details in db
+    db.collection('profile-photo').save(photofile, function(err, result) {
+    if (err) throw err;
+    console.log('Profile photo saved to the database');
+    res.redirect("/");
+    });
 });
 
 //login form handler
