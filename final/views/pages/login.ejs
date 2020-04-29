@@ -27,8 +27,10 @@
         <div id="form-wrapper" class="flex-container flex-center">
             <form id="login-form" action='/dologin' method='POST'>
                 <input type="text" id="lusername" name="name" placeholder="Username">
+                <label for="lusername">Username</label>
                 <input type="password" id="lpassword" name="password" placeholder="Password">
-                <input type="submit" value="Login">
+                <label for="lpassword">Password</label>
+                <input type="submit" value="Login" onclick="login()">
                 <!-- Register Link -->
                 <p id="form-text">Not got an account? Sign Up <a href="/signup">Here</a></p>
             </form>
