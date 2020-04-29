@@ -63,53 +63,6 @@ function signUp() {
 //function called when user submits the form on the PasswordChange page
 function changePassword() {
 
-    //get user's input
-    var newPwd = document.getElementById('newPwd').value;
-    var newPwdConf = document.getElementById('newPwdConf').value;
-
-    //get username of the person logged in from the local storage
-    var login = JSON.parse(localStorage.getItem('userID'));
-
-    //get the list of the users
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
-
-    //DOM Element to display error msges
-    var error_holder = document.getElementById('passchange-error');
-
-    //prevent page refreshing on button click
-    var form = document.getElementById("passChange");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-    //check new password field is not empty
-    if (newPwd == '') {
-        //display error msg if passwords dont match
-        error_holder.innerHTML = 'Enter new password below';
-    }
-
-    //check the passwords are the same
-    else if (newPwd != newPwdConf) {
-        error_holder.innerHTML = 'Passwords entered must be identical';
-    }
-
-    //update user's password; save encrypted in the local storage (temporary solution)
-    else {
-        var pass_hash = CryptoJS.MD5(newPwd).toString();
-        for (var i in usersSaved) {
-            if (usersSaved[i].username == login) {
-                usersSaved[i].password = pass_hash;
-                localStorage.removeItem('users');
-                localStorage.setItem('users', JSON.stringify(usersSaved));
-                setTimeout(function () {
-                    document.location.href = "settings.html"
-                }, 500);
-            }
-        }
-
-    }
 }
 
 

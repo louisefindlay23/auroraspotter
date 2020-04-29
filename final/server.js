@@ -83,8 +83,10 @@ app.get('/', function (req, res) {
 // change password route
 app.get('/change-password', function (req, res) {
     var isLogged = req.session.loggedin;
-    res.render('pages/change-password', {isLoggedIn: isLogged});
+    var msg = '';
+    res.render('pages/change-password', {changepass_error: msg, isLoggedIn: isLogged});
 });
+
 
 // login route
 app.get('/login', function (req, res) {
@@ -134,7 +136,7 @@ app.get('/settings', function (req, res) {
     res.render('pages/settings', {isLoggedIn: isLogged});
 });
 
-// change password route
+// signup route
 
 app.get('/signup', function (req, res) {
     var msg = '';
@@ -266,8 +268,7 @@ app.post('/dologin', function(req,res){
                    }); return;}
         if(result.password == password){
             req.session.loggedin = true; 
-            req.session.username = result._id;
-            console.log(req.session.username);
+            req.session.username = result.username;
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
@@ -277,6 +278,42 @@ app.post('/dologin', function(req,res){
                    }); return;}
         });
     });
+
+//password change handler
+app.post('/changePassword', function(req, res){
+   var  newPass = req.body.newpassword;
+   var newPassConf = req.body.confirmpassword;
+    var isLogged = req.session.loggedin;
+   var error_msg = '';
+    
+    console.log('test changePassword');
+    
+    if(newPass== '' || newPassConf == ''){
+        console.log('fields missing');
+        error_msg = 'Please enter new password';
+                   res.render('pages/change-password', {
+                       changepass_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+    }
+    else if(newPass != newPassConf){
+        console.log('passwords different');
+        error_msg = 'Passwords do not match';
+                   res.render('pages/change-password', {
+                       changepass_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+    }
+    else{
+        var user = req.session.username;
+        db.collection('profiles').updateOne(({"username": user}), ({$set: {"password": newPass}}), function(err, result){
+            if (err) throw err;
+            req.session.loggedin = false;
+            res.redirect('/login');
+        });
+    }
+});
+
 
 //signout handler
 app.get('/signout', function(req,res){
