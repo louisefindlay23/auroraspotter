@@ -84,7 +84,10 @@ app.get('/change-password', function (req, res) {
 // login route
 
 app.get('/login', function (req, res) {
-    res.render('pages/login');
+    var msg = '';
+    res.render('pages/login', {
+        login_error: msg
+    });
 });
 
 // profile route
@@ -131,3 +134,32 @@ app.post('/upload', upload.single('aurora'), function (req, res, next) {
 
     res.redirect("/");
 });
+
+//login form handler
+app.post('/dologin', function(req,res){
+    var name = req.body.name;
+    var password = req.body.password;
+    var error_msg = '';
+    
+    if(name == '' || password == ''){
+        error_msg = 'Please enter your username and password';
+                   res.render('pages/login', {
+                       login_error: error_msg
+                   }); return
+    }
+    db.collection('profiles').findOne({'username':name}, function(err, result){
+        if(err) throw err;
+        if(!result){
+                   error_msg = 'The username or password you entered are incorrect';
+                   res.render('pages/login', {
+                       login_error: error_msg
+                   }); return}
+        if(result.password == password){
+            req.session.loggedin = true; res.redirect('/');
+        }else{
+              error_msg = 'The username or password you entered are incorrect';
+                   res.render('pages/login', {
+                       login_error: error_msg
+                   }); return}
+        });
+    });

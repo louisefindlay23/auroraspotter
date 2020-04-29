@@ -150,67 +150,6 @@ function signUp() {
 }
 
 
-/* LOG IN */
-
-//login function called when user submits the form on login page
-function login() {
-
-    //get user's input
-    var login = document.getElementById('lusername').value;
-    var password = document.getElementById('lpassword').value;
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
-    var logged = false;
-    var error_holder = document.getElementById('login-error');
-
-    //prevent page refreshing on button click
-    var form = document.getElementById("login-form");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-    //check that the login and password fields have been filled up
-    if (login == '' || password == '') {
-        //display error msg if any of the fields not filled up
-        error_holder.innerHTML = 'Please enter your username and password';
-    } else {
-        //check does the username exist in the users list
-        password = CryptoJS.MD5(password).toString();
-        try {
-            for (var i in usersSaved) {
-                if (usersSaved[i].username == login) {
-                    //if it does, check does the password match
-                    if (usersSaved[i].password == password) {
-                        //if it does set the logged value to true
-                        logged = true;
-                        //set the index of the logged user
-                        localStorage.setItem('userID', JSON.stringify(login));
-                    }
-                }
-
-            }
-        } catch (err) {
-            console.log('no users saved');
-        }
-
-        //if the logged value is true, redirect user to home page
-        //otherwise display an error msg
-        if (logged == true) {
-            localStorage.setItem('logged', JSON.stringify(true));
-            var form = document.getElementById("login-form");
-
-            function handleForm(event) {
-                event.preventDefault();
-            }
-            form.addEventListener('submit', handleForm);
-            window.location.href = "/";
-        } else {
-            //display error msg
-            error_holder.innerHTML = 'Details incorrect';
-        }
-    }
-}
 
 /* PASSWORD CHANGE */
 
