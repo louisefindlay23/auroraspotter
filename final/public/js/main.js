@@ -41,16 +41,6 @@ $(document).ready(function () {
 
 // function to hide menu elements
 function hideElements() {
-    // check if user is logged in
-    var isLogged = JSON.parse(localStorage.getItem('logged'));
-    //var isLogged = false;
-    if (!isLogged) {
-        $(".logout-nav").hide(); // if not logged in, hide Profile and Setting from nav
-
-    } else {
-        $(".login-nav").hide(); // if logged in, hide Login and Sign up from nav
-    }
-
 }
 
 
