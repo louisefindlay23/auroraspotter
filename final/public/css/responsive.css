@@ -46,7 +46,7 @@
     }
 
     #upload-profile-label {
-        margin-left: 25%;
+        margin-left: 2.5%;
     }
 
 }
@@ -219,8 +219,8 @@
     }
 
     #upload-profile, #upload-profile-label {
-        width: 45%;
-        padding: 2.5%;
+        width: 50%;
+        margin-left: 0;
     }
 
     button,
