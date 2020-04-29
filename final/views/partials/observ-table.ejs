@@ -16,12 +16,14 @@
         </tr>
     </thead>
     <tbody id="table-content">
-<!--         <% for (var i=0; i<observation_records.length; i++) { %> -->
+    <% observation_records.forEach(obsr => {  %>
             <tr>
-                <td><%= observation_records[i].date %></td>
-                <td><%= observation_records[i].time %></td>
-                <td><%= observation_records[i].longitude %></td>
-                <td><%= observation_records[i].auroraphoto %></td>
-            </tr>}
-    </tbody>
+                <td><%= obsr.date %></td>
+                <td><%= obsr.time %></td>
+                <td><%= obsr.coordinates %></td>
+                <td><%= obsr.auroraphoto %></td>
+            </tr>
+        <% }) %>
+                
+   </tbody>
 </table>

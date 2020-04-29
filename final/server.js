@@ -112,42 +112,40 @@ app.get('/profile', function (req, res) {
         var longitude = observation[0].longitude;
         var latitude = observation[0].latitude;
         var auroraphoto = observation[0].auroraphoto;
-        console.log(date);
-        console.log(time);
-        console.log(longitude);
-        console.log(latitude);
-        console.log(auroraphoto);
+        var coordinates = longitude+"  "+latitude;
         var observation_records = [];
-        observation_records.push(date, time, longitude, auroraphoto);
+        observation_records.push(date, time, coordinates, auroraphoto);
         console.log("testing: "+observation_records);           
         
-    // get requested user by the username
-    db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
-        console.log(user);
-        // get user's details
-        var username = user[0].username;
-        var email = user[0].email;
-        console.log(username);
-        console.log(email);
-        var observation_records = observation_records;
-        console.log("checking " + observation_records);
-        // get the details of the latest photo uploaded
+        // get requested user by the username
         db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
-        console.log(user);
-        // get the filename of the latest photo uploaded
-        var arrayphoto = user[0].filename;
-        console.log(arrayphoto);
-        // render the index page and pass the filename of the latest photo uploaded as a variable
-        res.render('pages/profile', {
-            profilephoto: arrayphoto,
-            username: username,
-            email: email,
-            isLoggedIn: isLogged,
-            observation_records: observation_records
-           });
-        });
-    });
-  });
+            console.log(user);
+            // get user's details
+            var username = user[0].username;
+            var email = user[0].email;
+            console.log(username);
+            console.log(email);
+            
+            // get the details of the latest photo uploaded
+            db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
+            console.log(user);
+                
+            // get the filename of the latest photo uploaded
+            var arrayphoto = user[0].filename;
+            console.log(arrayphoto);
+                
+            // render the index page and pass the filename of the latest photo uploaded as a variable
+            console.log("last check: "+observation_records);
+            res.render('pages/profile', {
+                profilephoto: arrayphoto,
+                username: username,
+                email: email,
+                isLoggedIn: isLogged,
+                observation_records: observation_records
+               });
+            });
+          });
+      });
 });
 
 
