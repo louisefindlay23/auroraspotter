@@ -199,17 +199,6 @@ function changePassword() {
 }
 
 
-/* SIGN OUT */
-
-//function called when user clicks Log Out btn
-function signout() {
-
-    //change the localStorage logged value to false
-    localStorage.setItem('logged', JSON.stringify(false));
-    localStorage.setItem('userID', JSON.stringify('null'));
-    //redirect the user to the index page
-    window.location.href = "/";
-}
 
 
 /* Create Profile Page content */

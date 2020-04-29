@@ -205,6 +205,7 @@ app.post('/dologin', function(req,res){
                        login_error: error_msg
                    }); return;
     }
+
     db.collection('profiles').findOne({'username':name}, function(err, result){
         if(err) throw err;
         if(!result){
@@ -225,3 +226,11 @@ app.post('/dologin', function(req,res){
                    }); return;}
         });
     });
+
+//signout handler
+app.get('/signout', function(req,res){
+    req.session.loggedin = false;
+    var isLogged = req.session.loggedin;
+    req.session.username = null;
+    res.redirect('/');
+});
