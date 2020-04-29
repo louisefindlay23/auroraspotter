@@ -104,30 +104,29 @@ app.get('/profile', function (req, res) {
     console.log(loggedUser);
   
     // get requested user by the username
-    //db.collection('profiles').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-    //    if (err) throw err;
-      //  console.log(result);
-       // console.log(result[0].username);
-        //var username = result[0].username;
-      //  var email = result[0].email;
-      
+    db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
+        console.log(user);
+        // get user's details
+        var username = user[0].username;
+        var email = user[0].email;
+        console.log(username);
+        console.log(email);
         // get the details of the latest photo uploaded
-        db.collection('profile').find({username: loggedUser}).toArray(function (err, user) {
+        db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
         console.log(user);
         // get the filename of the latest photo uploaded
-        //var arrayphoto = user[0].filename;
-       // console.log(arrayphoto);
+        var arrayphoto = user[0].filename;
+        console.log(arrayphoto);
         // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
-          //  user: result,
-          //  profilephoto: arrayphoto,
-            //username: username,
-           // email: email,
+            profilephoto: arrayphoto,
+            username: username,
+            email: email,
             isLoggedIn: isLogged
     });
 });
 });
-//});
+});
 
 // settings route
 app.get('/settings', function (req, res) {
@@ -204,7 +203,7 @@ app.post('/dologin', function(req,res){
         error_msg = 'Please enter your username and password';
                    res.render('pages/login', {
                        login_error: error_msg
-                   }); return
+                   }); return;
     }
     db.collection('profiles').findOne({'username':name}, function(err, result){
         if(err) throw err;
@@ -213,15 +212,16 @@ app.post('/dologin', function(req,res){
                    res.render('pages/login', {
                        login_error: error_msg,
                        isLoggedIn: isLogged
-                   }); return}
+                   }); return;}
         if(result.password == password){
             req.session.loggedin = true; 
             req.session.username = result._id;
+            console.log(req.session.username);
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
                    res.render('pages/login', {
                        login_error: error_msg
-                   }); return}
+                   }); return;}
         });
     });
