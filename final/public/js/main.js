@@ -300,12 +300,12 @@ function profileContent() {
     //DOM Elements
     // var username_cont = document.getElementById('profile-user');
     // var email_cont = document.getElementById('profile-email');
-    // var observation_records = JSON.parse(localStorage.getItem('observations'));
-    // var new_table = '';
-    // var diary_cont = document.getElementById('diary');
-    // if (observation_records == null) {
-    //     observation_records = [];
-    // }
+    var observation_records = JSON.parse(localStorage.getItem('observations'));
+    var new_table = '';
+    var diary_cont = document.getElementById('diary');
+    if (observation_records == null) {
+         observation_records = [];
+     }
 
     // var diary_empty = true;
 
