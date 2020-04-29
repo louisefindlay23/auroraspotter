@@ -102,7 +102,25 @@ app.get('/profile', function (req, res) {
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
     console.log(loggedUser);
-  
+    
+     // get observations for the username
+    db.collection('observations').find({_id: loggedUser}).toArray(function (err, observation) {
+        console.log(observation);
+        // get observation details
+        var date = observation[0].date;
+        var time = observation[0].time;
+        var longitude = observation[0].longitude;
+        var latitude = observation[0].latitude;
+        var auroraphoto = observation[0].auroraphoto;
+        console.log(date);
+        console.log(time);
+        console.log(longitude);
+        console.log(latitude);
+        console.log(auroraphoto);
+        var observation_records = [];
+        observation_records.push(date, time, longitude, auroraphoto);
+        console.log("testing: "+observation_records);           
+        
     // get requested user by the username
     db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
         console.log(user);
@@ -111,6 +129,8 @@ app.get('/profile', function (req, res) {
         var email = user[0].email;
         console.log(username);
         console.log(email);
+        var observation_records = observation_records;
+        console.log("checking " + observation_records);
         // get the details of the latest photo uploaded
         db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
         console.log(user);
@@ -122,11 +142,15 @@ app.get('/profile', function (req, res) {
             profilephoto: arrayphoto,
             username: username,
             email: email,
-            isLoggedIn: isLogged
+            isLoggedIn: isLogged,
+            observation_records: observation_records
+           });
+        });
     });
+  });
 });
-});
-});
+
+
 
 // settings route
 app.get('/settings', function (req, res) {
