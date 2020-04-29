@@ -110,13 +110,9 @@ app.get('/profile', function (req, res) {
         // get user's details
         var username = user[0].username;
         var email = user[0].email;
+        var arrayphoto = user[0].filename;
         console.log(username);
         console.log(email);
-        // get the details of the latest photo uploaded
-        db.collection('profiles').find({username: loggedUser}).toArray(function (err, user) {
-        console.log(user);
-        // get the filename of the latest photo uploaded
-        var arrayphoto = user[0].filename;
         console.log(arrayphoto);
         // render the index page and pass the filename of the latest photo uploaded as a variable
         res.render('pages/profile', {
@@ -125,7 +121,6 @@ app.get('/profile', function (req, res) {
             email: email,
             isLoggedIn: isLogged
     });
-});
 });
 });
 
