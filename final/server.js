@@ -57,6 +57,9 @@ MongoClient.connect(url, function(err, database) {
     console.log('Listening on 8080');
 });
 
+session.loggedin = false;
+
+
 
 //******************** GET ROUTES - display pages **************************
 
@@ -64,48 +67,54 @@ MongoClient.connect(url, function(err, database) {
 
 // root route
 app.get('/', function (req, res) {
-
-// get the details of the latest photo uploaded
-db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
+    var isLogged = req.session.loggedin;
+    // get the details of the latest photo uploaded
+    db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
     console.log(result);
-    // get the filename of the latest photo uploaded
-    var arrayphoto = result[0].filename;
-    console.log(arrayphoto);
-    // render the index page and pass the filename of the latest photo uploaded as a variable
-    res.render("pages/index",{photo: arrayphoto});
-    });
+   // get the filename of the latest photo uploaded
+   var arrayphoto = result[0].filename;
+   console.log(arrayphoto);
+    //render the index page and pass the filename of the latest photo uploaded as a variable
+   res.render("pages/index",{photo: arrayphoto, isLoggedIn: isLogged});  
+});
 });
 
 // change password route
 app.get('/change-password', function (req, res) {
-    res.render('pages/change-password');
+    var isLogged = req.session.loggedin;
+    res.render('pages/change-password', {isLoggedIn: isLogged});
 });
 
 // login route
 
 app.get('/login', function (req, res) {
     var msg = '';
+    var isLogged = req.session.loggedin;
     res.render('pages/login', {
-        login_error: msg
+        login_error: msg,
+        isLoggedIn: isLogged
     });
 });
 
 // profile route
 
 app.get('/profile', function (req, res) {
-    res.render('pages/profile');
+    var isLogged = req.session.loggedin;
+    res.render('pages/profile', {isLoggedIn: isLogged});
 });
 
 // settings route
 
 app.get('/settings', function (req, res) {
-    res.render('pages/settings');
+    var isLogged = req.session.loggedin;
+    res.render('pages/settings', {isLoggedIn: isLogged});
 });
 
 // change password route
 
 app.get('/signup', function (req, res) {
-    res.render('pages/signup');
+    var isLogged = req.session.loggedin;
+    res.render('pages/signup', {isLoggedIn: isLogged});
 });
 
 // upload photo route
@@ -140,6 +149,7 @@ app.post('/dologin', function(req,res){
     var name = req.body.name;
     var password = req.body.password;
     var error_msg = '';
+    var isLogged = req.session.loggedin;
     
     if(name == '' || password == ''){
         error_msg = 'Please enter your username and password';
@@ -152,7 +162,8 @@ app.post('/dologin', function(req,res){
         if(!result){
                    error_msg = 'The username or password you entered are incorrect';
                    res.render('pages/login', {
-                       login_error: error_msg
+                       login_error: error_msg,
+                       isLoggedIn: isLogged
                    }); return}
         if(result.password == password){
             req.session.loggedin = true; 
