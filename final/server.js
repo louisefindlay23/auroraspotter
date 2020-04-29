@@ -98,6 +98,7 @@ app.get('/login', function (req, res) {
 
 // profile route
 app.get('/profile', function (req, res) {
+
     //Login status
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
@@ -145,7 +146,13 @@ app.get('/signup', function (req, res) {
 // upload photo routes
 
 app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
-  // req.file is the `photo` file
+
+    //Think a if req.file = “” redirect to / and set vars as # should do it
+
+    if (req.file = "") {
+} else {
+
+    // req.file is the `photo` file
     console.log(req.file);
     console.log(req.file.filename);
     var photofile = req.file;
@@ -166,6 +173,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     });
 
     res.redirect("/");
+    }
 });
 
 //registration form handler
