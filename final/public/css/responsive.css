@@ -45,6 +45,10 @@
     width: 160px;
     }
 
+    #upload-profile-label {
+        margin-left: 2.5%;
+    }
+
 }
 
 /* In between mobile and tablet */
@@ -214,8 +218,13 @@
         margin-left: 25%;
     }
 
+    #upload-profile, #upload-profile-label {
+        width: 50%;
+        margin-left: 0;
+    }
+
     button,
-    input[type=submit], #upload-profile, #upload-profile-label {
+    input[type=submit] {
         width: 55%;
         margin-left: 30%;
         border-radius: 5px;
@@ -223,7 +232,7 @@
 
 
     #myForm button,
-    #myForm input[type=submit], #upload-profile, #upload-profile-label {
+    #myForm input[type=submit] {
         width: 55%;
     }
 
