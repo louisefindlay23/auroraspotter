@@ -65,6 +65,32 @@ function changePassword() {
 
 }
 
+
+//function to load aurora status
+function loadAurora(){
+
+    //link to aurora watch status
+    var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
+    //link to aurora watch status and solar activity plots
+    var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="https://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
+
+    //function to load an appriopriate content
+    function loadStatus() {
+        //on mobile devices display only the aurora watch uk alert status
+        if (window.innerWidth < 1280) {
+            document.getElementById('aurora_status').innerHTML = mobile_content;
+        }
+        //on bigger screens display the plots provided by aurora watch uk
+        else {
+            document.getElementById('aurora_status').innerHTML = other_devices;
+        }
+    }
+    loadStatus();
+    //detect change of the screen size and reload the appropriate element
+    window.addEventListener('resize', loadStatus);
+}
+
+
 //hash the password on client-side
 $(document).ready(function(){
 $('#myForm').on('submit', function(){
@@ -84,10 +110,6 @@ $('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
  var pass = $('#lpassword').val();
 $('#lpassword').val(CryptoJS.MD5(pass).toString());
 });
-    
-    
-    
-    
                 });
 
 
