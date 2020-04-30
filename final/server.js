@@ -71,10 +71,10 @@ app.get('/', function (req, res) {
     var isLogged = req.session.loggedin;
     // get the details of the latest photo uploaded
     db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-    console.log(result);
+    console.log("Uploaded aurora photo details" + result);
    // get the filename of the latest photo uploaded
    var arrayphoto = result[0].filename;
-   console.log(arrayphoto);
+   console.log("From db - aurora photo details" + arrayphoto);
     //render the index page and pass the filename of the latest photo uploaded as a variable
    res.render("pages/index",{photo: arrayphoto, isLoggedIn: isLogged});  
 });
@@ -83,8 +83,10 @@ app.get('/', function (req, res) {
 // change password route
 app.get('/change-password', function (req, res) {
     var isLogged = req.session.loggedin;
-    res.render('pages/change-password', {isLoggedIn: isLogged});
+    var msg = '';
+    res.render('pages/change-password', {changepass_error: msg, isLoggedIn: isLogged});
 });
+
 
 // login route
 app.get('/login', function (req, res) {
@@ -98,35 +100,50 @@ app.get('/login', function (req, res) {
 
 // profile route
 app.get('/profile', function (req, res) {
+
     //Login status
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
-    console.log(loggedUser);
-  
-    // get requested user by the username
-    db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
-        console.log(user);
-        // get user's details
-        var username = user[0].username;
-        var email = user[0].email;
-        console.log(username);
-        console.log(email);
-        // get the details of the latest photo uploaded
-        db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
-        console.log(user);
-        // get the filename of the latest photo uploaded
-        var arrayphoto = user[0].filename;
-        console.log(arrayphoto);
-        // render the index page and pass the filename of the latest photo uploaded as a variable
-        res.render('pages/profile', {
-            profilephoto: arrayphoto,
-            username: username,
-            email: email,
-            isLoggedIn: isLogged
-    });
-});
-});
-});
+    console.log("Username is" + loggedUser);
+    
+     // get observations for the username
+    db.collection('observations').find({username: loggedUser}).toArray(function (err, observation) {
+        console.log("Observation is:" + observation);
+        //get observation details
+        var date = observation[0].date;
+        var time = observation[0].time;
+        var longitude = observation[0].longitude;
+        var latitude = observation[0].latitude;
+        var auroraphoto = observation[0].observation_photo;
+
+        var observation_records = [];
+        observation_records.push(date, time, longitude, latitude, auroraphoto);
+        console.log("testing: " + observation_records);
+        
+        // get requested user by the username
+        db.collection('profiles').find({username: loggedUser}).toArray(function (err, user) {
+            console.log("User details" + user);
+            // get user's details
+            var username = user[0].username;
+            var email = user[0].email;
+            var arrayphoto = user[0].filename;
+            console.log("Profile Pic is" + arrayphoto);
+            console.log("Username is" + username);
+            console.log("Email is" + email);
+                
+            // render the profile page and pass the filename of the latest photo uploaded as a variable
+            res.render('pages/profile', {
+                profilephoto: arrayphoto,
+                username: username,
+                email: email,
+                isLoggedIn: isLogged,
+                observation_records: observation
+               });
+            });
+          });
+      });
+
+
 
 // settings route
 app.get('/settings', function (req, res) {
@@ -134,7 +151,7 @@ app.get('/settings', function (req, res) {
     res.render('pages/settings', {isLoggedIn: isLogged});
 });
 
-// change password route
+// signup route
 
 app.get('/signup', function (req, res) {
     var msg = '';
@@ -145,9 +162,13 @@ app.get('/signup', function (req, res) {
 // upload photo routes
 
 app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
-  // req.file is the `photo` file
-    console.log(req.file);
-    console.log(req.file.filename);
+
+    //Think a if req.file = “” redirect to / and set vars as # should do it
+
+   
+    // req.file is the `photo` file
+    console.log("Uploaded aurora photo details" + req.file);
+    console.log("Upload aurora photo filename" + req.file.filename);
     var photofile = req.file;
 
     // resize image to 235px width
@@ -166,6 +187,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     });
 
     res.redirect("/");
+    
 });
 
 //registration form handler
@@ -202,11 +224,6 @@ app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
                    }); return;
             }
             else{
-                //create new user and insert into database
-                var user_details = {"username":name,"email":email,"password": password};
-                db.collection('profiles').save(user_details, function(err, result){
-                    if(err) throw err;
-                })
                 //save the photo
                 // req.file is the `photo` file
                 var photofile = req.file;
@@ -228,13 +245,14 @@ app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
         fs.writeFile(req.file.path, buffer, function(e) {
         });
     });
+                //create new user and insert into database
+                console.log("Upload Profile Photo filename" + req.file.filename);
+                var user_details = {"username":name,"email":email,"password": password,"filename":req.file.filename};
+                db.collection('profiles').save(user_details, function(err, result){
+                    if(err) throw err;
+                    res.redirect('/login');
+                });
 
-    // save image file details in db
-    db.collection('profile-photo').save(photofile, function(err, result) {
-    if (err) throw err;
-    console.log('Profile photo saved to the database');
-    res.redirect("/login");
-    });
             }
             }
         });
@@ -266,8 +284,10 @@ app.post('/dologin', function(req,res){
                    }); return;}
         if(result.password == password){
             req.session.loggedin = true; 
-            req.session.username = result._id;
-            console.log(req.session.username);
+            req.session.username = result.username;
+
+            console.log("This is the username:" + req.session.username);
+
             res.redirect('/');
         }else{
               error_msg = 'The username or password you entered are incorrect';
@@ -278,10 +298,68 @@ app.post('/dologin', function(req,res){
         });
     });
 
+//password change handler
+app.post('/changePassword', function(req, res){
+   var  newPass = req.body.newpassword;
+   var newPassConf = req.body.confirmpassword;
+    var isLogged = req.session.loggedin;
+   var error_msg = '';
+    
+    console.log('test changePassword');
+    
+    if(newPass== '' || newPassConf == ''){
+        console.log('fields missing');
+        error_msg = 'Please enter new password';
+                   res.render('pages/change-password', {
+                       changepass_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+    }
+    else if(newPass != newPassConf){
+        console.log('passwords different');
+        error_msg = 'Passwords do not match';
+                   res.render('pages/change-password', {
+                       changepass_error: error_msg,
+                        isLoggedIn: isLogged
+                   }); return;
+    }
+    else{
+        var user = req.session.username;
+        db.collection('profiles').updateOne(({"username": user}), ({$set: {"password": newPass}}), function(err, result){
+            if (err) throw err;
+            req.session.loggedin = false;
+            res.redirect('/login');
+        });
+    }
+});
+
+
 //signout handler
 app.get('/signout', function(req,res){
     req.session.loggedin = false;
     var isLogged = req.session.loggedin;
     req.session.username = null;
     res.redirect('/');
+});
+
+
+
+//map
+
+app.get('/getObservations', function(req,res){
+    db.collection('observations').find().toArray(function(err, result){
+        if (err) throw err;
+        console.log(("Get observation result" + result));
+        res.send(result);
+    });
+    
+});
+
+//send information is the user logged in to the browser
+app.get('/getIsLogged', function(req,res){
+    var isLogged = false;
+    if(req.session.loggedin==true){
+        isLogged = true;
+    }
+    res.send(isLogged); 
 });

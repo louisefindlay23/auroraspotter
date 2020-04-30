@@ -42,132 +42,109 @@ $(document).ready(function () {
 
 });
 
-// function to hide menu elements
-function hideElements() {
-}
 
 
-/* SIGN UP */
+//function to load aurora status
+function loadAurora(){
 
-//function triggered when user clicks the sign up button
-//handles the form validation
-//temporarily saves the data in the browser's local storage to simulate the user interaction before back-end implemented
+    //link to aurora watch status
+    var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
+    //link to aurora watch status and solar activity plots
+    var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="https://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
 
-function signUp() {
-}
-
-
-
-/* PASSWORD CHANGE */
-
-//function called when user submits the form on the PasswordChange page
-function changePassword() {
-
-    //get user's input
-    var newPwd = document.getElementById('newPwd').value;
-    var newPwdConf = document.getElementById('newPwdConf').value;
-
-    //get username of the person logged in from the local storage
-    var login = JSON.parse(localStorage.getItem('userID'));
-
-    //get the list of the users
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
-
-    //DOM Element to display error msges
-    var error_holder = document.getElementById('passchange-error');
-
-    //prevent page refreshing on button click
-    var form = document.getElementById("passChange");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-    //check new password field is not empty
-    if (newPwd == '') {
-        //display error msg if passwords dont match
-        error_holder.innerHTML = 'Enter new password below';
-    }
-
-    //check the passwords are the same
-    else if (newPwd != newPwdConf) {
-        error_holder.innerHTML = 'Passwords entered must be identical';
-    }
-
-    //update user's password; save encrypted in the local storage (temporary solution)
-    else {
-        var pass_hash = CryptoJS.MD5(newPwd).toString();
-        for (var i in usersSaved) {
-            if (usersSaved[i].username == login) {
-                usersSaved[i].password = pass_hash;
-                localStorage.removeItem('users');
-                localStorage.setItem('users', JSON.stringify(usersSaved));
-                setTimeout(function () {
-                    document.location.href = "settings.html"
-                }, 500);
-            }
+    //function to load an appriopriate content
+    function loadStatus() {
+        //on mobile devices display only the aurora watch uk alert status
+        if (window.innerWidth < 1280) {
+            document.getElementById('aurora_status').innerHTML = mobile_content;
         }
-
+        //on bigger screens display the plots provided by aurora watch uk
+        else {
+            document.getElementById('aurora_status').innerHTML = other_devices;
+        }
     }
+    loadStatus();
+    //detect change of the screen size and reload the appropriate element
+    window.addEventListener('resize', loadStatus);
 }
 
+
+//hash the password on client-side
+$(document).ready(function(){
+$('#myForm').on('submit', function(){
+ var pass = $('#rpassword').val();
+var pass_conf = $('#rpassConf').val();
+$('#rpassword').val(CryptoJS.MD5(pass).toString());
+$('#rpassConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    $('#passChange').on('submit', function(){
+ var pass = $('#newPwd').val();
+var pass_conf = $('#newPwdConf').val();
+$('#newPwd').val(CryptoJS.MD5(pass).toString());
+$('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    
+      $('#login-form').on('submit', function(){
+ var pass = $('#lpassword').val();
+$('#lpassword').val(CryptoJS.MD5(pass).toString());
+});
+                });
 
 
 
 /* Create Profile Page content */
 
-function profileContent() {
-    //get user's details
-    var usersList = JSON.parse(localStorage.getItem('users'));
-    if (usersList == null) {
-        usersList = [];
-    }
-    var username = JSON.parse(localStorage.getItem('userID'));
-    if (username == null) {
-        username = '';
-    }
-    var user_email = '';
+// function profileContent() {
+//     //get user's details
+//     var usersList = JSON.parse(localStorage.getItem('users'));
+//     if (usersList == null) {
+//         usersList = [];
+//     }
+//     var username = JSON.parse(localStorage.getItem('userID'));
+//     if (username == null) {
+//         username = '';
+//     }
+//     var user_email = '';
 
-    //DOM Elements
-    // var username_cont = document.getElementById('profile-user');
-    // var email_cont = document.getElementById('profile-email');
-    var observation_records = JSON.parse(localStorage.getItem('observations'));
-    var new_table = '';
-    var diary_cont = document.getElementById('diary');
-    if (observation_records == null) {
-         observation_records = [];
-     }
+//     //DOM Elements
+//     // var username_cont = document.getElementById('profile-user');
+//     // var email_cont = document.getElementById('profile-email');
+//     var observation_records = JSON.parse(localStorage.getItem('observations'));
+//     var new_table = '';
+//     var diary_cont = document.getElementById('diary');
+//     if (observation_records == null) {
+//          observation_records = [];
+//      }
 
-    // var diary_empty = true;
+//     // var diary_empty = true;
 
-    //display user's email and username on the screen
-    // for (var i in usersList) {
-    //     if (usersList[i].username == username) {
-    //         user_email = usersList[i].email;
-    //         //display user details on the screen
-    //         username_cont.innerHTML = username;
-    //         email_cont.innerHTML = user_email;
-    //     }
-    // }
+//     //display user's email and username on the screen
+//     // for (var i in usersList) {
+//     //     if (usersList[i].username == username) {
+//     //         user_email = usersList[i].email;
+//     //         //display user details on the screen
+//     //         username_cont.innerHTML = username;
+//     //         email_cont.innerHTML = user_email;
+//     //     }
+//     // }
 
-    //create a table with user's observation details on the screen
-    for (var i in observation_records) {
-        if (observation_records[i].username == username) {
-            new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
-                ', ' + observation_records[i].longitude.toPrecision(5) + '</td><td>'+ observation_records[i].observation_photo + '</td></tr>';
-            diary_empty = false;
-        }
-    }
+//     //create a table with user's observation details on the screen
+//     for (var i in observation_records) {
+//         if (observation_records[i].username == username) {
+//             new_table += '<tr><td>' + observation_records[i].date + '</td><td>' + observation_records[i].time + '</td><td>' + observation_records[i].latitude.toPrecision(5) +
+//                 ', ' + observation_records[i].longitude.toPrecision(5) + '</td><td>'+ observation_records[i].observation_photo + '</td></tr>';
+//             diary_empty = false;
+//         }
+//     }
 
-    //display data on the screen
-    //if no observations saved, display a msg
-    if (diary_empty == true) {
-        diary_cont.insertAdjacentHTML('beforeend', '<p style="margin-top:20%; text-align: center;">Nothing to display here!</p>');
-    }
-    //otherwise display a table with user's observation details
-    else {
-        diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">' +
-            new_table + " </tbody></table>");
-    }
-}
+//     //display data on the screen
+//     //if no observations saved, display a msg
+//     if (diary_empty == true) {
+//         diary_cont.insertAdjacentHTML('beforeend', '<p style="margin-top:20%; text-align: center;">Nothing to display here!</p>');
+//     }
+//     //otherwise display a table with user's observation details
+//     else {
+//         diary_cont.insertAdjacentHTML('beforeend', ' <table id="diary-tbl"><thead><tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">' +
+//             new_table + " </tbody></table>");
+//     }
+// }

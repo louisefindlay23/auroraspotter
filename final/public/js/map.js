@@ -26,14 +26,13 @@ var marker;
 /*add the map to the screen */
 function loadMap() {
 
-    //test data to more markers at different locations
-    var test_observation1 = new Observation('test1', 57.1945, -3.8238, '23/05/2019', '23:25', "<img src='../img/uploads/aurora/aurora-1.jpg'>");
-    var test_observation2 = new Observation('test2', 58.331486, -4.438113, '21/10/2019', '11:25', "<img src='../img/uploads/aurora/aurora-2.jpg'>");
-    var test_observation3 = new Observation('test3', 55.176515, -4.174233, '11/10/2007', '01:15',  "<img src='../img/uploads/aurora/aurora-3.jpg'>");
-    var test_observation4 = new Observation('test4', 55.176515, -4.174233, '11/11/2015', '21:15',  "<img src='../img/uploads/aurora/aurora-4.jpg'>");
-
-    //get observations details from the local storage
-    var observation_records = JSON.parse(localStorage.getItem('observations'));
+   var observation_records;
+    //get observations details from the database
+    $.getJSON('/getObservations', function(data){
+        observation_records = data;
+        console.log(observation_records);
+    
+    
 
     //if no observations saved set observation_record to an empty array
     if (observation_records == null) {
@@ -41,7 +40,6 @@ function loadMap() {
     }
 
     //add test data to the observation_records array
-    observation_records.push(test_observation1, test_observation2, test_observation3, test_observation4);
 
     //for each observation create a marker and add it to the map
     //add pop ups to be displayed when user clicks on the marker with informations about username, date, time and the coordinates for the location
@@ -56,9 +54,10 @@ function loadMap() {
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
         marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + observation_records[i].observation_photo);
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + "<img src=../img/uploads/aurora/" + observation_records[i].observation_photo + ">");
         marker.on('click', onMapClick);
     }
+        });
 
     /* display a weather forecast for the chosen location when user clicks on the map */
 
@@ -84,11 +83,13 @@ function loadMap() {
 
 //function called when user clicks 'Record Observation' button
 function recordClicked() {
-
-    //get data from local storage to check is the user logged in
-    var is_logged = JSON.parse(localStorage.getItem('logged'));
-
-    //if user not logged in promt to log in, if they are call the function to save their location
+    
+    //get information from server is the user logged in
+    var is_logged = false;
+    $.getJSON('/getIsLogged', function(data){
+        is_logged = data;
+        console.log(is_logged);
+        //if user not logged in promt to log in, if they are call the function to save their location
     if (!is_logged || is_logged == null) {
         $("#record-not-logged").fadeIn();
         $("#record-not-logged").css("display", "inline-block");
@@ -97,6 +98,7 @@ function recordClicked() {
     } else {
         recordNewLoc();
     }
+    });
 }
 
 //display popup box with info that will be saved for user confirmation
@@ -133,9 +135,6 @@ function recordNewLoc() {
         //Display txt in the popup box
         popup_txt_cont.innerHTML = conf_txt;
         var current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
-
-        //save observation info in the local storage
-        localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
     }
 
     //Display an error msg prompting user to allow geolocation permissions in case they werent granted
@@ -150,7 +149,6 @@ function recordNewLoc() {
 
 //close popup if user clicks on Cancel button and remove the new entry data from the local storage
 function cancelLocation() {
-    localStorage.removeItem('current_user_details');
     document.getElementById('new-popup').style.display = 'none';
     $("#overlay").remove();
 }
