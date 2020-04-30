@@ -143,6 +143,8 @@ app.get('/profile', function (req, res) {
           });
       });
 
+
+
 // settings route
 app.get('/settings', function (req, res) {
     var isLogged = req.session.loggedin;
@@ -163,9 +165,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
 
     //Think a if req.file = “” redirect to / and set vars as # should do it
 
-    if (req.file = "") {
-} else {
-
+   
     // req.file is the `photo` file
     console.log("Uploaded aurora photo details" + req.file);
     console.log("Upload aurora photo filename" + req.file.filename);
@@ -187,7 +187,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     });
 
     res.redirect("/");
-    }
+    
 });
 
 //registration form handler
@@ -351,8 +351,15 @@ app.get('/getObservations', function(req,res){
         if (err) throw err;
         console.log(("Get observation result" + result));
         res.send(result);
-        
-    })
+    });
     
-})
+});
 
+//send information is the user logged in to the browser
+app.get('/getIsLogged', function(req,res){
+    var isLogged = false;
+    if(req.session.loggedin==true){
+        isLogged = true;
+    }
+    res.send(isLogged); 
+});

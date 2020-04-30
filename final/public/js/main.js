@@ -42,28 +42,6 @@ $(document).ready(function () {
 
 });
 
-// function to hide menu elements
-function hideElements() {
-}
-
-
-/* SIGN UP */
-
-//function triggered when user clicks the sign up button
-//handles the form validation
-//temporarily saves the data in the browser's local storage to simulate the user interaction before back-end implemented
-
-function signUp() {
-}
-
-
-
-/* PASSWORD CHANGE */
-
-//function called when user submits the form on the PasswordChange page
-function changePassword() {
-
-}
 
 
 //function to load aurora status
