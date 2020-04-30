@@ -82,6 +82,7 @@ app.get('/', function (req, res) {
 
 // change password route
 app.get('/change-password', function (req, res) {
+     if(!req.session.loggedin){res.redirect('/login');return;}
     var isLogged = req.session.loggedin;
     var msg = '';
     res.render('pages/change-password', {changepass_error: msg, isLoggedIn: isLogged});
@@ -100,7 +101,7 @@ app.get('/login', function (req, res) {
 
 // profile route
 app.get('/profile', function (req, res) {
-
+     if(!req.session.loggedin){res.redirect('/login');return;}
     //Login status
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
@@ -144,41 +145,10 @@ app.get('/profile', function (req, res) {
       });
 
 
-// save observation on database  
-app.post('/put-marker', upload.single('observation'), function (req, res, next) {
-    var isLogged = req.session.loggedin;
-    var error_msg = '';
-    // check if user logged in
-    if (!isLogged) {      
-      error_msg = "Please login to tag the location";
-              res.render('pages/login', {
-                       tagging_error: error_msg,
-                        isLoggedIn: isLogged
-                   }); return;
-    } else {
-      // get location tag variables
-      var username = req.body.username;
-      var date = req.body.date;
-      var time = req.body.time;
-      var latitude = req.body.latitude;
-      var longitude = req.body.longitude;
-      var observation_photo = req.body.observation_photo;
-      
-      db.collection('observations').updateOne(({"username": username}), ({$set: { "date": date,
-                                                                                  "time": time,
-                                                                                   "latitude": latitude,
-                                                                                  "longitude": longitude,
-                                                                                  "observation_photo": observation_photo} })), function(err, result){
-            if(err) throw err; 
-               req.session.loggedin = false;
-               res.redirect('/');
-              }
-        }
-});
-
-
 // settings route
 app.get('/settings', function (req, res) {
+     if(!req.session.loggedin){res.redirect('/login');return;}
+
     var isLogged = req.session.loggedin;
     res.render('pages/settings', {isLoggedIn: isLogged});
 });
@@ -248,7 +218,8 @@ app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
     var error_msg = '';
     var isLogged = req.session.loggedin;
     
-    if(name == '' || password == '' || email == '' || pass_conf==''){
+    //d41d8cd98f00b204e9800998ecf8427e is an MD5 hash of empty string
+    if(name == '' || password == '' || email == '' || pass_conf=='' || pass_conf == 'd41d8cd98f00b204e9800998ecf8427e' || password == 'd41d8cd98f00b204e9800998ecf8427e'){
         error_msg = 'Please provide all details';
                    res.render('pages/signup', {
                        signup_error: error_msg,
@@ -314,7 +285,9 @@ app.post('/dologin', function(req,res){
     var error_msg = '';
     var isLogged = req.session.loggedin;
     
-    if(name == '' || password == ''){
+    
+    //d41d8cd98f00b204e9800998ecf8427e is MD5hash for empty string
+    if(name == '' || password == '' || password == 'd41d8cd98f00b204e9800998ecf8427e'){
         error_msg = 'Please enter your username and password';
                    res.render('pages/login', {
                        login_error: error_msg,
@@ -355,7 +328,8 @@ app.post('/changePassword', function(req, res){
     
     console.log('test changePassword');
     
-    if(newPass== '' || newPassConf == ''){
+    //d41d8cd98f00b204e9800998ecf8427e is MD5 hash for empty string
+    if(newPass== '' || newPassConf == '' || newPass== 'd41d8cd98f00b204e9800998ecf8427e' || newPassConf == 'd41d8cd98f00b204e9800998ecf8427e'){
         console.log('fields missing');
         error_msg = 'Please enter new password';
                    res.render('pages/change-password', {
