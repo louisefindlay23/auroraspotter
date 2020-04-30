@@ -29,10 +29,13 @@ const key = "bba7e5b7d4db7564662712e34db2cb37";
 
 // Check if Geolocation services are available in the browser
 if('geolocation' in navigator){
-      var latitude = ('myLatitude', '57.1189003');
-      var longitude = ('myLongitude', '-2.1351575');
-      getWeather(latitude,longitude);
-    }
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+
+function showPosition(position) {
+ var latitude = position.coords.latitude;
+ var longitude =  position.coords.longitude;
+    getWeather(latitude,longitude);
 
 // Make an API call with api key to get a weather forecast
 function getWeather(latitude, longitude) {
@@ -53,6 +56,7 @@ function getWeather(latitude, longitude) {
         .then(function () {
             displayWeather(); // when Promise resolve, call displayWeather() to update UI
         });
+}
 }
 
 // Updates innerHTML of HTML elements and displays weather forecast
