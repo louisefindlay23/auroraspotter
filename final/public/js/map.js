@@ -27,8 +27,7 @@ var marker;
 function loadMap() {
 
    var observation_records;
-    //get observations details from the local storage
-    //var observation_records = JSON.parse(localStorage.getItem('observations'));
+    //get observations details from the database
     $.getJSON('/getObservations', function(data){
         observation_records = data;
         console.log(observation_records);
@@ -84,11 +83,13 @@ function loadMap() {
 
 //function called when user clicks 'Record Observation' button
 function recordClicked() {
-
-    //get data from local storage to check is the user logged in
-    var is_logged = JSON.parse(localStorage.getItem('logged'));
-
-    //if user not logged in promt to log in, if they are call the function to save their location
+    
+    //get information from server is the user logged in
+    var is_logged = false;
+    $.getJSON('/getIsLogged', function(data){
+        is_logged = data;
+        console.log(is_logged);
+        //if user not logged in promt to log in, if they are call the function to save their location
     if (!is_logged || is_logged == null) {
         $("#record-not-logged").fadeIn();
         $("#record-not-logged").css("display", "inline-block");
@@ -97,6 +98,7 @@ function recordClicked() {
     } else {
         recordNewLoc();
     }
+    });
 }
 
 //display popup box with info that will be saved for user confirmation
@@ -133,9 +135,6 @@ function recordNewLoc() {
         //Display txt in the popup box
         popup_txt_cont.innerHTML = conf_txt;
         var current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
-
-        //save observation info in the local storage
-        localStorage.setItem('current_user_details', JSON.stringify(current_user_details));
     }
 
     //Display an error msg prompting user to allow geolocation permissions in case they werent granted
@@ -150,7 +149,6 @@ function recordNewLoc() {
 
 //close popup if user clicks on Cancel button and remove the new entry data from the local storage
 function cancelLocation() {
-    localStorage.removeItem('current_user_details');
     document.getElementById('new-popup').style.display = 'none';
     $("#overlay").remove();
 }
