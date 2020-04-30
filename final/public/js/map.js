@@ -139,7 +139,7 @@ function recordNewLoc() {
         $('#ob_date').val(current_date);
 
         //Display observation data for review before they submit a new observation
-        var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0] + ', ' + user_loc[1] +
+        var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0].toPrecision(5) + ', ' + user_loc[1].toPrecision(5) +
             '<br>Date: ' + current_date + '<br>Time: ' + current_time;
 
         //Display txt in the popup box
