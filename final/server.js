@@ -110,13 +110,15 @@ app.get('/profile', function (req, res) {
     db.collection('observations').find({username: loggedUser}).toArray(function (err, observation) {
         console.log("Observation is: "+ observation);
         // get observation details
-        // var date = observation[0].date;
-        // var time = observation[0].time;
-        // var coordinates = observation[0].coordinates;
-        // var longitude = observation[0].longitude;
-        // var latitude = observation[0].latitude;
-        // var auroraphoto = observation[0].auroraphoto;
-                 
+         var date = observation[0].date;
+         var time = observation[0].time;
+         var longitude = observation[0].longitude;
+         var latitude = observation[0].latitude;
+         var auroraphoto = observation[0].observation_photo;
+
+        var observation_records = [];
+        observation_records.push(date, time, longitude, latitude, auroraphoto);
+        console.log("testing: "+observation_records);
         
         // get requested user by the username
         db.collection('profiles').find({username: loggedUser}).toArray(function (err, user) {
