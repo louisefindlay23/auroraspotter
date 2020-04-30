@@ -71,10 +71,10 @@ app.get('/', function (req, res) {
     var isLogged = req.session.loggedin;
     // get the details of the latest photo uploaded
     db.collection('photo').find({}).sort({'_id':-1}).limit(1).toArray(function (err, result) {
-    console.log(result);
+    console.log("Uploaded aurora photo details" + result);
    // get the filename of the latest photo uploaded
    var arrayphoto = result[0].filename;
-   console.log(arrayphoto);
+   console.log("From db - aurora photo details" + arrayphoto);
     //render the index page and pass the filename of the latest photo uploaded as a variable
    res.render("pages/index",{photo: arrayphoto, isLoggedIn: isLogged});  
 });
@@ -104,36 +104,32 @@ app.get('/profile', function (req, res) {
     //Login status
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
-    console.log(loggedUser);
+    console.log("Username is" + loggedUser);
     
      // get observations for the username
     db.collection('observations').find({username: loggedUser}).toArray(function (err, observation) {
-        console.log(observation);
-        // get observation details
+        console.log("Observation is:" + observation);
+        //get observation details
         var date = observation[0].date;
         var time = observation[0].time;
-        var coordinates = observation[0].coordinates;
-//         var longitude = observation[0].longitude;
-//         var latitude = observation[0].latitude;
-        var auroraphoto = observation[0].auroraphoto;
-                 
+        var longitude = observation[0].longitude;
+        var latitude = observation[0].latitude;
+        var auroraphoto = observation[0].observation_photo;
+
+        var observation_records = [];
+        observation_records.push(date, time, longitude, latitude, auroraphoto);
+        console.log("testing: " + observation_records);
         
         // get requested user by the username
         db.collection('profiles').find({username: loggedUser}).toArray(function (err, user) {
-            console.log(user);
+            console.log("User details" + user);
             // get user's details
             var username = user[0].username;
             var email = user[0].email;
-            console.log(username);
-            console.log(email);
-            
-            // get the details of the latest photo uploaded
-            db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
-            console.log(user);
-                
-            // get the filename of the latest photo uploaded
             var arrayphoto = user[0].filename;
-            console.log(arrayphoto);
+            console.log("Profile Pic is" + arrayphoto);
+            console.log("Username is" + username);
+            console.log("Email is" + email);
                 
             // render the profile page and pass the filename of the latest photo uploaded as a variable
             res.render('pages/profile', {
@@ -146,9 +142,6 @@ app.get('/profile', function (req, res) {
             });
           });
       });
-});
-
-
 
 // settings route
 app.get('/settings', function (req, res) {
@@ -174,8 +167,8 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
 } else {
 
     // req.file is the `photo` file
-    console.log(req.file);
-    console.log(req.file.filename);
+    console.log("Uploaded aurora photo details" + req.file);
+    console.log("Upload aurora photo filename" + req.file.filename);
     var photofile = req.file;
 
     // resize image to 235px width
@@ -253,7 +246,7 @@ app.post('/uploadProfile', upload.single('profile'), function (req, res, next) {
         });
     });
                 //create new user and insert into database
-                console.log(req.file.filename);
+                console.log("Upload Profile Photo filename" + req.file.filename);
                 var user_details = {"username":name,"email":email,"password": password,"filename":req.file.filename};
                 db.collection('profiles').save(user_details, function(err, result){
                     if(err) throw err;
@@ -356,7 +349,7 @@ app.get('/signout', function(req,res){
 app.get('/getObservations', function(req,res){
     db.collection('observations').find().toArray(function(err, result){
         if (err) throw err;
-        console.log((result));
+        console.log(("Get observation result" + result));
         res.send(result);
         
     })

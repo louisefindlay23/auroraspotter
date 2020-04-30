@@ -20,8 +20,8 @@
             <tr>
                 <td><%= obsr.date %></td>
                 <td><%= obsr.time %></td>
-                <td><%= obsr.coordinates.latitude %> , <%= obsr.coordinates.longitude %></td>
-                <td><%= obsr.auroraphoto %></td>
+                <td><%= obsr.latitude %> , <%= obsr.longitude %></td>
+                <td><img id="aurora_photo" src="../img/uploads/aurora/<%= obsr.observation_photo %>"></td>
             </tr>
         <% }); %>
                 
