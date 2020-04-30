@@ -33,19 +33,19 @@ $(document).ready(function () {
     $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
 
     // Change input file text to name of file
-    $('#upload-aurora').change(function() {
-         $("#upload-aurora-label").text(this.files[0].name);
-});
-    $('#upload-profile').change(function() {
-         $("#upload-profile-label").text(this.files[0].name);
-});
+    $('#upload-aurora').change(function () {
+        $("#upload-aurora-label").text(this.files[0].name);
+    });
+    $('#upload-profile').change(function () {
+        $("#upload-profile-label").text(this.files[0].name);
+    });
 
 });
 
 
 
 //function to load aurora status
-function loadAurora(){
+function loadAurora() {
 
     //link to aurora watch status
     var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
@@ -69,25 +69,27 @@ function loadAurora(){
 }
 
 
-//hash the password on client-side
-$(document).ready(function(){
-$('#myForm').on('submit', function(){
- var pass = $('#rpassword').val();
-var pass_conf = $('#rpassConf').val();
-$('#rpassword').val(CryptoJS.MD5(pass).toString());
-$('#rpassConf').val(CryptoJS.MD5(pass_conf).toString());
+//hash the password on client-side for sign up, login and change password forms
+//MD5 hashing is not the best solution, but still better than storing plane text on the server
+//on form submission, prevent default action and convert the user's entry to MD5 hash value
+$(document).ready(function () {
+    $('#myForm').on('submit', function () {
+        var pass = $('#rpassword').val();
+        var pass_conf = $('#rpassConf').val();
+        $('#rpassword').val(CryptoJS.MD5(pass).toString());
+        $('#rpassConf').val(CryptoJS.MD5(pass_conf).toString());
+    });
+    $('#passChange').on('submit', function () {
+        var pass = $('#newPwd').val();
+        var pass_conf = $('#newPwdConf').val();
+        $('#newPwd').val(CryptoJS.MD5(pass).toString());
+        $('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
+    });
+
+    $('#login-form').on('submit', function () {
+        var pass = $('#lpassword').val();
+        $('#lpassword').val(CryptoJS.MD5(pass).toString());
+    });
 });
-    $('#passChange').on('submit', function(){
- var pass = $('#newPwd').val();
-var pass_conf = $('#newPwdConf').val();
-$('#newPwd').val(CryptoJS.MD5(pass).toString());
-$('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
-});
-    
-      $('#login-form').on('submit', function(){
- var pass = $('#lpassword').val();
-$('#lpassword').val(CryptoJS.MD5(pass).toString());
-});
-                });
 
 
