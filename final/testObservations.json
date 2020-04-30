@@ -1,3 +1,3 @@
-{username: "Test", latitude: 58.331486, longitude: -4.438113, date: "21/10/2019", time: "11:25", observation_photo: "<img src='../img/uploads/aurora/aurora-2.jpg'>"}
-{username: "Test", latitude: 58.331486, longitude: -4.438113, date: "21/12/2019", time: "11:20", observation_photo: "<img src='../img/uploads/aurora/aurora-1.jpg'>"}
-{username: "user", latitude: 56.331486, longitude: -2.438113, date: "10/12/2019", time: "08:20", observation_photo: "<img src='../img/uploads/aurora/aurora-3.jpg'>"}
+{"username": "Test", "latitude": 58.331486, "longitude": -4.438113, "date": "21/10/2019", "time": "11:25", "observation_photo": "<img src='../img/uploads/aurora/aurora-2.jpg'>"}
+{"username": "Test", "latitude": 58.331486, "longitude": -4.438113, "date": "21/12/2019", "time": "11:20", "observation_photo": "<img src='../img/uploads/aurora/aurora-1.jpg'>"}
+{"username": "user", "latitude": 56.331486, "longitude": -2.438113, "date": "10/12/2019", "time": "08:20", "observation_photo": "<img src='../img/uploads/aurora/aurora-3.jpg'>"}
