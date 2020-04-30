@@ -54,92 +54,6 @@ function hideElements() {
 //temporarily saves the data in the browser's local storage to simulate the user interaction before back-end implemented
 
 function signUp() {
-
-    //get users input
-    var username = document.getElementById('rusername').value;
-    var email = document.getElementById('remail').value;
-    var password = document.getElementById('rpassword').value;
-    var pwdConf = document.getElementById('rpassConf').value;
-
-    //array to hold list of all users
-    var usersList = [];
-
-    //read the list of users registered and put them in an array
-    //(temporary solution to simulate the user interaction; will be changed during backend implementation due to the security issues)
-    //can cause compatibility issues
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
-    if (usersSaved == null) {
-        usersSaved = [];
-    }
-
-    //boolean to keep track is user in the list
-    var userExist = false;
-
-    //DOM element to display an error msg
-    var error_holder = document.getElementById('error-msg');
-
-    //create user class
-    class User {
-        constructor(username, email, password) {
-            this.username = username;
-            this.email = email;
-            this.password = password;
-        }
-
-        //method to change user's password
-        changePwd(newPwd) {
-            this.password = newPwd;
-        }
-    }
-
-
-    //prevent page refreshing on button click
-    var form = document.getElementById("myForm");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-
-    //check all input fields have been filled up, if not display an error msg
-    if (username == '' || email == '' || pwdConf == '' || password == '') {
-        error_holder.innerHTML = 'Please provide all details';
-    } else if (pwdConf != password) {
-        //display error msg if passwords entered dont match
-        error_holder.innerHTML = 'Passwords entered must be identical';
-    } else {
-        //check does the username already exist
-        if (usersSaved != null) {
-            try {
-                for (var i in usersSaved) {
-                    if (usersSaved[i].username == username) {
-                        userExist = true;
-                        //display an error msg if the username already registered
-                        error_holder.innerHTML = 'The username already registered<br/>Please try a different username';
-                    }
-                }
-            } catch (err) {
-                console.log('no users saved');
-            }
-        } else {
-            console.log('no users saved');
-        }
-
-        //if user not in the list, validate the rest of the form
-        //if input correct, add to the list of users and save in Local Storage
-        if (!userExist) {
-            //encrypt user's password using MD5 (still better than plain text)
-            password = CryptoJS.MD5(password).toString();
-            usersList = usersSaved;
-            let new_user = new User(username, email, password);
-            usersList.push(new_user);
-            localStorage.removeItem('users');
-            localStorage.setItem('users', JSON.stringify(usersList));
-            window.location.href = "/login";
-        }
-
-    }
 }
 
 
@@ -149,67 +63,55 @@ function signUp() {
 //function called when user submits the form on the PasswordChange page
 function changePassword() {
 
-    //get user's input
-    var newPwd = document.getElementById('newPwd').value;
-    var newPwdConf = document.getElementById('newPwdConf').value;
+}
 
-    //get username of the person logged in from the local storage
-    var login = JSON.parse(localStorage.getItem('userID'));
 
-    //get the list of the users
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
+//function to load aurora status
+function loadAurora(){
 
-    //DOM Element to display error msges
-    var error_holder = document.getElementById('passchange-error');
+    //link to aurora watch status
+    var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
+    //link to aurora watch status and solar activity plots
+    var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="https://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
 
-    //prevent page refreshing on button click
-    var form = document.getElementById("passChange");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-    //check new password field is not empty
-    if (newPwd == '') {
-        //display error msg if passwords dont match
-        error_holder.innerHTML = 'Enter new password below';
-    }
-
-    //check the passwords are the same
-    else if (newPwd != newPwdConf) {
-        error_holder.innerHTML = 'Passwords entered must be identical';
-    }
-
-    //update user's password; save encrypted in the local storage (temporary solution)
-    else {
-        var pass_hash = CryptoJS.MD5(newPwd).toString();
-        for (var i in usersSaved) {
-            if (usersSaved[i].username == login) {
-                usersSaved[i].password = pass_hash;
-                localStorage.removeItem('users');
-                localStorage.setItem('users', JSON.stringify(usersSaved));
-                setTimeout(function () {
-                    document.location.href = "settings.html"
-                }, 500);
-            }
+    //function to load an appriopriate content
+    function loadStatus() {
+        //on mobile devices display only the aurora watch uk alert status
+        if (window.innerWidth < 1280) {
+            document.getElementById('aurora_status').innerHTML = mobile_content;
         }
-
+        //on bigger screens display the plots provided by aurora watch uk
+        else {
+            document.getElementById('aurora_status').innerHTML = other_devices;
+        }
     }
+    loadStatus();
+    //detect change of the screen size and reload the appropriate element
+    window.addEventListener('resize', loadStatus);
 }
 
 
-/* SIGN OUT */
+//hash the password on client-side
+$(document).ready(function(){
+$('#myForm').on('submit', function(){
+ var pass = $('#rpassword').val();
+var pass_conf = $('#rpassConf').val();
+$('#rpassword').val(CryptoJS.MD5(pass).toString());
+$('#rpassConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    $('#passChange').on('submit', function(){
+ var pass = $('#newPwd').val();
+var pass_conf = $('#newPwdConf').val();
+$('#newPwd').val(CryptoJS.MD5(pass).toString());
+$('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    
+      $('#login-form').on('submit', function(){
+ var pass = $('#lpassword').val();
+$('#lpassword').val(CryptoJS.MD5(pass).toString());
+});
+                });
 
-//function called when user clicks Log Out btn
-function signout() {
-
-    //change the localStorage logged value to false
-    localStorage.setItem('logged', JSON.stringify(false));
-    localStorage.setItem('userID', JSON.stringify('null'));
-    //redirect the user to the index page
-    window.location.href = "/";
-}
 
 
 /* Create Profile Page content */
