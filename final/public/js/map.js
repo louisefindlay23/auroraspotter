@@ -54,7 +54,7 @@ function loadMap() {
         }
         marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
         marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + observation_records[i].observation_photo);
+            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + "<img src=../img/uploads/aurora/" + observation_records[i].observation_photo + ">");
         marker.on('click', onMapClick);
     }
         });
