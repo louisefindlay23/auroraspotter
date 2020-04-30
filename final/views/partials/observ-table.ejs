@@ -1,0 +1,29 @@
+<!--
+//Project: Aurora
+//Group: DM Web Dev Team
+//TMs: Maya Bonazarova, Louise Findlay, Miriam Wojcik, Brandon Reid
+//Date: 4/4/2020
+//Observation table partial -->
+
+
+<table id="diary-tbl">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Coordinates</th>
+            <th>Photo</th>
+        </tr>
+    </thead>
+    <tbody id="table-content">
+    <% observation_records.forEach(function(obsr) {  %>
+            <tr>
+                <td><%= obsr.date %></td>
+                <td><%= obsr.time %></td>
+                <td><%= obsr.coordinates.latitude %> , <%= obsr.coordinates.longitude %></td>
+                <td><%= obsr.auroraphoto %></td>
+            </tr>
+        <% }); %>
+                
+   </tbody>
+</table>
