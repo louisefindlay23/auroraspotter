@@ -2,7 +2,9 @@
 	date: "13.02.20", 
 	time: "22:30",
     username: "Tester",
-	latitude: "58.331486",
-     longitude: "-4.438113", 
+    coordinates: {
+                    latitude: "58.331486", 
+					longitude: "-4.438113"
+                 }, 
 	auroraphoto: "aurora-318.jpg"
 }

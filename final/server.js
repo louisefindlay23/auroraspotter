@@ -109,13 +109,11 @@ app.get('/profile', function (req, res) {
         // get observation details
         var date = observation[0].date;
         var time = observation[0].time;
-        var longitude = observation[0].longitude;
-        var latitude = observation[0].latitude;
+        var coordinates = observation[0].coordinates;
+//         var longitude = observation[0].longitude;
+//         var latitude = observation[0].latitude;
         var auroraphoto = observation[0].auroraphoto;
-        var coordinates = longitude+"  "+latitude;
-        var observation_records = [];
-        observation_records.push(date, time, coordinates, auroraphoto);
-        console.log("testing: "+observation_records);           
+                 
         
         // get requested user by the username
         db.collection('profiles').find({_id: loggedUser}).toArray(function (err, user) {
@@ -134,14 +132,13 @@ app.get('/profile', function (req, res) {
             var arrayphoto = user[0].filename;
             console.log(arrayphoto);
                 
-            // render the index page and pass the filename of the latest photo uploaded as a variable
-            console.log("last check: "+observation_records);
+            // render the profile page and pass the filename of the latest photo uploaded as a variable
             res.render('pages/profile', {
                 profilephoto: arrayphoto,
                 username: username,
                 email: email,
                 isLoggedIn: isLogged,
-                observation_records: observation_records
+                observation_records: observation
                });
             });
           });
