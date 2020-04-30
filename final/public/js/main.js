@@ -63,55 +63,54 @@ function signUp() {
 //function called when user submits the form on the PasswordChange page
 function changePassword() {
 
-    //get user's input
-    var newPwd = document.getElementById('newPwd').value;
-    var newPwdConf = document.getElementById('newPwdConf').value;
-
-    //get username of the person logged in from the local storage
-    var login = JSON.parse(localStorage.getItem('userID'));
-
-    //get the list of the users
-    var usersSaved = JSON.parse(localStorage.getItem('users'));
-
-    //DOM Element to display error msges
-    var error_holder = document.getElementById('passchange-error');
-
-    //prevent page refreshing on button click
-    var form = document.getElementById("passChange");
-
-    function handleForm(event) {
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-
-    //check new password field is not empty
-    if (newPwd == '') {
-        //display error msg if passwords dont match
-        error_holder.innerHTML = 'Enter new password below';
-    }
-
-    //check the passwords are the same
-    else if (newPwd != newPwdConf) {
-        error_holder.innerHTML = 'Passwords entered must be identical';
-    }
-
-    //update user's password; save encrypted in the local storage (temporary solution)
-    else {
-        var pass_hash = CryptoJS.MD5(newPwd).toString();
-        for (var i in usersSaved) {
-            if (usersSaved[i].username == login) {
-                usersSaved[i].password = pass_hash;
-                localStorage.removeItem('users');
-                localStorage.setItem('users', JSON.stringify(usersSaved));
-                setTimeout(function () {
-                    document.location.href = "settings.html"
-                }, 500);
-            }
-        }
-
-    }
 }
 
+
+//function to load aurora status
+function loadAurora(){
+
+    //link to aurora watch status
+    var mobile_content = '<iframe id ="status-frame" scrolling="no" allowtransparency="true" src="https://aurorawatch.lancs.ac.uk/external/status_text"></iframe>';
+    //link to aurora watch status and solar activity plots
+    var other_devices = '<div class = "frame-cont"><iframe id="plot-frame" scrolling="no" allowtransparency="true" width="550" height="480" src="https://aurorawatch.lancs.ac.uk/external/rolling_status_text"></iframe></div>';
+
+    //function to load an appriopriate content
+    function loadStatus() {
+        //on mobile devices display only the aurora watch uk alert status
+        if (window.innerWidth < 1280) {
+            document.getElementById('aurora_status').innerHTML = mobile_content;
+        }
+        //on bigger screens display the plots provided by aurora watch uk
+        else {
+            document.getElementById('aurora_status').innerHTML = other_devices;
+        }
+    }
+    loadStatus();
+    //detect change of the screen size and reload the appropriate element
+    window.addEventListener('resize', loadStatus);
+}
+
+
+//hash the password on client-side
+$(document).ready(function(){
+$('#myForm').on('submit', function(){
+ var pass = $('#rpassword').val();
+var pass_conf = $('#rpassConf').val();
+$('#rpassword').val(CryptoJS.MD5(pass).toString());
+$('#rpassConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    $('#passChange').on('submit', function(){
+ var pass = $('#newPwd').val();
+var pass_conf = $('#newPwdConf').val();
+$('#newPwd').val(CryptoJS.MD5(pass).toString());
+$('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    
+      $('#login-form').on('submit', function(){
+ var pass = $('#lpassword').val();
+$('#lpassword').val(CryptoJS.MD5(pass).toString());
+});
+                });
 
 
 
