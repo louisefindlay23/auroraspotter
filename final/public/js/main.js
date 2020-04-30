@@ -65,6 +65,30 @@ function changePassword() {
 
 }
 
+//hash the password on client-side
+$(document).ready(function(){
+$('#myForm').on('submit', function(){
+ var pass = $('#rpassword').val();
+var pass_conf = $('#rpassConf').val();
+$('#rpassword').val(CryptoJS.MD5(pass).toString());
+$('#rpassConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    $('#passChange').on('submit', function(){
+ var pass = $('#newPwd').val();
+var pass_conf = $('#newPwdConf').val();
+$('#newPwd').val(CryptoJS.MD5(pass).toString());
+$('#newPwdConf').val(CryptoJS.MD5(pass_conf).toString());
+});
+    
+      $('#login-form').on('submit', function(){
+ var pass = $('#lpassword').val();
+$('#lpassword').val(CryptoJS.MD5(pass).toString());
+});
+    
+    
+    
+    
+                });
 
 
 
