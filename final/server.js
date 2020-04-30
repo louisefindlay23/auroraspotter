@@ -322,3 +322,16 @@ app.get('/signout', function(req,res){
     req.session.username = null;
     res.redirect('/');
 });
+
+
+//map
+
+app.get('/getObservations', function(req,res){
+    db.collection('observations').find().toArray(function(err, result){
+        if (err) throw err;
+        console.log((result));
+        res.send(result);
+        
+    })
+    
+})
