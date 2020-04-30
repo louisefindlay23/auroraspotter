@@ -28,38 +28,38 @@ var marker;
 /*add the map to the screen */
 function loadMap() {
 
-   var observation_records;
+    var observation_records;
     //get observations details from the database
-    $.getJSON('/getObservations', function(data){
+    $.getJSON('/getObservations', function (data) {
         observation_records = data;
         console.log(observation_records);
-    
-    
 
-    //if no observations saved set observation_record to an empty array
-    if (observation_records == null) {
-        observation_records = [];
-    }
 
-    //add test data to the observation_records array
 
-    //for each observation create a marker and add it to the map
-    //add pop ups to be displayed when user clicks on the marker with informations about username, date, time and the coordinates for the location
-
-    for (var i in observation_records) {
-        //count the total number of observations for the point
-        var counter = 0;
-        for (var j in observation_records) {
-            if (observation_records[i].latitude == observation_records[j].latitude && observation_records[i].longitude == observation_records[j].longitude) {
-                counter++;
-            }
+        //if no observations saved set observation_record to an empty array
+        if (observation_records == null) {
+            observation_records = [];
         }
-        marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
-        marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
-            "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + "<img src=../img/uploads/aurora/" + observation_records[i].observation_photo + ">");
-        marker.on('click', onMapClick);
-    }
-        });
+
+
+        //for each observation create a marker and add it to the map
+        //add pop ups to be displayed when user clicks on the marker with informations about username, date, time and the coordinates for the location
+
+        for (var i in observation_records) {
+            //count the total number of observations for the point
+            var counter = 0;
+            for (var j in observation_records) {
+                if (observation_records[i].latitude == observation_records[j].latitude && observation_records[i].longitude == observation_records[j].longitude) {
+                    counter++;
+                }
+            }
+            marker = L.marker([observation_records[i].latitude, observation_records[i].longitude]).addTo(mymap);
+            marker.bindPopup("<b>" + observation_records[i].username + "</b><br>" + observation_records[i].latitude + ", " + observation_records[i].longitude +
+                "<br>" + observation_records[i].date + "<br>" + observation_records[i].time + "<br><b>Number of observations at this location: " + counter + "<img src=../img/uploads/aurora/" + observation_records[i].observation_photo + ">");
+            marker.on('click', onMapClick);
+        }
+    });
+
 
     /* display a weather forecast for the chosen location when user clicks on the map */
 
@@ -81,25 +81,26 @@ function loadMap() {
     mymap.on('click', onMapClick);
 }
 
+
 /* Adding new observations/locations to the map */
 
 //function called when user clicks 'Record Observation' button
 function recordClicked() {
-    
-    //get information from server is the user logged in
+
+    //get information from the server is the user logged in
     var is_logged = false;
-    $.getJSON('/getIsLogged', function(data){
+    $.getJSON('/getIsLogged', function (data) {
         is_logged = data;
         console.log(is_logged);
-        //if user not logged in promt to log in, if they are call the function to save their location
-    if (!is_logged || is_logged == null) {
-        $("#record-not-logged").fadeIn();
-        $("#record-not-logged").css("display", "inline-block");
-        var overlay = jQuery('<div id="overlay"> </div>');
-        overlay.appendTo(document.body);
-    } else {
-        recordNewLoc();
-    }
+        //if user not logged in prompt them to log in, if they are, call the function to save their location
+        if (!is_logged || is_logged == null) {
+            $("#record-not-logged").fadeIn();
+            $("#record-not-logged").css("display", "inline-block");
+            var overlay = jQuery('<div id="overlay"> </div>');
+            overlay.appendTo(document.body);
+        } else {
+            recordNewLoc();
+        }
     });
 }
 
@@ -113,9 +114,9 @@ function recordNewLoc() {
         $("#new-popup").fadeIn();
         document.getElementById('new-popup').style.display = 'inline-block';
         var popup_txt_cont = document.getElementById('popup-msg');
-        
-        
-         //get current date and time
+
+
+        //get current date and time
         var current_date = new Date().toLocaleString("en-GB", {
             year: "numeric",
             day: "2-digit",
@@ -126,25 +127,25 @@ function recordNewLoc() {
             minute: "2-digit"
         });
 
-        //get users location
+        //get the user's location
         var user_loc = [];
         user_loc[0] = position.coords.latitude;
         user_loc[1] = position.coords.longitude;
-        
-        //update hidden form fields
+
+        //update hidden form fields with location and date/time
         $('#long').val(user_loc[1]);
         $('#lat').val(user_loc[0]);
         $('#ob_time').val(current_time);
         $('#ob_date').val(current_date);
 
-        //Display data for used to review before they submit new location
+        //Display observation data for review before they submit a new observation
         var conf_txt = 'Following details will be added to the map and visible to all users:<br><br>Location: ' + user_loc[0] + ', ' + user_loc[1] +
             '<br>Date: ' + current_date + '<br>Time: ' + current_time;
 
         //Display txt in the popup box
         popup_txt_cont.innerHTML = conf_txt;
         current_user_details = [user_loc[0], user_loc[1], current_date, current_time];
-        
+
     }
 
     //Display an error msg prompting user to allow geolocation permissions in case they werent granted
@@ -152,7 +153,7 @@ function recordNewLoc() {
         alert('Please allow geolocation');
     }
 
-    //get users location coordinates
+    //get user's location coordinates
     navigator.geolocation.getCurrentPosition(showPosition, onError);
 }
 
@@ -164,7 +165,7 @@ function cancelLocation() {
 }
 
 /* Storing and displaying new location/observation data */
-/* if the user confirms they want to save the data, store them in the local storage (temporary solution) */
+/* if the user confirms they want to save the data post information to the server, close the pop up window and update the map*/
 function addLocation() {
 
     //close the popup
