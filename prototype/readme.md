@@ -10,6 +10,6 @@ HTML5, CSS3 & JavaScript
 
 jQuery, Leaflet Maps, Mapbox, CryptoJS & Font Awesome
 
-The prototype website is deployed on Github Pages and our own Codio instances.
+The prototype website is deployed through our own Codio instances.
 
 Codio links to follow
