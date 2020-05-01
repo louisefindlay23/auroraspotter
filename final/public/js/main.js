@@ -22,14 +22,6 @@ $(document).ready(function () {
         $("#menu").hide();
     });
 
-    // Table Styling
-    $('table tr').each(function () {
-        $(this).find('th').first().addClass('first');
-        $(this).find('th').last().addClass('last');
-        $(this).find('td').first().addClass('first');
-        $(this).find('td').last().addClass('last');
-    });
-
     $(".leaflet-popup-content img").attr('id', 'uploadedphoto');
 
     // Change input file text to name of file
