@@ -109,43 +109,63 @@ app.get('/profile', function (req, res) {
     //Login status
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
+    // get requested user by the username
+    db.collection('profiles').find({ username: loggedUser }).toArray(function (err, user) {
+        console.log("User details" + user);
+        // get user's details
+        var username = user[0].username;
+        var email = user[0].email;
+        var arrayphoto = user[0].filename;
 
-    // get observations for the username
-    db.collection('observations').find({ username: loggedUser }).toArray(function (err, observation) {
-
-        //get observation details
-        var date = observation[0].date;
-        var time = observation[0].time;
-        var longitude = observation[0].longitude;
-        var latitude = observation[0].latitude;
-        var auroraphoto = observation[0].observation_photo;
-
-        var observation_records = [];
-        observation_records.push(date, time, longitude, latitude, auroraphoto);
-
-        // get requested user by the username
-        db.collection('profiles').find({ username: loggedUser }).toArray(function (err, user) {
-            console.log("User details" + user);
-            // get user's details
-            var username = user[0].username;
-            var email = user[0].email;
-            var arrayphoto = user[0].filename;
-            console.log("Profile Pic is" + arrayphoto);
-            console.log("Username is" + username);
-            console.log("Email is" + email);
-
-            // render the profile page and pass the filename of the latest photo uploaded as a variable
-            res.render('pages/profile', {
-                profilephoto: arrayphoto,
-                username: username,
-                email: email,
-                isLoggedIn: isLogged,
-                observation_records: observation
-            });
+        // render the profile page and pass the filename of the latest photo uploaded as a variable
+        res.render('pages/profile', {
+            profilephoto: arrayphoto,
+            username: username,
+            email: email,
+            isLoggedIn: isLogged
         });
+
     });
 });
 
+
+app.get('/getObervationsData', function (req, res) {
+    var loggedUser = req.session.username;
+    var output;
+    // get user's observations from the db
+    db.collection('observations').find({ username: loggedUser }).toArray(function (err, observation) {
+
+        //if no observations found output no observations msg
+        if (observation.length == 0) {
+            output = '<p style="margin-top:20%; text-align: center;">You have not recorded any Aurora observations yet!</p>';
+        }
+
+        //if user recorded observations get observation details
+        else { 
+            var date = observation[0].date;
+            var time = observation[0].time;
+            var longitude = observation[0].longitude;
+            var latitude = observation[0].latitude;
+            var auroraphoto = observation[0].observation_photo;
+            
+            //output observations data to the table
+            output = '<table id="diary-tbl"><thead> <tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">';
+            for (var i in observation) {
+                date = observation[i].date;
+                time = observation[i].time;
+                longitude = observation[i].longitude;
+                latitude = observation[i].latitude;
+                auroraphoto = observation[i].observation_photo;
+                output += '<tr><td>' + date + '</td><td>' + time + ', ' + latitude + '</td><td>' + longitude
+                    + '</td><td><img id="aurora_photo" src="../img/uploads/aurora/' + auroraphoto + '"/></td></tr>';
+            }
+            output += '</tbody></table>';
+        }
+        res.send(output);
+
+    });
+
+});
 
 // settings route
 app.get('/settings', function (req, res) {
@@ -363,7 +383,6 @@ app.post('/changePassword', function (req, res) {
 
     //display an error msg if passwords entered dont match
     else if (newPass != newPassConf) {
-        console.log('passwords different');
         error_msg = 'Passwords do not match';
         res.render('pages/change-password', {
             changepass_error: error_msg,

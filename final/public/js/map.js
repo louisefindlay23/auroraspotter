@@ -32,8 +32,6 @@ function loadMap() {
     //get observations details from the database
     $.getJSON('/getObservations', function (data) {
         observation_records = data;
-        console.log(observation_records);
-
 
 
         //if no observations saved set observation_record to an empty array
