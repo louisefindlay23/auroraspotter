@@ -53,8 +53,6 @@ Maya Bonazarova (Back-End) = [@mayabonaz](https://github.com/mayabonaz)
 
 ## Useful Links  :link:
 
-Website - [Prototype](https://cm2104-dynamicwebdevelopment.github.io/aurora/prototype/index.html)
-
-Website - Final (TBD)
+Website - Final (https://auroraspotter.space) and our Codio boxes
 
 Project Management - [Glo Boards](https://app.gitkraken.com/glo/board/XkEAXQ6McgARAiGj)
