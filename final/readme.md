@@ -14,4 +14,6 @@ The final version of the site uses a NodeJS backend and EJS template engine, ser
 
 If running on Codio, make sure MongoDB and and the correct version of MongoDB is installed `npm install mongodb@2.2.33`
 
-If starting with an empty database, import some entries: `mongoimport -d usersdb -c photo --file photos.json --jsonArray`
+If you have cannot find modules errors, run `npm install` and if the error persists, `npm install (name of module referenced in the error that it cannot find`
+
+If starting with an empty database, import some entries: `mongoimport -d usersdb -c observations --file testObservations.json --jsonArray` and `mongoimport -d usersdb -c photo --file photos.json --jsonArray`
