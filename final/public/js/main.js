@@ -93,3 +93,13 @@ $(document).ready(function () {
 });
 
 
+//get observations data for profile page
+function getObservations(){
+    $.get('/getObervationsData', function(data){
+        //display data on profile page
+       var holder =  document.getElementById('ob_data');
+        holder.insertAdjacentHTML("beforeend", data);
+       
+    })
+}
+
