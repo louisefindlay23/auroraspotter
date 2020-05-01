@@ -53,6 +53,6 @@ Maya Bonazarova (Back-End) = [@mayabonaz](https://github.com/mayabonaz)
 
 ## Useful Links  :link:
 
-Website - Final (https://auroraspotter.space) and our Codio boxes
+Website - Final - Our Codio boxes
 
 Project Management - [Glo Boards](https://app.gitkraken.com/glo/board/XkEAXQ6McgARAiGj)
