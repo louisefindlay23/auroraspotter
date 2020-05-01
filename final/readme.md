@@ -12,6 +12,8 @@ The final version of the site uses a NodeJS backend and EJS template engine, ser
 
 ## Run Instructions ##
 
+To run, cd into the final folder and then npm start
+
 If running on Codio, make sure MongoDB and and the correct version of MongoDB is installed `npm install mongodb@2.2.33`
 
 If you have cannot find modules errors, run `npm install` and if the error persists, `npm install (name of module referenced in the error that it cannot find`
