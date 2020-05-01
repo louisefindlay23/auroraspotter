@@ -207,9 +207,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     var photofile = req.file;
     
         if(!photofile){
-    console.log('nophoto');
             photo_path = 'default_image.jpg';
-    }
     
     else{
         photo_path = req.file.filename;
