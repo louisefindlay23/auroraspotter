@@ -211,23 +211,53 @@ table td {
     background: var(--grey);
 }
 
-table th {
-    border-top: none;
-}
-
-table .first {
-    border-left: none;
-}
-
-table .last {
-    border-right: none;
-}
-
 td a {
     font-weight: bold;
     color: var(--white);
     text-decoration: underline;
 }
+
+/* Mobile Table Styling */
+
+able, thead, tbody, th, td, tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	tr {
+        margin-bottom: 10%;
+}
+
+	td {
+		/* Behave  like a "row" */
+        display: flex;
+        justify-content: flex-start;
+		position: relative;
+	}
+
+	td:before {
+        width: 50%;
+}
+
+table #aurora_photo {
+    height: 100px;
+}
+
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { content: "Date"; }
+	td:nth-of-type(2):before { content: "Type"; }
+	td:nth-of-type(3):before { content: "Coordinates";}
+	td:nth-of-type(4):before { content: "Photo"; }
+
+/* File Upload Styling */
 
 [type="file"] {
     width: 0 !important;
