@@ -208,7 +208,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     
         if(!photofile){
     console.log('nophoto');
-            photo_path = 'profile-85.jpg';
+            photo_path = 'default_image.jpg';
     }
     
     else{
@@ -242,6 +242,7 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     res.redirect("/");
 
 });
+
 
 
 //registration form handler
