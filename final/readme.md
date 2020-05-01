@@ -18,4 +18,6 @@ If running on Codio, make sure MongoDB and and the correct version of MongoDB is
 
 If you have cannot find modules errors, run `npm install` and if the error persists, `npm install (name of module referenced in the error that it cannot find`
 
+Module you should need are: mongodb, ejs, express, body-parser, express-session, multer, path, sharp and fs.
+
 If starting with an empty database, import some entries: `mongoimport -d usersdb -c observations --file testObservations.json` and `mongoimport -d usersdb -c photo --file photos.json --jsonArray`
