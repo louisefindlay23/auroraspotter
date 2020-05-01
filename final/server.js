@@ -193,7 +193,26 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
     // req.file is the `photo` file
     // console.log("Uploaded aurora photo details" + req.file);
     //  console.log("Upload aurora photo filename" + req.file.filename);
+    
+    
+    //get observation details (location, date/time, username)
+    var username = req.session.username;
+    var long = req.body.long;
+    var lat = req.body.lat;
+    var ob_date = req.body.ob_date;
+    var ob_time = req.body.ob_time;
+    var photo_path;
+    
+    
     var photofile = req.file;
+    
+        if(!photofile){
+    console.log('nophoto');
+            photo_path = 'profile-85.jpg';
+    }
+    
+    else{
+        photo_path = req.file.filename;
 
     // resize image to 235px width
     sharp(req.file.path)
@@ -210,13 +229,8 @@ app.post('/upload-aurora', upload.single('aurora'), function (req, res, next) {
         console.log('Aurora photo saved to database');
     });
 
-    //get observation details (location, date/time, username)
-    var username = req.session.username;
-    var long = req.body.long;
-    var lat = req.body.lat;
-    var ob_date = req.body.ob_date;
-    var ob_time = req.body.ob_time;
-    var photo_path = req.file.filename;
+    }
+    
 
     //create new observation 
     var newObservation = { "username": username, "latitude": lat, "longitude": long, "date": ob_date, "time": ob_time, "observation_photo": photo_path };
