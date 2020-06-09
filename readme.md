@@ -1,4 +1,4 @@
-## Project Aurora
+## Aurora ![Aurora Icon](./favicon-32x32.png)
 Aurora is a web application that helps to find the best locations for observing the Aurora Borealis in Great Britain. The map shows locations where our users observed this magnificent phenomenon. You can click on the pins on the map to check the date, time, exact coordinates for the location and the total number of observations registered at that point by our community.
 To help you plan the best Northern Lights experience, we provide you with a weather forecast and the preditctions how likely it is to see an Aurora.
 
@@ -30,7 +30,7 @@ jQuery, Leaflet Maps, Mapbox, CryptoJS & Font Awesome
 
 ### Final: Back-End
 
-The final version of the site uses a NodeJS backend and EJS template engine, served by Express to create a dynamic version of the Aurora website. The login system is replaced by a more secure MongoDB database, the (previously static) content is created through EJS pages and partials and images can be uploaded (in development.)
+The final version of the site uses a NodeJS backend and EJS template engine, served by Express to create a dynamic version of the Aurora website. The login system is replaced by a more secure MongoDB database, the (previously static) content is created through EJS pages and partials and images can be uploaded.
 
 #### Plugins Used
 
@@ -43,7 +43,7 @@ Express, MongoDB, Multer & Path
 
 ## Collaborators
 
-Louise Findlay (Front-End) = [@louisefindlay23](https://github.com/louisefindlay23)
+Louise Findlay (Full-Stack) = [@louisefindlay23](https://github.com/louisefindlay23)
 
 Brandon Reid (Design) = [@brandonreid11](https://github.com/brandonreid11)
 
@@ -53,6 +53,6 @@ Maya Bonazarova (Back-End) = [@mayabonaz](https://github.com/mayabonaz)
 
 ## Useful Links  :link:
 
-Website - Final - Our Codio boxes
+Website - [Final](https://auroraspotter.space)
 
 Project Management - [Glo Boards](https://app.gitkraken.com/glo/board/XkEAXQ6McgARAiGj)
