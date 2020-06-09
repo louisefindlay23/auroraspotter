@@ -10,6 +10,4 @@ HTML5, CSS3 & JavaScript
 
 jQuery, Leaflet Maps, Mapbox, CryptoJS & Font Awesome
 
-The prototype website is deployed through our own Codio instances.
-
-Codio links to follow
+The prototype website can be deployed by cloning this repo. It is recommended to view the [final app](https://auroraspotter.space) instead.
