@@ -10,15 +10,15 @@ To help you plan the best Northern Lights experience, we provide you with a weat
 - Tag a location where Aurora was observed.
 - View the observation diary.
 
-## Demos
+## Demo Photos
 
-Upload Aurora Photo
+Aurora Observation Map
 
-![](https://p392.p3.n0.cdn.getcloudapp.com/items/E0uzPy42/Aurora%20Homepage%20Demo.gif)
+![](https://louisefindlay.com/img/aurora-mockup-1.png)
 
-Profile
+Profile and Aurora Observation Diary
 
-![](https://p392.p3.n0.cdn.getcloudapp.com/items/d5uWbn4e/Aurora%20Profile%20Demo.gif)
+![](https://louisefindlay.com/img/aurora-mockup-2.png)
 
 ## Technologies Used
 
