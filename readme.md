@@ -10,6 +10,16 @@ To help you plan the best Northern Lights experience, we provide you with a weat
 - Tag a location where Aurora was observed.
 - View the observation diary.
 
+## Demos
+
+Upload Aurora Photo
+
+![](https://p392.p3.n0.cdn.getcloudapp.com/items/E0uzPy42/Aurora%20Homepage%20Demo.gif)
+
+Profile
+
+![](https://p392.p3.n0.cdn.getcloudapp.com/items/d5uWbn4e/Aurora%20Profile%20Demo.gif)
+
 ## Technologies Used
 
 The project was first developed as a static site and then converted into a dynamic site with a NodeJS backend.
