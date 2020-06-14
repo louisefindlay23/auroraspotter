@@ -10,6 +10,12 @@ To help you plan the best Northern Lights experience, we provide you with a weat
 - Tag a location where Aurora was observed.
 - View the observation diary.
 
+### Feature: Upload Photos
+
+When users register, they can upload a profile photo (which is stored on the server via Multer and resized using Sharp.) Their photo is then displayed on their profile by storing the filepath in a MongoDB database and displayed on the front-end using EJS templating.
+
+When recording their observations, users can also upload a photo of the aurora which is then shown on the observation map popup and in their observation profile. If they chose not upload a photo, a default one is provided.
+
 ## Demo Photos
 
 Aurora Observation Map
