@@ -53,8 +53,8 @@ Express, MongoDB, Multer & Path
 
 ## API Reference
 
-[Leaflet Map API](https://leafletjs.com/)\
-[OpenWeatherMap API](https://openweathermap.org/api)\
+[Leaflet Map API](https://leafletjs.com/)
+[OpenWeatherMap API](https://openweathermap.org/api)
 [AuroraWatch UK API](https://aurorawatch.lancs.ac.uk/api-info/)
 
 ## Collaborators
