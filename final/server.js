@@ -124,72 +124,82 @@ app.get("/profile", function (req, res) {
     var isLogged = req.session.loggedin;
     var loggedUser = req.session.username;
     // get requested user by the username
-    db.collection("profiles")
-        .find({ username: loggedUser })
-        .toArray(function (err, user) {
-            console.log("User details" + user);
-            // get user's details
-            var username = user[0].username;
-            var email = user[0].email;
-            var arrayphoto = user[0].filename;
-
-            // render the profile page and pass the filename of the latest photo uploaded as a variable
-            res.render("pages/profile", {
-                profilephoto: arrayphoto,
-                username: username,
-                email: email,
-                isLoggedIn: isLogged,
+    client.connect((err) => {
+        const collection = client.db("aurora").collection("profiles");
+        const retrieveProfile = async () => {
+            const getProfile = collection.find({ username: loggedUser });
+            await getProfile.toArray().then((user) => {
+                console.info(user);
+                // get user's details
+                var username = user[0].username;
+                var email = user[0].email;
+                var arrayphoto = user[0].filename;
+                res.render("pages/profile", {
+                    profilephoto: arrayphoto,
+                    username: username,
+                    email: email,
+                    isLoggedIn: isLogged,
+                });
             });
-        });
+            client.close();
+        };
+        retrieveProfile();
+    });
 });
 
 app.get("/getObervationsData", function (req, res) {
     var loggedUser = req.session.username;
     var output;
     // get user's observations from the db
-    db.collection("observations")
-        .find({ username: loggedUser })
-        .toArray(function (err, observation) {
-            //if no observations found output no observations msg
-            if (observation.length == 0) {
-                output =
-                    '<p style="margin-top:20%; text-align: center;">You have not recorded any Aurora observations yet!</p>';
-            }
-
-            //if user recorded observations get observation details
-            else {
-                var date = observation[0].date;
-                var time = observation[0].time;
-                var longitude = observation[0].longitude;
-                var latitude = observation[0].latitude;
-                var auroraphoto = observation[0].observation_photo;
-
-                //output observations data to the table
-                output =
-                    '<table id="diary-tbl"><thead> <tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">';
-                for (var i in observation) {
-                    date = observation[i].date;
-                    time = observation[i].time;
-                    longitude = observation[i].longitude;
-                    latitude = observation[i].latitude;
-                    auroraphoto = observation[i].observation_photo;
-                    output +=
-                        "<tr><td>" +
-                        date +
-                        "</td><td>" +
-                        time +
-                        ", " +
-                        latitude +
-                        "</td><td>" +
-                        longitude +
-                        '</td><td><img id="aurora_photo" src="../img/uploads/aurora/' +
-                        auroraphoto +
-                        '"/></td></tr>';
+    client.connect((err) => {
+        const collection = client.db("aurora").collection("observations");
+        const retrieveObservations = async () => {
+            const getObservations = collection.find({ username: loggedUser });
+            await getObservations.toArray().then((observations) => {
+                //if no observations found output no observations msg
+                if (observation.length == 0) {
+                    output =
+                        '<p style="margin-top:20%; text-align: center;">You have not recorded any Aurora observations yet!</p>';
                 }
-                output += "</tbody></table>";
-            }
-            res.send(output);
-        });
+
+                //if user recorded observations get observation details
+                else {
+                    var date = observation[0].date;
+                    var time = observation[0].time;
+                    var longitude = observation[0].longitude;
+                    var latitude = observation[0].latitude;
+                    var auroraphoto = observation[0].observation_photo;
+
+                    //output observations data to the table
+                    output =
+                        '<table id="diary-tbl"><thead> <tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">';
+                    for (var i in observation) {
+                        date = observation[i].date;
+                        time = observation[i].time;
+                        longitude = observation[i].longitude;
+                        latitude = observation[i].latitude;
+                        auroraphoto = observation[i].observation_photo;
+                        output +=
+                            "<tr><td>" +
+                            date +
+                            "</td><td>" +
+                            time +
+                            ", " +
+                            latitude +
+                            "</td><td>" +
+                            longitude +
+                            '</td><td><img id="aurora_photo" src="../img/uploads/aurora/' +
+                            auroraphoto +
+                            '"/></td></tr>';
+                    }
+                    output += "</tbody></table>";
+                }
+                res.send(output);
+            });
+            client.close();
+        };
+        retrieveObservations();
+    });
 });
 
 // settings route
@@ -244,27 +254,44 @@ app.post("/upload-aurora", upload.single("aurora"), function (req, res, next) {
             });
 
         // save image file details in db
-        db.collection("photo").save(photofile, function (err, result) {
-            if (err) throw err;
-            console.log("Aurora photo saved to database");
+        client.connect((err) => {
+            const collection = client.db("aurora").collection("photos");
+            const savePhotos = async () => {
+                const getPhotos = collection.save(photofile);
+                await getPhotos.then((photos) => {
+                    console.info(photos);
+                    console.log("Aurora photo saved to database");
+                });
+                client.close();
+            };
+            savePhotos();
+        });
+
+        //create new observation
+        var newObservation = {
+            username: username,
+            latitude: lat,
+            longitude: long,
+            date: ob_date,
+            time: ob_time,
+            observation_photo: photo_path,
+        };
+
+        //save observation in database
+        client.connect((err) => {
+            const collection = client.db("aurora").collection("observations");
+            const saveObservations = async () => {
+                const getObservations = collection.save(newObservation);
+                await getObservations.then((observation) => {
+                    console.info(observation);
+                    console.log("Observation saved to database");
+                });
+                client.close();
+                res.redirect("/");
+            };
+            saveObservations();
         });
     }
-
-    //create new observation
-    var newObservation = {
-        username: username,
-        latitude: lat,
-        longitude: long,
-        date: ob_date,
-        time: ob_time,
-        observation_photo: photo_path,
-    };
-
-    //save observation in database
-    db.collection("observations").save(newObservation, function (err, result) {
-        if (err) throw err;
-    });
-    res.redirect("/");
 });
 
 //registration form handler
@@ -296,78 +323,93 @@ app.post("/uploadProfile", upload.single("profile"), function (req, res, next) {
 
         //query the database for the user's details
     } else {
-        db.collection("profiles").findOne(
-            { username: name },
-            function (err, result) {
-                if (err) throw err;
-
-                //username must be unique so if in database, display an error msg
-                if (result) {
-                    error_msg =
-                        "The username already registered. Please try a different username";
-                    res.render("pages/signup", {
-                        signup_error: error_msg,
-                        isLoggedIn: isLogged,
-                    });
-                    return;
-                }
-
-                //if password and password confirmation dont match, display an error msg
-                else if (pass_conf != password) {
-                    error_msg = "Passwords entered must be identical";
-                    res.render("pages/signup", {
-                        signup_error: error_msg,
-                        isLoggedIn: isLogged,
-                    });
-                    return;
-                }
-
-                //if all information correct, upload the profile photo to the server and save user's data in profiles collection
-                else {
-                    //save the photo
-                    // req.file is the `photo` file
-                    var photofile = req.file;
-
-                    if (photofile == null) {
-                        error_msg = "Please upload profile photo";
+        client.connect((err) => {
+            const collection = client.db("aurora").collection("profiles");
+            const retrieveProfiles = async () => {
+                const getProfiles = collection.findOne({
+                    username: name,
+                });
+                await getProfiles.then((profile) => {
+                    console.info(profile);
+                    //username must be unique so if in database, display an error msg
+                    if (profile) {
+                        error_msg =
+                            "The username already registered. Please try a different username";
                         res.render("pages/signup", {
                             signup_error: error_msg,
                             isLoggedIn: isLogged,
                         });
                         return;
-                    } else {
-                        // resize image to 128px width
-                        sharp(req.file.path)
-                            .resize(128)
-                            .toBuffer(function (err, buffer) {
-                                if (err) throw err;
-                                fs.writeFile(
-                                    req.file.path,
-                                    buffer,
-                                    function (e) {}
-                                );
-                            });
-                        //create new user and insert into database
-                        console.log(
-                            "Upload Profile Photo filename" + req.file.filename
-                        );
-                        var user_details = {
-                            username: name,
-                            email: email,
-                            password: password,
-                            filename: req.file.filename,
-                        };
-                        db.collection("profiles").save(
-                            user_details,
-                            function (err, result) {
-                                if (err) throw err;
-                                res.redirect("/login");
-                            }
-                        );
                     }
-                }
-            }
-        );
+
+                    //if password and password confirmation dont match, display an error msg
+                    else if (pass_conf != password) {
+                        error_msg = "Passwords entered must be identical";
+                        res.render("pages/signup", {
+                            signup_error: error_msg,
+                            isLoggedIn: isLogged,
+                        });
+                        return;
+                    }
+
+                    //if all information correct, upload the profile photo to the server and save user's data in profiles collection
+                    else {
+                        //save the photo
+                        // req.file is the `photo` file
+                        var photofile = req.file;
+
+                        if (photofile == null) {
+                            error_msg = "Please upload profile photo";
+                            res.render("pages/signup", {
+                                signup_error: error_msg,
+                                isLoggedIn: isLogged,
+                            });
+                            return;
+                        } else {
+                            // resize image to 128px width
+                            sharp(req.file.path)
+                                .resize(128)
+                                .toBuffer(function (err, buffer) {
+                                    if (err) throw err;
+                                    fs.writeFile(
+                                        req.file.path,
+                                        buffer,
+                                        function (e) {}
+                                    );
+                                });
+                            //create new user and insert into database
+                            console.log(
+                                "Upload Profile Photo filename" +
+                                    req.file.filename
+                            );
+                            var user_details = {
+                                username: name,
+                                email: email,
+                                password: password,
+                                filename: req.file.filename,
+                            };
+                            client.connect((err) => {
+                                const collection = client
+                                    .db("aurora")
+                                    .collection("profiles");
+                                const retrieveProfiles = async () => {
+                                    const saveProfiles =
+                                        collection.save(user_details);
+                                    await saveProfiles.then((profile) => {
+                                        console.info(profile);
+                                        res.redirect("/login");
+                                    });
+                                    client.close();
+                                };
+                                retrievePhotos();
+                            });
+                        }
+                        client.close();
+                    }
+                    retrieveProfiles();
+                });
+            };
+        });
     }
 });
 
@@ -395,40 +437,43 @@ app.post("/dologin", function (req, res) {
     }
 
     //query the db, get users information
-    db.collection("profiles").findOne(
-        { username: name },
-        function (err, result) {
-            if (err) throw err;
+    client.connect((err) => {
+        const collection = client.db("aurora").collection("profiles");
+        const retrieveProfiles = async () => {
+            const getProfiles = collection.find({ username: name });
+            await getProfiles.then((profiles) => {
+                console.info(profiles);
+                if (!profiles) {
+                    error_msg =
+                        "The username or password you entered are incorrect";
+                    res.render("pages/login", {
+                        login_error: error_msg,
+                        isLoggedIn: isLogged,
+                    });
+                    return;
+                }
 
-            //if username not in database display an error msg
-            if (!result) {
-                error_msg =
-                    "The username or password you entered are incorrect";
-                res.render("pages/login", {
-                    login_error: error_msg,
-                    isLoggedIn: isLogged,
-                });
-                return;
-            }
+                //if the password entered matched user's password in the database change session.loggedin value to true and redirect the user to index page
+                if (result.password == password) {
+                    req.session.loggedin = true;
+                    req.session.username = result.username;
+                    res.redirect("/");
 
-            //if the password entered matched user's password in the database change session.loggedin value to true and redirect the user to index page
-            if (result.password == password) {
-                req.session.loggedin = true;
-                req.session.username = result.username;
-                res.redirect("/");
-
-                //if passwords dont match display an error msg
-            } else {
-                error_msg =
-                    "The username or password you entered are incorrect";
-                res.render("pages/login", {
-                    login_error: error_msg,
-                    isLoggedIn: isLogged,
-                });
-                return;
-            }
-        }
-    );
+                    //if passwords dont match display an error msg
+                } else {
+                    error_msg =
+                        "The username or password you entered are incorrect";
+                    res.render("pages/login", {
+                        login_error: error_msg,
+                        isLoggedIn: isLogged,
+                    });
+                    return;
+                }
+            });
+        };
+        client.close();
+    });
+    retrieveProfiles();
 });
 
 //password change handler
@@ -469,15 +514,22 @@ app.post("/changePassword", function (req, res) {
     //if passwords correct update user's data in database, log them out and redirect to login page, so they can sign in with new password
     else {
         var user = req.session.username;
-        db.collection("profiles").updateOne(
-            { username: user },
-            { $set: { password: newPass } },
-            function (err, result) {
-                if (err) throw err;
-                req.session.loggedin = false;
-                res.redirect("/login");
-            }
-        );
+        client.connect((err) => {
+            const collection = client.db("aurora").collection("profiles");
+            const updateProfiles = async () => {
+                const getProfile = collection.updateOne(
+                    { username: user },
+                    { $set: { password: newPass } }
+                );
+                await getProfile.then((profile) => {
+                    console.info(profile);
+                    req.session.loggedin = false;
+                    res.redirect("/login");
+                });
+                client.close();
+            };
+            retrieveProfiles();
+        });
     }
 });
 
@@ -491,12 +543,18 @@ app.get("/signout", function (req, res) {
 
 //retrive observations data from database and return them to browser
 app.get("/getObservations", function (req, res) {
-    db.collection("observations")
-        .find()
-        .toArray(function (err, result) {
-            if (err) throw err;
-            res.send(result);
-        });
+    client.connect((err) => {
+        const collection = client.db("aurora").collection("observations");
+        const retrieveObservations = async () => {
+            const getObservations = collection.find({});
+            await getObservations.toArray().then((observations) => {
+                console.info(observations);
+                res.send(observations);
+            });
+            client.close();
+        };
+        retrieveObservations();
+    });
 });
 
 //send information is the user logged in to the browser
