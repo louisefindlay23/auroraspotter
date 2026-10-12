@@ -1,567 +1,415 @@
 //**************** DATABASE and EXPRESS connections *************************
 
-// Database Connections
 require("dotenv").config();
-// Initalise MongoDB
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = process.env.DB_URL;
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverApi: ServerApiVersion.v1,
-});
 
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
-const session = require("express-session");
-
-// Node Modules
-
-var multer = require("multer");
-var path = require("path");
-const sharp = require("sharp");
+const path = require("path");
 const fs = require("fs");
+const express = require("express");
+const session = require("express-session");
+const { MongoClient } = require("mongodb");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const sharp = require("sharp");
 
-// Multer DiskStorage - for storing images
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "public/img/uploads/aurora");
-    },
-    filename: function (req, file, cb) {
-        let a = Math.floor(Math.random() * 1001);
-        cb(null, file.fieldname + "-" + a + path.extname(file.originalname));
-    },
+const PORT = process.env.PORT || 3000;
+const DB_NAME = process.env.DB_NAME || "aurora";
+const SESSION_SECRET = process.env.SESSION_SECRET || "keyboard cat";
+const BCRYPT_ROUNDS = 10;
+
+//******************** DATABASE - connect once on startup ********************
+
+// Single client for the whole process. Do not connect/close per request.
+const client = new MongoClient(
+    process.env.DB_URL || "mongodb://127.0.0.1:27017"
+);
+let db;
+
+async function connectDB() {
+    await client.connect();
+    db = client.db(DB_NAME);
+    await db.command({ ping: 1 }); // fail fast if Atlas URI / IP allowlist is wrong
+}
+
+//******************** UPLOADS **********************************************
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, "public/img/uploads/aurora");
+        },
+        filename: function (req, file, cb) {
+            let a = Math.floor(Math.random() * 1001);
+            cb(null, file.fieldname + "-" + a + path.extname(file.originalname));
+        },
+    }),
 });
 
-var upload = multer({ storage: storage });
+//******************** PASSPORT (local strategy) ****************************
 
-// Initalising Express
+passport.use(
+    new LocalStrategy(
+        { usernameField: "name", passwordField: "password" },
+        async (username, password, done) => {
+            try {
+                const profile = await db
+                    .collection("profiles")
+                    .findOne({ username });
+                // Same message for unknown user and wrong password - do not leak which.
+                if (!profile) {
+                    return done(null, false, {
+                        message:
+                            "The username or password you entered are incorrect",
+                    });
+                }
+                const ok = await bcrypt.compare(password, profile.password);
+                if (!ok) {
+                    return done(null, false, {
+                        message:
+                            "The username or password you entered are incorrect",
+                    });
+                }
+                return done(null, profile);
+            } catch (err) {
+                return done(err);
+            }
+        }
+    )
+);
 
+passport.serializeUser((user, done) => done(null, user.username));
+passport.deserializeUser(async (username, done) => {
+    try {
+        const user = await db
+            .collection("profiles")
+            .findOne({ username });
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+});
+
+//******************** EXPRESS **********************************************
+
+const app = express();
+app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(
     session({
-        secret: "keyboard cat",
-        resave: true,
-        saveUninitialized: true,
+        secret: SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+        },
     })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-);
-
-app.use(bodyParser.json());
-
-// set the view engine to ejs
-app.set("view engine", "ejs");
-
-// connecting variable db to database
-app.listen(3000);
-console.log("Listening on 3000");
-
-// set default session.loggedin value
-session.loggedin = false;
-
-//******************** GET ROUTES - display pages **************************
-
-// root route
-app.get("/", function (req, res) {
-    var isLogged = req.session.loggedin;
-    // get the details of the latest photo uploaded
-    client.connect((err) => {
-        const collection = client.db("aurora").collection("photo");
-        const retrievePhotos = async () => {
-            const getPhotos = collection.find({}).sort({ _id: -1 }).limit(1);
-            await getPhotos.toArray().then((arrayphoto) => {
-                console.info(arrayphoto);
-                res.render("pages/index", {
-                    photo: arrayphoto,
-                    isLoggedIn: isLogged,
-                });
-            });
-            client.close();
-        };
-        retrievePhotos();
-    });
+// Make auth state available to every template (header.ejs uses isLoggedIn)
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.isAuthenticated ? req.isAuthenticated() : false;
+    next();
 });
 
-// change password route
-app.get("/change-password", function (req, res) {
-    //if user is not logged in, redirect them to the login page
-    if (!req.session.loggedin) {
-        res.redirect("/login");
-        return;
+// Small helpers
+const wrap = (fn) => (req, res, next) =>
+    Promise.resolve(fn(req, res, next)).catch(next);
+const requireLogin = (req, res, next) =>
+    req.isAuthenticated() ? next() : res.redirect("/login");
+
+//******************** VIEW HELPERS *****************************************
+
+// Build the Observation Diary table for the profile page.
+function buildObservationsTable(observations) {
+    if (!observations || observations.length === 0) {
+        return '<p style="margin-top:20%; text-align: center;">You have not recorded any Aurora observations yet!</p>';
     }
-    var isLogged = req.session.loggedin;
-    var msg = "";
-    res.render("pages/change-password", {
-        changepass_error: msg,
-        isLoggedIn: isLogged,
-    });
+    let output =
+        '<table id="diary-tbl"><thead> <tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">';
+    for (const ob of observations) {
+        output +=
+            "<tr><td>" +
+            ob.date +
+            "</td><td>" +
+            ob.time +
+            ", " +
+            ob.latitude +
+            "</td><td>" +
+            ob.longitude +
+            '</td><td><img id="aurora_photo" src="../img/uploads/aurora/' +
+            ob.observation_photo +
+            '"/></td></tr>';
+    }
+    output += "</tbody></table>";
+    return output;
+}
+
+//******************** GET ROUTES - display pages ***************************
+
+// root route
+app.get(
+    "/",
+    wrap(async (req, res) => {
+        // details of the latest photo uploaded
+        const photo = await db
+            .collection("photo")
+            .find({})
+            .sort({ _id: -1 })
+            .limit(1)
+            .toArray();
+        res.render("pages/index", {
+            photo: photo[0] ? photo[0].filename : "aurora-default.jpg",
+        });
+    })
+);
+
+// change password route
+app.get("/change-password", requireLogin, function (req, res) {
+    res.render("pages/change-password", { changepass_error: "" });
 });
 
 // login route
 app.get("/login", function (req, res) {
-    var msg = "";
-    var isLogged = req.session.loggedin;
-    res.render("pages/login", {
-        login_error: msg,
-        isLoggedIn: isLogged,
-    });
+    res.render("pages/login", { login_error: "" });
 });
 
 // profile route
-app.get("/profile", function (req, res) {
-    //if user is not logged in, redirect them to the login page
-    if (!req.session.loggedin) {
-        res.redirect("/login");
-        return;
-    }
-    //Login status
-    var isLogged = req.session.loggedin;
-    var loggedUser = req.session.username;
-    // get requested user by the username
-    client.connect((err) => {
-        const collection = client.db("aurora").collection("profiles");
-        const retrieveProfile = async () => {
-            const getProfile = collection.find({ username: loggedUser });
-            await getProfile.toArray().then((user) => {
-                console.info(user);
-                // get user's details
-                var username = user[0].username;
-                var email = user[0].email;
-                var arrayphoto = user[0].filename;
-                res.render("pages/profile", {
-                    profilephoto: arrayphoto,
-                    username: username,
-                    email: email,
-                    isLoggedIn: isLogged,
-                });
-            });
-            client.close();
-        };
-        retrieveProfile();
+app.get("/profile", requireLogin, function (req, res) {
+    res.render("pages/profile", {
+        profilephoto: req.user.filename,
+        username: req.user.username,
+        email: req.user.email,
     });
 });
 
-app.get("/getObervationsData", function (req, res) {
-    var loggedUser = req.session.username;
-    var output;
-    // get user's observations from the db
-    client.connect((err) => {
-        const collection = client.db("aurora").collection("observations");
-        const retrieveObservations = async () => {
-            const getObservations = collection.find({ username: loggedUser });
-            await getObservations.toArray().then((observations) => {
-                //if no observations found output no observations msg
-                if (observation.length == 0) {
-                    output =
-                        '<p style="margin-top:20%; text-align: center;">You have not recorded any Aurora observations yet!</p>';
-                }
-
-                //if user recorded observations get observation details
-                else {
-                    var date = observation[0].date;
-                    var time = observation[0].time;
-                    var longitude = observation[0].longitude;
-                    var latitude = observation[0].latitude;
-                    var auroraphoto = observation[0].observation_photo;
-
-                    //output observations data to the table
-                    output =
-                        '<table id="diary-tbl"><thead> <tr><th>Date</th><th>Time</th><th>Coordinates</th><th>Photo</th></tr></thead><tbody id="table-content">';
-                    for (var i in observation) {
-                        date = observation[i].date;
-                        time = observation[i].time;
-                        longitude = observation[i].longitude;
-                        latitude = observation[i].latitude;
-                        auroraphoto = observation[i].observation_photo;
-                        output +=
-                            "<tr><td>" +
-                            date +
-                            "</td><td>" +
-                            time +
-                            ", " +
-                            latitude +
-                            "</td><td>" +
-                            longitude +
-                            '</td><td><img id="aurora_photo" src="../img/uploads/aurora/' +
-                            auroraphoto +
-                            '"/></td></tr>';
-                    }
-                    output += "</tbody></table>";
-                }
-                res.send(output);
-            });
-            client.close();
-        };
-        retrieveObservations();
-    });
+// observations data for the profile page
+app.get("/getObervationsData", requireLogin, function (req, res) {
+    db.collection("observations")
+        .find({ username: req.user.username })
+        .toArray()
+        .then((observations) => res.send(buildObservationsTable(observations)))
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send("Could not load observations");
+        });
 });
 
 // settings route
-app.get("/settings", function (req, res) {
-    //if user is not logged in, redirect them to the login page
-    if (!req.session.loggedin) {
-        res.redirect("/login");
-        return;
-    }
-
-    var isLogged = req.session.loggedin;
-    res.render("pages/settings", { isLoggedIn: isLogged });
+app.get("/settings", requireLogin, function (req, res) {
+    res.render("pages/settings");
 });
 
 // signup route
-
 app.get("/signup", function (req, res) {
-    var msg = "";
-    var isLogged = req.session.loggedin;
-    res.render("pages/signup", { signup_error: msg, isLoggedIn: isLogged });
+    res.render("pages/signup", { signup_error: "" });
 });
 
-// upload photo routes
+//******************** POST ROUTES ******************************************
 
-app.post("/upload-aurora", upload.single("aurora"), function (req, res, next) {
-    //Think a if req.file = “” redirect to / and set vars as # should do it
-    // req.file is the `photo` file
-    // console.log("Uploaded aurora photo details" + req.file);
-    //  console.log("Upload aurora photo filename" + req.file.filename);
+// upload photo + observation
+app.post(
+    "/upload-aurora",
+    requireLogin,
+    upload.single("aurora"),
+    wrap(async (req, res) => {
+        const username = req.user.username;
+        let photo_path = "aurora-default.jpg";
 
-    //get observation details (location, date/time, username)
-    var username = req.session.username;
-    var long = req.body.long;
-    var lat = req.body.lat;
-    var ob_date = req.body.ob_date;
-    var ob_time = req.body.ob_time;
-    var photo_path;
+        if (req.file) {
+            photo_path = req.file.filename;
 
-    var photofile = req.file;
+            // resize image to 235px width, then overwrite the uploaded file
+            const buffer = await sharp(req.file.path).resize(235).toBuffer();
+            await fs.promises.writeFile(req.file.path, buffer);
 
-    if (!photofile) {
-        photo_path = "aurora-default.jpg";
-    } else {
-        photo_path = req.file.filename;
+            // save image file details in db
+            await db.collection("photos").insertOne(req.file);
+        }
 
-        // resize image to 235px width
-        sharp(req.file.path)
-            .resize(235)
-            .toBuffer(function (err, buffer) {
-                if (err) throw err;
-                fs.writeFile(req.file.path, buffer, function (e) {});
-            });
-
-        // save image file details in db
-        client.connect((err) => {
-            const collection = client.db("aurora").collection("photos");
-            const savePhotos = async () => {
-                const getPhotos = collection.save(photofile);
-                await getPhotos.then((photos) => {
-                    console.info(photos);
-                    console.log("Aurora photo saved to database");
-                });
-                client.close();
-            };
-            savePhotos();
-        });
-
-        //create new observation
-        var newObservation = {
+        // create + save the observation (also when no photo was uploaded)
+        await db.collection("observations").insertOne({
             username: username,
-            latitude: lat,
-            longitude: long,
-            date: ob_date,
-            time: ob_time,
+            latitude: req.body.lat,
+            longitude: req.body.long,
+            date: req.body.ob_date,
+            time: req.body.ob_time,
             observation_photo: photo_path,
-        };
-
-        //save observation in database
-        client.connect((err) => {
-            const collection = client.db("aurora").collection("observations");
-            const saveObservations = async () => {
-                const getObservations = collection.save(newObservation);
-                await getObservations.then((observation) => {
-                    console.info(observation);
-                    console.log("Observation saved to database");
-                });
-                client.close();
-                res.redirect("/");
-            };
-            saveObservations();
         });
-    }
-});
 
-//registration form handler
-app.post("/uploadProfile", upload.single("profile"), function (req, res, next) {
-    //get user details
-    var name = req.body.username;
-    var password = req.body.password;
-    var pass_conf = req.body.confirm_password;
-    var email = req.body.email;
-    var error_msg = "";
-    var isLogged = req.session.loggedin;
+        res.redirect("/");
+    })
+);
 
-    //if any of input fields empty, display an error msg
-    //d41d8cd98f00b204e9800998ecf8427e is an MD5 hash of empty string
-    if (
-        name == "" ||
-        password == "" ||
-        email == "" ||
-        pass_conf == "" ||
-        pass_conf == "d41d8cd98f00b204e9800998ecf8427e" ||
-        password == "d41d8cd98f00b204e9800998ecf8427e"
-    ) {
-        error_msg = "Please provide all details";
-        res.render("pages/signup", {
-            signup_error: error_msg,
-            isLoggedIn: isLogged,
-        });
-        return;
+// registration form handler
+app.post(
+    "/uploadProfile",
+    upload.single("profile"),
+    wrap(async (req, res) => {
+        const name = req.body.username;
+        const password = req.body.password;
+        const pass_conf = req.body.confirm_password;
+        const email = req.body.email;
 
-        //query the database for the user's details
-    } else {
-        client.connect((err) => {
-            const collection = client.db("aurora").collection("profiles");
-            const retrieveProfiles = async () => {
-                const getProfiles = collection.findOne({
-                    username: name,
-                });
-                await getProfiles.then((profile) => {
-                    console.info(profile);
-                    //username must be unique so if in database, display an error msg
-                    if (profile) {
-                        error_msg =
-                            "The username already registered. Please try a different username";
-                        res.render("pages/signup", {
-                            signup_error: error_msg,
-                            isLoggedIn: isLogged,
-                        });
-                        return;
-                    }
-
-                    //if password and password confirmation dont match, display an error msg
-                    else if (pass_conf != password) {
-                        error_msg = "Passwords entered must be identical";
-                        res.render("pages/signup", {
-                            signup_error: error_msg,
-                            isLoggedIn: isLogged,
-                        });
-                        return;
-                    }
-
-                    //if all information correct, upload the profile photo to the server and save user's data in profiles collection
-                    else {
-                        //save the photo
-                        // req.file is the `photo` file
-                        var photofile = req.file;
-
-                        if (photofile == null) {
-                            error_msg = "Please upload profile photo";
-                            res.render("pages/signup", {
-                                signup_error: error_msg,
-                                isLoggedIn: isLogged,
-                            });
-                            return;
-                        } else {
-                            // resize image to 128px width
-                            sharp(req.file.path)
-                                .resize(128)
-                                .toBuffer(function (err, buffer) {
-                                    if (err) throw err;
-                                    fs.writeFile(
-                                        req.file.path,
-                                        buffer,
-                                        function (e) {}
-                                    );
-                                });
-                            //create new user and insert into database
-                            console.log(
-                                "Upload Profile Photo filename" +
-                                    req.file.filename
-                            );
-                            var user_details = {
-                                username: name,
-                                email: email,
-                                password: password,
-                                filename: req.file.filename,
-                            };
-                            client.connect((err) => {
-                                const collection = client
-                                    .db("aurora")
-                                    .collection("profiles");
-                                const retrieveProfiles = async () => {
-                                    const saveProfiles =
-                                        collection.save(user_details);
-                                    await saveProfiles.then((profile) => {
-                                        console.info(profile);
-                                        res.redirect("/login");
-                                    });
-                                    client.close();
-                                };
-                                retrievePhotos();
-                            });
-                        }
-                        client.close();
-                    }
-                    retrieveProfiles();
-                });
-            };
-        });
-    }
-});
-
-//login form handler
-app.post("/dologin", function (req, res) {
-    //get user's input
-    var name = req.body.name;
-    var password = req.body.password;
-    var error_msg = "";
-    var isLogged = req.session.loggedin;
-
-    //check is any of the input fields empty, if so, display an error msg
-    //d41d8cd98f00b204e9800998ecf8427e is MD5hash for empty string
-    if (
-        name == "" ||
-        password == "" ||
-        password == "d41d8cd98f00b204e9800998ecf8427e"
-    ) {
-        error_msg = "Please enter your username and password";
-        res.render("pages/login", {
-            login_error: error_msg,
-            isLoggedIn: isLogged,
-        });
-        return;
-    }
-
-    //query the db, get users information
-    client.connect((err) => {
-        const collection = client.db("aurora").collection("profiles");
-        const retrieveProfiles = async () => {
-            const getProfiles = collection.find({ username: name });
-            await getProfiles.then((profiles) => {
-                console.info(profiles);
-                if (!profiles) {
-                    error_msg =
-                        "The username or password you entered are incorrect";
-                    res.render("pages/login", {
-                        login_error: error_msg,
-                        isLoggedIn: isLogged,
-                    });
-                    return;
-                }
-
-                //if the password entered matched user's password in the database change session.loggedin value to true and redirect the user to index page
-                if (result.password == password) {
-                    req.session.loggedin = true;
-                    req.session.username = result.username;
-                    res.redirect("/");
-
-                    //if passwords dont match display an error msg
-                } else {
-                    error_msg =
-                        "The username or password you entered are incorrect";
-                    res.render("pages/login", {
-                        login_error: error_msg,
-                        isLoggedIn: isLogged,
-                    });
-                    return;
-                }
+        if (!name || !password || !email || !pass_conf) {
+            return res.render("pages/signup", {
+                signup_error: "Please provide all details",
             });
-        };
-        client.close();
-    });
-    retrieveProfiles();
+        }
+
+        const existing = await db
+            .collection("profiles")
+            .findOne({ username: name });
+        if (existing) {
+            return res.render("pages/signup", {
+                signup_error:
+                    "The username already registered. Please try a different username",
+            });
+        }
+
+        if (pass_conf !== password) {
+            return res.render("pages/signup", {
+                signup_error: "Passwords entered must be identical",
+            });
+        }
+
+        if (!req.file) {
+            return res.render("pages/signup", {
+                signup_error: "Please upload profile photo",
+            });
+        }
+
+        // resize profile photo to 128px width
+        const buffer = await sharp(req.file.path).resize(128).toBuffer();
+        await fs.promises.writeFile(req.file.path, buffer);
+
+        // hash the password before storing - never store plaintext
+        const hashed = await bcrypt.hash(password, BCRYPT_ROUNDS);
+
+        await db.collection("profiles").insertOne({
+            username: name,
+            email: email,
+            password: hashed,
+            filename: req.file.filename,
+        });
+
+        res.redirect("/login");
+    })
+);
+
+// login form handler
+app.post("/dologin", function (req, res, next) {
+    const { name, password } = req.body;
+
+    if (!name || !password) {
+        return res.render("pages/login", {
+            login_error: "Please enter your username and password",
+        });
+    }
+
+    passport.authenticate("local", (err, user, info) => {
+        if (err) return next(err);
+        if (!user) {
+            return res.render("pages/login", {
+                login_error:
+                    (info && info.message) ||
+                    "The username or password you entered are incorrect",
+            });
+        }
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            res.redirect("/");
+        });
+    })(req, res, next);
 });
 
-//password change handler
-app.post("/changePassword", function (req, res) {
-    //get user's input
-    var newPass = req.body.newpassword;
-    var newPassConf = req.body.confirmpassword;
-    var isLogged = req.session.loggedin;
-    var error_msg = "";
+// password change handler
+app.post(
+    "/changePassword",
+    requireLogin,
+    wrap(async (req, res) => {
+        const newPass = req.body.newpassword;
+        const newPassConf = req.body.confirmpassword;
 
-    //check is password or password confirmation empty; if it is throw error msg
-    //d41d8cd98f00b204e9800998ecf8427e is MD5 hash for empty string
-    if (
-        newPass == "" ||
-        newPassConf == "" ||
-        newPass == "d41d8cd98f00b204e9800998ecf8427e" ||
-        newPassConf == "d41d8cd98f00b204e9800998ecf8427e"
-    ) {
-        console.log("fields missing");
-        error_msg = "Please enter new password";
-        res.render("pages/change-password", {
-            changepass_error: error_msg,
-            isLoggedIn: isLogged,
+        if (!newPass || !newPassConf) {
+            return res.render("pages/change-password", {
+                changepass_error: "Please enter new password",
+            });
+        }
+
+        if (newPass !== newPassConf) {
+            return res.render("pages/change-password", {
+                changepass_error: "Passwords do not match",
+            });
+        }
+
+        const hashed = await bcrypt.hash(newPass, BCRYPT_ROUNDS);
+        await db
+            .collection("profiles")
+            .updateOne(
+                { username: req.user.username },
+                { $set: { password: hashed } }
+            );
+
+        // log them out so they sign in again with the new password
+        req.logout((err) => {
+            if (err) return res.redirect("/login");
+            res.redirect("/login");
         });
-        return;
-    }
+    })
+);
 
-    //display an error msg if passwords entered dont match
-    else if (newPass != newPassConf) {
-        error_msg = "Passwords do not match";
-        res.render("pages/change-password", {
-            changepass_error: error_msg,
-            isLoggedIn: isLogged,
-        });
-        return;
-    }
-
-    //if passwords correct update user's data in database, log them out and redirect to login page, so they can sign in with new password
-    else {
-        var user = req.session.username;
-        client.connect((err) => {
-            const collection = client.db("aurora").collection("profiles");
-            const updateProfiles = async () => {
-                const getProfile = collection.updateOne(
-                    { username: user },
-                    { $set: { password: newPass } }
-                );
-                await getProfile.then((profile) => {
-                    console.info(profile);
-                    req.session.loggedin = false;
-                    res.redirect("/login");
-                });
-                client.close();
-            };
-            retrieveProfiles();
-        });
-    }
-});
-
-//signout handler
+// signout handler
 app.get("/signout", function (req, res) {
-    req.session.loggedin = false;
-    var isLogged = req.session.loggedin;
-    req.session.username = null;
-    res.redirect("/");
+    req.logout(() => res.redirect("/"));
 });
 
-//retrive observations data from database and return them to browser
-app.get("/getObservations", function (req, res) {
-    client.connect((err) => {
-        const collection = client.db("aurora").collection("observations");
-        const retrieveObservations = async () => {
-            const getObservations = collection.find({});
-            await getObservations.toArray().then((observations) => {
-                console.info(observations);
-                res.send(observations);
-            });
-            client.close();
-        };
-        retrieveObservations();
-    });
-});
+//******************** JSON ROUTES ******************************************
 
-//send information is the user logged in to the browser
+// all observations, for the map
+app.get(
+    "/getObservations",
+    wrap(async (req, res) => {
+        const observations = await db
+            .collection("observations")
+            .find({})
+            .toArray();
+        res.send(observations);
+    })
+);
+
+// is the user logged in?
 app.get("/getIsLogged", function (req, res) {
-    var isLogged = false;
-    if (req.session.loggedin == true) {
-        isLogged = true;
-    }
-    res.send(isLogged);
+    res.send(req.isAuthenticated());
 });
+
+//******************** ERROR HANDLING ***************************************
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send("Something went wrong");
+});
+
+//******************** STARTUP **********************************************
+
+async function start() {
+    try {
+        await connectDB();
+        app.listen(PORT, () => console.log("Listening on " + PORT));
+    } catch (err) {
+        console.error("Failed to start:", err);
+        process.exit(1);
+    }
+}
+
+if (require.main === module) {
+    start();
+}
+
+module.exports = { app, buildObservationsTable };

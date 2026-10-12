@@ -12,7 +12,15 @@ The final version of the site uses a NodeJS backend and EJS template engine, ser
 
 ## Run Instructions ##
 
-To run, cd into the final folder and then npm start
+To run:
+
+1. Copy `.env.example` to `.env` and set `DB_URL` (local MongoDB or MongoDB Atlas) and a real `SESSION_SECRET`.
+2. `npm install`
+3. `npm start`
+
+Passwords are hashed with bcrypt on the server. Accounts created before this change stored MD5 hashes and will need to re-register (there is no reset flow).
+
+To use MongoDB Atlas: create a cluster, add your IP to the allowlist, and use the `mongodb+srv://...` connection string as `DB_URL`.
 
 If running on Codio, make sure MongoDB and and the correct version of MongoDB is installed `npm install mongodb@2.2.33`
 
